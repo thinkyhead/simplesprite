@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Message Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+			<ul>
+				<li><a href="ss_broadcaster.html">SS_Broadcaster</a></li>
+				<li><a href="ss_listener.html">SS_Listener</a></li>
+				<li>SS_Message</li>
+			</ul>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Messages.h</div>
+<h1>SS_Message</h1>
+<p>
+When a message is sent from a Broadcaster to a Listener the HandleMessage method
+receives an SS_Message reference. The receiver then uses the contents of the
+SS_Message to determine the course of action. An SS_Message is composed of a
+message class, a message code, an integer message value, and an optional pointer
+to sender-defined data.
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>message_class</tt></td><td></td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>message_code</tt></td><td></td></tr>
+<tr class="priv"><td><tt>int</tt></td><td><tt>message_value</tt></td><td></td></tr>
+<tr class="priv"><td><tt>void*</tt></td><td><tt>message_data</tt></td><td></td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_Message()
+SS_Message(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL)
+</pre>
+<p>
+You can construct an SS_Message with an empty message or pre-populated. Note that
+the <tt>SS_Listener::HandleMessage</tt> method can take an <tt>SS_Message&amp;</tt>
+argument. This makes it possible to create, send, and delete a message all in one
+line:
+</p>
+<pre>
+        HandleMessage(SS_Message('FUN ','MESG',1975))
+</pre>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#Class">Class</a></li>
+<li><a href="#Code">Code</a></li>
+<li><a href="#Data">Data</a></li>
+<li><a href="#GetFloat">GetFloat</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#GetInt16">GetInt16</a></li>
+<li><a href="#GetInt32">GetInt32</a></li>
+<li><a href="#GetString">GetString</a></li>
+<li><a href="#IsSet">IsSet</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Set">Set</a></li>
+<li><a href="#SetClass">SetClass</a></li>
+<li><a href="#SetCode">SetCode</a></li>
+<li><a href="#SetData">SetData</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetValue">SetValue</a></li>
+<li><a href="#Value">Value</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- Class -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Class"></a><h3>Class</h3>
+<pre>Uint32 Class()</pre>
+<p>Gets the message_class field of the message.</p>
+</div>
+
+
+<!-- Code -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Code"></a><h3>Code</h3>
+<pre>Uint32 Code()</pre>
+<p>Returns the message_code field of the message.</p>
+</div>
+
+
+<!-- Data -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Data"></a><h3>Data</h3>
+<pre>void* Data()</pre>
+<p>Returns the message_data field of the message.</p>
+</div>
+
+
+<!-- GetFloat -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetFloat"></a><h3>GetFloat</h3>
+<pre>float GetFloat()</pre>
+<p>
+Returns the float from the address indicated by the message_data field of the
+message. If the message_data field is NULL it returns 0.
+</p>
+</div>
+
+
+<!-- GetInt16 -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetInt16"></a><h3>GetInt16</h3>
+<pre>Sint16 GetInt16()</pre>
+<p>
+Returns the 16-bit integer from the address indicated by the message_data field
+of the message. If the message_data field is NULL it returns 0.
+</p>
+</div>
+
+
+<!-- GetInt32 -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetInt32"></a><h3>GetInt32</h3>
+<pre>Sint32 GetInt32()</pre>
+<p>
+Returns the 32-bit integer from the address indicated by the message_data field
+of the message. If the message_data field is NULL it returns 0.
+</p>
+</div>
+
+
+<!-- GetString -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetString"></a><h3>GetString</h3>
+<pre>char* GetString()</pre>
+<p>
+Returns the address of the string stored in the message_data field of the message.
+If the message_data field is NULL it returns a NULL pointer.
+</p>
+</div>
+
+
+<!-- IsSet -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsSet"></a><h3>IsSet</h3>
+<pre>bool IsSet()</pre>
+<p>Returns true if the message has been set.</p>
+</div>
+
+
+<!-- Set -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Set"></a><h3>Set</h3>
+<pre>
+void Set(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL)
+</pre>
+<p>This sets all the message fields.</p>
+</div>
+
+
+<!-- SetClass -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetClass"></a><h3>SetClass</h3>
+<pre>void SetClass(Uint32 mclass)</pre>
+<p>SetClass sets the message_class field of the message.</p>
+</div>
+
+
+<!-- SetCode -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetCode"></a><h3>SetCode</h3>
+<pre>void SetCode(Uint32 mcode)</pre>
+<p>SetCode sets the message_code field of the message.</p>
+</div>
+
+
+<!-- SetData -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetData"></a><h3>SetData</h3>
+<pre>void SetData(void *mdata)</pre>
+<p>
+SetData sets the data field of the message. Your program should make sure
+never to use a message with a bad pointer.
+</p>
+</div>
+
+
+<!-- SetValue -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetValue"></a><h3>SetValue</h3>
+<pre>void SetValue(int mval)</pre>
+<p>SetValue sets the message_value field of the message.</p>
+</div>
+
+
+<!-- Value -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Value"></a><h3>Value</h3>
+<pre>int Value()</pre>
+<p>Returns the value of the message_value field.</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

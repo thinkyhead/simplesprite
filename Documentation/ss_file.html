@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_File Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+			<ul>
+				<li><a href="ss_datacontext.html">SS_DataContext</a></li>
+				<li><a href="ss_datatoken.html">SS_DataToken</a></li>
+				<li>SS_File</li>
+				<li><a href="ss_flatfile.html">SS_FlatFile</a></li>
+				<li><a href="ss_folder.html">SS_Folder</a></li>
+				<li><a href="ss_folderiterator.html">SS_FolderIterator</a></li>
+			</ul>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_File.h</div>
+<h1>SS_File</h1>
+<p>About this section...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="prot"><td><tt>FILE*</tt></td><td><tt>stream</tt></td><td>POSIX file reference</td></tr>
+<tr class="prot"><td><tt>char*</tt></td><td><tt>path</tt></td><td>Relative path of the file</td></tr>
+<tr class="prot"><td><tt>size_t</tt></td><td><tt>bufsize</tt></td><td>Buffer size</td></tr>
+<tr class="prot"><td><tt>char*</tt></td><td><tt>buffer</tt></td><td>Buffer of the last operation</td></tr>
+<tr class="prot"><td><tt>struct stat</tt></td><td><tt>itemstat</tt></td><td>File statistics in POSIX form</td></tr>
+<tr class="prot"><td><tt>bool</tt></td><td><tt>exists</tt></td><td>Flag: The file exists</td></tr>
+<tr class="prot"><td><tt>bool</tt></td><td><tt>is_open</tt></td><td>Flag: The file is open</td></tr>
+<tr class="prot"><td><tt>bool</tt></td><td><tt>eof</tt></td><td>Flag: End of file reached</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_File()
+SS_File(char *path)
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#basename">basename</a></li>
+<li><a href="#BaseName">BaseName</a></li>
+<li><a href="#ClearError">ClearError</a></li>
+<li><a href="#Close">Close</a></li>
+<li><a href="#dirname">dirname</a></li>
+<li><a href="#DirName">DirName</a></li>
+<li><a href="#Dump">Dump</a></li>
+<li><a href="#Exists">Exists</a></li>
+<li><a href="#GetAll">GetAll</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#GetChar">GetChar</a></li>
+<li><a href="#GetEOF">GetEOF</a></li>
+<li><a href="#GetLine">GetLine</a></li>
+<li><a href="#GetStatus">GetStatus</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#Open">Open</a></li>
+<li><a href="#OpenAppend">OpenAppend</a></li>
+<li><a href="#OpenRead">OpenRead</a></li>
+<li><a href="#OpenRW">OpenRW</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#OpenRWAppend">OpenRWAppend</a></li>
+<li><a href="#OpenWrite">OpenWrite</a></li>
+<li><a href="#Path">Path</a></li>
+<li><a href="#PrepareBuffer">PrepareBuffer</a></li>
+<li><a href="#Print">Print</a></li>
+<li><a href="#PrintLine">PrintLine</a></li>
+<li><a href="#Read">Read</a></li>
+<li><a href="#ReadAll">ReadAll</a></li>
+<li><a href="#ReadLine">ReadLine</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Seek">Seek</a></li>
+<li><a href="#SetPath">SetPath</a></li>
+<li><a href="#Size">Size</a></li>
+<li><a href="#Status">Status</a></li>
+<li><a href="#Stream">Stream</a></li>
+<li><a href="#Touch">Touch</a></li>
+<li><a href="#Write">Write</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- BaseName -->
+<div class="mitem"><a href="#top">top</a>
+<a name="BaseName"></a><h3>BaseName</h3>
+<pre>char* BaseName()</pre>
+<p>The base name of the file.</p>
+</div>
+
+
+<!-- basename -->
+<div class="mitem"><a href="#top">top</a>
+<a name="basename"></a><h3>basename</h3>
+<pre>char* basename(char *path)</pre>
+<p>Static method to derive the base name part of a pathname.</p>
+</div>
+
+
+<!-- ClearError -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ClearError"></a><h3>ClearError</h3>
+<pre>void ClearError()</pre>
+<p>ClearError Description...</p>
+</div>
+
+
+<!-- Close -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Close"></a><h3>Close</h3>
+<pre>void Close()</pre>
+<p>Close the file.</p>
+</div>
+
+
+<!-- DirName -->
+<div class="mitem"><a href="#top">top</a>
+<a name="DirName"></a><h3>DirName</h3>
+<pre>char* DirName()</pre>
+<p>The directory path of the file.</p>
+</div>
+
+
+<!-- dirname -->
+<div class="mitem"><a href="#top">top</a>
+<a name="dirname"></a><h3>dirname</h3>
+<pre>char* dirname(char *path)</pre>
+<p>Static method to derive the directory portion of a pathname.</p>
+</div>
+
+
+<!-- Dump -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Dump"></a><h3>Dump</h3>
+<pre>void Dump()</pre>
+<p>Write the file out to stderr with numbered lines. This method is intended
+for plain text files and is not useful for binary files.</p>
+</div>
+
+
+<!-- Exists -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Exists"></a><h3>Exists</h3>
+<pre>bool Exists()</pre>
+<p>Exists Description...</p>
+</div>
+
+
+<!-- GetAll -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetAll"></a><h3>GetAll</h3>
+<pre>char* GetAll()</pre>
+<p>GetAll Description...</p>
+</div>
+
+
+<!-- GetChar -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetChar"></a><h3>GetChar</h3>
+<pre>char GetChar()</pre>
+<p>GetChar Description...</p>
+</div>
+
+
+<!-- GetEOF -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetEOF"></a><h3>GetEOF</h3>
+<pre>bool GetEOF()</pre>
+<p>GetEOF Description...</p>
+</div>
+
+
+<!-- GetLine -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetLine"></a><h3>GetLine</h3>
+<pre>char* GetLine()</pre>
+<p>GetLine Description...</p>
+</div>
+
+
+<!-- GetStatus -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetStatus"></a><h3>GetStatus</h3>
+<pre>void GetStatus()</pre>
+<p>GetStatus Description...</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- Open -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Open"></a><h3>Open</h3>
+<pre>bool Open(char *p=NULL)</pre>
+<p>Open Description...</p>
+</div>
+
+
+<!-- OpenAppend -->
+<div class="mitem"><a href="#top">top</a>
+<a name="OpenAppend"></a><h3>OpenAppend</h3>
+<pre>bool OpenAppend(char *p=NULL)</pre>
+<p>OpenAppend Description...</p>
+</div>
+
+
+<!-- OpenRead -->
+<div class="mitem"><a href="#top">top</a>
+<a name="OpenRead"></a><h3>OpenRead</h3>
+<pre>bool OpenRead(char *p=NULL)</pre>
+<p>OpenRead Description...</p>
+</div>
+
+
+<!-- OpenRW -->
+<div class="mitem"><a href="#top">top</a>
+<a name="OpenRW"></a><h3>OpenRW</h3>
+<pre>bool OpenRW(char *p=NULL)</pre>
+<p>OpenRW Description...</p>
+</div>
+
+
+<!-- OpenRWAppend -->
+<div class="mitem"><a href="#top">top</a>
+<a name="OpenRWAppend"></a><h3>OpenRWAppend</h3>
+<pre>bool OpenRWAppend(char *p=NULL)</pre>
+<p>OpenRWAppend Description...</p>
+</div>
+
+
+<!-- OpenWrite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="OpenWrite"></a><h3>OpenWrite</h3>
+<pre>bool OpenWrite(char *p=NULL)</pre>
+<p>OpenWrite Description...</p>
+</div>
+
+
+<!-- Path -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Path"></a><h3>Path</h3>
+<pre>char* Path()</pre>
+<p>Path Description...</p>
+</div>
+
+
+<!-- PrepareBuffer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="PrepareBuffer"></a><h3>PrepareBuffer</h3>
+<pre>char* PrepareBuffer(int size)</pre>
+<p>PrepareBuffer Description...</p>
+</div>
+
+
+<!-- Print -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Print"></a><h3>Print</h3>
+<pre>size_t Print(char *text)</pre>
+<p>Print Description...</p>
+</div>
+
+
+<!-- PrintLine -->
+<div class="mitem"><a href="#top">top</a>
+<a name="PrintLine"></a><h3>PrintLine</h3>
+<pre>size_t PrintLine(char *text)</pre>
+<p>PrintLine Description...</p>
+</div>
+
+
+<!-- Read -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Read"></a><h3>Read</h3>
+<pre>size_t Read(char *buf, size_t len=0)</pre>
+<p>Read Description...</p>
+</div>
+
+
+<!-- ReadAll -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ReadAll"></a><h3>ReadAll</h3>
+<pre>size_t ReadAll()</pre>
+<p>ReadAll Description...</p>
+</div>
+
+
+<!-- ReadLine -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ReadLine"></a><h3>ReadLine</h3>
+<pre>size_t ReadLine()</pre>
+<p>ReadLine Description...</p>
+</div>
+
+
+<!-- Seek -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Seek"></a><h3>Seek</h3>
+<pre>int Seek(long offset)</pre>
+<p>Seek Description...</p>
+</div>
+
+
+<!-- SetPath -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPath"></a><h3>SetPath</h3>
+<pre>void SetPath(char *path)</pre>
+<p>SetPath Description...</p>
+</div>
+
+
+<!-- Size -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Size"></a><h3>Size</h3>
+<pre>size_t Size()</pre>
+<p>Size Description...</p>
+</div>
+
+
+<!-- Status -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Status"></a><h3>Status</h3>
+<pre>struct stat* Status()</pre>
+<p>Status Description...</p>
+</div>
+
+
+<!-- Stream -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Stream"></a><h3>Stream</h3>
+<pre>FILE* Stream()</pre>
+<p>Stream Description...</p>
+</div>
+
+
+<!-- Touch -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Touch"></a><h3>Touch</h3>
+<pre>void Touch()</pre>
+<p>Touch Description...</p>
+</div>
+
+
+<!-- Write -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Write"></a><h3>Write</h3>
+<pre>size_t Write(char *buf, size_t len=0)</pre>
+<p>Write Description...</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

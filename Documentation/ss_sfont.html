@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_SFont Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+			<ul>
+				<li><a href="ss_editstring.html">SS_EditString</a></li>
+				<li>SS_SFont</li>
+				<li><a href="ss_string.html">SS_String</a></li>
+				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
+			</ul>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_SFont.h</div>
+<h1>SS_SFont</h1>
+<p>
+The 
+format is popular among SDL and Linux game developers for its simplicity and
+portability. Making an SFont file is <a href="http://nostatic.org/sfont/" target="_new">pretty simple</a>.
+SimpleSprite doesn't use the official SFont library, but uses the SFont format as
+the basis for the SS_SFont class. You can use any SDL-compatible image format as
+an SFont (PNG is best).
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>GLuint</tt></td><td><tt>gl_texture[SS_CHR_COUNT]</tt></td><td>The texture names of all characters</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>texw[SS_CHR_COUNT]</tt></td><td>The width of all character textures</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>texh</tt></td><td>The height of the character textures</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>width[SS_CHR_COUNT]</tt></td><td>The actual width of the characters</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>height</tt></td><td>The actual height of the characters</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>wfactor[SS_CHR_COUNT]</tt></td><td>The percentage width of characters to textures</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>hfactor</tt></td><td>The percentage height of the font to its textures</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>xspace</tt></td><td>The regular space between characters</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>yspace</tt></td><td>The regular space between lines</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>descender</tt></td><td>The height of the descender</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_SFont(char *filename, float desc)</pre>
+<p>The constructor requires the path to an image file containing a valid SFont
+image and the height of the descender. During construction the specified image
+is loaded into memory, converted into gl textures and display lists - one of
+each per character.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#Ascent">Ascent</a></li>
+<li><a href="#CharacterWidth">CharacterWidth</a></li>
+<li><a href="#Descender">Descender</a></li>
+<li><a href="#Height">Height</a></li>
+<li><a href="#IndexOfPoint">IndexOfPoint</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#IsPointInside">IsPointInside</a></li>
+<li><a href="#LoadFont">LoadFont</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#SetBaseline">SetBaseline</a></li>
+<li><a href="#SetDescender">SetDescender</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetSpacing">SetSpacing</a></li>
+<li><a href="#StringWidth">StringWidth</a></li>
+<li><a href="#UpdateCursor">UpdateCursor</a></li>
+<li><a href="#XSpace">XSpace</a></li>
+<li><a href="#YSpace">YSpace</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Ascent -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Ascent"></a><h3>Ascent</h3>
+<pre>float Ascent()</pre>
+<p>Ascent Description...</p>
+</div>
+
+
+<!-- CharacterWidth -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CharacterWidth"></a><h3>CharacterWidth</h3>
+<pre>float CharacterWidth(char chr)</pre>
+<p>CharacterWidth Description...</p>
+</div>
+
+
+<!-- Descender -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Descender"></a><h3>Descender</h3>
+<pre>float Descender()</pre>
+<p>Descender Description...</p>
+</div>
+
+
+<!-- Height -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Height"></a><h3>Height</h3>
+<pre>float Height()</pre>
+<p>Height Description...</p>
+</div>
+
+
+<!-- IndexOfPoint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="IndexOfPoint"></a><h3>IndexOfPoint</h3>
+<pre>Uint16 IndexOfPoint(char *text, float pixx, float pixy=0)</pre>
+<p>IndexOfPoint Description...</p>
+</div>
+
+
+<!-- IsPointInside -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="IsPointInside"></a><h3>IsPointInside</h3>
+<pre>bool IsPointInside(char *text, float pixx, float pixy)</pre>
+<p>IsPointInside Description...</p>
+</div>
+
+
+<!-- LoadFont -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadFont"></a><h3>LoadFont</h3>
+<pre>void LoadFont(char *filename, float desc)</pre>
+<p>LoadFont Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render(char chr, float x, float y, ssColorQuad *tint)
+void Render(char *text, float x, float y, ssColorQuad *tint)</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- SetBaseline -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetBaseline"></a><h3>SetBaseline</h3>
+<pre>void SetBaseline(float base)</pre>
+<p>SetBaseline Description...</p>
+</div>
+
+
+<!-- SetDescender -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetDescender"></a><h3>SetDescender</h3>
+<pre>void SetDescender(float desc)</pre>
+<p>SetDescender Description...</p>
+</div>
+
+
+<!-- SetSpacing -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetSpacing"></a><h3>SetSpacing</h3>
+<pre>void SetSpacing(float h, float v)</pre>
+<p>SetSpacing Description...</p>
+</div>
+
+
+<!-- StringWidth -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="StringWidth"></a><h3>StringWidth</h3>
+<pre>float StringWidth(char *text)
+float StringWidth(char *text, Sint16 pos)</pre>
+<p>StringWidth Description...</p>
+</div>
+
+
+<!-- UpdateCursor -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="UpdateCursor"></a><h3>UpdateCursor</h3>
+<pre>void UpdateCursor(char *text, float *x, float *y)</pre>
+<p>UpdateCursor Description...</p>
+</div>
+
+
+<!-- XSpace -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="XSpace"></a><h3>XSpace</h3>
+<pre>float XSpace()</pre>
+<p>XSpace Description...</p>
+</div>
+
+
+<!-- YSpace -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="YSpace"></a><h3>YSpace</h3>
+<pre>float YSpace()</pre>
+<p>YSpace Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_VectorSprite Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+			<ul>
+				<li><a href="ss_frame.html">SS_Frame</a></li>
+				<li><a href="ss_itemgroup.html">SS_ItemGroup</a></li>
+				<li><a href="ss_layeritem.html">SS_LayerItem</a></li>
+				<li><a href="ss_sprite.html">SS_Sprite</a></li>
+				<li><a href="ss_vectorframe.html">SS_VectorFrame</a></li>
+				<li>SS_VectorSprite</li>
+			</ul>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Vectors.h</div>
+<h1>SS_VectorSprite</h1>
+<h4><strong>Superclass</strong>: <a href="ss_layeritem.html">SS_LayerItem</a></h4>
+<p>Class Description...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SS_VectorFrame**</tt></td><td><tt>frameArray</tt></td><td>pointer to an array of frame pointers</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_VectorSprite();
+SS_VectorSprite(const SS_VectorSprite &amp;src)
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AddFrame">AddFrame</a></li>
+<li><a href="#Clone">Clone</a></li>
+<li><a href="#DisposeFrames">DisposeFrames</a></li>
+<li><a href="#GetNewCollisions">GetNewCollisions</a></li>
+<li><a href="#Init">Init</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#IsOnScreen">IsOnScreen</a></li>
+<li><a href="#operator=">operator=</a></li>
+<li><a href="#RemoveSelf">RemoveSelf</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#SetAnimIncrement">SetAnimIncrement</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetAnimRange">SetAnimRange</a></li>
+<li><a href="#SetFrameIndex">SetFrameIndex</a></li>
+<li><a href="#SetHandle">SetHandle</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- AddFrame -->
+<div class="mitem"><a href="#top">top</a>
+<a name="AddFrame"></a><h3>AddFrame</h3>
+<pre>
+void AddFrame(char *vectorFile)
+void AddFrame(SS_VectorFrame *frame)
+</pre>
+<p>AddFrame Description...</p>
+</div>
+
+
+<!-- AddFrame -->
+<div class="mitem"><a href="#top">top</a>
+<a name="AddFrame"></a><h3>AddFrame</h3>
+<p>AddFrame Description...</p>
+</div>
+
+
+<!-- Clone -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Clone"></a><h3>Clone</h3>
+<pre>SS_VectorSprite* Clone()</pre>
+<p>Clone Description...</p>
+</div>
+
+
+<!-- DisposeFrames -->
+<div class="mitem"><a href="#top">top</a>
+<a name="DisposeFrames"></a><h3>DisposeFrames</h3>
+<pre>void DisposeFrames()</pre>
+<p>DisposeFrames Description...</p>
+</div>
+
+
+<!-- GetNewCollisions -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetNewCollisions"></a><h3>GetNewCollisions</h3>
+<pre>Uint32 GetNewCollisions()</pre>
+<p>GetNewCollisions Description...</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- IsOnScreen -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsOnScreen"></a><h3>IsOnScreen</h3>
+<pre>bool IsOnScreen()</pre>
+<p>IsOnScreen Description...</p>
+</div>
+
+
+<!-- operator= -->
+<div class="mitem"><a href="#top">top</a>
+<a name="operator="></a><h3>operator=</h3>
+<pre>SS_VectorSprite&amp; operator=(const SS_VectorSprite &amp;src)</pre>
+<p>operator= Description...</p>
+</div>
+
+
+<!-- RemoveSelf -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveSelf"></a><h3>RemoveSelf</h3>
+<pre>void RemoveSelf()</pre>
+<p>RemoveSelf Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- SetAnimIncrement -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetAnimIncrement"></a><h3>SetAnimIncrement</h3>
+<pre>void SetAnimIncrement(Uint16 inc)</pre>
+<p>SetAnimIncrement Description...</p>
+</div>
+
+
+<!-- SetAnimRange -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetAnimRange"></a><h3>SetAnimRange</h3>
+<pre>void SetAnimRange(Uint16 start, Uint16 end)</pre>
+<p>SetAnimRange Description...</p>
+</div>
+
+
+<!-- SetFrameIndex -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetFrameIndex"></a><h3>SetFrameIndex</h3>
+<pre>void SetFrameIndex(Uint16 f)</pre>
+<p>SetFrameIndex Description...</p>
+</div>
+
+
+<!-- SetHandle -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetHandle"></a><h3>SetHandle</h3>
+<pre>void SetHandle(float x, float y)</pre>
+<p>SetHandle Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

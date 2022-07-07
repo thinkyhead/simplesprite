@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Game Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+			<ul>
+				<li>SS_Game</li>
+				<li><a href="ss_layer.html">SS_Layer</a></li>
+				<li><a href="ss_world.html">SS_World</a></li>
+			</ul>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Game.h</div>
+<h1>SS_Game</h1>
+<p>
+SS_Game represents the base application class. Your game should subclass
+SS_Game overriding the <a href="#Run">Run</a> method. The Run method will
+contain your setup code and main loop.
+</p>
+<p>
+You must then edit the <strong>main.cpp</strong> file, replacing all
+instances of Demo_Game with the name of your own SS_Game subclass.
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr><td><tt>bool</tt></td><td><tt>bQuit</tt></td><td>Flag that tells the game to quit.</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>worldCount</tt></td><td>The number of worlds in the world stack.</td></tr>
+<tr><td><tt>SS_World**</tt></td><td><tt>worlds</tt></td><td>The world stack.</td></tr>
+<tr><td><tt>SS_World*</tt></td><td><tt>world</tt></td><td>The active world.</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_Game()</pre>
+<p>
+When the base game class is instantiated it creates a screen or window based
+on your settings in the SS_Config.h file, initializes the audio system, and
+generates sine and cosine arrays for use in game calculations.
+If your game needs to maintain its own game-wide data it should override the
+<a href="#Init">Init</a> method and do its allocation and initialization there.
+</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+
+<table>
+<tr valign="top">
+
+<td><ul>
+<li><a href="#cd">cd</a></li>
+<li><a href="#Cos">Cos</a></li>
+<li><a href="#FullPath">FullPath</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#InitAudioMixer">InitAudioMixer</a></li>
+<li><a href="#InitScreen">InitScreen</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#InitTrigonometry">InitTrigonometry</a></li>
+<li><a href="#LoadGame">LoadGame</a></li>
+<li><a href="#PopWorld">PopWorld</a></li>
+<li><a href="#PushWorld">PushWorld</a></li>
+<li><a href="#Quit">Quit</a></li>
+<li><a href="#Run">Run</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SaveGame">SaveGame</a></li>
+<li><a href="#SetWorkingDir">SetWorkingDir</a></li>
+<li><a href="#Sin">Sin</a></li>
+<li><a href="#SyncVblank">SyncVblank</a></li>
+<li><a href="#TheScreen">TheScreen</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- cd -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="cd"></a><h3>cd</h3>
+<pre>void cd(char *dir)</pre>
+<p>cd description.</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init description.</p>
+</div>
+
+
+<!-- InitTrigonometry -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitTrigonometry"></a><h3>InitTrigonometry</h3>
+<pre>void InitTrigonometry()</pre>
+<p>InitTrigonometry description.</p>
+</div>
+
+
+<!-- Cos -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Cos"></a><h3>Cos</h3>
+<pre>double Cos(Uint16 index)</pre>
+<p>Cos description.</p>
+</div>
+
+
+<!-- Sin -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Sin"></a><h3>Sin</h3>
+<pre>double Sin(Uint16 index)</pre>
+<p>Sin description.</p>
+</div>
+
+
+<!-- InitScreen -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitScreen"></a><h3>InitScreen</h3>
+<pre>void InitScreen()</pre>
+<p>InitScreen description.</p>
+</div>
+
+
+<!-- TheScreen -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="TheScreen"></a><h3>TheScreen</h3>
+<pre>SDL_Surface* TheScreen()</pre>
+<p>TheScreen description.</p>
+</div>
+
+
+<!-- SyncVblank -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SyncVblank"></a><h3>SyncVblank</h3>
+<pre>void SyncVblank(long sync)</pre>
+<p>SyncVblank description.</p>
+</div>
+
+
+<!-- SetWorkingDir -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetWorkingDir"></a><h3>SetWorkingDir</h3>
+<pre>void SetWorkingDir(char *dir)</pre>
+<p>SetWorkingDir description.</p>
+</div>
+
+
+<!-- FullPath -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="FullPath"></a><h3>FullPath</h3>
+<pre>char* FullPath(char *file)</pre>
+<p>FullPath description.</p>
+</div>
+
+
+<!-- InitAudioMixer -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitAudioMixer"></a><h3>InitAudioMixer</h3>
+<pre>void InitAudioMixer(const Uint32 channels)</pre>
+<p>InitAudioMixer description.</p>
+</div>
+
+
+<!-- PushWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PushWorld"></a><h3>PushWorld</h3>
+<pre>void PushWorld(SS_World *world)</pre>
+<p>PushWorld description.</p>
+</div>
+
+
+<!-- PopWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PopWorld"></a><h3>PopWorld</h3>
+<pre>void PopWorld()</pre>
+<p>PopWorld description.</p>
+</div>
+
+
+<!-- Run -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Run"></a><h3>Run</h3>
+<pre>void Run()</pre>
+<p>Run description.</p>
+</div>
+
+
+<!-- SaveGame -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SaveGame"></a><h3>SaveGame</h3>
+<pre>void SaveGame()</pre>
+<p>SaveGame description.</p>
+</div>
+
+
+<!-- LoadGame -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadGame"></a><h3>LoadGame</h3>
+<pre>void LoadGame()</pre>
+<p>LoadGame description.</p>
+</div>
+
+
+<!-- Quit -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Quit"></a><h3>Quit</h3>
+<pre>void Quit()</pre>
+<p>Quit description.</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

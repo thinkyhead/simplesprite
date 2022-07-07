@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : User Interface</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li>User Interface</li>
+			<ul>
+				<li><a href="ss_button.html">SS_Button</a></li>
+				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
+				<li><a href="ss_customgadget.html">SS_CustomGadget</a></li>
+				<li><a href="ss_dial.html">SS_Dial</a></li>
+				<li><a href="ss_dragger.html">SS_Dragger</a></li>
+				<li><a href="ss_gadget.html">SS_Gadget</a></li>
+				<li><a href="ss_gui.html">SS_GUI</a></li>
+				<li><a href="ss_menu.html">SS_Menu</a></li>
+				<li><a href="ss_menubar.html">SS_Menubar</a></li>
+				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
+				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
+				<li><a href="ss_slider.html">SS_Slider</a></li>
+				<li><a href="ss_textinput.html">SS_TextInput</a></li>
+			</ul>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<div id="classbox">
+<h1>User Interface</h1>
+<p>
+A Gadget is a graphical object that players can interact with.
+A GUI is a graphical user interface made with one or more Gadgets.
+SimpleSprite implements several types of gadget already, such as
+buttons and checkboxes. Gadgets respond to various kinds of events.
+</p>
+
+<h2>Events</h2>
+
+<p>
+When an event occurs the pertinent gadgets are handed a pointer to an
+SS_Event structure that describes what happened. Your gadget's handler
+uses the data in the event structure to do something useful.
+</p>
+
+<pre>
+typedef struct {
+  ssEventCode  type;                    <em>// The event code</em>
+  float        x, y;                    <em>// Mouse pos in gadget coords</em>
+  float        xrel, yrel;              <em>// Mouse motion</em>
+  float        xgui, ygui;              <em>// Mouse pos in gui coords</em>
+  float        xglob, yglob;            <em>// Mouse pos in screen coords</em>
+  SDLKey       key;                     <em>// The pressed key</em>
+  SDLMod       mod;                     <em>// Key modifiers</em>
+} SS_Event;
+</pre>
+
+<p>
+Events are automatically dispatched to gadgets as they occur. The
+supplied gadgets handle certain events themselves. For example, a Slider
+updates the thumb position as you click and drag on it. For your own
+special behaviors you need only set event handlers for the events that
+matter. The following events are available:
+</p>
+
+<table class="indent">
+<tr><td><tt>SS_EVENT_ENTER</tt></td><td>The gadget was entered</td></tr>
+<tr><td><tt>SS_EVENT_MOVE</tt></td><td>The mouse moved within the gadget</td></tr>
+<tr><td><tt>SS_EVENT_EXIT</tt></td><td>The mouse exited the gadget</td></tr>
+<tr><td><tt>SS_EVENT_CLICK</tt></td><td>The gadget was clicked</td></tr>
+<tr><td><tt>SS_EVENT_DRAG</tt></td><td>The gadget was dragged</td></tr>
+<tr><td><tt>SS_EVENT_UNCLICK</tt></td><td>The gadget was unclicked</td></tr>
+<tr><td><tt>SS_EVENT_KEYDOWN</tt></td><td>A key was pressed</td></tr>
+<tr><td><tt>SS_EVENT_KEYUP</tt></td><td>A key was released</td></tr>
+<tr><td><tt>SS_EVENT_GAIN_FOCUS</tt></td><td>The gadget gained focus</td></tr>
+<tr><td><tt>SS_EVENT_LOSE_FOCUS</tt></td><td>The gadget lost focus</td></tr>
+<tr><td><tt>SS_EVENT_CHANGE</tt></td><td>The value changed</td></tr>
+<tr><td><tt>SS_EVENT_IDLE</tt></td><td>Nothing happened</td></tr>
+</table>
+
+</div>
+
+</td></tr></table>
+
+
+</body>
+</html>

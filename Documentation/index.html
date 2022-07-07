@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : Introduction</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li>Introduction</li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Section Description
+
+-->
+
+<div id="classbox">
+<h1>Introduction to SimpleSprite</h1>
+<p>
+SimpleSprite is a C++ framework based on <a href="www.libsdl.org">SDL</a> and <a
+href="http://www.opengl.org">OpenGL</a> that you can use to create games,
+screensavers, demos, presentations, etc. Like other sprite engines it allows you
+to load and animate bitmap graphics, test collisions between objects, and assign
+atomic behaviors to game objects. The only requirement is a little patience and
+some knowledge of C++.
+</p>
+<p>
+SimpleSprite was originally inspired by <a
+href="http://www.spriteworld.org/">SpriteWorld</a>, a library written in C and
+C++ for Mac OS, and used in games like Escape Velocity. I didn't set out to copy
+SpriteWorld but rather to implement its best features - such as sprite layers
+and action procs - and to extend these concepts with the power of OpenGL. The
+result is a clean, lightweight, and flexible class library which resembles many
+other sprite libraries.
+</p>
+<p>
+It is not necessary to subclass most SimpleSprite classes to customize them
+because many base classes implement their virtual methods as procedure
+callbacks. This is useful mainly for prototyping. For more complex games it's
+far better to implement everything as subclasses.
+</p>
+<p>
+This game library is continuing to expand as I build projects with it. I have
+not yet created a finished game with SimpleSprite but I have created fully
+working environments with interacting AIs. It all works very simply, according
+to the same principles set forth in many other sprite libraries. The main
+purpose of this project is to take the 2D sprite concept to the next level
+through the power of OpenGL.
+</p>
+<p>
+I consider C++ as the ideal language for this purpose because it is available on
+all platforms and every serious game programmer knows it. SDL is also ideal for
+its ubiquity. SimpleSprite has been tested and compiled in XCode on Mac OS X and
+Visual Studio in Windows 2000. Theoretically it should compile well on any
+system supporting gcc.
+</p>
+</div>
+
+
+<!--
+
+		SimpleSprite Features
+
+-->
+
+<div id="methbox">
+<h1>Features Overview</h1>
+
+<dl>
+
+<dt>Image and Texture support</dt>
+<dd>SimpleSprite can load image files in GIF, JPEG, BMP, and PNG
+formats. PNG is favored for its amazing powers of translucency.
+The SDL_image library provides all this power for free.</dd>
+
+<dt>Fonts, strings, and blocks of text</dt>
+<dd>An SFont file is an image file in any format containing the font and
+a line of markers at the top. (Samples should be included.) Your fonts
+can be used in their own layers or inside user interface objects.</dd>
+
+
+<dt>Tiles and tile maps</dt>
+<dd>A Tile Palette file is an image file in any format containing a grid
+of tiles of any regular size. Tile maps are large multi-layered
+environments that integrate seamlessly into nearly endless scrolling
+worlds. Sprites can interact with tile maps to test collisions or
+pick up objects on the map.</dd>
+
+
+<dt>User Interface and Event Chain</dt>
+<dd>The SS_GUI and SS_Gadget classes are the SimpleSprite equivalent of
+windows and controls. A GUI is a special layer for gadgets which
+implements an event chain. Simple controls like buttons, checkboxes, sliders,
+and edit fields are already provided.</dd>
+
+
+<dt>Sound Effects and Music</dt>
+<dd>You can load and play AIFF, WAV, and MP3 files with the SS_Sound and
+SS_Music classes. These classes utilize the SDL_mixer and smpeg libraries
+and playback performance is very good.</dd>
+
+
+<dt>Inter-Object Messaging</dt>
+<dd>Objects can easily send messages to one another with the SS_Broadcaster
+and SS_Listener classes. Worlds, Layers, LayerItems, GUIs, and Gadgets
+already inherit from these classes, so virtually any object in your
+game can register to listen to any other object.</dd>
+
+
+<dt>Distributed AI</dt>
+<dd>Every sprite and game object has hooks for procedures that define its
+behavior. This provides discreet intelligence for simple behaviors like
+spinning, pursuit, gravitation, flashing, animation, etc. You can use
+Finite State Machine technology to generate more complex behaviors and
+decision-making. AI Stacks make it easy to jump in and out of states as
+required. This means your creatures can take detours from a current task
+and return to it later when the detour is completed.</dd>
+<dd>Finite State Machines are very fast, so you can have thousands of concurrent
+decision trees evolving simultaneously.</dd>
+
+</dl>
+
+</div>
+
+</td></tr></table>
+
+
+</body>
+</html>

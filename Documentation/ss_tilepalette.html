@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_TilePalette Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+			<ul>
+				<li><a href="ss_tilelayer.html">SS_TileLayer</a></li>
+				<li><a href="ss_tilemap.html">SS_TileMap</a></li>
+				<li>SS_TilePalette</li>
+			</ul>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>SS_TilePalette</h1>
+<p>Class Description...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<h2>Member Data</h2>
+
+<div id="databox">
+
+<table>
+
+<tr class="priv">
+<td><tt>Uint16</tt></td><td><tt>image_w</tt></td>
+<td>The source image width</td>
+</tr>
+
+<tr class="priv">
+<td><tt>Uint16</tt></td><td><tt>image_h</tt></td>
+<td>The source image height</td>
+</tr>
+
+<tr class="priv">
+<td><tt>Uint16</tt></td><td><tt>image_depth</tt></td>
+<td>The source image depth</td>
+</tr>
+
+<tr>
+<td><tt>GLuint</tt></td><td><tt>gl_texture</tt></td>
+<td>The OpenGL texture name value</td>
+</tr>
+
+<tr>
+<td><tt>Uint16</tt></td><td><tt>tile_w, tile_h</tt></td>
+<td>Individual tile size in pixels</td>
+</tr>
+
+<tr>
+<td><tt>float</tt></td><td><tt>tile_pw, tile_ph</tt></td>
+<td>Individual tile size as percentage of palette size</td>
+</tr>
+
+<tr>
+<td><tt>Uint16</tt></td><td><tt>tiles_across, tiles_down</tt></td>
+<td>Number of tiles across and down</td>
+</tr>
+
+<tr>
+<td><tt>Uint16</tt></td><td><tt>useCount</tt></td>
+<td>Count of usage for autodisposal</td>
+</tr>
+
+</table>
+
+</div>
+
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_TilePalette(char *filename, int tw, int th);</pre>
+<p>About the constructor.</p>
+</div>
+
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<div><ul><li><a href="#AutoDispose">AutoDispose</a></li></ul></div>
+</div>
+
+
+<!-- AutoDispose -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AutoDispose"><h3>AutoDispose</h3></a>
+<pre>void AutoDispose()</pre>
+<p>AutoDispose Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

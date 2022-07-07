@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : Base Classes</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li>Base Classes</li>
+			<ul>
+				<li><a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></li>
+				<li><a href="ss_linkedlist.html">SS_LinkedList&lt;T&gt;</a></li>
+				<li><a href="ss_listnode.html">SS_ListNode&lt;T&gt;</a></li>
+				<li><a href="ss_objectlist.html">SS_ObjectList&lt;T&gt;</a></li>
+				<li><a href="ss_refcounter.html">SS_RefCounter</a></li>
+			</ul>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>Base Classes</h1>
+<p>
+The classes described in this section provide support for most of the classes
+in this framework. You don't need to use these classes directly; however you
+will need to be familiar with their methods to fully utilize most of the other
+classes.
+</p>
+
+<dl>
+
+<dt><a href="ss_refcounter.html">SS_RefCounter</a></dt>
+<dd>
+This class provides "reference counting" to help prevent premature deletion and
+memory leaks.
+</dd>
+
+<dt><a href="ss_listnode.html">SS_ListNode&lt;T&gt;</a> &bull; <a href="ss_linkedlist.html">SS_LinkedList&lt;T&gt;</a> &bull; <a href="ss_objectlist.html">SS_ObjectList&lt;T&gt;</a> &bull; <a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></dt>
+<dd>
+Linked Lists are essential. These classes provide the basic functionality for
+linked lists of simple data types, aggregate data types, and object pointers.
+They are template classes, so SimpleSprite uses <tt>typedef</tt>s to declare
+the specific data types it needs.
+</dd>
+
+</dl>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

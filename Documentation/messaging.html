@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : Messaging Classes</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li>Messaging</li>
+			<ul>
+				<li><a href="ss_broadcaster.html">SS_Broadcaster</a></li>
+				<li><a href="ss_listener.html">SS_Listener</a></li>
+				<li><a href="ss_message.html">SS_Message</a></li>
+			</ul>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>Messaging Classes</h1>
+<p>
+There are many instances where it's convenient for one object to send a message
+to one or more other objects. For example, when you add a button to your user
+interface your program needs to be notified when the button is clicked. The
+code for this is very simple thanks to the messaging classes.
+</p>
+<pre>
+<em>// World initialization</em>
+void MyWorld::Init()
+{
+  button = new SS_Button(myGUI, 70, 20);   <em>// Add a 70x20 button to myGUI</em>
+  button->SetLabel("Load");                <em>// Set the label to "Load"</em>
+  button->SetMessage('FILE','LOAD');       <em>// Assign a message</em>
+  ListenTo(button);                        <em>// Listen to the button</em>
+}
+
+<em>// World message handler override</em>
+void MyWorld::HandleMessage(const SS_Message &amp;msg)
+{
+  switch(msg.Class()) {                    <em>// First argument above</em>
+    case 'FILE':
+      switch(msg.Code()) {                 <em>// Second argument above</em>
+        case 'LOAD':
+          DoMyLoadPrompt();                <em>// Do something!</em>
+          break;
+      }
+      break;
+  }
+}
+</pre>
+<p>
+The button in the above example will automatically trigger the HandleMessage
+method for the game world when clicked. The game world can then perform some
+action, such as loading a saved game or spawning and running a new world.
+All the included gadgets use messaging.
+</p>
+<p>
+Messages may also have an associated data value. Use accessor methods to
+retrieve the value. The value may be a pointer to a message-specific data
+structure. Your message generator should take care of all creation and release
+of generated message data.
+</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

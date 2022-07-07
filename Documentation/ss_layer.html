@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Layer Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+			<ul>
+				<li><a href="ss_game.html">SS_Game</a></li>
+				<li>SS_Layer</li>
+				<li><a href="ss_world.html">SS_World</a></li>
+			</ul>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Layer.h</div>
+<h1>SS_Layer</h1>
+<h4><strong>Superclass</strong>:
+<a href="ss_itemlist.html">SS_ItemList</a>
+</h4>
+<h4><strong>Subclasses</strong>:
+<a href="ss_gui.html">SS_GUI</a> |
+<a href="ss_textlayer.html">SS_TextLayer</a> |
+<a href="ss_tilelayer.html">SS_TileLayer</a>
+</h4>
+<p>
+The SS_Layer class allows you to group sprites and other game objects
+into independently controlled units. You can change the order of layers,
+and you can show, hide, pause, and disable them. Layers can be world-
+synchronized to scroll and zoom in alignment with the world. Or they can
+be set to a fixed position for HUD displays and interface objects.
+(Although called "fixed," they actually have x/y offsets of their own.)
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="prot"><td><tt>SS_World*</tt></td><td><tt>world</tt></td><td>the world this layer is in</td></tr>
+<tr><td><tt>SS_ItemList</tt></td><td><tt>visibleList</tt></td><td>everything that ought to be rendered</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>flags</tt></td><td>every layer has flags</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>enabled</tt></td><td>layer on/off</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>paused</tt></td><td>layer paused temporarily?</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>removeFlag</tt></td><td>layer scheduled for deletion?</td></tr>
+<tr><td><tt>float</tt></td><td><tt>spatialScale</tt></td><td>scale relative to the world</td></tr>
+<tr><td><tt>float</tt></td><td><tt>xoffset, yoffset</tt></td><td>The offset of the layer, woohoo!</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_Layer(Uint32 flags=SS_NONE)
+SS_Layer(SS_World *world, Uint32 flags=SS_NONE)</pre>
+<p>When you create a new empty layer you can optionally add it to
+an existing World and/or set the layer flags. The available flags
+are:</p>
+<table class="indent">
+<tr><td><tt>SS_NONE</tt></td><td>A normal layer</td></tr>
+<tr><td><tt>SS_NOSCROLL</tt></td><td>Don't apply world-scrolling</td></tr>
+<tr><td><tt>SS_NOZOOM</tt></td><td>Don't apply world-zooming</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AddItem">AddItem</a></li>
+<li><a href="#AddToVisible">AddToVisible</a></li>
+<li><a href="#Animate">Animate</a></li>
+<li><a href="#Disable">Disable</a></li>
+<li><a href="#DisposeItem">DisposeItem</a></li>
+<li><a href="#Enable">Enable</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Flags">Flags</a></li>
+<li><a href="#HandleEvent">HandleEvent</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#Kill">Kill</a></li>
+<li><a href="#MousePointer">MousePointer</a></li>
+<li><a href="#Pause">Pause</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#PrepareMatrix">PrepareMatrix</a></li>
+<li><a href="#Process">Process</a></li>
+<li><a href="#RemoveItem">RemoveItem</a></li>
+<li><a href="#RemoveSelf">RemoveSelf</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#Resume">Resume</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetFlags">SetFlags</a></li>
+<li><a href="#SetOffset">SetOffset</a></li>
+<li><a href="#SetSpatialScale">SetSpatialScale</a></li>
+<li><a href="#SetWorld">SetWorld</a></li>
+<li><a href="#Type">Type</a></li>
+<li><a href="#World">World</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- AddItem -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AddItem"></a><h3>AddItem</h3>
+<pre>void AddItem(SS_LayerItem *item)</pre>
+<p>Add an item to the layer.</p>
+</div>
+
+
+<!-- AddToVisible -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AddToVisible"></a><h3>AddToVisible</h3>
+<pre>void AddToVisible(SS_LayerItem *item)</pre>
+<p>Add an item to the layer's visible list.</p>
+</div>
+
+
+<!-- Animate -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Animate"></a><h3>Animate</h3>
+<pre>void Animate()</pre>
+<p>Animate all the items in the layer.</p>
+</div>
+
+
+<!-- Disable -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Disable"></a><h3>Disable</h3>
+<pre>void Disable()</pre>
+<p>Disable the layer. All processing and rendering for the layer will
+stop.</p>
+</div>
+
+
+<!-- DisposeItem -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeItem"></a><h3>DisposeItem</h3>
+<pre>void DisposeItem(SS_LayerItem *item)</pre>
+<p>Remove an item from the layer and dispose it.</p>
+</div>
+
+
+<!-- Enable -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Enable"></a><h3>Enable</h3>
+<pre>void Enable()</pre>
+<p>Enable the layer. Processing and rendering of the layer will
+resume. Layers are enabled by default.</p>
+</div>
+
+
+<!-- Flags -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Flags"></a><h3>Flags</h3>
+<pre>
+Uint32 Flags()
+Uint32 Flags(Uint32 mask)
+</pre>
+<p>Return the flags, optionally testing against a bit mask.</p>
+</div>
+
+
+<!-- HandleEvent -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="HandleEvent"></a><h3>HandleEvent</h3>
+<pre>bool HandleEvent(SDL_Event *e)</pre>
+<p>Handle a single event received from SDL. This method is meant to
+be overridden by subclasses of SS_Layer. By default it simply returns
+false, indicating the event was not handled by this layer.</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init(Uint32 flags=SS_NONE)</pre>
+<p>Init() is called by the constructor and it should not be called at any
+other time.</p>
+</div>
+
+
+<!-- Kill -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Kill"></a><h3>Kill</h3>
+<pre>void Kill()</pre>
+<p>Mark the layer for removal during the next Process loop.</p>
+</div>
+
+
+<!-- MousePointer -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="MousePointer"></a><h3>MousePointer</h3>
+<pre>SS_LayerItem* MousePointer()</pre>
+<p>Accessor for the world's pointer sprite.</p>
+</div>
+
+
+<!-- Pause -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Pause"></a><h3>Pause</h3>
+<pre>void Pause()</pre>
+<p>Pause the layer. Processing of the layer will stop.</p>
+</div>
+
+
+<!-- PrepareMatrix -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PrepareMatrix"></a><h3>PrepareMatrix</h3>
+<pre>void PrepareMatrix()</pre>
+<p>PrepareMatrix Description...</p>
+</div>
+
+
+<!-- Process -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Process"></a><h3>Process</h3>
+<pre>void Process()</pre>
+<p>Process all the items in the layer. All items in the layer which are
+marked for removal are removed by this method.</p>
+</div>
+
+
+<!-- RemoveItem -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RemoveItem"></a><h3>RemoveItem</h3>
+<pre>void RemoveItem(SS_LayerItem *item)</pre>
+<p>Remove an item from the layer but don't dispose it.</p>
+</div>
+
+
+<!-- RemoveSelf -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RemoveSelf"></a><h3>RemoveSelf</h3>
+<pre>void RemoveSelf()</pre>
+<p>RemoveSelf Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render all the items in the layer.</p>
+</div>
+
+
+<!-- Resume -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Resume"></a><h3>Resume</h3>
+<pre>void Resume()</pre>
+<p>Resume processing of the layer.</p>
+</div>
+
+
+<!-- SetFlags -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFlags"></a><h3>SetFlags</h3>
+<pre>void SetFlags(Uint32 f)</pre>
+<p>Set the layer's flags.</p>
+</div>
+
+
+<!-- SetOffset -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetOffset"></a><h3>SetOffset</h3>
+<pre>void SetOffset(float h, float v)</pre>
+<p>Change the layer's offset values. All items in the layer will
+be rendered with the given offset.</p>
+</div>
+
+
+<!-- SetSpatialScale -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetSpatialScale"></a><h3>SetSpatialScale</h3>
+<pre>void SetSpatialScale(float s)</pre>
+<p>Set the Spatial Scale of the layer. Spatial scaling is used to
+create a parallax effect, simulating a Z plane.</p>
+</div>
+
+
+<!-- SetWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetWorld"></a><h3>SetWorld</h3>
+<pre>void SetWorld(SS_World *w)</pre>
+<p>Set the layer's world pointer and the world pointer of all
+the layer's members.</p>
+</div>
+
+
+<!-- Type -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Type"></a><h3>Type</h3>
+<pre>layerType Type()</pre>
+<p>The type of the layer. The layer type enumerated constants are SS_LAYER_PLAIN,
+SS_LAYER_SPRITE, SS_LAYER_TEXT, SS_LAYER_TILE, and SS_LAYER_GUI</p>
+</div>
+
+
+<!-- World -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="World"></a><h3>World</h3>
+<pre>SS_World* World()</pre>
+<p>Accessor method for the world which contains this layer.</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

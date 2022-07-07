@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Frame Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+			<ul>
+				<li>SS_Frame</li>
+				<li><a href="ss_itemgroup.html">SS_ItemGroup</a></li>
+				<li><a href="ss_layeritem.html">SS_LayerItem</a></li>
+				<li><a href="ss_sprite.html">SS_Sprite</a></li>
+				<li><a href="ss_vectorframe.html">SS_VectorFrame</a></li>
+				<li><a href="ss_vectorsprite.html">SS_VectorSprite</a></li>
+			</ul>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Frame.h</div>
+<h1>SS_Frame</h1>
+<h4><strong>SuperClass</strong>: <a href="ss_refcounter.html">SS_RefCounter</a></h4>
+<p>The SS_Frame class represents the bitmap data which SS_Sprite utilizes for its
+frames. When you create a frame you must supply either the pathname of an image or
+an existing SDL_Surface. You can also pass flags indicating whether the frame
+should generate a collision mask and whether it should retain its surface data.
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>ssColorQuad</tt></td><td><tt>tint</tt></td><td>a color to tint the frame when drawn</td></tr>
+<tr class="priv"><td><tt>GLuint</tt></td><td><tt>gl_texture</tt></td><td>the frame's image is an OpenGL texture</td></tr>
+<tr class="priv"><td><tt>GLuint</tt></td><td><tt>gl_list</tt></td><td>the frame's stored display list</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>texw, texh</tt></td><td>the texture's size (powers of 2)</td></tr>
+<tr class="priv"><td><tt>SDL_Surface*</tt></td><td><tt>surface</tt></td><td>the surface, if preserved</td></tr>
+<tr class="priv"><td><tt>frameFlags</tt></td><td><tt>flags</tt></td><td>flags</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>xhandle, yhandle</tt></td><td>the pivot point for rotation</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>width, height</tt></td><td>size of image area</td></tr>
+<tr><td><tt>Uint8*</tt></td><td><tt>mask</tt></td><td>collision mask, if created</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>maskBytesWide</tt></td><td>useful value</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_Frame(char *filename, frameFlags f)
+SS_Frame(char *filename)
+SS_Frame(SDL_Surface *s, frameFlags f)
+SS_Frame(SDL_Surface *s)
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#CenterHandle">CenterHandle</a></li>
+<li><a href="#DisposeDisplayList">DisposeDisplayList</a></li>
+<li><a href="#DisposeMask">DisposeMask</a></li>
+<li><a href="#DisposeSurface">DisposeSurface</a></li>
+<li><a href="#DisposeTexture">DisposeTexture</a></li>
+<li><a href="#GetHandle">GetHandle</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Init">Init</a></li>
+<li><a href="#InitDisplayList">InitDisplayList</a></li>
+<li><a href="#LoadImage">LoadImage</a></li>
+<li><a href="#LoadSurface">LoadSurface</a></li>
+<li><a href="#MakeCollisionMask">MakeCollisionMask</a></li>
+<li><a href="#Render">Render</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SendGeometry">SendGeometry</a></li>
+<li><a href="#SetAlpha">SetAlpha</a></li>
+<li><a href="#SetHandle">SetHandle</a></li>
+<li><a href="#SetTint">SetTint</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- CenterHandle -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CenterHandle"></a><h3>CenterHandle</h3>
+<pre>void CenterHandle()</pre>
+<p>Set the frame handle to the exact center of the frame.</p>
+</div>
+
+
+<!-- DisposeDisplayList -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeDisplayList"></a><h3>DisposeDisplayList</h3>
+<pre>void DisposeDisplayList()</pre>
+<p>Dispose the gl display list for the frame.</p>
+</div>
+
+
+<!-- DisposeMask -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeMask"></a><h3>DisposeMask</h3>
+<pre>void DisposeMask()</pre>
+<p>Dispose the collision mask. This reverts to simple bounds-checking for
+subsequent collisions.</p>
+</div>
+
+
+<!-- DisposeSurface -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeSurface"></a><h3>DisposeSurface</h3>
+<pre>void DisposeSurface()</pre>
+<p>Dispose the SDL_Surface for this frame. The source surface is usually destroyed
+after the gl texture has been generated. To prevent this from happening and retain
+the surface you should include the <tt>SS_KEEP_SURFACE</tt> flag when creating
+the frame.</p>
+</div>
+
+
+<!-- DisposeTexture -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeTexture"></a><h3>DisposeTexture</h3>
+<pre>void DisposeTexture()</pre>
+<p>Dispose the gl texture for the frame.</p>
+</div>
+
+
+<!-- GetHandle -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="GetHandle"></a><h3>GetHandle</h3>
+<pre>void GetHandle(float *x, float *y)</pre>
+<p>Gets the handle of the frame.</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init(frameFlags f)
+void Init()</pre>
+<p>Init is the initialization code shared by all SS_Frame constructors.
+You should never call Init in your code.</p>
+</div>
+
+
+<!-- InitDisplayList -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitDisplayList"></a><h3>InitDisplayList</h3>
+<pre>void InitDisplayList()</pre>
+<p>Generates a GL display list for the frame.</p>
+</div>
+
+
+<!-- LoadImage -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadImage"></a><h3>LoadImage</h3>
+<pre>void LoadImage(const char *filename)</pre>
+<p>Generate the frame's texture, display list, and collision mask from an image
+file.</p>
+</div>
+
+
+<!-- LoadSurface -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadSurface"></a><h3>LoadSurface</h3>
+<pre>void LoadSurface(SDL_Surface *surface)</pre>
+<p>Generate the frame's texture, display list, and collision mask from an
+SDL_Surface.</p>
+</div>
+
+
+<!-- MakeCollisionMask -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="MakeCollisionMask"></a><h3>MakeCollisionMask</h3>
+<pre>void MakeCollisionMask()
+void MakeCollisionMask(Uint8 threshold)</pre>
+<p>Create a collision mask for the frame. The frame's collision mask is a one-bit
+representation of the frame which is used to precisely detect collisions. This
+gives the highest level of precision possible but bit-level collision detection
+can be expensive. See the notes on collision-detection elsewhere in this doc.
+</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render(float x, float y)
+void Render(float x, float y, float rot)
+void Render(float x, float y, float rot, float scale)
+void Render(float x, float y, float rot, float xscale, float yscale)
+
+void Render(
+    float x,                            <em>// Render at X Position</em>
+    float y,                            <em>// Render at Y Position</em>
+    float rot,                          <em>// Render with rotation</em>
+    float xscale,                       <em>// Render with X Scaled</em>
+    float yscale,                       <em>// Render with Y Scaled</em>
+    const ssColorQuad *tint             <em>// Render with tint / alpha</em>
+  )</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- SendGeometry -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SendGeometry"></a><h3>SendGeometry</h3>
+<pre>void SendGeometry()</pre>
+<p>Sends the frame's drawing instructions to the graphics card. This method is
+used by InitDisplayList during frame creation. But it can also be called directly
+to draw the frame in the current matrix.</p>
+</div>
+
+
+<!-- SetAlpha -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetAlpha"></a><h3>SetAlpha</h3>
+<pre>void SetAlpha(GLubyte a)</pre>
+<p>Set the alpha (overall opacity) of the frame.</p>
+</div>
+
+
+<!-- SetHandle -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetHandle"></a><h3>SetHandle</h3>
+<pre>void SetHandle(float x, float y)</pre>
+<p>Set the handle coordinates of the frame.</p>
+</div>
+
+
+<!-- SetTint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetTint"></a><h3>SetTint</h3>
+<pre>void SetTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
+void SetTint(GLubyte r, GLubyte g, GLubyte b)</pre>
+<p>Set the overall color of the frame. If no alpha is specified then the
+alpha remains unchanged.</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_CustomGadget Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+			<ul>
+				<li><a href="ss_button.html">SS_Button</a></li>
+				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
+				<li>SS_CustomGadget</li>
+				<li><a href="ss_dial.html">SS_Dial</a></li>
+				<li><a href="ss_dragger.html">SS_Dragger</a></li>
+				<li><a href="ss_gadget.html">SS_Gadget</a></li>
+				<li><a href="ss_gui.html">SS_GUI</a></li>
+				<li><a href="ss_menu.html">SS_Menu</a></li>
+				<li><a href="ss_menubar.html">SS_Menubar</a></li>
+				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
+				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
+				<li><a href="ss_slider.html">SS_Slider</a></li>
+				<li><a href="ss_textinput.html">SS_TextInput</a></li>
+			</ul>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_GUI.h</div>
+<h1>SS_CustomGadget</h1>
+<h4><strong>Superclass</strong>: <a href="ss_gadget.html">SS_Gadget</a></h4>
+<p>
+There are times when you need a special gadget but you don't want to make an
+entire subclass. The SS_CustomGadget augments the vanilla SS_Gadget class by
+adding a render handler pointer. SimpleSprite sets up the render context and
+does the event dispatching.
+</p>
+
+<h5>Code Example</h5>
+
+<pre>
+  SS_CustomGadget *custom;
+
+  custom = new SS_CustomGadget(
+      myGUI,                        <em>// An existing GUI</em>
+      150, 150,                     <em>// 150 x 150 area</em>
+      myRenderProc                  <em>// My own renderer</em>
+    );
+
+  custom->SetHandler(SS_EVENT_CLICK, myEventProc);  <em>// My event handler</em>
+  custom->Move(10, 10);                             <em>// Offset in the GUI</em>
+</pre>
+
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>gadgetRenderProcPtr</tt></td><td><tt>renderProc</tt></td><td>Custom rendering handler</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>rotation</tt></td><td>Rotation for rendering</td></tr>
+<tr class="priv"><td><tt>char*</tt></td><td><tt>storage</tt></td><td>Storage for handler data</td></tr>
+<tr><td><tt>float</tt></td><td><tt>misc[10]</tt></td><td>More custom storage</td></tr>
+<tr><td><tt>int</tt></td><td><tt>vals[10]</tt></td><td>And even more custom storage</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_CustomGadget(
+    SS_GUI *g,
+    gadgetRenderProcPtr r=NULL
+    )
+
+SS_CustomGadget(
+    SS_GUI *g,
+    float w, float h,
+    gadgetRenderProcPtr r=NULL
+    )
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AllocStorage">AllocStorage</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#PushAndPrepareMatrix">PushAndPrepareMatrix</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Render">Render</a></li>
+<li><a href="#RestoreMatrix">RestoreMatrix</a></li>
+<li><a href="#SetRenderProc">SetRenderProc</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- AllocStorage -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AllocStorage"></a><h3>AllocStorage</h3>
+<pre>char* AllocStorage(int size)</pre>
+<p>AllocStorage Description...</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- PushAndPrepareMatrix -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PushAndPrepareMatrix"></a><h3>PushAndPrepareMatrix</h3>
+<pre>void PushAndPrepareMatrix()</pre>
+<p>PushAndPrepareMatrix Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- RestoreMatrix -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RestoreMatrix"></a><h3>RestoreMatrix</h3>
+<pre>void RestoreMatrix()</pre>
+<p>RestoreMatrix Description...</p>
+</div>
+
+
+<!-- SetRenderProc -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetRenderProc"></a><h3>SetRenderProc</h3>
+<pre>void SetRenderProc(gadgetRenderProcPtr r)</pre>
+<p>SetRenderProc Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Sound Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+			<ul>
+				<li><a href="ss_music.html">SS_Music</a></li>
+				<li>SS_Sound</li>
+			</ul>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Sound.h</div>
+<h1>SS_Sound</h1>
+<p>Class Description...</p>
+</div>
+
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="prot"><td><tt>Uint32</tt></td><td><tt>flags</tt></td><td>Sound flags</td></tr>
+<tr class="prot"><td><tt>Uint32</tt></td><td><tt>minWait</tt></td><td>Minimum time between repeats of the sound</td></tr>
+<tr class="prot"><td><tt>Uint32</tt></td><td><tt>lastPlay</tt></td><td>The last time the sound was played</td></tr>
+<tr class="prot"><td><tt>Mix_Chunk*</tt></td><td><tt>soundChunk</tt></td><td>The sound as a Mix_Chunk (from SDL_mixer)</td></tr>
+</table>
+</div>
+
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_Sound()
+SS_Sound(SDL_AudioSpec *spec)
+SS_Sound(char *filename)</pre>
+<p>About the constructor.</p>
+</div>
+
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#Dispose">Dispose</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#InitSoundSystem">InitAudioMixer</a></li>
+<li><a href="#Load">Load</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Pause">Pause</a></li>
+<li><a href="#Play">Play</a></li>
+<li><a href="#SetFrequency">SetFrequency</a></li>
+<li><a href="#SetMinWait">SetMinWait</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetRate">SetRate</a></li>
+<li><a href="#SetVolume">SetVolume</a></li>
+<li><a href="#Stop">Stop</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Dispose -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Dispose"></a><h3>Dispose</h3>
+<pre>void Dispose()</pre>
+<p>Dispose Description...</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- InitAudioMixer -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitAudioMixer"></a><h3>InitAudioMixer</h3>
+<pre>void InitAudioMixer()</pre>
+<p>InitAudioMixer Description...</p>
+</div>
+
+
+<!-- Load -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Load"></a><h3>Load</h3>
+<pre>void Load(char *filename)</pre>
+<p>Load Description...</p>
+</div>
+
+
+<!-- Pause -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Pause"></a><h3>Pause</h3>
+<pre>void Pause()</pre>
+<p>Pause Description...</p>
+</div>
+
+
+<!-- Play -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Play"></a><h3>Play</h3>
+<pre>int Play()
+int Play(int times)</pre>
+<p>Play Description...</p>
+</div>
+
+
+<!-- Stop -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Stop"></a><h3>Stop</h3>
+<pre>void Stop()</pre>
+<p>Stop Description...</p>
+</div>
+
+
+<!-- SetFrequency -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFrequency"></a><h3>SetFrequency</h3>
+<pre>void SetFrequency(int freq)</pre>
+<p>SetFrequency Description...</p>
+</div>
+
+
+<!-- SetMinWait -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetMinWait"></a><h3>SetMinWait</h3>
+<pre>void SetMinWait(Uint32 min)</pre>
+<p>SetMinWait Description...</p>
+</div>
+
+
+<!-- SetRate -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetRate"></a><h3>SetRate</h3>
+<pre>void SetRate(Uint32 rate)</pre>
+<p>SetRate Description...</p>
+</div>
+
+
+<!-- SetVolume -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetVolume"></a><h3>SetVolume</h3>
+<pre>void SetVolume(Uint32 vol)</pre>
+<p>SetVolume Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

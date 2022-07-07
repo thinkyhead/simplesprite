@@ -1,0 +1,193 @@
+body {
+	margin: 0;
+	padding: 0 0 1024px;
+	background-color: #EEF;
+	}
+
+body, td, p, dd {
+	font-family: "times new roman",times,serif;
+	font-size: 12px;
+	}
+
+pre, tt, #hdr {
+	font-family: "andale mono",courier,monospace;
+	font-size: 11px;
+	}
+
+h1, h2, h3, h4, h5, dt {
+	font-family: helvetica,sansserif;
+	font-size: 14px;
+	margin: 0;
+	}
+
+h1 { font-size: 16px; }
+h1 span { font-size:10px; display:block; color: #FF0; }
+dt { font-size: 12px; font-weight: bold; color: #400; }
+
+table { border-collapse: collapse; }
+
+a:link, a:visited { color:blue; }
+a:hover { color:black; }
+
+
+pre { margin: 0 0 10px 6px; }
+pre em { color:red; font-style:normal; }
+p, dd { margin: 6px 0 8px 6px; }
+
+/*
+
+	#nav
+
+*/
+
+#nav {
+	font-weight: bold;
+	background-color: #B0B8B0;
+	border: 4px solid #AAB;
+	padding: 6px;
+	width: 170px;
+	color: #FFF;
+	}
+#nav h1 {
+	text-align: center;
+	background-color: #426;
+	padding: 4px;
+	margin-bottom: 9px;
+	border: 3px dotted #B0B8B0;
+	border-style: dashed dotted;
+	}
+#nav ul {
+	font-family: helvetica,sansserif;
+	font-size: 12px;
+	list-style: none;
+	margin: 0 0 0 11px;
+	padding: 0;
+	}
+#nav li {
+	padding: 6px 0 0 2px;
+	display: block;
+	}
+#nav ul ul ul li {
+	font-family:verdana,arial,helvetica,sans-serif;
+	font-size: 10px;
+	padding: 3px 0 4px 4px;
+	border-bottom: 1px solid #99A;
+	width: 80%;
+	}
+#nav ul ul ul {
+	border-left: 1px solid #99A;
+	margin-bottom: 4px;
+	padding-top: 4px;
+	}
+#nav a:link, #nav a:visited { color:#026; text-decoration: none; }
+#nav a:hover { color: #600; }
+
+/*
+
+	#main
+
+*/
+
+#main {
+	width: 530px;
+	padding: 2px 10px 20px 10px;
+	border: 4px solid #AAB;
+	}
+
+#main h1, #main h2, #main h3, #main h4, #main h5 {
+	font-weight: bold;
+	margin: 0 0 10px 0px;
+	}
+#main h2 { font-style: italic; }
+#main h3 { font-weight: normal; }
+#main h3, strong { color: #400; }
+#main h4 {
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0 0 4px 6px;
+	}
+#main h5 {
+	font-size: 11px;
+	margin: 0 0 4px 6px;
+	font-style: italic;
+	}
+
+#main a { color:dkblue; text-decoration: none; }
+#main a:link { color:dkblue; }
+#main a:hover { color:#F00; }
+#main a:visited { color:dkblue; }
+
+
+/*
+
+	#reflist
+
+*/
+
+#reflist ul, #reflist h4 {
+	font-family: arial,helvetica,sansserif;
+	font-weight: bold;
+	}
+#reflist ul {
+	font-size: 11px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	}
+#reflist li a {
+	font-size: 11px;
+	font-weight: normal;
+	color: #444;
+	margin-left: 18px;
+	}
+
+
+/*
+
+	Box IDs
+
+*/
+
+#databox td {
+	padding: 0 0 0 6px;
+	margin: 0;
+	}
+
+div.mitem, div#classbox, div#databox, div#conbox, div#methbox {
+	padding: 8px 0;
+	margin: 0 0 4px 0;
+	}
+div.mitem, div#databox, div#conbox, div#methbox {
+	border-top: 2px solid #CCC;
+	}
+
+#databox h2, #methbox h2 { margin-bottom: 8px; }
+
+#methbox table, #methbox div {
+	background: #DDF;
+	margin: 10px;
+	border: 1px solid black;
+	display: compact;
+	}
+#methbox ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 19px 0 6px;
+	}
+
+div#hdr, .mitem a:link {
+	float: right;
+	border: 1px solid #BBB;
+	padding: 2px;
+	background: white;
+	color: black;
+	}
+
+.indent {
+	margin-left: 20px;
+	border: 0;
+	}
+.indent td { padding: 0 10px 0 0; }
+
+tr.priv tt { color: #900 }
+tr.prot tt { color: #963 }

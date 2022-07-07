@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Broadcaster Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+			<ul>
+				<li>SS_Broadcaster</li>
+				<li><a href="ss_listener.html">SS_Listener</a></li>
+				<li><a href="ss_message.html">SS_Message</a></li>
+			</ul>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Messages.h</div>
+<h1>SS_Broadcaster</h1>
+<h4><strong>Subclasses</strong>:
+<a href="ss_gadget.html">SS_Gadget</a> |
+<a href="ss_layer.html">SS_Layer</a> |
+<a href="ss_layeritem.html">SS_LayerItem</a> |
+<a href="ss_world.html">SS_World</a>
+</h4>
+<p>
+Any object that wants to send messages to another object should inherit from
+SS_Broadcaster. Then when some interesting event occurs within the object it can
+broadcast a message.
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="prot"><td><tt>SS_ListenerList</tt></td><td><tt>listenerList</tt></td><td>All listeners this object broadcasts for</td></tr>
+<tr class="prot"><td><tt>SS_ListenerIterator</tt></td><td><tt>listenerIterator</tt></td><td>A pre-existing iterator</td></tr>
+<tr class="prot"><td><tt>SS_Message</tt></td><td><tt>message</tt></td><td>A message to broadcast</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AddListener">AddListener</a></li>
+<li><a href="#Broadcast">Broadcast</a></li>
+<li><a href="#MessageIsSet">MessageIsSet</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#RemoveAllListeners">RemoveAllListeners</a></li>
+<li><a href="#RemoveListener">RemoveListener</a></li>
+<li><a href="#SetMessage">SetMessage</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- AddListener -->
+<div class="mitem"><a href="#top">top</a>
+<a name="AddListener"></a><h3>AddListener</h3>
+<pre>void AddListener(SS_Listener *listener)</pre>
+<p>AddListener Description...</p>
+</div>
+
+
+<!-- Broadcast -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Broadcast"></a><h3>Broadcast</h3>
+<pre>
+void Broadcast()
+void Broadcast(char *text)
+void Broadcast(const SS_Message &amp;msg)
+void Broadcast(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL)
+</pre>
+<p>Broadcast Description...</p>
+</div>
+
+
+<!-- MessageIsSet -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MessageIsSet"></a><h3>MessageIsSet</h3>
+<pre>bool MessageIsSet()</pre>
+<p>MessageIsSet Description...</p>
+</div>
+
+
+<!-- RemoveAllListeners -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveAllListeners"></a><h3>RemoveAllListeners</h3>
+<pre>void RemoveAllListeners()</pre>
+<p>RemoveAllListeners Description...</p>
+</div>
+
+
+<!-- RemoveListener -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveListener"></a><h3>RemoveListener</h3>
+<pre>void RemoveListener(SS_Listener *listener)</pre>
+<p>RemoveListener Description...</p>
+</div>
+
+
+<!-- SetMessage -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetMessage"></a><h3>SetMessage</h3>
+<pre>void SetMessage(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL)</pre>
+<p>SetMessage Description...</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Gadget Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+			<ul>
+				<li><a href="ss_button.html">SS_Button</a></li>
+				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
+				<li><a href="ss_customgadget.html">SS_CustomGadget</a></li>
+				<li><a href="ss_dial.html">SS_Dial</a></li>
+				<li><a href="ss_dragger.html">SS_Dragger</a></li>
+				<li>SS_Gadget</li>
+				<li><a href="ss_gui.html">SS_GUI</a></li>
+				<li><a href="ss_menu.html">SS_Menu</a></li>
+				<li><a href="ss_menubar.html">SS_Menubar</a></li>
+				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
+				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
+				<li><a href="ss_slider.html">SS_Slider</a></li>
+				<li><a href="ss_textinput.html">SS_TextInput</a></li>
+			</ul>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_GUI.h</div>
+<h1>SS_Gadget</h1>
+<table><tr valign="top">
+
+<td><h4><strong>SuperClasses</strong>:</h4></td>
+<td><h4><a href="ss_broadcaster.html">SS_Broadcaster</a> | <a href="ss_listener.html">SS_Listener</a></h4></td>
+
+</tr><tr valign="top">
+
+<td><h4><strong>Subclasses</strong>:</h4></td>
+<td><h4>
+<a href="ss_button.html">SS_Button</a> |
+<a href="ss_checkbox.html">SS_Checkbox</a> |
+<a href="ss_customgadget.html">SS_CustomGadget</a> |
+<a href="ss_dial.html">SS_Dial</a> |
+<a href="ss_dragger.html">SS_Dragger</a> |
+<a href="ss_menu.html">SS_Menu</a> |
+<a href="ss_menubar.html">SS_Menubar</a> |
+<a href="ss_menuitem.html">SS_MenuItem</a> |
+<a href="ss_radiobutton.html">SS_RadioButton</a> |
+<a href="ss_slidearea.html">SS_SlideArea</a> |
+<a href="ss_slider.html">SS_Slider</a> |
+<a href="ss_textinput.html">SS_TextInput</a>
+</h4></td>
+</tr></table>
+
+<p>A gadget is a user interface element that you lives in a GUI.</p>
+
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table id="members">
+<tr class="priv"><td><tt>SS_SFont*</tt></td><td><tt>gadFont</tt></td><td>The main font for this gadget</td></tr>
+<tr class="priv"><td><tt>stringAlign</tt></td><td><tt>labelAlignment</tt></td><td>Label alignment type (stringAlign enum)</td></tr>
+<tr class="priv"><td><tt>colorSet</tt></td><td><tt>setNormal</tt></td><td>Colors when at rest</td></tr>
+<tr class="priv"><td><tt>colorSet</tt></td><td><tt>setHover</tt></td><td>Colors when hovering</td></tr>
+<tr class="priv"><td><tt>colorSet</tt></td><td><tt>setPressed</tt></td><td>Colors when pressed</td></tr>
+<tr class="priv"><td><tt>colorSet</tt></td><td><tt>setDisabled</tt></td><td>Colors when disabled</td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>state</tt></td><td>A general purpose state</td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>flags</tt></td><td>Attributes (GAD_... flags in SS_GUI.h)</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>enabled</tt></td><td>The gadget is enabled?</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>pointerIn</tt></td><td>Is the pointer inside?</td></tr>
+<tr class="priv"><td><tt>SS_GadgetNode*</tt></td><td><tt>rolloverNode</tt></td><td>Node in the rollover list</td></tr>
+<tr class="priv"><td><tt>SS_GadgetNode*</tt></td><td><tt>guiNode</tt></td><td>Node in the gui list</td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>lastClickTime</tt></td><td>Tracking of multiple-clicks</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>clickCount</tt></td><td>Counting of multiple-clicks</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>maxClicks</tt></td><td>Click count wraps at this value</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>clickx, clicky</tt></td><td>Local point of the last click</td></tr>
+<tr class="priv"><td><tt>gadgetEventProcPtr</tt></td><td><tt>mouseEnterProc</tt></td><td>Event Proc: Mouse Entered</td></tr>
+<tr class="priv"><td></td><td><tt>mouseMoveProc</tt></td><td>Event Proc: Mouse Moved Within</td></tr>
+<tr class="priv"><td></td><td><tt>mouseExitProc</tt></td><td>Event Proc: Mouse Exited</td></tr>
+<tr class="priv"><td></td><td><tt>mouseDownProc</tt></td><td>Event Proc: Mouse Down Within</td></tr>
+<tr class="priv"><td></td><td><tt>mouseDragProc</tt></td><td>Event Proc: Mouse Dragged Within</td></tr>
+<tr class="priv"><td></td><td><tt>mouseUpProc</tt></td><td>Event Proc: Mouse Up Within</td></tr>
+<tr class="priv"><td></td><td><tt>keyDownProc</tt></td><td>Event Proc: Key down (if key focus)</td></tr>
+<tr class="priv"><td></td><td><tt>keyUpProc</tt></td><td>Event Proc: Key Up (if key focus)</td></tr>
+<tr class="priv"><td></td><td><tt>idleProc</tt></td><td>Event Proc: Periodic Event</td></tr>
+<tr class="priv"><td></td><td><tt>gainFocusProc</tt></td><td>Event Proc: Gained Key Focus</td></tr>
+<tr class="priv"><td></td><td><tt>loseFocusProc</tt></td><td>Event Proc: Lost Key Focus</td></tr>
+<tr class="priv"><td></td><td><tt>onChangeProc</tt></td><td>Event Proc: The Value Changed</td></tr>
+<tr class="prot"><td><tt>SS_World*</tt></td><td><tt>world</tt></td><td>The world it lives in</td></tr>
+<tr class="prot"><td><tt>SS_GUI*</tt></td><td><tt>gui</tt></td><td>The SS_GUI (and layer) it lives in</td></tr>
+<tr class="prot"><td><tt>SS_ItemGroup*</tt></td><td><tt>gadGroup</tt></td><td>The Gadget may have a group</td></tr>
+<tr class="prot"><td><tt>SS_LayerItem*</tt></td><td><tt>bkgdSprite</tt></td><td>The gadget may have a background sprite</td></tr>
+<tr class="prot"><td><tt>SS_LayerItem*</tt></td><td><tt>gadSprite</tt></td><td>The gadget may have a sprite</td></tr>
+<tr class="prot"><td><tt>SS_String*</tt></td><td><tt>labelString</tt></td><td>The aligned string label</td></tr>
+<tr class="prot"><td><tt>long</tt></td><td><tt>Command</tt></td><td>The command it broadcasts</td></tr>
+<tr><td><tt>float</tt></td><td><tt>xpos, ypos</tt></td><td>The position</td></tr>
+<tr><td><tt>float</tt></td><td><tt>width, height</tt></td><td>The width and height</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_Gadget()
+SS_Gadget(SS_GUI *g)
+SS_Gadget(SS_GUI *g, float w, float h)
+SS_Gadget(SS_GUI *g, float w, float h, Uint32 s)
+SS_Gadget(SS_GUI *g, SS_Sprite *spr)
+SS_Gadget(SS_GUI *g, SS_ItemGroup *grp)
+
+SS_Gadget(
+	SS_GUI *g,
+	char *file1,
+	char *file2=NULL,
+	char *file3=NULL,
+	char *file4=NULL
+	)
+</pre>
+
+<p>
+A gadget in its basic form behaves visually like a button. You can load images
+for up to four rollover and clicked states, or use a sprite group as background
+and indicator. You can set callbacks for various events.
+</p>
+<p>
+The current gadget suite has buttons, labels, sliders, and simple text fields.
+More complex gadgets are made by placing individual gadgets into groupings. The
+gadgets then broadcast to their grouping object.
+</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table>
+<tr valign="top">
+
+<td><ul>
+<li><a href="#Animate">Animate</a></li>
+<li><a href="#ContainsPoint">ContainsPoint</a></li>
+<li><a href="#CountClicks">CountClicks</a></li>
+<li><a href="#Disable">Disable</a></li>
+<li><a href="#DisableFlag">DisableFlag</a></li>
+<li><a href="#Enable">Enable</a></li>
+<li><a href="#EnableFlag">EnableFlag</a></li>
+<li><a href="#Flags">Flags</a></li>
+<li><a href="#Font">Font</a></li>
+<li><a href="#FrameForState">FrameForState</a></li>
+<li><a href="#HandleEvent">HandleEvent</a></li>
+<li><a href="#Height">Height</a></li>
+<li><a href="#Init">Init</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#IsClicked">IsClicked</a></li>
+<li><a href="#IsEntered">IsEntered</a></li>
+<li><a href="#IsHover">IsHover</a></li>
+<li><a href="#IsPressed">IsPressed</a></li>
+<li><a href="#Label">Label</a></li>
+<li><a href="#MakeSprite">MakeSprite</a></li>
+<li><a href="#MakeSpriteGroup">MakeSpriteGroup</a></li>
+<li><a href="#MarkEntered">MarkEntered</a></li>
+<li><a href="#MarkExited">MarkExited</a></li>
+<li><a href="#Move">Move</a></li>
+<li><a href="#RealignLabel">RealignLabel</a></li>
+<li><a href="#RemoveSelf">RemoveSelf</a></li>
+<li><a href="#Render">Render</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Reset">Reset</a></li>
+<li><a href="#ResetClicks">ResetClicks</a></li>
+<li><a href="#SendCommand">SendCommand</a></li>
+<li><a href="#SetCommand">SetCommand</a></li>
+<li><a href="#SetDisabledAlpha">SetDisabledAlpha</a></li>
+<li><a href="#SetDisabledColor">SetDisabledColor</a></li>
+<li><a href="#SetFlags">SetFlags</a></li>
+<li><a href="#SetFont">SetFont</a></li>
+<li><a href="#SetGUI">SetGUI</a></li>
+<li><a href="#SetHandler">SetHandler</a></li>
+<li><a href="#SetHeight">SetHeight</a></li>
+<li><a href="#SetHoverColor">SetHoverColor</a></li>
+<li><a href="#SetLabel">SetLabel</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetLabelAlignment">SetLabelAlignment</a></li>
+<li><a href="#SetMaxClicks">SetMaxClicks</a></li>
+<li><a href="#SetNormalColor">SetNormalColor</a></li>
+<li><a href="#SetPressedColor">SetPressedColor</a></li>
+<li><a href="#SetRegion">SetRegion</a></li>
+<li><a href="#SetSprite">SetSprite</a></li>
+<li><a href="#SetSpriteGroup">SetSpriteGroup</a></li>
+<li><a href="#SetState">SetState</a></li>
+<li><a href="#SetWidth">SetWidth</a></li>
+<li><a href="#SetWorld">SetWorld</a></li>
+<li><a href="#Sprite">Sprite</a></li>
+<li><a href="#SpriteGroup">SpriteGroup</a></li>
+<li><a href="#State">State</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#String">String</a></li>
+<li><a href="#TestLabelCollision">TestLabelCollision</a></li>
+<li><a href="#TestRectCollision">TestRectCollision</a></li>
+<li><a href="#Type">Type</a></li>
+<li><a href="#Update">Update</a></li>
+<li><a href="#Width">Width</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Animate -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Animate"></a><h3>Animate</h3>
+<pre>void Animate()</pre>
+<p>Animate Description...</p>
+</div>
+
+
+<!-- ContainsPoint -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ContainsPoint"></a><h3>ContainsPoint</h3>
+<pre>bool ContainsPoint(float x, float y)</pre>
+<p>ContainsPoint Description...</p>
+</div>
+
+
+<!-- CountClicks -->
+<div class="mitem"><a href="#top">top</a>
+<a name="CountClicks"></a><h3>CountClicks</h3>
+<pre>Uint16 CountClicks()</pre>
+<p>CountClicks Description...</p>
+</div>
+
+
+<!-- Disable -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Disable"></a><h3>Disable</h3>
+<pre>void Disable()</pre>
+<p>Disable Description...</p>
+</div>
+
+
+<!-- DisableFlag -->
+<div class="mitem"><a href="#top">top</a>
+<a name="DisableFlag"></a><h3>DisableFlag</h3>
+<pre>void DisableFlag(Uint32 f)</pre>
+<p>DisableFlag Description...</p>
+</div>
+
+
+<!-- Enable -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Enable"></a><h3>Enable</h3>
+<pre>void Enable()</pre>
+<p>Enable Description...</p>
+</div>
+
+
+<!-- EnableFlag -->
+<div class="mitem"><a href="#top">top</a>
+<a name="EnableFlag"></a><h3>EnableFlag</h3>
+<pre>void EnableFlag(Uint32 f)</pre>
+<p>EnableFlag Description...</p>
+</div>
+
+
+<!-- Flags -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Flags"></a><h3>Flags</h3>
+<pre>
+Uint32 Flags()
+Uint32 Flags(Uint32 m)
+</pre>
+<p>Flags Description...</p>
+</div>
+
+
+<!-- Font -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Font"></a><h3>Font</h3>
+<pre>SS_SFont* Font()</pre>
+<p>Font Description...</p>
+</div>
+
+
+<!-- FrameForState -->
+<div class="mitem"><a href="#top">top</a>
+<a name="FrameForState"></a><h3>FrameForState</h3>
+<pre>Uint16 FrameForState()</pre>
+<p>FrameForState Description...</p>
+</div>
+
+
+<!-- HandleEvent -->
+<div class="mitem"><a href="#top">top</a>
+<a name="HandleEvent"></a><h3>HandleEvent</h3>
+<pre>bool HandleEvent(SS_Event *event)</pre>
+<p>HandleEvent Description...</p>
+</div>
+
+
+<!-- Height -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Height"></a><h3>Height</h3>
+<pre>float Height()</pre>
+<p>Height Description...</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- IsClicked -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsClicked"></a><h3>IsClicked</h3>
+<pre>bool IsClicked()</pre>
+<p>IsClicked Description...</p>
+</div>
+
+
+<!-- IsEntered -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsEntered"></a><h3>IsEntered</h3>
+<pre>bool IsEntered()</pre>
+<p>IsEntered Description...</p>
+</div>
+
+
+<!-- IsHover -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsHover"></a><h3>IsHover</h3>
+<pre>bool IsHover()</pre>
+<p>IsHover Description...</p>
+</div>
+
+
+<!-- IsPressed -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IsPressed"></a><h3>IsPressed</h3>
+<pre>bool IsPressed()</pre>
+<p>IsPressed Description...</p>
+</div>
+
+
+<!-- Label -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Label"></a><h3>Label</h3>
+<pre>char* Label()</pre>
+<p>Label Description...</p>
+</div>
+
+
+<!-- MakeSprite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MakeSprite"></a><h3>MakeSprite</h3>
+<pre>SS_Sprite* MakeSprite(char *file1, char *file2=NULL, char *file3=NULL, char *file4=NULL)</pre>
+<p>MakeSprite Description...</p>
+</div>
+
+
+<!-- MakeSpriteGroup -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MakeSpriteGroup"></a><h3>MakeSpriteGroup</h3>
+<pre>SS_ItemGroup* MakeSpriteGroup(char *file1, char *file2 = NULL, char *file3=NULL, char *file4=NULL)</pre>
+<p>MakeSpriteGroup Description...</p>
+</div>
+
+
+<!-- MarkEntered -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MarkEntered"></a><h3>MarkEntered</h3>
+<pre>void MarkEntered()</pre>
+<p>MarkEntered Description...</p>
+</div>
+
+
+<!-- MarkExited -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MarkExited"></a><h3>MarkExited</h3>
+<pre>void MarkExited()</pre>
+<p>MarkExited Description...</p>
+</div>
+
+
+<!-- Move -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Move"></a><h3>Move</h3>
+<pre>void Move(float x, float y)</pre>
+<p>Move Description...</p>
+</div>
+
+
+<!-- RealignLabel -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RealignLabel"></a><h3>RealignLabel</h3>
+<pre>void RealignLabel()</pre>
+<p>RealignLabel Description...</p>
+</div>
+
+
+<!-- RemoveSelf -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveSelf"></a><h3>RemoveSelf</h3>
+<pre>void RemoveSelf()</pre>
+<p>RemoveSelf Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>
+void Render()
+void Render(SScolorb &amp;inTint)
+</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- Reset -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Reset"></a><h3>Reset</h3>
+<pre>void Reset()</pre>
+<p>Reset Description...</p>
+</div>
+
+
+<!-- ResetClicks -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ResetClicks"></a><h3>ResetClicks</h3>
+<pre>void ResetClicks()</pre>
+<p>ResetClicks Description...</p>
+</div>
+
+
+<!-- SendCommand -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SendCommand"></a><h3>SendCommand</h3>
+<pre>void SendCommand(long command)</pre>
+<p>SendCommand Description...</p>
+</div>
+
+
+<!-- SetCommand -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetCommand"></a><h3>SetCommand</h3>
+<pre>void SetCommand(long command)</pre>
+<p>SetCommand Description...</p>
+</div>
+
+
+<!-- SetDisabledAlpha -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetDisabledAlpha"></a><h3>SetDisabledAlpha</h3>
+<pre>void SetDisabledAlpha(GLubyte a)</pre>
+<p>SetDisabledAlpha Description...</p>
+</div>
+
+
+<!-- SetDisabledColor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetDisabledColor"></a><h3>SetDisabledColor</h3>
+<pre>void SetDisabledColor(colorSet &amp;col)</pre>
+<p>SetDisabledColor Description...</p>
+</div>
+
+
+<!-- SetFlags -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetFlags"></a><h3>SetFlags</h3>
+<pre>void SetFlags(Uint32 f)</pre>
+<p>SetFlags Description...</p>
+</div>
+
+
+<!-- SetFont -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetFont"></a><h3>SetFont</h3>
+<pre>void SetFont(SS_SFont *font)</pre>
+<p>SetFont Description...</p>
+</div>
+
+
+<!-- SetGUI -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetGUI"></a><h3>SetGUI</h3>
+<pre>void SetGUI(SS_GUI *g)</pre>
+<p>SetGUI Description...</p>
+</div>
+
+
+<!-- SetHandler -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetHandler"></a><h3>SetHandler</h3>
+<pre>void SetHandler(ssEventCode type, gadgetEventProcPtr proc)</pre>
+<p>SetHandler Description...</p>
+</div>
+
+
+<!-- SetHeight -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetHeight"></a><h3>SetHeight</h3>
+<pre>void SetHeight(float h)</pre>
+<p>SetHeight Description...</p>
+</div>
+
+
+<!-- SetHoverColor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetHoverColor"></a><h3>SetHoverColor</h3>
+<pre>void SetHoverColor(colorSet &amp;col)</pre>
+<p>SetHoverColor Description...</p>
+</div>
+
+
+<!-- SetLabel -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetLabel"></a><h3>SetLabel</h3>
+<pre>
+void SetLabel(char *text)
+void SetLabel(SS_String *str)
+</pre>
+<p>SetLabel Description...</p>
+</div>
+
+
+<!-- SetLabelAlignment -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetLabelAlignment"></a><h3>SetLabelAlignment</h3>
+<pre>void SetLabelAlignment(stringAlign la)</pre>
+<p>SetLabelAlignment Description...</p>
+</div>
+
+
+<!-- SetMaxClicks -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetMaxClicks"></a><h3>SetMaxClicks</h3>
+<pre>void SetMaxClicks(Uint16 m)</pre>
+<p>SetMaxClicks Description...</p>
+</div>
+
+
+<!-- SetNormalColor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetNormalColor"></a><h3>SetNormalColor</h3>
+<pre>void SetNormalColor(colorSet &amp;col)</pre>
+<p>SetNormalColor Description...</p>
+</div>
+
+
+<!-- SetPressedColor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPressedColor"></a><h3>SetPressedColor</h3>
+<pre>void SetPressedColor(colorSet &amp;col)</pre>
+<p>SetPressedColor Description...</p>
+</div>
+
+
+<!-- SetRegion -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetRegion"></a><h3>SetRegion</h3>
+<pre>void SetRegion(float w, float h)</pre>
+<p>SetRegion Description...</p>
+</div>
+
+
+<!-- SetSprite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetSprite"></a><h3>SetSprite</h3>
+<pre>
+void SetSprite(
+       char *file1,
+       char *file2=NULL,
+       char *file3=NULL,
+       char *file4=NULL
+       )
+
+void SetSprite(SS_LayerItem *item)
+</pre>
+<p>SetSprite Description...</p>
+</div>
+
+
+<!-- SetSpriteGroup -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetSpriteGroup"></a><h3>SetSpriteGroup</h3>
+<pre>
+void SetSpriteGroup(
+        char *file1,
+        char *file2=NULL,
+        char *file3=NULL,
+        char *file4=NULL
+        )
+
+void SetSpriteGroup(SS_ItemGroup *grp)
+</pre>
+<p>SetSpriteGroup Description...</p>
+</div>
+
+
+<!-- SetState -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetState"></a><h3>SetState</h3>
+<pre>void SetState(Uint16 s)</pre>
+<p>SetState Description...</p>
+</div>
+
+
+<!-- SetWidth -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetWidth"></a><h3>SetWidth</h3>
+<pre>void SetWidth(float w)</pre>
+<p>SetWidth Description...</p>
+</div>
+
+
+<!-- SetWorld -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetWorld"></a><h3>SetWorld</h3>
+<pre>void SetWorld(SS_World *w)</pre>
+<p>SetWorld Description...</p>
+</div>
+
+
+<!-- Sprite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Sprite"></a><h3>Sprite</h3>
+<pre>SS_LayerItem* Sprite()</pre>
+<p>Sprite Description...</p>
+</div>
+
+
+<!-- SpriteGroup -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SpriteGroup"></a><h3>SpriteGroup</h3>
+<pre>SS_ItemGroup* SpriteGroup()</pre>
+<p>SpriteGroup Description...</p>
+</div>
+
+
+<!-- State -->
+<div class="mitem"><a href="#top">top</a>
+<a name="State"></a><h3>State</h3>
+<pre>Uint16 State()</pre>
+<p>State Description...</p>
+</div>
+
+
+<!-- String -->
+<div class="mitem"><a href="#top">top</a>
+<a name="String"></a><h3>String</h3>
+<pre>SS_String* String()</pre>
+<p>String Description...</p>
+</div>
+
+
+<!-- TestLabelCollision -->
+<div class="mitem"><a href="#top">top</a>
+<a name="TestLabelCollision"></a><h3>TestLabelCollision</h3>
+<pre>bool TestLabelCollision(float x, float y)</pre>
+<p>TestLabelCollision Description...</p>
+</div>
+
+
+<!-- TestRectCollision -->
+<div class="mitem"><a href="#top">top</a>
+<a name="TestRectCollision"></a><h3>TestRectCollision</h3>
+<pre>bool TestRectCollision(float x, float y)</pre>
+<p>TestRectCollision Description...</p>
+</div>
+
+
+<!-- Type -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Type"></a><h3>Type</h3>
+<pre>layerType Type()</pre>
+<p>Type Description...</p>
+</div>
+
+
+<!-- Update -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Update"></a><h3>Update</h3>
+<pre>void Update()</pre>
+<p>Update Description...</p>
+</div>
+
+
+<!-- Width -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Width"></a><h3>Width</h3>
+<pre>float Width()</pre>
+<p>Width Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

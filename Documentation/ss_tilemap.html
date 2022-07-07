@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_TileMap Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+			<ul>
+				<li><a href="ss_tilelayer.html">SS_TileLayer</a></li>
+				<li>SS_TileMap</li>
+				<li><a href="ss_tilepalette.html">SS_TilePalette</a></li>
+			</ul>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>SS_TileMap</h1>
+<p>Class Description...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SS_TilePalette*</tt></td><td><tt>tilePalette</tt></td><td>The tile palette to use for drawing</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>tile_w, tile_h</tt></td><td>The size of the current tiles</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>columns</tt></td><td>How many tiles across and down</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>rows</tt></td><td></td></tr>
+<tr><td><tt>Uint8*</tt></td><td><tt>theMap</tt></td><td>The map itself</td></tr>
+<tr><td><tt>float</tt></td><td><tt>xpos, ypos</tt></td><td>The map's position in the universe</td></tr>
+<tr><td><tt>float</tt></td><td><tt>pix_w, pix_h</tt></td><td>Total width and height of the whole map</td></tr>
+<tr><td><tt>ssColorQuad</tt></td><td><tt>radarColor</tt></td><td>The map's color on radar</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_TileMap(int w, int h)
+SS_TileMap(char* filename)</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#Init">Init</a></li>
+<li><a href="#InitMap">InitMap</a></li>
+<li><a href="#LoadMap">LoadMap</a></li>
+<li><a href="#DisposeMap">DisposeMap</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetRadarColor">SetRadarColor</a></li>
+<li><a href="#LoadPalette">LoadPalette</a></li>
+<li><a href="#SetPalette">SetPalette</a></li>
+<li><a href="#DisposePalette">DisposePalette</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Move">Move</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#DrawTile">DrawTile</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- InitMap -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="InitMap"></a><h3>InitMap</h3>
+<pre>void InitMap(int w, int h)</pre>
+<p>InitMap Description...</p>
+</div>
+
+
+<!-- LoadMap -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadMap"></a><h3>LoadMap</h3>
+<pre>void LoadMap(char *filename)</pre>
+<p>LoadMap Description...</p>
+</div>
+
+
+<!-- DisposeMap -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposeMap"></a><h3>DisposeMap</h3>
+<pre>void DisposeMap()</pre>
+<p>DisposeMap Description...</p>
+</div>
+
+
+<!-- SetRadarColor -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetRadarColor"></a><h3>SetRadarColor</h3>
+<pre>void SetRadarColor(GLuint r, GLuint g, GLuint b, GLuint a)</pre>
+<p>SetRadarColor Description...</p>
+</div>
+
+
+<!-- LoadPalette -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadPalette"></a><h3>LoadPalette</h3>
+<pre>void LoadPalette(char *filename, int tw, int th)</pre>
+<p>LoadPalette Description...</p>
+</div>
+
+
+<!-- SetPalette -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetPalette"></a><h3>SetPalette</h3>
+<pre>void SetPalette(SS_TilePalette *palette)</pre>
+<p>SetPalette Description...</p>
+</div>
+
+
+<!-- DisposePalette -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DisposePalette"></a><h3>DisposePalette</h3>
+<pre>void DisposePalette()</pre>
+<p>DisposePalette Description...</p>
+</div>
+
+
+<!-- Move -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Move"></a><h3>Move</h3>
+<pre>void Move(float x, float y)</pre>
+<p>Move Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render(float x, float y, float width, float height)
+void Render(SS_World *world, Uint32 flags)</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- DrawTile -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="DrawTile"></a><h3>DrawTile</h3>
+<pre>void DrawTile(Uint8 tile, GLfloat x, GLfloat y)</pre>
+<p>DrawTile Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

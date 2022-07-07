@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		BD337A3F0952D81F001C4E45 /* SimpleSprite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD337A230952D81F001C4E45 /* SimpleSprite.framework */; };
+		BD427C4B0554AA53008FD831 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD427C480554AA53008FD831 /* SDL_image.framework */; };
+		BD427C4C0554AA53008FD831 /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD427C490554AA53008FD831 /* SDL_mixer.framework */; };
+		BD427C4D0554AA53008FD831 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD427C4A0554AA53008FD831 /* SDL.framework */; };
+		BD427E6D0554AA8E008FD831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD427E6C0554AA8E008FD831 /* OpenGL.framework */; };
+		BDABDBD70929365E00F72B7D /* prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = BDABDBD60929365D00F72B7D /* prefix.h */; };
+		BDE4F069062BA816007ECA07 /* smpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE4F068062BA816007ECA07 /* smpeg.framework */; };
+		BDE629C4065C489900E28248 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE629BF065C489900E28248 /* main.cpp */; };
+		BDE629C5065C489900E28248 /* My_Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE629C0065C489900E28248 /* My_Game.cpp */; };
+		BDE629C6065C489900E28248 /* My_Game.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE629C1065C489900E28248 /* My_Game.h */; };
+		BDE629C7065C489900E28248 /* SDLMain.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE629C2065C489900E28248 /* SDLMain.h */; };
+		BDE629C8065C489900E28248 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE629C3065C489900E28248 /* SDLMain.m */; };
+		BDE629CE065C48D600E28248 /* data in Resources */ = {isa = PBXBuildFile; fileRef = BDE629C9065C48D600E28248 /* data */; };
+		BDED0F22065B39EC0049C82B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDED0F21065B39EB0049C82B /* GLUT.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* «PROJECTNAME».app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "«PROJECTNAME».app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD337A230952D81F001C4E45 /* SimpleSprite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleSprite.framework; path = /Library/Frameworks/SimpleSprite.framework; sourceTree = "<absolute>"; };
+		BD427C480554AA53008FD831 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
+		BD427C490554AA53008FD831 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
+		BD427C4A0554AA53008FD831 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		BD427E6C0554AA8E008FD831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		BDABDBD60929365D00F72B7D /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = prefix.h; sourceTree = "<group>"; };
+		BDE4F068062BA816007ECA07 /* smpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = smpeg.framework; path = /Library/Frameworks/smpeg.framework; sourceTree = "<absolute>"; };
+		BDE629BF065C489900E28248 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = source/main.cpp; sourceTree = "<group>"; };
+		BDE629C0065C489900E28248 /* My_Game.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = My_Game.cpp; path = source/My_Game.cpp; sourceTree = "<group>"; };
+		BDE629C1065C489900E28248 /* My_Game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = My_Game.h; path = source/My_Game.h; sourceTree = "<group>"; };
+		BDE629C2065C489900E28248 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = source/SDLMain.h; sourceTree = "<group>"; };
+		BDE629C3065C489900E28248 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = source/SDLMain.m; sourceTree = "<group>"; };
+		BDE629C9065C48D600E28248 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		BDED0F21065B39EB0049C82B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				BD427C4B0554AA53008FD831 /* SDL_image.framework in Frameworks */,
+				BD427C4C0554AA53008FD831 /* SDL_mixer.framework in Frameworks */,
+				BD427C4D0554AA53008FD831 /* SDL.framework in Frameworks */,
+				BD427E6D0554AA8E008FD831 /* OpenGL.framework in Frameworks */,
+				BDE4F069062BA816007ECA07 /* smpeg.framework in Frameworks */,
+				BDED0F22065B39EC0049C82B /* GLUT.framework in Frameworks */,
+				BD337A3F0952D81F001C4E45 /* SimpleSprite.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD337A230952D81F001C4E45 /* SimpleSprite.framework */,
+				BDE4F068062BA816007ECA07 /* smpeg.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				BD427E6C0554AA8E008FD831 /* OpenGL.framework */,
+				BDED0F21065B39EB0049C82B /* GLUT.framework */,
+				BD427C4A0554AA53008FD831 /* SDL.framework */,
+				BD427C480554AA53008FD831 /* SDL_image.framework */,
+				BD427C490554AA53008FD831 /* SDL_mixer.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* «PROJECTNAME».app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* DeepSpace */ = {
+			isa = PBXGroup;
+			children = (
+				BDABDBD60929365D00F72B7D /* prefix.h */,
+				BDE629BF065C489900E28248 /* main.cpp */,
+				BDE629C2065C489900E28248 /* SDLMain.h */,
+				BDE629C3065C489900E28248 /* SDLMain.m */,
+				BDE629C1065C489900E28248 /* My_Game.h */,
+				BDE629C0065C489900E28248 /* My_Game.cpp */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = DeepSpace;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDE629C9065C48D600E28248 /* data */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D1107270486CEB800E47090 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDE629C6065C489900E28248 /* My_Game.h in Headers */,
+				BDE629C7065C489900E28248 /* SDLMain.h in Headers */,
+				BDABDBD70929365E00F72B7D /* prefix.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* «PROJECTNAME» */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDEB14B608C1138B00ACA5CA /* Build configuration list for PBXNativeTarget "«PROJECTNAME»" */;
+			buildPhases = (
+				8D1107270486CEB800E47090 /* Headers */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "«PROJECTNAME»";
+			productInstallPath = "$(HOME)/Applications";
+			productName = DeepSpace;
+			productReference = 8D1107320486CEB800E47090 /* «PROJECTNAME».app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = BDEB14BA08C1138B00ACA5CA /* Build configuration list for PBXProject "SimpleSpriteApp" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* DeepSpace */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* «PROJECTNAME» */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				BDE629CE065C48D600E28248 /* data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDE629C4065C489900E28248 /* main.cpp in Sources */,
+				BDE629C5065C489900E28248 /* My_Game.cpp in Sources */,
+				BDE629C8065C489900E28248 /* SDLMain.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BDEB14B708C1138B00ACA5CA /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = "«PROJECTNAME»";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		BDEB14B808C1138B00ACA5CA /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = "«PROJECTNAME»";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		BDEB14B908C1138B00ACA5CA /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = "«PROJECTNAME»";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		BDEB14BB08C1138B00ACA5CA /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					/Library/Frameworks/SDL_image.framework/Headers,
+					/Library/Frameworks/SDL_mixer.framework/Headers,
+					/System/Library/Frameworks/OpenGL.framework/Headers,
+					/System/Library/Frameworks/GLUT.framework/Headers,
+				);
+			};
+			name = Development;
+		};
+		BDEB14BC08C1138B00ACA5CA /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					/Library/Frameworks/SDL_image.framework/Headers,
+					/Library/Frameworks/SDL_mixer.framework/Headers,
+					/System/Library/Frameworks/OpenGL.framework/Headers,
+					/System/Library/Frameworks/GLUT.framework/Headers,
+				);
+			};
+			name = Deployment;
+		};
+		BDEB14BD08C1138B00ACA5CA /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefix.h;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SimpleSprite.framework/Headers,
+					/Library/Frameworks/SDL.framework/Headers,
+					/Library/Frameworks/SDL_image.framework/Headers,
+					/Library/Frameworks/SDL_mixer.framework/Headers,
+					/System/Library/Frameworks/OpenGL.framework/Headers,
+					/System/Library/Frameworks/GLUT.framework/Headers,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-framework",
+					SimpleSprite,
+				);
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BDEB14B608C1138B00ACA5CA /* Build configuration list for PBXNativeTarget "«PROJECTNAME»" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDEB14B708C1138B00ACA5CA /* Development */,
+				BDEB14B808C1138B00ACA5CA /* Deployment */,
+				BDEB14B908C1138B00ACA5CA /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		BDEB14BA08C1138B00ACA5CA /* Build configuration list for PBXProject "SimpleSpriteApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDEB14BB08C1138B00ACA5CA /* Development */,
+				BDEB14BC08C1138B00ACA5CA /* Deployment */,
+				BDEB14BD08C1138B00ACA5CA /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

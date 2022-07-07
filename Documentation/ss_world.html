@@ -1,0 +1,713 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_World Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+			<ul>
+				<li><a href="ss_game.html">SS_Game</a></li>
+				<li><a href="ss_layer.html">SS_Layer</a></li>
+				<li>SS_World</li>
+			</ul>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_World.h</div>
+<h1>SS_World</h1>
+<p>
+An SS_World contains all the layers, sprites, and other graphical objects
+that make up a single game, level, selection screen, etc. Generally you
+have only one world running at a time, though there is nothing to prevent
+running several worlds concurrently.
+</p>
+<p>
+The basic SS_World is an empty rectangular area of nearly infinite size
+(about 340 trillion trillion trillion by 340 trillion trillion trillion pixels).
+Only a portion of the world is rendered, based on a few world parameters.
+</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SDL_Surface*</tt></td><td><tt>surface</tt></td><td>This world's surface (the window or screen)</td></tr>
+<tr class="priv"><td><tt>SDL_Thread*</tt></td><td><tt>processThread</tt></td><td>The processing thread (if threads are enabled)</td></tr>
+<tr class="priv"><td><tt>SDL_Thread*</tt></td><td><tt>renderThread</tt></td><td>The rendering thread (if threads are enabled)</td></tr>
+<tr class="priv"><td><tt>SDL_mutex*</tt></td><td><tt>worldMutex</tt></td><td>Mutex for the processing thread</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>calibrating</tt></td><td>Calibration flag</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>caliCount</tt></td><td>Calibration counter</td></tr>
+<tr class="priv"><td><tt>worldEventProc</tt></td><td><tt>eventHandler</tt></td><td>Event handler proc pointer</td></tr>
+<tr class="priv"><td><tt>worldProc</tt></td><td><tt>preRenderProc</tt></td><td>Procedure to call before world rendering</td></tr>
+<tr class="priv"><td><tt>worldProc</tt></td><td><tt>postRenderProc</tt></td><td>Procedure to call after world rendering</td></tr>
+<tr class="priv"><td><tt>worldProc</tt></td><td><tt>postProcessor</tt></td><td>Procedure to call after world processing</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>view_w, view_h</tt></td><td>Pixel width and height of the view</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>zoom</tt></td><td>World global zoom</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>zoom_w, zoom_h</tt></td><td>Size of the zoomed view</td></tr>
+<tr class="priv"><td><tt>SScolorf</tt></td><td><tt>clearColor</tt></td><td>The background color of the world</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>processFlag</tt></td><td>Processing flag</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>renderFlag</tt></td><td>Rendering flag</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>processQuit</tt></td><td>Flag to quit the processing thread (if any)</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>renderQuit</tt></td><td>Flag to quit the rendering thread (if any)</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>worldQuit</tt></td><td>Flag to return from the world Run() method</td></tr>
+<tr class="priv"><td><tt>SS_LayerItem*</tt></td><td><tt>pointerSprite</tt></td><td>The mouse pointer layer item</td></tr>
+<tr class="priv"><td><tt>SS_Layer*</tt></td><td><tt>latchedLayer</tt></td><td>A layer which is monopolizing events</td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>lastAutoTime</tt></td><td>Last time fireAuto was set</td></tr>
+<tr class="priv"><td><tt>Uint32</tt></td><td><tt>autoInterval</tt></td><td>The minimum interval between auto-moves</td></tr>
+<tr class="prot"><td><tt>SS_Game*</tt></td><td><tt>game</tt></td><td>The game (e.g., application) object</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>fireAuto</tt></td><td>Flag to auto-move on the next Process() call</td></tr>
+<tr><td><tt>SS_ItemList</tt></td><td><tt>colliderList[100]</tt></td><td>100 lists that optimize collisions</td></tr>
+<tr><td><tt>float</tt></td><td><tt>left, top</tt></td><td>The top-left of the current view</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>slowCount</tt></td><td>Dropped frame count for calibration</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>frameCount</tt></td><td>Total number of frames displayed</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>fps</tt></td><td>Frames per second calculation</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>ticks</tt></td><td>Adjusted time</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>timeAdjust</tt></td><td>Time adjustment factor</td></tr>
+<tr><td><tt>Uint32</tt></td><td><tt>stopTime</tt></td><td>Starting time of the last pause</td></tr>
+<tr><td><tt>Uint8*</tt></td><td><tt>keyState</tt></td><td>Array of key states (from SDL)</td></tr>
+<tr><td><tt>float</tt></td><td><tt>mousex, mousey</tt></td><td>Mouse pointer position</td></tr>
+<tr><td><tt>Uint8</tt></td><td><tt>mouseButtons</tt></td><td>Mouse button state bit mask</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>mouseClick</tt></td><td>If set the mouse button was clicked this loop</td></tr>
+<tr><td><tt>bool</tt></td><td><tt>mouseDown</tt></td><td>The mouse button is down</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_World()</pre>
+<p>
+A new SS_World is an empty container for all kinds of layers.
+Before the world can do anything it must have layers added,
+handlers set, etc.
+</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AddLayer">AddLayer</a></li>
+<li><a href="#AddToColliders">AddToColliders</a></li>
+<li><a href="#Animate">Animate</a></li>
+<li><a href="#Bottom">Bottom</a></li>
+<li><a href="#Calibrate">Calibrate</a></li>
+<li><a href="#CreatePointerSprite">CreatePointerSprite</a></li>
+<li><a href="#DisposeLayer">DisposeLayer</a></li>
+<li><a href="#GetInput">GetInput</a></li>
+<li><a href="#GetWorldTime">GetWorldTime</a></li>
+<li><a href="#HandleEvent">HandleEvent</a></li>
+<li><a href="#HandleEvents">HandleEvents</a></li>
+<li><a href="#LatchLayer">LatchLayer</a></li>
+<li><a href="#LayerToBack">LayerToBack</a></li>
+<li><a href="#LayerToFront">LayerToFront</a></li>
+<li><a href="#Left">Left</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#MousePointer">MousePointer</a></li>
+<li><a href="#NewGUI">NewGUI</a></li>
+<li><a href="#NewLayer">NewLayer</a></li>
+<li><a href="#NewTextLayer">NewTextLayer</a></li>
+<li><a href="#NewTileLayer">NewTileLayer</a></li>
+<li><a href="#Pause">Pause</a></li>
+<li><a href="#PostProcess">PostProcess</a></li>
+<li><a href="#PostRender">PostRender</a></li>
+<li><a href="#PreRender">PreRender</a></li>
+<li><a href="#process_thread">process_thread</a></li>
+<li><a href="#Process">Process</a></li>
+<li><a href="#ProcessFlag">ProcessFlag</a></li>
+<li><a href="#ProcessThread">ProcessThread</a></li>
+<li><a href="#Quit">Quit</a></li>
+<li><a href="#RemoveFromColliders">RemoveFromColliders</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Render">Render</a></li>
+<li><a href="#RenderThread">RenderThread</a></li>
+<li><a href="#Resume">Resume</a></li>
+<li><a href="#Right">Right</a></li>
+<li><a href="#Run">Run</a></li>
+<li><a href="#RunCollisionTest">RunCollisionTest</a></li>
+<li><a href="#ScreenToGlobal">ScreenToGlobal</a></li>
+<li><a href="#SetClearColor">SetClearColor</a></li>
+<li><a href="#SetEventHandler">SetEventHandler</a></li>
+<li><a href="#SetLeftTop">SetLeftTop</a></li>
+<li><a href="#SetPaused">SetPaused</a></li>
+<li><a href="#SetPointerSprite">SetPointerSprite</a></li>
+<li><a href="#SetPostProcessor">SetPostProcessor</a></li>
+<li><a href="#SetPostRenderProc">SetPostRenderProc</a></li>
+<li><a href="#SetPreRenderProc">SetPreRenderProc</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetProcessFlag">SetProcessFlag</a></li>
+<li><a href="#SetSurface">SetSurface</a></li>
+<li><a href="#SetZoom">SetZoom</a></li>
+<li><a href="#Start">Start</a></li>
+<li><a href="#Stop">Stop</a></li>
+<li><a href="#TogglePaused">TogglePaused</a></li>
+<li><a href="#Top">Top</a></li>
+<li><a href="#ViewHeight">ViewHeight</a></li>
+<li><a href="#ViewWidth">ViewWidth</a></li>
+<li><a href="#Zoom">Zoom</a></li>
+<li><a href="#ZoomHeight">ZoomHeight</a></li>
+<li><a href="#ZoomWidth">ZoomWidth</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+
+<!-- AddLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="AddLayer"></a><h3>AddLayer</h3>
+<pre>void AddLayer(SS_Layer *layer)</pre>
+<p>AddLayer Description...</p>
+</div>
+
+
+<!-- AddToColliders -->
+<div class="mitem"><a href="#top">top</a>
+<a name="AddToColliders"></a><h3>AddToColliders</h3>
+<pre>SS_ItemNode* AddToColliders(SS_LayerItem *item)</pre>
+<p>AddToColliders Description...</p>
+</div>
+
+
+<!-- Animate -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Animate"></a><h3>Animate</h3>
+<pre>void Animate()</pre>
+<p>Animate Description...</p>
+</div>
+
+
+<!-- Bottom -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Bottom"></a><h3>Bottom</h3>
+<pre>float Bottom() </pre>
+<p>Bottom Description...</p>
+</div>
+
+
+<!-- Calibrate -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Calibrate"></a><h3>Calibrate</h3>
+<pre>void Calibrate()</pre>
+<p>
+This method enables Vertical Blank Synchronization and initiates a speed
+test for the first few seconds of the world's Run loop. If the frame rate
+is found to be too low then Vertical Blank Synchronization is disabled.
+</p>
+</div>
+
+
+<!-- CreatePointerSprite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="CreatePointerSprite"></a><h3>CreatePointerSprite</h3>
+<pre>SS_Sprite* CreatePointerSprite(char *file)</pre>
+<p>CreatePointerSprite Description...</p>
+</div>
+
+
+<!-- DisposeLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="DisposeLayer"></a><h3>DisposeLayer</h3>
+<pre>void DisposeLayer(SS_Layer* layer) </pre>
+<p>DisposeLayer Description...</p>
+</div>
+
+
+<!-- GetInput -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetInput"></a><h3>GetInput</h3>
+<pre>void GetInput()</pre>
+<p>GetInput Description...</p>
+</div>
+
+
+<!-- GetWorldTime -->
+<div class="mitem"><a href="#top">top</a>
+<a name="GetWorldTime"></a><h3>GetWorldTime</h3>
+<pre>Uint32 GetWorldTime() </pre>
+<p>GetWorldTime Description...</p>
+</div>
+
+
+<!-- HandleEvent -->
+<div class="mitem"><a href="#top">top</a>
+<a name="HandleEvent"></a><h3>HandleEvent</h3>
+<pre>void HandleEvent(SDL_Event *e)</pre>
+<p>HandleEvent Description...</p>
+</div>
+
+
+<!-- HandleEvents -->
+<div class="mitem"><a href="#top">top</a>
+<a name="HandleEvents"></a><h3>HandleEvents</h3>
+<pre>void HandleEvents()</pre>
+<p>HandleEvents Description...</p>
+</div>
+
+
+<!-- LatchLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="LatchLayer"></a><h3>LatchLayer</h3>
+<pre>void LatchLayer(SS_Layer *l) </pre>
+<p>LatchLayer Description...</p>
+</div>
+
+
+<!-- LayerToBack -->
+<div class="mitem"><a href="#top">top</a>
+<a name="LayerToBack"></a><h3>LayerToBack</h3>
+<pre>void LayerToBack(SS_Layer *layer)</pre>
+<p>LayerToBack Description...</p>
+</div>
+
+
+<!-- LayerToFront -->
+<div class="mitem"><a href="#top">top</a>
+<a name="LayerToFront"></a><h3>LayerToFront</h3>
+<pre>void LayerToFront(SS_Layer *layer)</pre>
+<p>LayerToFront Description...</p>
+</div>
+
+
+<!-- Left -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Left"></a><h3>Left</h3>
+<pre>float Left()</pre>
+<p>Accessor for the left visible edge of the world.</p>
+</div>
+
+
+<!-- MousePointer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="MousePointer"></a><h3>MousePointer</h3>
+<pre>SS_LayerItem* MousePointer() </pre>
+<p>MousePointer Description...</p>
+</div>
+
+
+<!-- NewGUI -->
+<div class="mitem"><a href="#top">top</a>
+<a name="NewGUI"></a><h3>NewGUI</h3>
+<pre>SS_GUI* NewGUI()
+SS_GUI* NewGUI(SS_SFont *font)</pre>
+<p>NewGUI Description...</p>
+</div>
+
+
+<!-- NewLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="NewLayer"></a><h3>NewLayer</h3>
+<pre>SS_Layer* NewLayer(Uint32 f=SS_NONE)</pre>
+<p>NewLayer Description...</p>
+</div>
+
+
+<!-- NewTextLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="NewTextLayer"></a><h3>NewTextLayer</h3>
+<pre>SS_TextLayer* NewTextLayer(char *filename, float desc, Uint32 f)
+SS_TextLayer* NewTextLayer(char *filename, float desc)
+SS_TextLayer* NewTextLayer(SS_SFont *sfont, Uint32 f)
+SS_TextLayer* NewTextLayer(SS_SFont *sfont)</pre>
+<p>NewTextLayer Description...</p>
+</div>
+
+
+<!-- NewTileLayer -->
+<div class="mitem"><a href="#top">top</a>
+<a name="NewTileLayer"></a><h3>NewTileLayer</h3>
+<pre>SS_TileLayer* NewTileLayer()
+SS_TileLayer* NewTileLayer(SS_TileMap *map, Uint32 f)
+SS_TileLayer* NewTileLayer(SS_TileMap *map)</pre>
+<p>NewTileLayer Description...</p>
+</div>
+
+
+<!-- Pause -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Pause"></a><h3>Pause</h3>
+<pre>void Pause() </pre>
+<p>
+Enable or disable processing without affecting the rendering state.
+Without the boolean argument this disables processing.
+</p>
+</div>
+
+
+<!-- PostProcess -->
+<div class="mitem"><a href="#top">top</a>
+<a name="PostProcess"></a><h3>PostProcess</h3>
+<pre>void PostProcess()</pre>
+<p>PostProcess Description...</p>
+</div>
+
+
+<!-- PostRender -->
+<div class="mitem"><a href="#top">top</a>
+<a name="PostRender"></a><h3>PostRender</h3>
+<pre>void PostRender()</pre>
+<p>PostRender Description...</p>
+</div>
+
+
+<!-- PreRender -->
+<div class="mitem"><a href="#top">top</a>
+<a name="PreRender"></a><h3>PreRender</h3>
+<pre>void PreRender()</pre>
+<p>PreRender Description...</p>
+</div>
+
+
+<!-- Process -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Process"></a><h3>Process</h3>
+<pre>void Process()</pre>
+<p>Process Description...</p>
+</div>
+
+
+<!-- process_thread -->
+<div class="mitem"><a href="#top">top</a>
+<a name="process_thread"></a><h3>process_thread</h3>
+<pre>static int process_thread(void *world) </pre>
+<p>process_thread Description...</p>
+</div>
+
+
+<!-- ProcessFlag -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ProcessFlag"></a><h3>ProcessFlag</h3>
+<pre>bool ProcessFlag() </pre>
+<p>ProcessFlag Description...</p>
+</div>
+
+
+<!-- ProcessThread -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ProcessThread"></a><h3>ProcessThread</h3>
+<pre>int  ProcessThread()</pre>
+<p>ProcessThread Description...</p>
+</div>
+
+
+<!-- Quit -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Quit"></a><h3>Quit</h3>
+<pre>void Quit() </pre>
+<p>
+Call this method to exit the Run() method. The world will continue to persist
+until it is actually deleted. To re-enter a world that has been Quit you must
+call Go() followed by Run().
+</p>
+</div>
+
+
+<!-- RemoveFromColliders -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveFromColliders"></a><h3>RemoveFromColliders</h3>
+<pre>void RemoveFromColliders(SS_LayerItem *item)</pre>
+<p>RemoveFromColliders Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- RenderThread -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RenderThread"></a><h3>RenderThread</h3>
+<pre>int  RenderThread()</pre>
+<p>RenderThread Description...</p>
+</div>
+
+
+<!-- Resume -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Resume"></a><h3>Resume</h3>
+<pre>void Resume() </pre>
+<p>Resume Description...</p>
+</div>
+
+
+<!-- Right -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Right"></a><h3>Right</h3>
+<pre>float Right() </pre>
+<p>Right Description...</p>
+</div>
+
+
+<!-- Run -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Run"></a><h3>Run</h3>
+<pre>Uint32 Run(SS_Game *g)</pre>
+<p>Run Description...</p>
+</div>
+
+
+<!-- RunCollisionTest -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RunCollisionTest"></a><h3>RunCollisionTest</h3>
+<pre>void RunCollisionTest()</pre>
+<p>RunCollisionTest Description...</p>
+</div>
+
+
+<!-- ScreenToGlobal -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ScreenToGlobal"></a><h3>ScreenToGlobal</h3>
+<pre>void ScreenToGlobal(float *x, float *y) </pre>
+<p>ScreenToGlobal Description...</p>
+</div>
+
+
+<!-- SetClearColor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetClearColor"></a><h3>SetClearColor</h3>
+<pre>void SetClearColor(float r, float g, float b, float a=1.0) 
+void SetClearColor(GLubyte q[4])
+void SetClearColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a=255)
+void SetClearColor(SScolorf q) </pre>
+<p>SetClearColor Description...</p>
+</div>
+
+
+<!-- SetEventHandler -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetEventHandler"></a><h3>SetEventHandler</h3>
+<pre>void SetEventHandler(worldEventProc ep) </pre>
+<p>SetEventHandler Description...</p>
+</div>
+
+
+<!-- SetLeftTop -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetLeftTop"></a><h3>SetLeftTop</h3>
+<pre>void SetLeftTop(float x, float y) </pre>
+<p>SetLeftTop Description...</p>
+</div>
+
+
+<!-- SetPaused -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPaused"></a><h3>SetPaused</h3>
+<pre>void SetPaused(bool p)</pre>
+<p>SetPaused Description...</p>
+</div>
+
+
+<!-- SetPointerSprite -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPointerSprite"></a><h3>SetPointerSprite</h3>
+<pre>void SetPointerSprite(SS_LayerItem *s)</pre>
+<p>SetPointerSprite Description...</p>
+</div>
+
+
+<!-- SetPostProcessor -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPostProcessor"></a><h3>SetPostProcessor</h3>
+<pre>void SetPostProcessor(worldProc p) </pre>
+<p>
+After all the world's layers have been processed you often want to
+make further adjustments. In a scrolling game you would use this hook
+to center the world's view rectangle on your game character.
+</p>
+</div>
+
+
+<!-- SetPostRenderProc -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPostRenderProc"></a><h3>SetPostRenderProc</h3>
+<pre>void SetPostRenderProc(worldProc p) </pre>
+<p>SetPostRenderProc Description...</p>
+</div>
+
+
+<!-- SetPreRenderProc -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetPreRenderProc"></a><h3>SetPreRenderProc</h3>
+<pre>void SetPreRenderProc(worldProc p) </pre>
+<p>SetPreRenderProc Description...</p>
+</div>
+
+
+<!-- SetProcessFlag -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetProcessFlag"></a><h3>SetProcessFlag</h3>
+<pre>void SetProcessFlag(bool f) </pre>
+<p>SetProcessFlag Description...</p>
+</div>
+
+
+<!-- SetSurface -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetSurface"></a><h3>SetSurface</h3>
+<pre>void SetSurface(SDL_Surface *s)</pre>
+<p>SetSurface Description...</p>
+</div>
+
+
+<!-- SetZoom -->
+<div class="mitem"><a href="#top">top</a>
+<a name="SetZoom"></a><h3>SetZoom</h3>
+<pre>void SetZoom(float z) </pre>
+<p>SetZoom Description...</p>
+</div>
+
+
+<!-- Start -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Start"></a><h3>Start</h3>
+<pre>void Start()</pre>
+<p>
+Start the processing thread and enable rendering.
+Use <a href="#Stop">Stop()</a> to disable processing and rendering.
+</p>
+</div>
+
+
+<!-- Stop -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Stop"></a><h3>Stop</h3>
+<pre>void Stop()</pre>
+<p>
+Stop the processing thread and disable rendering.
+Use <a href="#Start">Start()</a> to re‘nable processing and rendering.
+</p>
+</div>
+
+
+<!-- TogglePaused -->
+<div class="mitem"><a href="#top">top</a>
+<a name="TogglePaused"></a><h3>TogglePaused</h3>
+<pre>void TogglePaused() </pre>
+<p>TogglePaused Description...</p>
+</div>
+
+
+<!-- Top -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Top"></a><h3>Top</h3>
+<pre>float Top() </pre>
+<p>Accessor for the top visible edge of the world.</p>
+</div>
+
+
+<!-- ViewHeight -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ViewHeight"></a><h3>ViewHeight</h3>
+<pre>float ViewHeight() </pre>
+<p>ViewHeight Description...</p>
+</div>
+
+
+<!-- ViewWidth -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ViewWidth"></a><h3>ViewWidth</h3>
+<pre>float ViewWidth() </pre>
+<p>ViewWidth Description...</p>
+</div>
+
+
+<!-- Zoom -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Zoom"></a><h3>Zoom</h3>
+<pre>float Zoom() </pre>
+<p>Accessor for the world's zoom factor.</p>
+</div>
+
+
+<!-- ZoomHeight -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ZoomHeight"></a><h3>ZoomHeight</h3>
+<pre>float ZoomHeight() </pre>
+<p>
+Accessor for the visible height of the world. This is the screen height
+divided by the zoom factor.
+</p>
+</div>
+
+
+<!-- ZoomWidth -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ZoomWidth"></a><h3>ZoomWidth</h3>
+<pre>float ZoomWidth() </pre>
+<p>
+Accessor for the visible width of the world. This is the screen width
+divided by the zoom factor.
+</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

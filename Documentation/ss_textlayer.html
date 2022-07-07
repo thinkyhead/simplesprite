@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_TextLayer Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+			<ul>
+				<li><a href="ss_editstring.html">SS_EditString</a></li>
+				<li><a href="ss_sfont.html">SS_SFont</a></li>
+				<li><a href="ss_string.html">SS_String</a></li>
+				<li>SS_TextLayer</li>
+			</ul>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>SS_TextLayer</h1>
+<h4><strong>Superclass</strong>: <a href="ss_layer.html">SS_Layer</a></h4>
+<p>Class Description...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SS_SFont*</tt></td><td><tt>sfont</tt></td><td>The default font for new strings in the layer</td></tr>
+<tr class="priv"><td><tt>float</tt></td><td><tt>xcurs, ycurs</tt></td><td>The position of the print cursor</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>stringCount</tt></td><td>The number of strings in the layer</td></tr>
+<tr><td><tt>SS_String*</tt></td><td><tt>firstString</tt></td><td>The first string in the layer</td></tr>
+<tr><td><tt>SS_String*</tt></td><td><tt>lastString</tt></td><td>The last string in the layer</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_TextLayer(char *filename, float desc, Uint32 f)
+SS_TextLayer(char *filename, float desc)
+SS_TextLayer(SS_SFont *font, Uint32 f)
+SS_TextLayer(SS_SFont *font)
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#Init">Init</a></li>
+<li><a href="#SetFont">SetFont</a></li>
+<li><a href="#AddString">AddString</a></li>
+<li><a href="#MoveCursor">MoveCursor</a></li>
+<li><a href="#CenterCursor">CenterCursor</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#CenterCursorX">CenterCursorX</a></li>
+<li><a href="#CenterCursorY">CenterCursorY</a></li>
+<li><a href="#Print">Print</a></li>
+<li><a href="#PrintCenter">PrintCenter</a></li>
+<li><a href="#Clear">Clear</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Process">Process</a></li>
+<li><a href="#Animate">Animate</a></li>
+<li><a href="#Render">Render</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- SetFont -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFont"></a><h3>SetFont</h3>
+<pre>void SetFont(SS_SFont *font)</pre>
+<p>SetFont Description...</p>
+</div>
+
+
+<!-- AddString -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AddString"></a><h3>AddString</h3>
+<pre>void AddString(SS_String *string)</pre>
+<p>AddString Description...</p>
+</div>
+
+
+<!-- MoveCursor -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="MoveCursor"></a><h3>MoveCursor</h3>
+<pre>void MoveCursor(float x, float y)</pre>
+<p>MoveCursor Description...</p>
+</div>
+
+
+<!-- CenterCursor -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CenterCursor"></a><h3>CenterCursor</h3>
+<pre>void CenterCursor()</pre>
+<p>CenterCursor Description...</p>
+</div>
+
+
+<!-- CenterCursorX -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CenterCursorX"></a><h3>CenterCursorX</h3>
+<pre>void CenterCursorX()</pre>
+<p>CenterCursorX Description...</p>
+</div>
+
+
+<!-- CenterCursorY -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CenterCursorY"></a><h3>CenterCursorY</h3>
+<pre>void CenterCursorY()</pre>
+<p>CenterCursorY Description...</p>
+</div>
+
+
+<!-- Print -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Print"></a><h3>Print</h3>
+<pre>SS_String* Print(char *text, float x, float y)
+SS_String* Print(char *text)</pre>
+<p>Print Description...</p>
+</div>
+
+
+<!-- PrintCenter -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PrintCenter"></a><h3>PrintCenter</h3>
+<pre>SS_String* PrintCenter(char *text, float x, float y)
+SS_String* PrintCenter(char *text)</pre>
+<p>PrintCenter Description...</p>
+</div>
+
+
+<!-- Clear -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Clear"></a><h3>Clear</h3>
+<pre>void Clear()</pre>
+<p>Clear Description...</p>
+</div>
+
+
+<!-- Process -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Process"></a><h3>Process</h3>
+<pre>void Process()</pre>
+<p>Process Description...</p>
+</div>
+
+
+<!-- Animate -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Animate"></a><h3>Animate</h3>
+<pre>void Animate()</pre>
+<p>Animate Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

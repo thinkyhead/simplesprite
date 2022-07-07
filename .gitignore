@@ -1,0 +1,8 @@
+.DS_Store
+xcuserdata/
+xcode-*/
+*.pbxuser
+*.perspective
+*.mode1
+*.mode1v3
+*.mode2

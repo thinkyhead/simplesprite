@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_ListNode&lt;T&gt; Template Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+			<ul>
+				<li><a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></li>
+				<li><a href="ss_linkedlist.html">SS_LinkedList&lt;T&gt;</a></li>
+				<li>SS_ListNode&lt;T&gt;</li>
+				<li><a href="ss_objectlist.html">SS_ObjectList&lt;T&gt;</a></li>
+				<li><a href="ss_refcounter.html">SS_RefCounter</a></li>
+			</ul>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Templates.h</div>
+<h1>SS_ListNode</h1>
+<p>About this class...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr><td><tt>T</tt></td><td><tt>m_data</tt></td><td></td></tr>
+<tr><td><tt>SS_ListNode&lt;T&gt;*</tt></td><td><tt>m_next</tt></td><td></td></tr>
+<tr><td><tt>SS_ListNode&lt;T&gt;*</tt></td><td><tt>m_prev</tt></td><td></td></tr>
+<tr><td><tt>SS_LinkedList&lt;T&gt;*</tt></td><td><tt>m_container</tt></td><td></td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+<td><ul>
+<li><a href="#InsertAfter">InsertAfter</a></li>
+<li><a href="#InsertBefore">InsertBefore</a></li>
+<li><a href="#Migrate">Migrate</a></li>
+<li><a href="#RemoveSelf">RemoveSelf</a></li>
+<li><a href="#Unlink">Unlink</a></li>
+</ul></td>
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- InsertAfter -->
+<div class="mitem"><a href="#top">top</a>
+<a name="InsertAfter"></a><h3>InsertAfter</h3>
+<pre>
+void InsertAfter( SS_ListNode&lt;T&gt; *newnode )
+void InsertAfter( T p_data )
+</pre>
+<p>InsertAfter Description...</p>
+</div>
+
+
+<!-- InsertBefore -->
+<div class="mitem"><a href="#top">top</a>
+<a name="InsertBefore"></a><h3>InsertBefore</h3>
+<pre>
+void InsertBefore( SS_ListNode&lt;T&gt; *newnode )
+void InsertBefore( T p_data )
+</pre>
+<p>InsertBefore Description...</p>
+</div>
+
+
+<!-- Migrate -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Migrate"></a><h3>Migrate</h3>
+<pre>void Migrate(SS_LinkedList&lt;T&gt; *new_container)</pre>
+<p>Migrate Description...</p>
+</div>
+
+
+<!-- RemoveSelf -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RemoveSelf"></a><h3>RemoveSelf</h3>
+<pre>void RemoveSelf()</pre>
+<p>RemoveSelf Description...</p>
+</div>
+
+
+<!-- Unlink -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Unlink"></a><h3>Unlink</h3>
+<pre>void Unlink()</pre>
+<p>Unlink Description...</p>
+</div>
+
+
+
+</td></tr></table>
+
+</body>
+</html>

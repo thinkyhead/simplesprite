@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_RefCounter Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+			<ul>
+				<li><a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></li>
+				<li><a href="ss_linkedlist.html">SS_LinkedList&lt;T&gt;</a></li>
+				<li><a href="ss_listnode.html">SS_ListNode&lt;T&gt;</a></li>
+				<li><a href="ss_objectlist.html">SS_ObjectList&lt;T&gt;</a></li>
+				<li>SS_RefCounter</li>
+			</ul>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_RefCounter.h</div>
+<h1>SS_RefCounter</h1>
+<h4><strong>Subclasses</strong>:
+<a href="ss_frame.html">SS_Frame</a> |
+<a href="ss_layeritem.html">SS_LayerItem</a> |
+<a href="ss_sound.html">SS_Sound</a> |
+<a href="ss_tilepalette.html">SS_TilePalette</a> |
+<a href="ss_vectorframe.html">SS_VectorFrame</a>
+</h4>
+<p>
+It turns out that very often a single object will be referenced in several places.
+Keeping track of all these references can be a very tedious task. Memory leaks,
+double-frees, and accidental deletion are common problems faced by the programmer.
+The SS_RefCounter class helps to prevent these problems by maintaining a count
+of these references.
+</p>
+<p>
+When an object is stored in a list, for example, it is "retained." This simply
+increments its reference counter. When the object is no longer needed it is
+"released." As you've guessed this decrements its reference counter. If the
+reference counter goes below 1 the object deletes itself. This commonly-used
+scheme makes it much easier to manage multiple references to an object.
+</p>
+<pre>
+    oneSprite = new SS_Sprite();    <em>// refcount = 0</em>
+    oneSprite->Retain();            <em>// refcount = 1</em>
+    twoSprite = oneSprite;          <em>// Another reference someplace</em>
+    twoSprite->Retain();            <em>// refcount = 2</em>
+    ...
+    oneSprite->Release();           <em>// refcount = 1</em>
+    ...
+    twoSprite->Release();           <em>// refcount = 0 so it is deleted</em>
+</pre>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>int</tt></td><td><tt>refCount</tt></td><td>Count of all references</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_RefCounter()
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#operator=">operator=</a></li>
+<li><a href="#RefCount">RefCount</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Release">Release</a></li>
+<li><a href="#Retain">Retain</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- operator= -->
+<div class="mitem"><a href="#top">top</a>
+<a name="operator="></a><h3>operator=</h3>
+<pre>const SS_RefCounter&amp; operator=(const SS_RefCounter &amp;src)</pre>
+<p>You can copy an SS_RefCounter using the = operator.</p>
+</div>
+
+
+<!-- RefCount -->
+<div class="mitem"><a href="#top">top</a>
+<a name="RefCount"></a><h3>RefCount</h3>
+<pre>int RefCount()</pre>
+<p>Returns the value of refCount, which equals the number of Retain() calls.</p>
+</div>
+
+
+<!-- Release -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Release"></a><h3>Release</h3>
+<pre>int Release()</pre>
+<p>
+Release decerements the refCount field. If refCount goes to zero the object
+is deleted. If this method returns zero or less then the target object no longer
+exists.
+</p>
+</div>
+
+
+<!-- Retain -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Retain"></a><h3>Retain</h3>
+<pre>void Retain()</pre>
+<p>Retain increments the refCount field. You should call Retain() any time you
+create a pointer that points to the object, if it is going to persist for
+awhile, and if you know that other pointers will also be referring to the
+same object. For example, if you plan to refer to an object in more than one
+linked list it is most convenient to use this scheme.
+</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

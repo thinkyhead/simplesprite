@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_Listener Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+			<ul>
+				<li><a href="ss_broadcaster.html">SS_Broadcaster</a></li>
+				<li>SS_Listener</li>
+				<li><a href="ss_message.html">SS_Message</a></li>
+			</ul>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_Messages.h</div>
+<h1>SS_Listener</h1>
+<h4><strong>Subclasses</strong>:
+<a href="ss_gadget.html">SS_Gadget</a> |
+<a href="ss_layer.html">SS_Layer</a> |
+<a href="ss_layeritem.html">SS_LayerItem</a> |
+<a href="ss_world.html">SS_World</a>
+</h4>
+<p>About this class...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SS_BroadcasterList</tt></td><td><tt>broadcasterList</tt></td><td>All broadcasters this object is listening to.</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_Listener()
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#HandleMessage">HandleMessage</a></li>
+<li><a href="#Ignore">Ignore</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#IgnoreAll">IgnoreAll</a></li>
+<li><a href="#ListenTo">ListenTo</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+
+<!-- HandleMessage -->
+<div class="mitem"><a href="#top">top</a>
+<a name="HandleMessage"></a><h3>HandleMessage</h3>
+<pre>
+void HandleMessage(const SS_Message &amp;message)
+
+void HandleMessage(
+       Uint32 mclass,
+       Uint32 mcode,
+       int    mval=0,
+       void   *data=NULL
+       )
+</pre>
+<p>
+There are two forms of HandleMessage. The first form is the message handler
+itself. You should override this method in your derived classes. The second
+form takes the arguments to fill in a new SS_Message and then calls the
+message handler. It is intended for use as an on-the-fly message sender.
+</p>
+</div>
+
+
+<!-- Ignore -->
+<div class="mitem"><a href="#top">top</a>
+<a name="Ignore"></a><h3>Ignore</h3>
+<pre>void Ignore(SS_Broadcaster *sender)</pre>
+<p>
+Ignore tells the listener to stop listening to one of its broadcasters.
+(It tells the broadcaster to stop sending messages to this listener.)
+</p>
+</div>
+
+
+<!-- IgnoreAll -->
+<div class="mitem"><a href="#top">top</a>
+<a name="IgnoreAll"></a><h3>IgnoreAll</h3>
+<pre>void IgnoreAll()</pre>
+<p>
+IgnoreAll tells the listener to stop listening to all its broadcasters.
+(It tells all the broadcasters to stop sending messages to this listener.)
+</p>
+</div>
+
+
+<!-- ListenTo -->
+<div class="mitem"><a href="#top">top</a>
+<a name="ListenTo"></a><h3>ListenTo</h3>
+<pre>void ListenTo(SS_Broadcaster *sender)</pre>
+<p>
+ListenTo tells the listener to listen to a broadcaster. (It adds this listener
+to the broadcaster's list of listeners.)
+</p>
+</div>
+
+
+</td></tr></table>
+
+</body>
+</html>

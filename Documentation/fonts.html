@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : Fonts &amp; Strings</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li>Fonts &amp; Strings</li>
+			<ul>
+				<li><a href="ss_editstring.html">SS_EditString</a></li>
+				<li><a href="ss_sfont.html">SS_SFont</a></li>
+				<li><a href="ss_string.html">SS_String</a></li>
+				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
+			</ul>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<h1>Fonts &amp; Strings</h1>
+<table><tr valign="top">
+<td><img src="_img/andale10.png" alt="" width="94" height="72"  style="background:#000;float:right;margin:0 0 14px 24px;padding:0;border:4px solid #88B" />
+<p>
+SimpleSprite uses a format called "<a href="http://www.linux-games.com/sfont/"
+target="_new">SFont</a>" for its font files. An SFont file is an ordinary image
+file with 96 ASCII characters rendered in the exact size and color that they
+will appear in your game.
+</p>
+<p>
+<b>Space Markers</b> consist of one or more pixels of solid color that mark the
+space between character images. The official SFont format requires the markers
+to be pure magenta (0xFF00FF) but in SimpleSprite any color will work. The
+character graphic extends from line below the marker to the next marker line (or
+the bottom of the image). The marker line isn't included as part of the loaded
+font, so the non-marker pixels in the marker line can also contain any color.
+</p>
+<p>
+The official SFont format requires all characters to be positioned on a single
+line, which makes for a very wide image. SimpleSprite allows you to use as many
+lines as you like. If you use the multi-line format you must make sure that
+every line of characters is the same height. (i.e., The marker lines must be
+equally-spaced.) Regardless of how many lines are used, there must be a marker
+after the last character on every line.
+</p>
+
+</td>
+</tr></table>
+
+</div>
+
+<div id="methbox">
+<h1>Font Classes</h1>
+
+<dl>
+<dt>SS_SFont</dt>
+<dd>Embodies the graphical elements of the font and provides methods for drawing
+characters and strings.</dd>
+
+<dt>SS_String</dt>
+<dd>
+
+</dd>
+
+<dt>SS_EditString</dt>
+<dd></dd>
+
+<dt>SS_TextLayer</dt>
+<dd></dd>
+
+</dl>
+
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

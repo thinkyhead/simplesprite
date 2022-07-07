@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_GUI Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+			<ul>
+				<li><a href="ss_button.html">SS_Button</a></li>
+				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
+				<li><a href="ss_customgadget.html">SS_CustomGadget</a></li>
+				<li><a href="ss_dial.html">SS_Dial</a></li>
+				<li><a href="ss_dragger.html">SS_Dragger</a></li>
+				<li><a href="ss_gadget.html">SS_Gadget</a></li>
+				<li>SS_GUI</li>
+				<li><a href="ss_menu.html">SS_Menu</a></li>
+				<li><a href="ss_menubar.html">SS_Menubar</a></li>
+				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
+				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
+				<li><a href="ss_slider.html">SS_Slider</a></li>
+				<li><a href="ss_textinput.html">SS_TextInput</a></li>
+			</ul>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<div id="classbox">
+<div id="hdr">SS_GUI.h</div>
+<h1>SS_GUI</h1>
+
+<h4><strong>Superclass</strong>: <a href="ss_layer.html">SS_Layer</a></h4>
+
+<p>
+The SS_GUI is a special type of SS_Layer. It contains SS_Gadgets, which have
+interactive abilities through the SDL event dispatcher. Gadgets automatically
+receive events pertaining to mouse movement, mouse clicks, drags, and keypresses
+which are then handled by your event procedures. Unhandled events are passed
+back to the SS_GUI, which can then pass it on to other GUIs and eventually the
+SS_World.
+</p>
+
+<h5>Code Example:</h5>
+
+<pre>
+  SS_World *w = new SS_World();
+  SS_GUI *theGUI = w->NewGUI();
+
+  theGUI->SetFont("font/optima18.png", 4);
+
+  cd("gui");
+
+  theGUI->LoadSliderImages(
+    "slider1.png",
+    "thumb1.png",
+    "thumb2.png",
+    "thumb3.png"
+  );
+
+  theGUI->LoadCheckboxImages(
+    "checkbox1_off.png",
+    "checkbox1_on.png",
+    "checkbox1_off_over.png",
+    "checkbox1_on_over.png"
+  );
+
+  cd("..");
+</pre>
+
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>SS_SFont*</tt></td><td><tt>guiFont</tt></td><td>The default font for new gadgets</td></tr>
+<tr class="priv"><td><tt>SS_Sprite*</tt></td><td><tt>checkboxSprite</tt></td><td>The default sprite for checkboxes</td></tr>
+<tr class="priv"><td><tt>SS_Sprite*</tt></td><td><tt>radioButtonSprite</tt></td><td>The default sprite for radio buttons</td></tr>
+<tr class="priv"><td><tt>SS_ItemGroup*</tt></td><td><tt>sliderSprite</tt></td><td>The default sprite group for sliders</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>gadgetCount</tt></td><td>The number of gadgets in the GUI</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>firstGadget</tt></td><td>The first gadget in the GUI</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>lastGadget</tt></td><td>The last gadget in the GUI</td></tr>
+<tr><td><tt>Uint16</tt></td><td><tt>enteredCount</tt></td><td>The number of items moused-over</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>firstEntered</tt></td><td>The first gadget moused-over</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>lastEntered</tt></td><td>The last gadget moused-over</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>clickedGadget</tt></td><td>The currently clicked gadget</td></tr>
+<tr><td><tt>SS_Gadget*</tt></td><td><tt>keyFocusGadget</tt></td><td>The gadget that receives keyboard events</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_GUI()</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h3>Method Index</h3>
+<table><tr valign="top">
+<td><ul>
+<li><a href="#AddGadget">AddGadget</a></li>
+<li><a href="#Animate">Animate</a></li>
+<li><a href="#CheckboxSprite">CheckboxSprite</a></li>
+<li><a href="#Enable">Enable</a></li>
+<li><a href="#Font">Font</a></li>
+<li><a href="#GadgetAtPointer">GadgetAtPointer</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#GadgetAtXY">GadgetAtXY</a></li>
+<li><a href="#HandleEvent">HandleEvent</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#KeyFocus">KeyFocus</a></li>
+<li><a href="#LoadCheckboxImages">LoadCheckboxImages</a></li>
+<li><a href="#LoadSliderImages">LoadSliderImages</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#MakeSprite">MakeSprite</a></li>
+<li><a href="#MakeSpriteGroup">MakeSpriteGroup</a></li>
+<li><a href="#Process">Process</a></li>
+<li><a href="#RadioButtonSprite">RadioButtonSprite</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#SetFont">SetFont</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetWorld">SetWorld</a></li>
+<li><a href="#SliderSprite">SliderSprite</a></li>
+<li><a href="#World">World</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- Enable -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Enable"></a><h3>Enable</h3>
+<pre>void Enable()</pre>
+<p>Enable Description...</p>
+</div>
+
+
+<!-- SetWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetWorld"></a><h3>SetWorld</h3>
+<pre>void SetWorld(SS_World *w)</pre>
+<p>SetWorld Description...</p>
+</div>
+
+
+<!-- World -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="World"></a><h3>World</h3>
+<pre>SS_World* World()</pre>
+<p>World Description...</p>
+</div>
+
+
+<!-- CheckboxSprite -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CheckboxSprite"></a><h3>CheckboxSprite</h3>
+<pre>SS_Sprite* CheckboxSprite()</pre>
+<p>CheckboxSprite Description...</p>
+</div>
+
+
+<!-- RadioButtonSprite -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RadioButtonSprite"></a><h3>RadioButtonSprite</h3>
+<pre>SS_Sprite* RadioButtonSprite()</pre>
+<p>RadioButtonSprite Description...</p>
+</div>
+
+
+<!-- SliderSprite -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SliderSprite"></a><h3>SliderSprite</h3>
+<pre>SS_ItemGroup* SliderSprite()</pre>
+<p>SliderSprite Description...</p>
+</div>
+
+
+<!-- LoadCheckboxImages -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadCheckboxImages"></a><h3>LoadCheckboxImages</h3>
+<pre>void LoadCheckboxImages(
+	char *off1,
+	char *on1,
+	char *off2=NULL,
+	char *on2=NULL
+	)</pre>
+<p>LoadCheckboxImages Description...</p>
+</div>
+
+
+<!-- LoadSliderImages -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoadSliderImages"></a><h3>LoadSliderImages</h3>
+<pre>void LoadSliderImages(
+	char *file1,
+	char *file2,
+	char *file3=NULL,
+	char *file4=NULL
+	)</pre>
+<p>LoadSliderImages Description...</p>
+</div>
+
+
+<!-- MakeSprite -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="MakeSprite"></a><h3>MakeSprite</h3>
+<pre>SS_Sprite* MakeSprite(
+	char *file1,
+	char *file2=NULL,
+	char *file3=NULL,
+	char *file4=NULL
+	)</pre>
+<p>MakeSprite Description...</p>
+</div>
+
+
+<!-- MakeSpriteGroup -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="MakeSpriteGroup"></a><h3>MakeSpriteGroup</h3>
+<pre>SS_ItemGroup* MakeSpriteGroup(
+	char *file1,
+	char *file2=NULL,
+	char *file3=NULL,
+	char *file4=NULL
+	)</pre>
+<p>MakeSpriteGroup Description...</p>
+</div>
+
+
+<!-- SetFont -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFont"></a><h3>SetFont</h3>
+<pre>void SetFont(char *filename, float desc)
+void SetFont(SS_SFont *font)</pre>
+<p>SetFont Description...</p>
+</div>
+
+
+<!-- Font -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Font"></a><h3>Font</h3>
+<pre>SS_SFont* Font()</pre>
+<p>Font Description...</p>
+</div>
+
+
+<!-- AddGadget -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AddGadget"></a><h3>AddGadget</h3>
+<pre>void AddGadget(SS_Gadget *gadget)</pre>
+<p>AddGadget Description...</p>
+</div>
+
+
+<!-- GadgetAtPointer -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="GadgetAtPointer"></a><h3>GadgetAtPointer</h3>
+<pre>SS_Gadget* GadgetAtPointer()</pre>
+<p>GadgetAtPointer Description...</p>
+</div>
+
+
+<!-- GadgetAtXY -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="GadgetAtXY"></a><h3>GadgetAtXY</h3>
+<pre>SS_Gadget* GadgetAtXY(float x, float y)</pre>
+<p>GadgetAtXY Description...</p>
+</div>
+
+
+<!-- KeyFocus -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="KeyFocus"></a><h3>KeyFocus</h3>
+<pre>SS_Gadget* KeyFocus()</pre>
+<p>KeyFocus Description...</p>
+</div>
+
+
+<!-- HandleEvent -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="HandleEvent"></a><h3>HandleEvent</h3>
+<pre>bool HandleEvent(SDL_Event *e)</pre>
+<p>HandleEvent Description...</p>
+</div>
+
+
+<!-- Process -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Process"></a><h3>Process</h3>
+<pre>void Process()</pre>
+<p>Process Description...</p>
+</div>
+
+
+<!-- Animate -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Animate"></a><h3>Animate</h3>
+<pre>void Animate()</pre>
+<p>Animate Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render()</pre>
+<p>Render Description...</p>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

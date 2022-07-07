@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_EditString Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+			<ul>
+				<li>SS_EditString</li>
+				<li><a href="ss_sfont.html">SS_SFont</a></li>
+				<li><a href="ss_string.html">SS_String</a></li>
+				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
+			</ul>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_SFont.h</div>
+<h1>SS_EditString</h1>
+<h4><strong>SuperClass</strong>: <a href="ss_string.html">SS_String</a></h4>
+<p>This class implements the display and behaviors of an editable string. This
+includes implementing the selection of characters, the replacement of the
+selected characters, the rendering of the selection in focused and unfocused
+states, and hooks for keyboard and mouse interaction.
+</p>
+</div>
+
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>maxLength</tt></td><td>Maximum number of characters</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>maxWidth</tt></td><td>Maximum pixel width</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>selectionStart</tt></td><td>The selection start</td></tr>
+<tr class="priv"><td><tt>Sint16</tt></td><td><tt>selectionLength</tt></td><td>The selection length (can be negative)</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>wordStart</tt></td><td>The initial word selection start</td></tr>
+<tr class="priv"><td><tt>Uint16</tt></td><td><tt>wordEnd</tt></td><td>The initial word selection end</td></tr>
+<tr class="priv"><td><tt>bool</tt></td><td><tt>hasFocus</tt></td><td>Flag to display the string as focused</td></tr>
+<tr class="priv"><td><tt>cursorStyle</tt></td><td><tt>cursStyle</tt></td><td>Cursor appearance style (Block, Bar, or Underline)</td></tr>
+<tr class="priv"><td><tt>ssColorQuad</tt></td><td><tt>cursorTint1</tt></td><td>The color of the cursor</td></tr>
+<tr class="priv"><td><tt>ssColorQuad</tt></td><td><tt>cursorTint2</tt></td><td>The color of the cursor when blinking</td></tr>
+<tr class="priv"><td><tt>ssColorQuad</tt></td><td><tt>selectionTint</tt></td><td>The color of the selection background</td></tr>
+</table>
+</div>
+
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>
+SS_EditString(SS_SFont *font)
+SS_EditString(SS_SFont *font, char *t, float x, float y)
+</pre>
+<p>About the constructor.</p>
+</div>
+
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#CursorEnd">CursorEnd</a></li>
+<li><a href="#CursorHome">CursorHome</a></li>
+<li><a href="#CursorLeft">CursorLeft</a></li>
+<li><a href="#CursorRight">CursorRight</a></li>
+<li><a href="#CursorStyle">CursorStyle</a></li>
+<li><a href="#CursorWordLeft">CursorWordLeft</a></li>
+<li><a href="#CursorWordRight">CursorWordRight</a></li>
+<li><a href="#GainFocus">GainFocus</a></li>
+<li><a href="#HandleKey">HandleKey</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Init">Init</a></li>
+<li><a href="#LoseFocus">LoseFocus</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#RenderCursor">RenderCursor</a></li>
+<li><a href="#ReplaceSelection">ReplaceSelection</a></li>
+<li><a href="#SelectAll">SelectAll</a></li>
+<li><a href="#SelectionEnd">SelectionEnd</a></li>
+<li><a href="#SelectionLength">SelectionLength</a></li>
+<li><a href="#SelectionStart">SelectionStart</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SelectWord">SelectWord</a></li>
+<li><a href="#SetCursorAlpha">SetCursorAlpha</a></li>
+<li><a href="#SetCursorAlpha1">SetCursorAlpha1</a></li>
+<li><a href="#SetCursorAlpha2">SetCursorAlpha2</a></li>
+<li><a href="#SetCursorStyle">SetCursorStyle</a></li>
+<li><a href="#SetCursorTint">SetCursorTint</a></li>
+<li><a href="#SetCursorTint1">SetCursorTint1</a></li>
+<li><a href="#SetCursorTint2">SetCursorTint2</a></li>
+<li><a href="#SetFocus">SetFocus</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#SetMaxStringLength">SetMaxStringLength</a></li>
+<li><a href="#SetMaxStringWidth">SetMaxStringWidth</a></li>
+<li><a href="#SetSelection">SetSelection</a></li>
+<li><a href="#SetSelectionAlpha">SetSelectionAlpha</a></li>
+<li><a href="#SetSelectionTint">SetSelectionTint</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!-- CursorEnd -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorEnd"></a><h3>CursorEnd</h3>
+<pre>void CursorEnd(bool ext=false)</pre>
+<p>CursorEnd Description...</p>
+</div>
+
+
+<!-- CursorHome -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorHome"></a><h3>CursorHome</h3>
+<pre>void CursorHome(bool ext=false)</pre>
+<p>CursorHome Description...</p>
+</div>
+
+
+<!-- CursorLeft -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorLeft"></a><h3>CursorLeft</h3>
+<pre>void CursorLeft(bool ext=false)</pre>
+<p>CursorLeft Description...</p>
+</div>
+
+
+<!-- CursorRight -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorRight"></a><h3>CursorRight</h3>
+<pre>void CursorRight(bool ext=false)</pre>
+<p>CursorRight Description...</p>
+</div>
+
+
+<!-- CursorStyle -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorStyle"></a><h3>CursorStyle</h3>
+<pre>cursorStyle CursorStyle()</pre>
+<p>CursorStyle Description...</p>
+</div>
+
+
+<!-- CursorWordLeft -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorWordLeft"></a><h3>CursorWordLeft</h3>
+<pre>void CursorWordLeft(bool ext=false)</pre>
+<p>CursorWordLeft Description...</p>
+</div>
+
+
+<!-- CursorWordRight -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="CursorWordRight"></a><h3>CursorWordRight</h3>
+<pre>void CursorWordRight(bool ext=false)</pre>
+<p>CursorWordRight Description...</p>
+</div>
+
+
+<!-- GainFocus -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="GainFocus"></a><h3>GainFocus</h3>
+<pre>void GainFocus()</pre>
+<p>GainFocus Description...</p>
+</div>
+
+
+<!-- HandleKey -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="HandleKey"></a><h3>HandleKey</h3>
+<pre>void HandleKey(SDLKey k, SDLMod m=KMOD_NONE)</pre>
+<p>HandleKey Description...</p>
+</div>
+
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- LoseFocus -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="LoseFocus"></a><h3>LoseFocus</h3>
+<pre>void LoseFocus()</pre>
+<p>LoseFocus Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render(GLubyte *t=NULL)</pre>
+<p>Render Description...</p>
+</div>
+
+
+
+<!-- RenderCursor -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RenderCursor"></a><h3>RenderCursor</h3>
+<pre>void RenderCursor()</pre>
+<p>RenderCursor Description...</p>
+</div>
+
+
+<!-- ReplaceSelection -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="ReplaceSelection"></a><h3>ReplaceSelection</h3>
+<pre>
+void ReplaceSelection(char c)
+void ReplaceSelection(char *t)
+</pre>
+<p>ReplaceSelection Description...</p>
+</div>
+
+
+<!-- SelectAll -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SelectAll"></a><h3>SelectAll</h3>
+<pre>void SelectAll()</pre>
+<p>SelectAll Description...</p>
+</div>
+
+
+<!-- SelectionEnd -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SelectionEnd"></a><h3>SelectionEnd</h3>
+<pre>Uint16 SelectionEnd()</pre>
+<p>SelectionEnd Description...</p>
+</div>
+
+
+<!-- SelectionLength -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SelectionLength"></a><h3>SelectionLength</h3>
+<pre>Sint16 SelectionLength()</pre>
+<p>SelectionLength Description...</p>
+</div>
+
+
+<!-- SelectionStart -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SelectionStart"></a><h3>SelectionStart</h3>
+<pre>Uint16 SelectionStart()</pre>
+<p>SelectionStart Description...</p>
+</div>
+
+
+<!-- SelectWord -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SelectWord"></a><h3>SelectWord</h3>
+<pre>void SelectWord(Uint16 i, bool ext=false)</pre>
+<p>SelectWord Description...</p>
+</div>
+
+
+<!-- SetCursorAlpha -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorAlpha"></a><h3>SetCursorAlpha</h3>
+<pre>void SetCursorAlpha(GLubyte a)</pre>
+<p>SetCursorAlpha Description...</p>
+</div>
+
+
+<!-- SetCursorAlpha1 -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorAlpha1"></a><h3>SetCursorAlpha1</h3>
+<pre>void SetCursorAlpha1(GLubyte a)</pre>
+<p>SetCursorAlpha1 Description...</p>
+</div>
+
+
+<!-- SetCursorAlpha2 -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorAlpha2"></a><h3>SetCursorAlpha2</h3>
+<pre>void SetCursorAlpha2(GLubyte a)</pre>
+<p>SetCursorAlpha2 Description...</p>
+</div>
+
+
+<!-- SetCursorStyle -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorStyle"></a><h3>SetCursorStyle</h3>
+<pre>void SetCursorStyle(cursorStyle s)</pre>
+<p>SetCursorStyle Description...</p>
+</div>
+
+
+<!-- SetCursorTint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorTint"></a><h3>SetCursorTint</h3>
+<pre>void SetCursorTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
+<p>SetCursorTint Description...</p>
+</div>
+
+
+<!-- SetCursorTint1 -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorTint1"></a><h3>SetCursorTint1</h3>
+<pre>void SetCursorTint1(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
+<p>SetCursorTint1 Description...</p>
+</div>
+
+
+<!-- SetCursorTint2 -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetCursorTint2"></a><h3>SetCursorTint2</h3>
+<pre>void SetCursorTint2(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
+<p>SetCursorTint2 Description...</p>
+</div>
+
+
+<!-- SetFocus -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFocus"></a><h3>SetFocus</h3>
+<pre>void SetFocus(bool f)</pre>
+<p>SetFocus Description...</p>
+</div>
+
+
+<!-- SetMaxStringLength -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetMaxStringLength"></a><h3>SetMaxStringLength</h3>
+<pre>void SetMaxStringLength(Uint16 max)</pre>
+<p>SetMaxStringLength Description...</p>
+</div>
+
+
+<!-- SetMaxStringWidth -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetMaxStringWidth"></a><h3>SetMaxStringWidth</h3>
+<pre>void SetMaxStringWidth(Uint16 max)</pre>
+<p>SetMaxStringWidth Description...</p>
+</div>
+
+
+<!-- SetSelection -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetSelection"></a><h3>SetSelection</h3>
+<pre>void SetSelection(Sint16 s=0, Sint16 l=0)</pre>
+<p>SetSelection Description...</p>
+</div>
+
+
+<!-- SetSelectionAlpha -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetSelectionAlpha"></a><h3>SetSelectionAlpha</h3>
+<pre>void SetSelectionAlpha(GLubyte a)</pre>
+<p>SetSelectionAlpha Description...</p>
+</div>
+
+
+<!-- SetSelectionTint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetSelectionTint"></a><h3>SetSelectionTint</h3>
+<pre>void SetSelectionTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
+<p>SetSelectionTint Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>

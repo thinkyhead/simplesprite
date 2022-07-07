@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SimpleSprite : SS_String Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+
+
+<a name="top"></a>
+<table><tr valign="top"><td id="nav">
+
+
+<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+			<ul>
+				<li><a href="ss_editstring.html">SS_EditString</a></li>
+				<li><a href="ss_sfont.html">SS_SFont</a></li>
+				<li>SS_String</li>
+				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
+			</ul>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+	</ul>
+</ul>
+
+
+</td><td id="main">
+
+
+<!--
+
+		Class Description
+
+-->
+
+<div id="classbox">
+<div id="hdr">SS_String.h</div>
+<h1>SS_String</h1>
+<h4><strong>Superclass</strong>: <a href="ss_layeritem.html">SS_LayerItem</a></h4>
+<h4><strong>Subclasses</strong>: <a href="ss_editstring.html">SS_EditString</a></h4>
+<p>Class Description...</p>
+</div>
+
+
+<!--
+
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr class="prot"><td><tt>SS_SFont*</tt></td><td><tt>sfont</tt></td><td>The font used to draw the string</td></tr>
+<tr class="prot"><td><tt>stringAlign</tt></td><td><tt>alignment</tt></td><td>The string's alignment (left, right, center)</td></tr>
+<tr class="prot"><td><tt>float</tt></td><td><tt>drawx, drawy</tt></td><td>The drawn position of the string</td></tr>
+<tr class="prot"><td><tt>char*</tt></td><td><tt>text</tt></td><td>The text to be displayed in the string</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_String(SS_SFont *font)
+SS_String(SS_SFont *font, char *t, float x, float y)</pre>
+<p>About the constructor.</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="#AlignToPoint">AlignToPoint</a></li>
+<li><a href="#AlignToRect">AlignToRect</a></li>
+<li><a href="#AlignToSprite">AlignToSprite</a></li>
+<li><a href="#Ascent">Ascent</a></li>
+<li><a href="#Bottom">Bottom</a></li>
+<li><a href="#Descender">Descender</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#Height">Height</a></li>
+<li><a href="#IndexOfPoint">IndexOfPoint</a></li>
+<li><a href="#Init">Init</a></li>
+<li><a href="#IsPointInside">IsPointInside</a></li>
+<li><a href="#Length">Length</a></li>
+<li><a href="#Move">Move</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#RedoAlignment">RedoAlignment</a></li>
+<li><a href="#Render">Render</a></li>
+<li><a href="#SetAlpha">SetAlpha</a></li>
+<li><a href="#SetFont">SetFont</a></li>
+<li><a href="#SetText">SetText</a></li>
+<li><a href="#SetTint">SetTint</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="#StringCopy">StringCopy</a></li>
+<li><a href="#Text">Text</a></li>
+<li><a href="#Top">Top</a></li>
+<li><a href="#Width">Width</a></li>
+</ul></td>
+
+</tr></table>
+
+</div>
+
+
+<!-- AlignToPoint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AlignToPoint"></a><h3>AlignToPoint</h3>
+<pre>void AlignToPoint(float x, float y, stringAlign position=(SA_LEFT|SA_CENTERV))</pre>
+<p>Move the string to the given position within its container and optionally set
+its alignment. Alignments for this method and others that take a position are:</p>
+<pre>
+    <em>Horizontal:</em>   SA_LEFT     SA_RIGHT    SA_CENTERH
+      <em>Vertical:</em>   SA_ABOVE    SA_BELOW    SA_BASELINE    SA_CENTERV
+<em>Center h and v:</em>   SA_CENTER
+</pre>
+</div>
+
+
+<!-- AlignToRect -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AlignToRect"></a><h3>AlignToRect</h3>
+<pre>void AlignToRect(SS_Rect &rect, stringAlign position=(SA_LEFT|SA_CENTERV))</pre>
+<p>Align the string to a given rectangular region and optionally set its position.</p>
+</div>
+
+
+<!-- AlignToSprite -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AlignToSprite"></a><h3>AlignToSprite</h3>
+<pre>void AlignToSprite(SS_LayerItem *spr, stringAlign position=(SA_LEFT|SA_CENTERV))</pre>
+<p>Align the string to a given Layer Item and optionally set its position.</p>
+</div>
+
+
+<!-- Ascent -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Ascent"></a><h3>Ascent</h3>
+<pre>float Ascent()</pre>
+<p>Accessor for the font's ascent value, the number of pixels above the baseline.</p>
+</div>
+
+
+<!-- Bottom -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Bottom"></a><h3>Bottom</h3>
+<pre>float Bottom()</pre>
+<p>Accessor for the string's bottom, the y position of the first line below the descender.</p>
+</div>
+
+
+<!-- Descender -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Descender"></a><h3>Descender</h3>
+<pre>float Descender()</pre>
+<p>Accessor for the font's descender value, the number of pixels below the baseline.</p>
+</div>
+
+
+<!-- Height -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Height"></a><h3>Height</h3>
+<pre>float Height()</pre>
+<p>Accessor for the height of the font, which is the sum of the Ascent and Descender values.</p>
+</div>
+
+
+<!-- IndexOfPoint -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="IndexOfPoint"></a><h3>IndexOfPoint</h3>
+<pre>Uint16 IndexOfPoint(float pixx, float pixy=0)</pre>
+<p>This method converts a world coordinate into an index into the string. So, for
+example, you can discover which character in the string was clicked on.</p>
+</div>
+
+
+<!-- Init -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init()</pre>
+<p>Init Description...</p>
+</div>
+
+
+<!-- IsPointInside -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="IsPointInside"></a><h3>IsPointInside</h3>
+<pre>bool IsPointInside(float pixx, float pixy)</pre>
+<p>IsPointInside Description...</p>
+</div>
+
+
+<!-- Length -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Length"></a><h3>Length</h3>
+<pre>Uint16 Length()</pre>
+<p>Length Description...</p>
+</div>
+
+
+<!-- Move -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Move"></a><h3>Move</h3>
+<pre>void Move(float x, float y)</pre>
+<p>Move Description...</p>
+</div>
+
+
+<!-- RedoAlignment -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="RedoAlignment"></a><h3>RedoAlignment</h3>
+<pre>void RedoAlignment()</pre>
+<p>RedoAlignment Description...</p>
+</div>
+
+
+<!-- Render -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Render"></a><h3>Render</h3>
+<pre>void Render(SScolorb &inTint, SDL_Rect *rect=NULL)</pre>
+<p>Render Description...</p>
+</div>
+
+
+<!-- SetFont -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetFont"></a><h3>SetFont</h3>
+<pre>void SetFont(SS_SFont *font)</pre>
+<p>SetFont Description...</p>
+</div>
+
+
+<!-- SetText -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetText"></a><h3>SetText</h3>
+<pre>void SetText(char *t)</pre>
+<p>SetText Description...</p>
+</div>
+
+
+<!-- StringCopy -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="StringCopy"></a><h3>StringCopy</h3>
+<pre>void StringCopy(char *t)</pre>
+<p>StringCopy Description...</p>
+</div>
+
+
+<!-- Top -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Top"></a><h3>Top</h3>
+<pre>float Top()</pre>
+<p>Top Description...</p>
+</div>
+
+
+<!-- Width -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Width"></a><h3>Width</h3>
+<pre>float Width()
+float Width(Uint16 pos)</pre>
+<p>Width Description...</p>
+</div>
+
+
+</td></tr></table>
+
+
+</body>
+</html>
