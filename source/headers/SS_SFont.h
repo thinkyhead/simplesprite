@@ -11,8 +11,8 @@
 #ifndef __SS_SFONT_H__
 #define __SS_SFONT_H__
 
-#include "SDL.h"
-#include "SDL_opengl.h"
+#include <SDL.h>
+#include <SDL_opengl.h>
 
 #include "SS_Types.h"
 #include "SS_Layer.h"

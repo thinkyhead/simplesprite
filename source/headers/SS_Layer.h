@@ -13,7 +13,7 @@
 
 #include <math.h>
 
-#include "SDL.h"
+#include <SDL.h>
 #include "SS_Types.h"
 #include "SS_Templates.h"
 #include "SS_Messages.h"

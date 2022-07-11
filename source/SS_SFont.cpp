@@ -16,7 +16,7 @@
 #include "SS_World.h"
 #include "SS_LayerItem.h"
 
-#include "SDL_image.h"
+#include <SDL_image.h>
 
 #include <stdlib.h>
 #include <string.h>

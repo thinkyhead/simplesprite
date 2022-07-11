@@ -98,8 +98,8 @@ enum stringAlign {
 // Required Headers for this file
 //
 #include <OpenGL/gl.h>
-#include "SDL.h"
-#include "SDL_opengl.h"
+#include <SDL.h>
+#include <SDL_opengl.h>
 
 #ifndef CALLBACK
 #define CALLBACK

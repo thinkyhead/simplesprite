@@ -11,8 +11,8 @@
 #ifndef __SS_SOUND_H__
 #define __SS_SOUND_H__
 
-#include "SDL.h"
-#include "SDL_mixer.h"
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 #include "SS_RefCounter.h"
 

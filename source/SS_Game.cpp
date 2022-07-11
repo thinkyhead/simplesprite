@@ -17,7 +17,7 @@
 #include "SS_World.h"
 #include "SS_Sound.h"
 
-#include "SDL_opengl.h"
+#include <SDL_opengl.h>
 
 #include <string.h>
 

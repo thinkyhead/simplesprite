@@ -17,8 +17,8 @@
 
 #include "SS_Types.h"
 
-#include "SDL_thread.h"
-#include "SDL.h"
+#include <SDL_thread.h>
+#include <SDL.h>
 
 typedef bool (*worldEventProc)(SS_World *w, SDL_Event *e);
 typedef void (*worldProc)(SS_World *w);

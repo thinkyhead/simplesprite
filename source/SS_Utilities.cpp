@@ -13,7 +13,7 @@
 #include "SS_Files.h"
 #include "SS_Game.h"
 
-#include "SDL_image.h"
+#include <SDL_image.h>
 
 SScolorb SS_WHITE_B     = { 0xFF, 0xFF, 0xFF, 0xFF };
 SScolorb SS_BLACK_B     = { 0x00, 0x00, 0x00, 0xFF };

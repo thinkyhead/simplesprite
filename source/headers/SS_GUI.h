@@ -11,7 +11,7 @@
 #ifndef __SS_GUI_H__
 #define __SS_GUI_H__
 
-#include "SDL.h"
+#include <SDL.h>
 #include "SS_Types.h"
 #include "SS_Layer.h"
 #include "SS_LayerItem.h"
