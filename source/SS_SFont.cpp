@@ -17,6 +17,7 @@
 #include "SS_LayerItem.h"
 
 #include <SDL_image.h>
+#include <SDL_keyboard.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -965,16 +966,16 @@ void SS_EditString::ReplaceSelection(char c)
 //
 // HandleKey(key)
 //
-void SS_EditString::HandleKey(SDLKey key, SDLMod mod)
+void SS_EditString::HandleKey(const SDL_Keysym &key)
 {
-    if (mod & (KMOD_META|KMOD_CTRL)) return;
+    if (key.mod & (KMOD_ALT|KMOD_CTRL)) return;
 
     Sint16  s = selectionStart;
     Sint16  l = selectionLength;
 
     if (l < 0) { s += l; l = -l; }
 
-    switch (key)
+    switch (key.sym)
     {
         case SDLK_DELETE:
             if (s < Length() && l == 0) SetSelection(s, 1);
@@ -988,31 +989,31 @@ void SS_EditString::HandleKey(SDLKey key, SDLMod mod)
 
         case SDLK_UP:
         case SDLK_HOME:
-            CursorHome(mod & KMOD_SHIFT);
+            CursorHome(key.mod & KMOD_SHIFT);
             break;
 
         case SDLK_DOWN:
         case SDLK_END:
-            CursorEnd(mod & KMOD_SHIFT);
+            CursorEnd(key.mod & KMOD_SHIFT);
             break;
 
         case SDLK_LEFT:
-            if (mod & KMOD_ALT)
-                CursorWordLeft(mod & KMOD_SHIFT);
+            if (key.mod & KMOD_ALT)
+                CursorWordLeft(key.mod & KMOD_SHIFT);
             else
-                CursorLeft(mod & KMOD_SHIFT);
+                CursorLeft(key.mod & KMOD_SHIFT);
             break;
 
         case SDLK_RIGHT:
-            if (mod & KMOD_ALT)
-                CursorWordRight(mod & KMOD_SHIFT);
+            if (key.mod & KMOD_ALT)
+                CursorWordRight(key.mod & KMOD_SHIFT);
             else
-                CursorRight(mod & KMOD_SHIFT);
+                CursorRight(key.mod & KMOD_SHIFT);
             break;
 
         default:
-            if (key == ' ' || (key >= SS_FIRST_CHR && key <= SS_LAST_CHR))
-                ReplaceSelection(key);
+            if (key.sym == ' ' || (key.sym >= SS_FIRST_CHR && key.sym <= SS_LAST_CHR))
+                ReplaceSelection(key.sym);
     }
 }
 

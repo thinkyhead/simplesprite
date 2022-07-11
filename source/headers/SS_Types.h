@@ -317,8 +317,8 @@ typedef struct {
 //  float       xrel, yrel;
     float       xgui, ygui;
     float       xglob, yglob;
-    SDLKey      key;
-    SDLMod      mod;
+    SDL_Keycode key;
+    Uint16      mod;
 } SS_Event;
 
 #endif

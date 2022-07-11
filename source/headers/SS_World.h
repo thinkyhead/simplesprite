@@ -69,7 +69,7 @@ class SS_World : public SS_Broadcaster, public SS_Listener, public SS_LayerList,
         Uint32              timeAdjust;     // adjustment factor
         Uint32              stopTime;       // pause time started here
 
-        Uint8               *keyState;
+        const Uint8         *keyState;
         float               mousex, mousey;
 //      float               mousexrel, mouseyrel;
         Uint8               mouseButtons;

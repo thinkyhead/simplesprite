@@ -211,7 +211,7 @@ class SS_EditString : public SS_String
         void                ReplaceSelection(const char *t);
         void                ReplaceSelection(char c);
 
-        void                HandleKey(SDLKey k, SDLMod m=KMOD_NONE);
+        void                HandleKey(const SDL_Keysym &key);
 
         void                Render(const SScolorb &inTint, SDL_Rect *bounds=NULL);
         void                RenderCursor(const SScolorb &inTint, SDL_Rect *bounds=NULL);

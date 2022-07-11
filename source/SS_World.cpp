@@ -312,7 +312,7 @@ void SS_World::GetInput()
 {
     int x, y;
 
-    keyState = SDL_GetKeyState(NULL);
+    keyState = SDL_GetKeyboardState(NULL);
 
     mouseButtons = SDL_GetMouseState(&x, &y);
 }
@@ -412,7 +412,7 @@ void SS_World::Render()
     #endif
 
     #ifndef WIN32
-    SDL_GL_SwapBuffers();
+    SDL_GL_SwapWindow(window);
     #endif
 
     //
@@ -583,7 +583,7 @@ void SS_World::HandleEvents()
                 }
 
                 if (k)
-                    event.key.keysym.sym = (SDLKey)k;
+                    event.key.keysym.sym = (SDL_Keycode)k;
                 else
                     return;
 

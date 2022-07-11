@@ -227,7 +227,7 @@ void SS_Game::SyncVblank(long sync)
 #elif defined(__APPLE__)
 
     CGLContextObj   ctx = CGLGetCurrentContext();
-    GLint           interval = sync;
+    GLint           interval = (GLint)sync;
 
     // tell OpenGL to synchronize with screen refresh
     CGLSetParameter(ctx, kCGLCPSwapInterval, &interval);
