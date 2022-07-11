@@ -34,9 +34,7 @@ SS_Frame::SS_Frame(SDL_Surface *surf, frameFlags f)
 
 SS_Frame::~SS_Frame()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::~SS_Frame()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::~SS_Frame()\n", this);
 
     DisposeSurface();
     DisposeMask();
@@ -53,9 +51,7 @@ SS_Frame::~SS_Frame()
 //
 void SS_Frame::Init(frameFlags f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::Init()\n", this);
 
     flags           = f;
     surface         = NULL;
@@ -75,9 +71,7 @@ void SS_Frame::Init(frameFlags f)
 //
 void SS_Frame::SetHandle(float x, float y)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::SetHandle(%d, %d)\n", this, x, y);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::SetHandle(%d, %d)\n", this, x, y);
 
     xhandle = x;
     yhandle = y;
@@ -90,9 +84,7 @@ void SS_Frame::SetHandle(float x, float y)
 //
 void SS_Frame::LoadImage(const char *filename)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::LoadImage(\"%s\")\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::LoadImage(\"%s\")\n", this, filename);
 
     SDL_Surface **save;
 
@@ -124,9 +116,7 @@ void SS_Frame::LoadImage(const char *filename)
 //
 void SS_Frame::LoadSurface(SDL_Surface *surf, const SDL_Rect *section)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::LoadSurface(s)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::LoadSurface(s)\n", this);
 
     if (surface != surf)
     {
@@ -169,9 +159,7 @@ void SS_Frame::LoadSurface(SDL_Surface *surf, const SDL_Rect *section)
 //
 void SS_Frame::DisposeSurface()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::DisposeSurface(s)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::DisposeSurface(s)\n", this);
 
     if (surface) {
         free(surface);
@@ -185,9 +173,7 @@ void SS_Frame::DisposeSurface()
 //
 void SS_Frame::DisposeMask()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::DisposeMask(s)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::DisposeMask(s)\n", this);
 
     if (mask) {
         free(mask);
@@ -201,9 +187,7 @@ void SS_Frame::DisposeMask()
 //
 void SS_Frame::DisposeTexture()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::DisposeTexture(s)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::DisposeTexture(s)\n", this);
 
     if (gl_texture) {
         glDeleteTextures(1, &gl_texture);
@@ -217,9 +201,7 @@ void SS_Frame::DisposeTexture()
 //
 void SS_Frame::DisposeDisplayList()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::DisposeDisplayList(s)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::DisposeDisplayList(s)\n", this);
 
     if (gl_list) {
         glDeleteLists(1, gl_list);
@@ -233,9 +215,7 @@ void SS_Frame::DisposeDisplayList()
 //
 void SS_Frame::MakeCollisionMask(Uint8 threshold)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Frame::MakeCollisionMask(%02X)\n", this, threshold);
-    #endif
+    DEBUGF(1, "[%08X] SS_Frame::MakeCollisionMask(%02X)\n", this, threshold);
 
     if (!surface)
         throw "MakeCollisionMask requires a surface.";
@@ -261,23 +241,16 @@ void SS_Frame::MakeCollisionMask(Uint8 threshold)
             if (SS_ALPHA(::GetPixel(surface, x, y)) > threshold)
             {
                 m |= (1 << b);
-#if SS_DEBUG
-                printf("*");
-#endif
+                DEBUGF(1, "*");
             }
-
-#if SS_DEBUG
             else
-                printf(".");
-#endif
+                DEBUGF(1, ".");
 
             if (b == 7 || x == w-1)
                 *a++ = m;
         }
 
-#if SS_DEBUG
-        printf("\n");
-#endif
+        DEBUGF(1, "\n");
     }
 }
 

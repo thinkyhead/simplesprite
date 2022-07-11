@@ -39,9 +39,7 @@ extern int SS_VIDEO_W, SS_VIDEO_H;
 //
 SS_TextLayer* SS_World::NewTextLayer(SS_SFont *sfont, Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::NewTextLayer(sfont, flags)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::NewTextLayer(sfont, flags)\n", this);
 
     SS_TextLayer *layer = new SS_TextLayer(sfont, f);
     AddLayer(layer);
@@ -50,9 +48,7 @@ SS_TextLayer* SS_World::NewTextLayer(SS_SFont *sfont, Uint32 f)
 
 SS_TextLayer* SS_World::NewTextLayer(SS_SFont *sfont)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::NewTextLayer(sfont)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::NewTextLayer(sfont)\n", this);
 
     SS_TextLayer *layer = new SS_TextLayer(sfont);
     AddLayer(layer);
@@ -61,18 +57,14 @@ SS_TextLayer* SS_World::NewTextLayer(SS_SFont *sfont)
 
 SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc, Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::NewTextLayer(\"%s\")\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::NewTextLayer(\"%s\")\n", this, filename);
 
     return NewTextLayer(new SS_SFont(filename, desc), f);
 }
 
 SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::NewTextLayer(\"%s\")\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::NewTextLayer(\"%s\")\n", this, filename);
 
     return NewTextLayer(new SS_SFont(filename, desc));
 }
@@ -87,9 +79,7 @@ SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc)
 
 SS_SFont::SS_SFont(char *filename, float desc)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_SFont::SS_SFont(\"%s\")\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_SFont::SS_SFont(\"%s\")\n", this, filename);
 
     height      = 0.0;
     descender   = 0.0;
@@ -109,9 +99,7 @@ SS_SFont::~SS_SFont()
 //
 void SS_SFont::LoadFont(char *filename, float desc)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_SFont::LoadFont(\"%s\")\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_SFont::LoadFont(\"%s\")\n", this, filename);
 
     Uint16      x, y, chr;
     Uint16      wide;
@@ -455,9 +443,7 @@ bool SS_SFont::IsPointInside(char *text, float pixx, float pixy)
 
 SS_String::SS_String(SS_SFont *font, char *t, float x, float y)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String(font, text, x, y) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_String(font, text, x, y) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -471,9 +457,7 @@ SS_String::SS_String(SS_SFont *font, char *t, float x, float y)
 
 SS_String::SS_String(SS_SFont *font)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String(font) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_String(font) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -491,9 +475,7 @@ SS_String::~SS_String()
 //
 void SS_String::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::Init()\n", this);
 
     sfont           = NULL;
     text            = NULL;
@@ -512,9 +494,7 @@ void SS_String::Init()
 //
 void SS_String::SetText(char *t)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::SetText(%s)\n", this, t);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::SetText(%s)\n", this, t);
 
     if (text) delete [] text;
     text = t ? newstring(t) : NULL;
@@ -525,9 +505,7 @@ void SS_String::SetText(char *t)
 //
 void SS_String::AlignToRect(SS_Rect &rect, stringAlign position)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::AlignToRect(%08X, {%.2f, %.2f, %.2f, %.2f}, %X)\n", this, rect.x, rect.y, rect.w, rect.h, position);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::AlignToRect(%08X, {%.2f, %.2f, %.2f, %.2f}, %X)\n", this, rect.x, rect.y, rect.w, rect.h, position);
 
     float       x, y;
     int a = 0;
@@ -584,9 +562,7 @@ void SS_String::AlignToRect(SS_Rect &rect, stringAlign position)
 //
 void SS_String::AlignToSprite(SS_LayerItem *spr, stringAlign position)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::AlignToSprite(%08X, %d)\n", this, spr, position);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::AlignToSprite(%08X, %d)\n", this, spr, position);
 
     SS_Point point;
     spr->LocalPosition(&point);
@@ -610,9 +586,7 @@ void SS_String::AlignToSprite(SS_LayerItem *spr, stringAlign position)
 //
 void SS_String::RedoAlignment()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::RedoAlignment()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::RedoAlignment()\n", this);
 
     // Determine where the left-edge should be positioned
     switch (alignment & SA_HMASK)
@@ -659,9 +633,7 @@ void SS_String::RedoAlignment()
 //
 void SS_String::StringCopy(char *t)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_String::StringCopy(%s)\n", this, t);
-    #endif
+    DEBUGF(1, "[%08X] SS_String::StringCopy(%s)\n", this, t);
 
     if (text)
         strcpy(text, t);
@@ -727,18 +699,14 @@ void SS_String::Render(SScolorb &inTint, SDL_Rect *rect)
 
 SS_EditString::SS_EditString(SS_SFont *font) : SS_String(font)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString(font) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString(font) CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_EditString::SS_EditString(SS_SFont *font, char *t, float x, float y) : SS_String(font, t, x, y)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString(font, t, x, y) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString(font, t, x, y) CONSTRUCTOR\n", this);
 
     Init();
 }
@@ -752,9 +720,7 @@ SS_EditString::~SS_EditString()
 //
 void SS_EditString::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString::Init()\n", this);
 
     maxLength       = 0;        // no limit
     maxWidth        = 0;        // no limit
@@ -939,9 +905,7 @@ void SS_EditString::SelectWord(Uint16 i, bool ext)
 //
 void SS_EditString::SetSelection(Sint16 s, Sint16 l)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString::SetSelection(s, l)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString::SetSelection(s, l)\n", this);
 
     Uint16  len = Length();
 
@@ -959,9 +923,7 @@ void SS_EditString::SetSelection(Sint16 s, Sint16 l)
 //
 void SS_EditString::ReplaceSelection(char *t)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString::ReplaceSelection(t)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString::ReplaceSelection(t)\n", this);
 
     Uint16  s = selectionStart;
     Sint16  l = selectionLength;
@@ -1059,9 +1021,7 @@ void SS_EditString::HandleKey(SDLKey key, SDLMod mod)
 //
 void SS_EditString::Render(const SScolorb &inTint, SDL_Rect *bounds)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString::Render()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString::Render()\n", this);
 
     SScolorb outTint;
     MultiplyColorQuads(inTint, tint, outTint);
@@ -1076,9 +1036,7 @@ void SS_EditString::Render(const SScolorb &inTint, SDL_Rect *bounds)
 //
 void SS_EditString::RenderCursor(const SScolorb &inTint, SDL_Rect *bounds)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_EditString::RenderCursor()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_EditString::RenderCursor()\n", this);
 
     if (bounds)
         ClipRectangle(bounds);
@@ -1263,9 +1221,7 @@ SS_String* SS_TextLayer::Print(SS_SFont *font, char *text, float x, float y)
 //
 void SS_TextLayer::Render()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_TextLayer::Render()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_TextLayer::Render()\n", this);
 
     PrepareMatrix();
 

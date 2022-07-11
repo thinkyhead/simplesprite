@@ -14,7 +14,7 @@
 #define __SS_CONFIG_H__
 
                         //
-                        // Debugger output? (1 / 0)
+                        // Debugger output? (0-2)
                         //
 #define SS_DEBUG            0
 

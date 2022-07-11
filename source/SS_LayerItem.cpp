@@ -25,18 +25,14 @@
 
 SS_LayerItem::SS_LayerItem()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem() CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_LayerItem::~SS_LayerItem()
 {
-    #if SS_DEBUG
-    printf("[%08X] ~SS_LayerItem()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] ~SS_LayerItem()\n", this);
 
     RemoveSelf();
 }
@@ -47,9 +43,7 @@ SS_LayerItem::~SS_LayerItem()
 //
 void SS_LayerItem::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::Init()\n", this);
 
     // Helpful name
     name            = NULL;
@@ -130,9 +124,7 @@ void SS_LayerItem::Init()
 //
 void SS_LayerItem::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetWorld(%08X)\n", this, w);
 
     if (world = w) {
         oldW = w->ZoomWidth();
@@ -147,9 +139,7 @@ void SS_LayerItem::SetWorld(SS_World *w)
 //
 void SS_LayerItem::SetLayer(SS_Layer *l)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetLayer(%08X)\n", this, l);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetLayer(%08X)\n", this, l);
 
     SetWorld((layer = l) ? l->World() : NULL);
 }
@@ -161,9 +151,7 @@ void SS_LayerItem::SetLayer(SS_Layer *l)
 //
 void SS_LayerItem::SetGroup(SS_ItemGroup *g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetGroup(%08X)\n", this, g);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetGroup(%08X)\n", this, g);
 
     SetLayer((group = g) ? g->layer : NULL);
 }
@@ -174,9 +162,7 @@ void SS_LayerItem::SetGroup(SS_ItemGroup *g)
 //
 const SS_LayerItem& SS_LayerItem::operator=(const SS_LayerItem &src)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::operator=(%08X)\n", this, &src);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::operator=(%08X)\n", this, &src);
 
     if (&src != this)
     {
@@ -313,9 +299,7 @@ void SS_LayerItem::Tokenize(SS_FlatFile &dataFile)
 //
 void SS_LayerItem::RemoveSelf() // aka "Unlink()"
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::RemoveSelf()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::RemoveSelf()\n", this);
 
     if (group) {
         group->Remove(dynamic_cast<SS_Collider*>(this));
@@ -660,9 +644,7 @@ float SS_LayerItem::AngleToPointer() const
 //
 void SS_LayerItem::SetMoveProc(spriteProcPtr proc)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetMoveProc(%08X)\n", this, proc);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetMoveProc(%08X)\n", this, proc);
 
     lastMoveTime = 0;
     moveProc = proc;
@@ -692,9 +674,7 @@ void SS_LayerItem::PrimeProcessor()
 //
 void SS_LayerItem::SetAnimateProc(spriteProcPtr proc)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetAnimateProc(%08X)\n", this, proc);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetAnimateProc(%08X)\n", this, proc);
 
     lastAnimTime = 0;
     animProc = proc;
@@ -706,9 +686,7 @@ void SS_LayerItem::SetAnimateProc(spriteProcPtr proc)
 //
 void SS_LayerItem::SetAngularVelocity(float ang, float vel)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::SetAngularVelocity(%.2f, %.2f)\n", this, ang, vel);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::SetAngularVelocity(%.2f, %.2f)\n", this, ang, vel);
 
     Uint16  i = SS_ROTINDEX(ang);
     xvel = SS_Game::Sin(i) * vel;

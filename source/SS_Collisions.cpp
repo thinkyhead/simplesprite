@@ -295,9 +295,7 @@ void SS_Collider::Init()
 //
 void SS_Collider::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Collider::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_Collider::SetWorld(%08X)\n", this, w);
 
     SS_LayerItem::SetWorld(w);
 
@@ -316,9 +314,7 @@ void SS_Collider::SetWorld(SS_World *w)
 //
 void SS_Collider::RemoveSelf()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Collider::RemoveSelf()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Collider::RemoveSelf()\n", this);
 
     RemoveFromColliders();
 
@@ -350,9 +346,7 @@ void SS_Collider::_Process()
 //
 const SS_Collider& SS_Collider::operator=(const SS_Collider &src)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_LayerItem::operator=(%08X)\n", this, &src);
-    #endif
+    DEBUGF(1, "[%08X] SS_LayerItem::operator=(%08X)\n", this, &src);
 
     if (&src != this)
     {
@@ -383,9 +377,7 @@ const SS_Collider& SS_Collider::operator=(const SS_Collider &src)
 //
 void SS_Collider::EnableCollisions(Uint32 out, Uint32 in)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Collider::EnableCollisions(%04X, %04X)\n", this, out, in);
-    #endif
+    DEBUGF(1, "[%08X] SS_Collider::EnableCollisions(%04X, %04X)\n", this, out, in);
 
     collisionOut = out;
     collisionIn = in;

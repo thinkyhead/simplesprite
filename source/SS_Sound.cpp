@@ -20,9 +20,7 @@
 
 SS_Sound::SS_Sound(Uint32 min)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sound::SS_Sound()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sound::SS_Sound()\n", this);
 
     Init();
     minWait = min;
@@ -30,9 +28,7 @@ SS_Sound::SS_Sound(Uint32 min)
 
 SS_Sound::SS_Sound(char *filename, Uint32 min)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sound::SS_Sound(%s)\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sound::SS_Sound(%s)\n", this, filename);
 
     Init();
     Load(filename);
@@ -41,9 +37,7 @@ SS_Sound::SS_Sound(char *filename, Uint32 min)
 
 SS_Sound::~SS_Sound()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sound::~SS_Sound()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sound::~SS_Sound()\n", this);
 
     Dispose();
 }
@@ -54,9 +48,7 @@ SS_Sound::~SS_Sound()
 //
 void SS_Sound::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sound::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sound::Init()\n", this);
 
     flags = 0;
     minWait = 0;
@@ -69,9 +61,7 @@ void SS_Sound::Init()
 //
 void SS_Sound::Load(char *filename)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sound::Load(%s)\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sound::Load(%s)\n", this, filename);
 
     char *full = SS_Folder::FullPath(filename);
 
@@ -149,18 +139,14 @@ void SS_Sound::InitAudioMixer(Uint32 channels)
 
 SS_Music::SS_Music()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Music::SS_Music()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Music::SS_Music()\n", this);
 
     Init();
 }
 
 SS_Music::SS_Music(char *filename)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Music::SS_Music(%s)\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_Music::SS_Music(%s)\n", this, filename);
 
     Init();
     Load(filename);
@@ -168,9 +154,7 @@ SS_Music::SS_Music(char *filename)
 
 SS_Music::~SS_Music()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Music::~SS_Music()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Music::~SS_Music()\n", this);
 
     Dispose();
 }
@@ -181,9 +165,7 @@ SS_Music::~SS_Music()
 //
 void SS_Music::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Music::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Music::Init()\n", this);
 }
 
 
@@ -192,9 +174,7 @@ void SS_Music::Init()
 //
 void SS_Music::Load(char *filename)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Music::Load(%s)\n", this, filename);
-    #endif
+    DEBUGF(1, "[%08X] SS_Music::Load(%s)\n", this, filename);
 
     char        *full = SS_Folder::FullPath(filename);
 

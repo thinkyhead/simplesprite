@@ -26,9 +26,7 @@
 //
 SS_Layer* SS_World::NewLayer(Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::NewLayer(%04X)\n", this, f);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::NewLayer(%04X)\n", this, f);
 
     SS_Layer *layer = new SS_Layer(this, f);
     return layer;
@@ -41,9 +39,7 @@ SS_Layer* SS_World::NewLayer(Uint32 f)
 //
 void SS_World::AddLayer(SS_Layer *layer)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::AddLayer(%08X)\n", this, layer);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::AddLayer(%08X)\n", this, layer);
 
     layer->SetWorld(this);
     Append(layer);
@@ -84,9 +80,7 @@ void SS_World::LayerToBack(SS_Layer *layer)
 
 SS_Layer::SS_Layer(Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer(%04X) CONSTRUCTOR\n", this, f);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer(%04X) CONSTRUCTOR\n", this, f);
 
     Init(f);
 }
@@ -94,9 +88,7 @@ SS_Layer::SS_Layer(Uint32 f)
 
 SS_Layer::SS_Layer(SS_World *w, Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer(%08X, %04X) CONSTRUCTOR\n", this, w, f);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer(%08X, %04X) CONSTRUCTOR\n", this, w, f);
 
     Init(f);
     w->AddLayer(this);
@@ -105,9 +97,7 @@ SS_Layer::SS_Layer(SS_World *w, Uint32 f)
 
 SS_Layer::~SS_Layer()
 {
-    #if SS_DEBUG
-    printf("[%08X] ~SS_Layer() DESTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] ~SS_Layer() DESTRUCTOR\n", this);
 
     RemoveSelf();
 }
@@ -124,9 +114,7 @@ void SS_Layer::RemoveSelf()
 //
 void SS_Layer::Init(Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::Init(flags)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::Init(flags)\n", this);
 
     Clear();
     visibleList.Clear();
@@ -152,9 +140,7 @@ void SS_Layer::Init(Uint32 f)
 //
 void SS_Layer::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::SetWorld(%08X)\n", this, w);
 
     world = w;
 
@@ -170,9 +156,7 @@ void SS_Layer::SetWorld(SS_World *w)
 //
 void SS_Layer::AddItem(SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::AddItem(item)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::AddItem(item)\n", this);
 
     item->SetLayer(this);
     item->SetHidden(false);
@@ -190,9 +174,7 @@ void SS_Layer::AddItem(SS_LayerItem *item)
 //
 void SS_Layer::PrependItem(SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::PrependItem(item)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::PrependItem(item)\n", this);
 
     item->SetLayer(this);
     item->SetHidden(false);
@@ -261,9 +243,7 @@ void SS_Layer::Render()
 //
 void SS_Layer::RemoveItem(SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::RemoveSprite(%08X)\n", this, item);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::RemoveSprite(%08X)\n", this, item);
 
     visibleList.Remove(item);
     SS_ItemList::RemoveItem(item);
@@ -282,9 +262,7 @@ void SS_Layer::RemoveItem(SS_LayerItem *item)
 //
 void SS_Layer::DisposeItem(SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Layer::DisposeItem(%08X)\n", this, item);
-    #endif
+    DEBUGF(1, "[%08X] SS_Layer::DisposeItem(%08X)\n", this, item);
 
     visibleList.Remove(item);
     delete item;

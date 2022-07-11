@@ -25,9 +25,7 @@
 
 SS_Sprite::SS_Sprite()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite() CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite() CONSTRUCTOR\n", this);
 
     Init();
 }
@@ -42,9 +40,7 @@ SS_Sprite::SS_Sprite(char *spriteFile)
 
 SS_Sprite::~SS_Sprite()
 {
-    #if SS_DEBUG
-    printf("[%08X] ~SS_Sprite()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] ~SS_Sprite()\n", this);
 
     ReleaseFrames();
 }
@@ -55,9 +51,7 @@ SS_Sprite::~SS_Sprite()
 //
 const SS_Sprite& SS_Sprite::operator=(const SS_Sprite &src)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite::operator=(%08X)\n", this, &src);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite::operator=(%08X)\n", this, &src);
 
     if (&src != this) {
         SS_Collider::operator=(src);
@@ -76,9 +70,7 @@ const SS_Sprite& SS_Sprite::operator=(const SS_Sprite &src)
 //
 void SS_Sprite::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite::Init()\n", this);
 
     frameArray  = NULL;
     frameBlocks = 0;
@@ -91,9 +83,7 @@ void SS_Sprite::Init()
 //
 void SS_Sprite::ReleaseFrames()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite::ReleaseFrames()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite::ReleaseFrames()\n", this);
 
     if (frameCount > 0)
     {
@@ -113,9 +103,7 @@ void SS_Sprite::ReleaseFrames()
 //
 void SS_Sprite::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite::SetWorld(%08X)\n", this, w);
 
     if (world = w)
     {
@@ -136,9 +124,7 @@ void SS_Sprite::SetWorld(SS_World *w)
 //
 void SS_Sprite::AddFrame(SS_Frame *frame)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Sprite::AddFrame(%d)\n", this, frameCount);
-    #endif
+    DEBUGF(1, "[%08X] SS_Sprite::AddFrame(%d)\n", this, frameCount);
 
     if ((frameCount % SS_FRAME_BLOCK) == 0)
     {

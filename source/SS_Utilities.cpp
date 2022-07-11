@@ -51,9 +51,7 @@ void GetTextureFromImage(
     Uint16 flags
     )
 {
-    #if SS_DEBUG
-    printf("GetTextureFromImage()\n");
-    #endif
+    DEBUGF(1, "GetTextureFromImage()\n");
 
     SDL_Surface *source;
     char        *full = SS_Folder::FullPath(filename);

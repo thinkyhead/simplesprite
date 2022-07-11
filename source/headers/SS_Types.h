@@ -13,6 +13,8 @@
 
 #include "SS_Config.h"
 
+#define DEBUGF(N,V...) if (SS_DEBUG >= N) printf(V)
+
 //
 // Forward Class Declarations
 //

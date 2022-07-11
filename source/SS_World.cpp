@@ -29,18 +29,14 @@ extern bool SS_VSYNC;
 
 SS_World::SS_World()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World() CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_World::~SS_World()
 {
-    #if SS_DEBUG
-    printf("[%08X] ~SS_World() DESTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] ~SS_World() DESTRUCTOR\n", this);
 
     Stop();
     DisposeAll();
@@ -51,9 +47,7 @@ SS_World::~SS_World()
 //
 void SS_World::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::Init()\n", this);
 
     eventHandler    = NULL;
     preRenderProc   = NULL;
@@ -104,9 +98,7 @@ void SS_World::Init()
 //
 void SS_World::SetPointerSprite(SS_LayerItem *s)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::SetPointerSprite(%08X)\n", this, s);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::SetPointerSprite(%08X)\n", this, s);
 
     if (pointerSprite) {
         delete pointerSprite->Layer();
@@ -127,9 +119,7 @@ void SS_World::SetPointerSprite(SS_LayerItem *s)
 //
 SS_Sprite* SS_World::CreatePointerSprite(char *file)
 {
-    #if SS_DEBUG
-    printf("SS_World::CreatePointerSprite(file)\n");
-    #endif
+    DEBUGF(1, "SS_World::CreatePointerSprite(file)\n");
 
     SS_Sprite   *sprite = new SS_Sprite();
     SS_Frame    *frame = new SS_Frame(file);
@@ -144,9 +134,7 @@ SS_Sprite* SS_World::CreatePointerSprite(char *file)
 //
 Uint32 SS_World::Run(SS_Game *g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::Run(%08X)\n", this, g);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::Run(%08X)\n", this, g);
 
     Uint32  interval, old, tick;
 
@@ -211,9 +199,7 @@ Uint32 SS_World::Run(SS_Game *g)
 //
 void SS_World::Start()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::Go()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::Go()\n", this);
 
     worldQuit = false;
     processQuit = false;
@@ -238,9 +224,7 @@ void SS_World::Start()
 //
 void SS_World::Stop()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::Stop()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::Stop()\n", this);
 
     int dummy;
 
@@ -287,9 +271,7 @@ void SS_World::SetPaused(bool p)
 //
 void SS_World::Calibrate()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::Calibrate()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::Calibrate()\n", this);
 
     frameCount = 0;
 
@@ -306,9 +288,7 @@ void SS_World::Calibrate()
 //
 void SS_World::SetSurface(SDL_Surface *s)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_World::SetSurface(%08X)\n", this, s);
-    #endif
+    DEBUGF(1, "[%08X] SS_World::SetSurface(%08X)\n", this, s);
 
     int w, h;
 

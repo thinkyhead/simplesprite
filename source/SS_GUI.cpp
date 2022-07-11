@@ -84,9 +84,7 @@ SS_GUI::~SS_GUI()
 
 void SS_GUI::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_GUI::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_GUI::Init()\n", this);
 
     // Event listeners
     clickedGadget   = NULL;
@@ -186,9 +184,7 @@ void SS_GUI::ActivateNone()
 //
 void SS_GUI::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_GUI::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_GUI::SetWorld(%08X)\n", this, w);
 
     SS_Layer::SetWorld(w);
 
@@ -212,9 +208,7 @@ void SS_GUI::SetWorld(SS_World *w)
 //
 void SS_GUI::AddGadget(SS_Gadget *gadget)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_GUI::AddGadget(%08X)\n", this, gadget);
-    #endif
+    DEBUGF(1, "[%08X] SS_GUI::AddGadget(%08X)\n", this, gadget);
 
     gadget->SetGUI(this);
     gadget->guiNode = gadgetList.Append(gadget);
@@ -248,9 +242,7 @@ void SS_GUI::SetKeyFocus(SS_Gadget *g)
 //
 bool SS_GUI::HandleEvent(SDL_Event *e)
 {
-    #if SS_DEBUG
-//  printf("[%08X] SS_GUI::HandleEvent(e)\n", this);
-    #endif
+    //DEBUGF(1, "[%08X] SS_GUI::HandleEvent(e)\n", this);
 
     if (dormant)
         return false;
@@ -443,9 +435,7 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
 //
 void SS_GUI::ExitAllRollovers()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_GUI::ExitAllRollovers()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_GUI::ExitAllRollovers()\n", this);
 
     SS_Event    ssevent;
 
@@ -525,18 +515,14 @@ void SS_GUI::Render()
 
 SS_Gadget::SS_Gadget()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget() CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_Gadget::SS_Gadget(SS_GUI *g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget(%08X) CONSTRUCTOR\n", this, g);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget(%08X) CONSTRUCTOR\n", this, g);
 
     Init();
     g->AddGadget(this);
@@ -544,9 +530,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, float w, float h, Uint32 f)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget(%08X, %f, %f, %d) CONSTRUCTOR\n", this, g, w, h, f);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget(%08X, %f, %f, %d) CONSTRUCTOR\n", this, g, w, h, f);
 
     Init();
 
@@ -564,9 +548,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, float w, float h, Uint32 f)
 //
 SS_Gadget::SS_Gadget(SS_GUI *g, SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget(gui, item) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget(gui, item) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -578,9 +560,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_LayerItem *item)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget(gui, group) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget(gui, group) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -592,9 +572,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, char *file1, char *file2, char *file3, char *file4)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget(gui, \"%s\", \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3, file4);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget(gui, \"%s\", \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3, file4);
 
     Init();
     SetItemGroup(file1, file2, file3, file4);
@@ -619,9 +597,7 @@ SS_Gadget::~SS_Gadget()
 //
 void SS_Gadget::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::Init()\n", this);
 
     gui             = NULL;
 
@@ -698,9 +674,7 @@ void SS_Gadget::Reset()
 //
 void SS_Gadget::RemoveSelf()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::RemoveSelf()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::RemoveSelf()\n", this);
 
     if (gui) {
         MarkExited();
@@ -715,9 +689,7 @@ void SS_Gadget::RemoveSelf()
 //
 void SS_Gadget::SetWorld(SS_World *w)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetWorld(%08X)\n", this, w);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetWorld(%08X)\n", this, w);
 
     world = w;
 
@@ -737,9 +709,7 @@ void SS_Gadget::SetWorld(SS_World *w)
 //
 void SS_Gadget::SetGUI(SS_GUI *g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetLayer(%08X)\n", this, g);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetLayer(%08X)\n", this, g);
 
     gui = g;
 
@@ -759,9 +729,7 @@ void SS_Gadget::SetGUI(SS_GUI *g)
 //
 SS_Sprite* SS_Gadget::MakeSprite(char *file1, char *file2, char *file3, char *file4)
 {
-    #if SS_DEBUG
-    printf("SS_Gadget::MakeSprite(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
-    #endif
+    DEBUGF(1, "SS_Gadget::MakeSprite(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
 
     SS_Sprite   *sprite = new SS_Sprite();
 
@@ -795,9 +763,7 @@ SS_Sprite* SS_Gadget::MakeSprite(char *file1, char *file2, char *file3, char *fi
 //
 SS_ItemGroup* SS_Gadget::MakeSpriteGroup(char *file1, char *file2, char *file3, char *file4)
 {
-    #if SS_DEBUG
-    printf("SS_GUI::MakeSpriteGroup(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
-    #endif
+    DEBUGF(1, "SS_GUI::MakeSpriteGroup(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
 
     SS_ItemGroup    *group = new SS_ItemGroup();
     SS_Sprite       *sprite;
@@ -827,9 +793,7 @@ void SS_Gadget::SetItem(char *file1, char *file2, char *file3, char *file4)
 //
 void SS_Gadget::SetItem(SS_LayerItem *item)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetItem(%08X)\n", this, item);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetItem(%08X)\n", this, item);
 
     gadGroup = NULL;
     bkgdSprite = NULL;
@@ -867,9 +831,7 @@ void SS_Gadget::SetItemGroup(char *file1, char *file2, char *file3, char *file4)
 //
 void SS_Gadget::SetItemGroup(SS_ItemGroup *group)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetItemGroup(%08X)\n", this, group);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetItemGroup(%08X)\n", this, group);
 
     gadGroup = group;
     bkgdSprite = group->m_head->m_data;
@@ -890,9 +852,7 @@ void SS_Gadget::SetItemGroup(SS_ItemGroup *group)
 //
 void SS_Gadget::SetLabel(char *text)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetLabel(\"%s\")\n", this, text);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetLabel(\"%s\")\n", this, text);
 
     if (!gui)
         throw "The gadget must be added to the gui before using labels.";
@@ -908,9 +868,7 @@ void SS_Gadget::SetLabel(char *text)
 //
 void SS_Gadget::SetLabel(SS_String *str)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::SetLabel(SS_String)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::SetLabel(SS_String)\n", this);
 
     if (!gui)
         throw "The gadget must be added to the gui before using labels.";
@@ -952,9 +910,7 @@ bool SS_Gadget::ContainsPoint(float x, float y)
 //
 void SS_Gadget::MarkEntered()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::MarkEntered(%08X)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::MarkEntered(%08X)\n", this);
 
     if (!IsEntered() && gui) {
         rolloverNode = gui->rolloverList.Append(this);
@@ -967,9 +923,7 @@ void SS_Gadget::MarkEntered()
 //
 void SS_Gadget::MarkExited()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::MarkExited()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::MarkExited()\n", this);
 
     if (IsEntered()) {
         gui->rolloverList.Remove(rolloverNode);
@@ -1039,9 +993,7 @@ void SS_Gadget::SetHandler(ssEventCode type, gadgetEventProcPtr proc)
 //
 bool SS_Gadget::HandleEvent(SS_Event *event)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::HandleEvent(%d)\n", this, event->type);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::HandleEvent(%d)\n", this, event->type);
 
     if (hideFlag) return false;
 
@@ -1110,9 +1062,7 @@ bool SS_Gadget::HandleEvent(SS_Event *event)
 //
 Uint16 SS_Gadget::CountClicks()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::CountClicks()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::CountClicks()\n", this);
 
     Uint32  t = SDL_GetTicks();
 
@@ -1162,9 +1112,7 @@ void SS_Gadget::Move(float x, float y)
 //
 void SS_Gadget::RealignLabel()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Gadget::RealignLabel()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Gadget::RealignLabel()\n", this);
 
     if (labelString)
     {
@@ -1419,9 +1367,7 @@ SS_Button::SS_Button(SS_GUI *g) : SS_Gadget(g)
 
 SS_Button::SS_Button(SS_GUI *g, float w, float h, char *lab) : SS_Gadget(g, w, h)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Button(gui, w, h, l) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Button(gui, w, h, l) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -1431,18 +1377,14 @@ SS_Button::SS_Button(SS_GUI *g, float w, float h, char *lab) : SS_Gadget(g, w, h
 
 SS_Button::SS_Button(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Button(gui, sprite) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Button(gui, sprite) CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_Button::SS_Button(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadget(g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Button(gui, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3);
-    #endif
+    DEBUGF(1, "[%08X] SS_Button(gui, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3);
 
     Init();
     SetItem(file1, file2, file3);
@@ -1453,9 +1395,7 @@ SS_Button::SS_Button(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadg
 //
 SS_Button::~SS_Button()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Button DESTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Button DESTRUCTOR\n", this);
 }
 
 //
@@ -1463,9 +1403,7 @@ SS_Button::~SS_Button()
 //
 void SS_Button::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Button::Init(gui)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Button::Init(gui)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
     SetLabelAlignment(SA_CENTER);
@@ -1538,9 +1476,7 @@ bool SS_Button::HandleEvent(SS_Event *event)
 
 SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::checkboxSprite)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Checkbox(%08X, %s) CONSTRUCTOR\n", this, g, label);
-    #endif
+    DEBUGF(1, "[%08X] SS_Checkbox(%08X, %s) CONSTRUCTOR\n", this, g, label);
 
     Init();
 
@@ -1550,9 +1486,7 @@ SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::che
 
 SS_Checkbox::SS_Checkbox(SS_GUI *g, float w, float h, char *label) : SS_Gadget(g, w, h)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Checkbox(%08X, %.2f, %.2f, %s) CONSTRUCTOR\n", this, g, w, h, label);
-    #endif
+    DEBUGF(1, "[%08X] SS_Checkbox(%08X, %.2f, %.2f, %s) CONSTRUCTOR\n", this, g, w, h, label);
 
     Init();
 
@@ -1571,9 +1505,7 @@ SS_Checkbox::~SS_Checkbox()
 //
 void SS_Checkbox::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Checkbox::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Checkbox::Init()\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_LABELCLICK);
 }
@@ -1666,9 +1598,7 @@ void SS_Checkbox::Render(const SScolorb &inTint)
 
 SS_RadioButton::SS_RadioButton(SS_GUI *g, Uint16 val, char *label) : SS_Gadget(g, SS_RadioButton::radioButtonSprite)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_RadioButton(%08X, %d, %s) CONSTRUCTOR\n", this, gui, val, label);
-    #endif
+    DEBUGF(1, "[%08X] SS_RadioButton(%08X, %d, %s) CONSTRUCTOR\n", this, gui, val, label);
 
     Init();
 
@@ -1688,9 +1618,7 @@ SS_RadioButton::~SS_RadioButton()
 //
 void SS_RadioButton::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_RadioButton::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_RadioButton::Init()\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_LABELCLICK);
 }
@@ -1887,9 +1815,7 @@ void SS_Thumb::Render(const SScolorb &inTint)
 
 SS_Slider::SS_Slider(SS_GUI *g, float x1, float x2, float y, float v1, float v2, bool isVert) : SS_Gadget(g, SS_Slider::sliderSprite)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Slider(g, x1, x2, y, v1, v2, isVert) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Slider(g, x1, x2, y, v1, v2, isVert) CONSTRUCTOR\n", this);
 
     //
     // Make default graphics with vectors
@@ -1924,9 +1850,7 @@ SS_Slider::~SS_Slider()
 //
 void SS_Slider::Init(float x1, float x2, float y, float v1, float v2, bool isVert)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Slider::Init(x1, x2, y, v1, v2, orient)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Slider::Init(x1, x2, y, v1, v2, orient)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAGGABLE);
 
@@ -2006,9 +1930,7 @@ bool SS_Slider::HandleEvent(SS_Event *event)
 
 SS_Scrollbar::SS_Scrollbar(SS_GUI *g, float startVal, float endVal, float a) : SS_Gadget(g)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Scrollbar(g, topVal, bottomVal, isVert) CONSTRUCTOR\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Scrollbar(g, topVal, bottomVal, isVert) CONSTRUCTOR\n", this);
 
 //  if (SS_Scrollbar::defaultScrollbar != NULL)
 //
@@ -2025,9 +1947,7 @@ SS_Scrollbar::~SS_Scrollbar()
 //
 void SS_Scrollbar::Init(float v1, float v2, float a)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_Scrollbar::Init(v1, v2, a)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_Scrollbar::Init(v1, v2, a)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAGGABLE);
 
@@ -2331,18 +2251,14 @@ bool SS_Dragger::HandleEvent(SS_Event *event)
 
 SS_TextInput::SS_TextInput(SS_GUI *g, SS_Sprite *spr) : SS_Gadget(g, spr)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_TextInput(gui, sprite)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_TextInput(gui, sprite)\n", this);
 
     Init();
 }
 
 SS_TextInput::SS_TextInput(SS_GUI *g, float w, float h) : SS_Gadget(g, w, h)
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_TextInput(gui, w, h)\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_TextInput(gui, w, h)\n", this);
 
     Init();
     SetMaxStringWidth((int)w + 100);            // pixel width input limit
@@ -2359,9 +2275,7 @@ SS_TextInput::~SS_TextInput()
 //
 void SS_TextInput::Init()
 {
-    #if SS_DEBUG
-    printf("[%08X] SS_TextInput::Init()\n", this);
-    #endif
+    DEBUGF(1, "[%08X] SS_TextInput::Init()\n", this);
 
     SetFlags(GAD_DRAWBORDER|GAD_KEYFOCUS);
     editString = new SS_EditString(gui->Font());
