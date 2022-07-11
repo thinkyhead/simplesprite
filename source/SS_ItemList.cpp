@@ -8,6 +8,7 @@
  *
  */
 
+#include "SS_Types.h"
 #include "SS_ItemList.h"
 #include "SS_LayerItem.h"
 

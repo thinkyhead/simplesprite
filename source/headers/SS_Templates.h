@@ -30,6 +30,8 @@
 #include <SDL.h>
 #include <stdexcept>
 
+#include "SS_Types.h"
+
 // forward declarations
 template<class T> class TListNode;
 template<class T> class TLinkedList;
