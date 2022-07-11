@@ -170,7 +170,7 @@ void SS_TileMap::SetPalette(SS_TilePalette *palette)
     if (tilePalette)
         tilePalette->Release();
 
-    if (tilePalette = palette)
+    if ((tilePalette = palette))
     {
         palette->Retain("Tile Palette");
         tile_w  = palette->tile_w;
@@ -312,7 +312,7 @@ void SS_TileMap::Render(float x, float y, float w, float h)
     {
         rx = xpos + ll * tile_w;
         for (xx=ll; xx<=rr; ++xx) {
-            if (tile = theMap[yy * columns + xx])
+            if ((tile = theMap[yy * columns + xx]))
                 DrawTile(tile, rx, ry);
             rx += tile_w;
         }

@@ -124,11 +124,11 @@ class SS_String : public SS_LayerItem
 
         // Setters
         inline void         SetFont(SS_SFont *font) { sfont = font; }
-        void                SetText(char *t);
-        void                StringCopy(char *t);
-        void                SetWithFloat(float f);
-        void                SetWithInt(int i);
-        void                SetHex(int h);
+        void                SetText(const char *t);
+        void                StringCopy(const char *t);
+        void                SetWithFloat(const float f);
+        void                SetWithInt(const int i);
+        void                SetHex(const int h);
 
         // Evaluators
         inline bool         IsPointInside(float pixx, float pixy) { return sfont->IsPointInside(text, pixx - drawx, pixy - drawy); }
@@ -173,10 +173,10 @@ class SS_EditString : public SS_String
                             SS_EditString(SS_SFont *font, char *t, float x, float y);
         virtual             ~SS_EditString();
 
-        inline void         SetMaxStringLength(Uint16 max) { maxLength = max; }
-        inline void         SetMaxStringWidth(Uint16 max) { maxWidth = max; }
+        inline void         SetMaxStringLength(const Uint16 max) { maxLength = max; }
+        inline void         SetMaxStringWidth(const Uint16 max) { maxWidth = max; }
 
-        inline void         SetCursorStyle(cursorStyle s) { cursStyle = s; }
+        inline void         SetCursorStyle(const cursorStyle s) { cursStyle = s; }
         inline cursorStyle  CursorStyle() { return cursStyle; }
 
         inline void         SetCursorTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF) { SetCursorTint1(r, g, b, a); SetCursorTint2(r, g, b, a); }
@@ -208,7 +208,7 @@ class SS_EditString : public SS_String
         inline Sint16       SelectionLength() { return selectionLength; }
         inline Uint16       SelectionEnd() { return selectionStart + selectionLength; }
 
-        void                ReplaceSelection(char *t);
+        void                ReplaceSelection(const char *t);
         void                ReplaceSelection(char c);
 
         void                HandleKey(SDLKey k, SDLMod m=KMOD_NONE);

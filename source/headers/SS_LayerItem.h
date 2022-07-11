@@ -204,26 +204,26 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
 
         virtual bool            IsOnScreen() const { printf("root isonscreen()\n"); return true; }
 
-        double                  DistanceSquaredTo(SS_LayerItem *other) const;
+        double                  DistanceSquaredTo(SS_LayerItem * const other) const;
         double                  DistanceSquaredTo(float x2, float y2) const;
 
-        inline double           DistanceTo(SS_LayerItem *other) const { return sqrt(DistanceSquaredTo(other)); }
+        inline double           DistanceTo(SS_LayerItem * const other) const { return sqrt(DistanceSquaredTo(other)); }
         inline double           DistanceTo(float x2, float y2) const { return sqrt(DistanceSquaredTo(x2, y2)); }
 
-        virtual void            GlobalPosition(SS_Point *point, bool scr=false) const;
+        virtual void            GlobalPosition(SS_Point * const point, bool scr=false) const;
 
         virtual void            GlobalVelocity(float *xv, float *yv) const;
         virtual float           GlobalVelocity() const { float xv, yv; GlobalVelocity(&xv, &yv); return sqrt(xv*xv+yv*yv); }
 
-        virtual void            LocalPosition(SS_Point *point) const;
+        virtual void            LocalPosition(SS_Point * const point) const;
         virtual float           LocalAngle(float globalAngle) const;
-        inline void             LayerPosition(SS_Point *point) const { GlobalPosition(point, true); }
+        inline void             LayerPosition(SS_Point * const point) const { GlobalPosition(point, true); }
 
         float                   AngleTo(float x, float y) const;
-        float                   AngleTo(SS_LayerItem *other) const;
+        float                   AngleTo(SS_LayerItem * const other) const;
         float                   AngleToPointer() const;
 
-        virtual void            BounceOff(SS_LayerItem *base);
+        virtual void            BounceOff(SS_LayerItem * const base);
 
         virtual void            _Process();
         virtual void            Process();

@@ -146,7 +146,7 @@ void SS_GUI::SetEnabled(bool e)
         keyFocusGadget = NULL;
 
         SS_GadgetIterator itr = gadgetList.GetIterator();
-        while (gad = itr.NextItem())
+        while ((gad = itr.NextItem()))
             gad->Reset();
     }
 }
@@ -190,7 +190,7 @@ void SS_GUI::SetWorld(SS_World *w)
 
     SS_Gadget   *gad;
     SS_GadgetIterator itr = gadgetList.GetIterator();
-    while(gad = itr.NextItem())
+    while ((gad = itr.NextItem()))
         gad->SetWorld(w);
 
 /*
@@ -379,7 +379,7 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
                 itr.End();
 
                 // do rollover behavior
-                while (gad = itr.PreviousItem())
+                while ((gad = itr.PreviousItem()))
                 {
                     //
                     // Rollover Enters
@@ -445,7 +445,7 @@ void SS_GUI::ExitAllRollovers()
     SS_Gadget   *gad;
     itr.End();
 
-    while (gad = itr.PreviousItem())
+    while ((gad = itr.PreviousItem()))
     {
         if (gad->IsEntered())
         {
@@ -489,7 +489,7 @@ void SS_GUI::Animate()
     SS_GadgetIterator   itr = gadgetList.GetIterator();
     SS_Gadget   *gad;
 
-    while (gad = itr.NextItem())
+    while ((gad = itr.NextItem()))
         gad->Animate();
 }
 
@@ -503,7 +503,7 @@ void SS_GUI::Render()
     SS_GadgetIterator   itr = gadgetList.GetIterator();
     SS_Gadget   *gad;
 
-    while (gad = itr.NextItem())
+    while ((gad = itr.NextItem()))
         gad->Render(tint);
 }
 

@@ -21,7 +21,7 @@ void SS_ItemList::ReleaseAll()
 {
     SS_ItemIterator itr = GetIterator();
     SS_LayerItem    *item;
-    while(item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->Release();
 
     Clear();

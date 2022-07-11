@@ -43,7 +43,7 @@ void SS_ItemGroup::SetWorld(SS_World *w)
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->SetWorld(w);
 }
 
@@ -58,7 +58,7 @@ void SS_ItemGroup::SetLayer(SS_Layer *l)
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->SetLayer(l);
 }
 
@@ -76,7 +76,7 @@ void SS_ItemGroup::SetHidden(bool h)
 /*
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->SetHidden(h);
 */
 }
@@ -140,7 +140,7 @@ const SS_ItemGroup& SS_ItemGroup::operator=(const SS_ItemGroup &src)
 
         SS_Collider     *item;
         SS_ColliderIterator itr = src.GetIterator();
-        while (item = itr.NextItem())
+        while ((item = itr.NextItem()))
             AddItem(item->Clone());
     }
 
@@ -178,8 +178,10 @@ void SS_ItemGroup::Process()
             // The collider node will be removed during destruction.
             Dispose(itr);
         }
-        else
-            item->_Process(), itr.Next();
+        else {
+            item->_Process();
+            itr.Next();
+        }
     }
 }
 
@@ -194,7 +196,7 @@ void SS_ItemGroup::Animate()
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->_Animate();
 }
 
@@ -209,7 +211,7 @@ void SS_ItemGroup::AutoMove()
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->AutoMove();
 }
 
@@ -238,7 +240,7 @@ void SS_ItemGroup::Render(const SScolorb &inTint)
 
         SS_Collider     *item;
         SS_ColliderIterator itr = GetIterator();
-        while (item = itr.NextItem())
+        while ((item = itr.NextItem()))
             item->Render(mulTint);
 
         RestoreMatrix();
@@ -258,7 +260,7 @@ bool SS_ItemGroup::IsOnScreen()
     {
         SS_Collider     *item;
         SS_ColliderIterator itr = GetIterator();
-        while (item = itr.NextItem())
+        while ((item = itr.NextItem()))
         {
             if (item->IsOnScreen())
                 return true;
@@ -280,7 +282,7 @@ void SS_ItemGroup::EnableCollisions(Uint32 out, Uint32 in)
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->EnableCollisions(out, in);
 }
 
@@ -288,7 +290,7 @@ void SS_ItemGroup::SetCollisionOrigin(Uint16 n)
 {
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->SetCollisionOrigin(n);
 }
 
@@ -301,7 +303,7 @@ void SS_ItemGroup::UpdateNodePosition()
 {
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->UpdateNodePosition();
 }
 */
@@ -317,7 +319,7 @@ Uint32 SS_ItemGroup::GetNewCollisions()
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         coll |= item->GetNewCollisions();
 
     if (coll)

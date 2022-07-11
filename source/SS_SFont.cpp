@@ -306,7 +306,7 @@ void SS_SFont::Render(char *text, float x, float y, SScolorb *inTint, SDL_Rect *
     char        c;
     float       left = 0;
 
-    while (c = *text++)
+    while ((c = *text++))
     {
         if (c >= SS_FIRST_CHR)
         {
@@ -332,7 +332,7 @@ void SS_SFont::UpdateCursor(char *text, float *x, float *y)
     char    c;
     float   left = 0;
 
-    while (c = *text++)
+    while ((c = *text++))
     {
         if (c >= SS_FIRST_CHR)
             left += width[c - SS_FIRST_CHR] + xspace;
@@ -392,7 +392,7 @@ Uint16 SS_SFont::IndexOfPoint(char *text, float pixx, float pixy)
     else if (pixx < 0)
         pixx = 0;
 
-    while (c = text[i])
+    while ((c = text[i]))
     {
         if (c >= SS_FIRST_CHR) {
             wide = width[c - SS_FIRST_CHR];
@@ -492,7 +492,7 @@ void SS_String::Init()
 //
 // SetText(text)
 //
-void SS_String::SetText(char *t)
+void SS_String::SetText(const char *t)
 {
     DEBUGF(1, "[%08X] SS_String::SetText(%s)\n", this, t);
 
@@ -631,7 +631,7 @@ void SS_String::RedoAlignment()
 // StringCopy(text)
 // Copy a string directly into the string buffer
 //
-void SS_String::StringCopy(char *t)
+void SS_String::StringCopy(const char *t)
 {
     DEBUGF(1, "[%08X] SS_String::StringCopy(%s)\n", this, t);
 
@@ -642,7 +642,7 @@ void SS_String::StringCopy(char *t)
 //
 // SetWithFloat(float)
 //
-void SS_String::SetWithFloat(float f)
+void SS_String::SetWithFloat(const float f)
 {
     char *temp;
     if (asprintf(&temp, "%.2f", f) != -1)
@@ -655,7 +655,7 @@ void SS_String::SetWithFloat(float f)
 //
 // SetWithInt(int)
 //
-void SS_String::SetWithInt(int i)
+void SS_String::SetWithInt(const int i)
 {
     char *temp;
     if (asprintf(&temp, "%d", i) != -1)
@@ -668,7 +668,7 @@ void SS_String::SetWithInt(int i)
 //
 // SetHex(int, digits)
 //
-void SS_String::SetHex(int h)
+void SS_String::SetHex(const int h)
 {
     if (text)
         sprintf(text, "%08X", h);
@@ -879,7 +879,7 @@ void SS_EditString::SelectWord(Uint16 i, bool ext)
 
     if (st < 0) st = 0;
 
-    while(c = text[en])
+    while((c = text[en]))
     {
         if (neg ? (c > SDLK_SPACE) : (c <= SDLK_SPACE)) {
             en--;
@@ -921,7 +921,7 @@ void SS_EditString::SetSelection(Sint16 s, Sint16 l)
 //
 // ReplaceSelection(text)
 //
-void SS_EditString::ReplaceSelection(char *t)
+void SS_EditString::ReplaceSelection(const char *t)
 {
     DEBUGF(1, "[%08X] SS_EditString::ReplaceSelection(t)\n", this);
 
@@ -1227,7 +1227,7 @@ void SS_TextLayer::Render()
 
     SS_String   *item;
     SS_ItemIterator itr = GetIterator();
-    while (item = (SS_String*)itr.NextItem())
+    while ((item = (SS_String*)itr.NextItem()))
         item->Render(tint, &bounds);
 }
 

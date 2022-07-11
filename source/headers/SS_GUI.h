@@ -695,12 +695,12 @@ class SS_TextInput : public SS_Gadget
 
         inline void         SetStringOffset(float x, float y) { xoff = x; yoff = y; }
 
-        inline void         SetMaxStringLength(Uint16 max) { editString->SetMaxStringLength(max); }
-        inline void         SetMaxStringWidth(Uint16 max) { editString->SetMaxStringWidth(max); }
+        inline void         SetMaxStringLength(const Uint16 max) { editString->SetMaxStringLength(max); }
+        inline void         SetMaxStringWidth(const Uint16 max) { editString->SetMaxStringWidth(max); }
 
         virtual void        Move(float x, float y);
-        inline void         SetText(char *t) { editString->SetText(t); }
-        inline void         SetFont(SS_SFont *f) { editString->SetFont(f); }
+        inline void         SetText(const char *t) { editString->SetText(t); }
+        inline void         SetFont(const SS_SFont *f) { editString->SetFont(f); }
 
         inline void         GainFocus() { editString->GainFocus(); }
         inline void         LoseFocus() { editString->LoseFocus(); }

@@ -126,7 +126,7 @@ void SS_LayerItem::SetWorld(SS_World *w)
 {
     DEBUGF(1, "[%08X] SS_LayerItem::SetWorld(%08X)\n", this, w);
 
-    if (world = w) {
+    if ((world = w)) {
         oldW = w->ZoomWidth();
         oldH = w->ZoomHeight();
     }
@@ -392,7 +392,7 @@ bool SS_LayerItem::IsVisible() const
 // Accounts for spatially-scaled (parallax) layers
 // - always returns coordinates relative to scale=1
 //
-void SS_LayerItem::GlobalPosition(SS_Point *point, bool layerOnly) const
+void SS_LayerItem::GlobalPosition(SS_Point * const point, bool layerOnly) const
 {
     //
     // 1. Get the base coordinates
@@ -407,7 +407,7 @@ void SS_LayerItem::GlobalPosition(SS_Point *point, bool layerOnly) const
     //
     // 2. Adjust for group nesting
     //
-    if (nxt = group)
+    if ((nxt = group))
     {
         float   ucos, usin, rotx, roty;
         Uint16  i;
@@ -423,7 +423,7 @@ void SS_LayerItem::GlobalPosition(SS_Point *point, bool layerOnly) const
             outx = rotx + grp->xpos - grp->xhandle;
             outy = roty + grp->ypos - grp->yhandle;
             outr += grp->rotation;
-        } while (nxt = grp->group);
+        } while ((nxt = grp->group));
 
         outer = grp;
     }
@@ -489,7 +489,7 @@ void SS_LayerItem::GlobalVelocity(float *xv, float *yv) const
     //
     // 2. Adjust for group nesting
     //
-    if (nxt = group)
+    if ((nxt = group))
     {
         float   ucos, usin, rotx, roty;
         Uint16  i;
@@ -504,7 +504,7 @@ void SS_LayerItem::GlobalVelocity(float *xv, float *yv) const
             roty = (outy * ucos + outx * usin);
             outx = rotx + grp->xvel;
             outy = roty + grp->yvel;
-        } while (nxt = grp->group);
+        } while ((nxt = grp->group));
 
         outer = grp;
     }
@@ -529,7 +529,7 @@ void SS_LayerItem::GlobalVelocity(float *xv, float *yv) const
 // LocalPosition(*point)
 // Accessor for the sprite's local position
 //
-void SS_LayerItem::LocalPosition(SS_Point *point) const
+void SS_LayerItem::LocalPosition(SS_Point * const point) const
 {
     point->x = xpos;
     point->y = ypos;
@@ -546,8 +546,8 @@ float SS_LayerItem::LocalAngle(float angle) const
 {
     SS_LayerItem *grp;
 
-    if (grp = group)
-        do { angle -= grp->rotation; } while (grp = grp->group);
+    if ((grp = group))
+        do { angle -= grp->rotation; } while ((grp = grp->group));
 
     return BASEANGLE(angle);
 }
@@ -561,8 +561,8 @@ void SS_LayerItem::SetGlobalRotation(float rot)
 {
     SS_LayerItem *grp;
 
-    if (grp = group)
-        do { rot -= grp->rotation; } while (grp = grp->group);
+    if ((grp = group))
+        do { rot -= grp->rotation; } while ((grp = grp->group));
 
     SetRotation(BASEANGLE(rot));
 }
@@ -587,7 +587,7 @@ double SS_LayerItem::DistanceSquaredTo(float x2, float y2) const
 // DistanceSquared(item)
 // Ask Pythagoras for the distance
 //
-double SS_LayerItem::DistanceSquaredTo(SS_LayerItem *other) const
+double SS_LayerItem::DistanceSquaredTo(SS_LayerItem * const other) const
 {
     SS_Point    this_pos;
     SS_Point    other_pos;
@@ -615,7 +615,7 @@ float SS_LayerItem::AngleTo(float x, float y) const
 //
 // AngleToSprite(sprite)
 //
-float SS_LayerItem::AngleTo(SS_LayerItem *other) const
+float SS_LayerItem::AngleTo(SS_LayerItem * const other) const
 {
     SS_Point    this_pos;
     SS_Point    other_pos;
@@ -826,7 +826,7 @@ void SS_LayerItem::Render(const SScolorb &inTint)
 // BounceOff(item)
 // Bounce the item off another item
 //
-void SS_LayerItem::BounceOff(SS_LayerItem *item)
+void SS_LayerItem::BounceOff(SS_LayerItem * const item)
 {
     float   h = xvel;
     float   v = yvel;

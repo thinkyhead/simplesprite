@@ -657,7 +657,7 @@ public:
 
         TListNode<T> *node, *newnode;
 
-        if ( node = p_iterator.m_node )
+        if ((node = p_iterator.m_node))
         {
             // insert the data after the iterator
             node->InsertAfter( p_data );
@@ -693,7 +693,7 @@ public:
 
         TListNode<T> *node, *newnode;
 
-        if ( node = p_iterator.m_node )
+        if ((node = p_iterator.m_node))
         {
             // insert the data before the iterator
             node->InsertBefore( p_data );
@@ -994,7 +994,7 @@ public:
         fwrite( &m_count, sizeof( Uint16 ), 1, outfile );
 
         // now loop through and write the list.
-        while( itr ) {
+        while ( itr ) {
             fwrite( &(itr->m_data), sizeof( T ), 1, outfile );
             itr = itr->m_next;
         }
@@ -1026,7 +1026,7 @@ public:
         fread( &count, sizeof( Uint16 ), 1, infile );
 
         // now loop through and read the list.
-        while( count ) {
+        while ( count ) {
             fread( &buffer, sizeof( T ), 1, infile );
             Append( buffer );
             count--;

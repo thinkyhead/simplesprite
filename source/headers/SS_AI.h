@@ -21,7 +21,8 @@ enum AIType {
     AI_DEFENDER,
     AI_HUNTER,
     AI_COLLECTOR,
-    AI_MERCHANT
+    AI_MERCHANT,
+    AI_NUM_TYPES
 };
 
 enum AIState {

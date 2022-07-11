@@ -105,7 +105,7 @@ void SS_Sprite::SetWorld(SS_World *w)
 {
     DEBUGF(1, "[%08X] SS_Sprite::SetWorld(%08X)\n", this, w);
 
-    if (world = w)
+    if ((world = w))
     {
         oldW = w->ZoomWidth();
         oldH = w->ZoomHeight();

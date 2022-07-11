@@ -179,20 +179,20 @@ void SS_CollisionManager::RunCollisionTest()
         {
             outer_iter = colliderList[i].GetIterator();
 
-            while ( item = outer_iter.NextItem() )
+            while ((item = outer_iter.NextItem()))
             {
                 if ( item->IsVisible() )
                 {
                     // Test all items following in the same list
                     inner_iter = outer_iter;
-                    while ( inner = inner_iter.NextItem() )
+                    while ((inner = inner_iter.NextItem()))
                         if ( item->TestCollision(inner) )
                             item->CollideWith(inner), inner->CollideWith(item);
 
                     // Test all items in the list to the right
                     inner_iter = colliderList[(i + 1) % SS_COLLISION_LISTS].GetIterator();
-                    while ( inner = inner_iter.NextItem() )
-                        if (item->TestCollision(inner))
+                    while ((inner = inner_iter.NextItem()))
+                        if ( item->TestCollision(inner) )
                             item->CollideWith(inner), inner->CollideWith(item);
                 }
             }
@@ -229,7 +229,7 @@ SS_Collider* SS_CollisionManager::FirstColliderAt(float x, float y)
         if ( colliderList[curr].m_count )
         {
             iter = colliderList[curr].GetIterator();
-            while ( item = iter.NextItem() )
+            while ((item = iter.NextItem()))
                 if ( item->IsVisible() && item->TestPointCollision(x, y) )
                     return item;
         }
@@ -479,7 +479,7 @@ void SS_Collider::UpdateCollisions()
         for (int i=0; i<=2; i++)
         {
             SS_ColliderIterator itr = w->colliderList[(b+i) % SS_COLLISION_LISTS].GetIterator();
-            while (item = itr.NextItem())
+            while ((item = itr.NextItem()))
                 if (item != this && TestCollision(item))
                     CollideWith(item);
         }
@@ -513,7 +513,7 @@ Uint32 SS_Collider::GetNewCollisions()
 
         // 1. Ignore collisions that were already set
 
-        if (coll = collisions)              // get actual collisions
+        if ((coll = collisions))            // get actual collisions
         {
             coll &= ~collisionIgnore;       // remove ignored collisions
             collisionIgnore |= coll;        // add the rest to the ignore list

@@ -57,7 +57,7 @@ void SS_Listener::IgnoreAll()
 
     SS_Broadcaster *item;
     SS_BroadcasterIterator itr = broadcasterList.GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->RemoveListener(this);
 
     broadcasterList.Clear();
@@ -80,7 +80,7 @@ SS_Broadcaster::~SS_Broadcaster()
 {
     SS_Listener *listener;
     listenerIterator.Start();
-    while (listener = listenerIterator.NextItem())
+    while ((listener = listenerIterator.NextItem()))
         listener->RemoveBroadcaster(this);
 }
 
@@ -91,7 +91,7 @@ void SS_Broadcaster::Broadcast(const SS_Message &msg)
 {
     SS_Listener *listener;
     listenerIterator.Start();
-    while (listener = listenerIterator.NextItem())
+    while ((listener = listenerIterator.NextItem()))
         listener->HandleMessage(msg);
 }
 

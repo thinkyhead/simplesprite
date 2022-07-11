@@ -386,7 +386,7 @@ bool SS_File::Open(const char *p, const char *mode)
     if (p != NULL)
         SetPath(p);
 
-    if (stream = fopen(path, mode))
+    if ((stream = fopen(path, mode)))
         is_open = true;
 
     return is_open;
@@ -602,7 +602,7 @@ SS_DataToken* SS_DataContext::GetToken(const char *k)
     SS_TokenIterator    itr = tokenList.GetIterator();
     SS_DataToken        *tok;
 
-    while (tok = itr.NextItem())
+    while ((tok = itr.NextItem()))
         if (tok->Match(k))
             return tok;
 
@@ -643,7 +643,7 @@ void SS_DataContext::Write(FILE *file)
     SS_TokenIterator    itr = tokenList.GetIterator();
 
     itr.Start();
-    while (tok = itr.NextItem())
+    while ((tok = itr.NextItem()))
         tok->Write(file);
 }
 
@@ -693,7 +693,7 @@ SS_DataContext* SS_FlatFile::GetContext(const char *k)
     SS_DataContext      *ctx;
 
     itr.Start();
-    while (ctx = itr.NextItem())
+    while ((ctx = itr.NextItem()))
         if (ctx->Match(k))
             return ctx;
 
@@ -736,7 +736,7 @@ bool SS_FlatFile::Import(const char *fileName)
 
     if (currFile->OpenRead())
     {
-        while(line = currFile->GetLine()) // get the buffer managed by the file class
+        while ((line = currFile->GetLine())) // get the buffer managed by the file class
             ParseLine(line);
 
         currFile->Close();
@@ -758,7 +758,7 @@ bool SS_FlatFile::Export()
     {
         FILE    *f = currFile->Stream();
         itr.Start();
-        while (ctx = itr.NextItem())
+        while ((ctx = itr.NextItem()))
             if (ctx->Size())
                 ctx->Write(f);
 
@@ -802,7 +802,7 @@ void SS_FlatFile::ParseLine(const char *input)
         }
             // Lines with an = sign are token assignments
             //
-        else if (part = strchr(tline, '=')) {
+        else if ((part = strchr(tline, '='))) {
             *part = '\0';
             SetToken(tline, trim(part+1));
         }

@@ -105,7 +105,7 @@ void SS_World::SetPointerSprite(SS_LayerItem *s)
         pointerSprite = NULL;
     }
 
-    if (pointerSprite = s) {
+    if ((pointerSprite = s)) {
         SS_Layer *layer = new SS_Layer(SS_NOZOOM|SS_NOSCROLL);
         layer->AddItem(s);
         AddLayer(layer);
@@ -292,7 +292,7 @@ void SS_World::SetSurface(SDL_Surface *s)
 
     int w, h;
 
-    if (surface = s)
+    if ((surface = s))
     {
         w = s->w;
         h = s->h;
@@ -324,19 +324,19 @@ void SS_World::GetInput()
 
 void SS_World::Process()
 {
-    if (fireAuto = (ticks - lastAutoTime >= autoInterval))
+    if ((fireAuto = (ticks - lastAutoTime >= autoInterval)))
         lastAutoTime = ticks;
 
     SS_Layer            *layer;
     SS_LayerIterator    itr = GetIterator();
 
-    while (layer = itr.NextItem())
+    while ((layer = itr.NextItem()))
         if (layer->enabled && !layer->paused)
             layer->Process();
 
     // Delete marked layers
     itr.Start();
-    while (layer = itr.NextItem())
+    while ((layer = itr.NextItem()))
         if (layer->removeFlag)
             delete layer;
 
@@ -362,7 +362,7 @@ void SS_World::Animate()
     SS_Layer            *layer;
     SS_LayerIterator    itr = GetIterator();
 
-    while (layer = itr.NextItem())
+    while ((layer = itr.NextItem()))
         if (layer->enabled && !layer->paused)
             layer->Animate();
 }
@@ -387,7 +387,7 @@ void SS_World::Render()
     SS_Layer            *layer;
     SS_LayerIterator    itr = GetIterator();
 
-    while (layer = itr.NextItem())
+    while ((layer = itr.NextItem()))
         if (layer->enabled)
             layer->Render();
 
@@ -607,7 +607,7 @@ void SS_World::HandleEvents()
         // only eligible items get asked to handle events
         //
         itr.End();
-        while (layer = itr.PreviousItem())
+        while ((layer = itr.PreviousItem()))
             if ((layer->enabled && !layer->paused) && (latchedLayer == NULL || latchedLayer == layer) && (did = layer->HandleEvent(&event)))
             {
                 break;

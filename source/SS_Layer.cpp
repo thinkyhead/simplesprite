@@ -146,7 +146,7 @@ void SS_Layer::SetWorld(SS_World *w)
 
     SS_LayerItem    *item;
     SS_ItemIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->SetWorld(w);
 }
 
@@ -194,7 +194,7 @@ void SS_Layer::Process()
 {
     SS_LayerItem    *item;
     SS_ItemIterator itr = GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
     {
         if (item->removeFlag)
             item->RemoveSelf();
@@ -215,7 +215,8 @@ void SS_Layer::Animate()
 
     SS_LayerItem    *item;
     SS_ItemIterator itr = GetIterator();
-    while (item = itr.NextItem()) {
+    while ((item = itr.NextItem()))
+    {
         item->_Animate();
         if (item->IsOnScreen())
             AddToVisible(item);
@@ -232,7 +233,7 @@ void SS_Layer::Render()
 
     SS_LayerItem    *item;
     SS_ItemIterator itr = visibleList.GetIterator();
-    while (item = itr.NextItem())
+    while ((item = itr.NextItem()))
         item->Render(tint);
 }
 
