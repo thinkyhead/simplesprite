@@ -795,7 +795,7 @@ void SS_VectorSprite::SetHandle(float x, float y)
 //
 void SS_VectorSprite::CenterHandle()
 {
-    DEBUGF(1, "[%08X] SS_VectorSprite::SetHandle(%d, %d)\n", this, x, y);
+    DEBUGF(1, "[%08X] SS_VectorSprite::CenterHandle() xhandle=%f yhandle=%f\n", this, xhandle, yhandle);
 
     if (frameCount)
         for (int i=0; i < frameCount; ++i)

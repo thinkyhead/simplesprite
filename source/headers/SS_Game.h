@@ -13,13 +13,22 @@
 
 #include <math.h>
 
+// Global video dimensions (defined in SS_Game.cpp). Declared up-front so the
+// inline accessors below can reference them regardless of include order.
+extern int SS_VIDEO_W, SS_VIDEO_H;
+
 #include <SDL.h>
 #include "SS_Types.h"
+
+// SDL 2.x bridge (SS_GetKeyState, SS_EnableKeyRepeat, SDL_VIDEO_W alias)
+#include "SS_sdl2.h"
 
 class SS_Game
 {
     private:
-        static SDL_Surface          *ss_screen;
+        static SDL_Surface          *ss_screen;     // SDL 1.2 remnant; unused under SDL2 (see ss_window)
+        static SDL_Window           *ss_window;     // SDL 2.x window handle
+        static SDL_GLContext        ss_glcontext;   // SDL 2.x OpenGL context
         static float                SS_cos[65536];
         static float                SS_sin[65536];
         bool                        bQuit;                      // Game should quit?
@@ -38,6 +47,10 @@ class SS_Game
 
         static inline float AngleOfXY(const float &x, const float &y)
         {
+            // Guard atan2(0,0): Apple's libm returns NaN there, which propagates
+            // into SS_ROTINDEX and corrupts rotation. A zero vector has no angle,
+            // so report 0 (matching the original SDL1.2 / Carbon behavior).
+            if (x == 0.0f && y == 0.0f) return 0.0f;
             float   dx = (x == 0.0f) ? 0.00001f : x;
             return (dx < 0.0f) ? (DEG(atan(y / dx)) + 270.0f) : (DEG(atan(y / dx)) + 90.0f);
         }
@@ -92,8 +105,9 @@ class SS_Game
 
         void                        InitScreen();
         static inline SDL_Surface*  TheScreen() { return ss_screen; }
-        static inline int           ScreenWidth() { return ss_screen->w; }
-        static inline int           ScreenHeight() { return ss_screen->h; }
+        static inline SDL_Window*   TheWindow() { return ss_window; }
+        static inline int           ScreenWidth() { return SS_VIDEO_W; }
+        static inline int           ScreenHeight() { return SS_VIDEO_H; }
         static void                 SyncVblank(long sync);
 
         void                        PushWorld(SS_World *w);
@@ -111,7 +125,5 @@ class SS_Game
     private:
         void                Init();
 };
-
-extern int SS_VIDEO_W, SS_VIDEO_H;
 
 #endif

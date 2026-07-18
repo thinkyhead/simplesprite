@@ -143,7 +143,7 @@ bool MakeTextureFromSurface(
     if (outTxWidth)     *outTxWidth = expw;
     if (outTxHeight)    *outTxHeight = exph;
 
-    SDL_SetAlpha(source, 0, SDL_ALPHA_OPAQUE);          // Tell SDL to copy verbatim
+    SDL_SetSurfaceAlphaMod(source, SDL_ALPHA_OPAQUE);    // Tell SDL to copy verbatim
     SDL_BlitSurface(source, &sRect, surface, NULL);
 
     glGenTextures(1, outTexture);                       // Generate one texture
@@ -240,8 +240,9 @@ Uint32 GetPixel(SDL_Surface *surface, Sint16 x, Sint16 y)
             Uint8 b = *(bits + surface->format->Bshift / 8);
             color = SDL_MapRGB(surface->format, r, g, b);
 
-            if (surface->flags & SDL_SRCCOLORKEY) {
-                if (surface->format->colorkey != color)
+            if (SDL_HasColorKey(surface)) {
+                Uint32 key;
+                if (SDL_GetColorKey(surface, &key) == 0 && key != color)
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
                     color = (color << 8) | 0x000000FF;  // rgba
 #else
@@ -411,8 +412,15 @@ void printSurfaceInfo(char *name, SDL_Surface *surface)
     printf("Pitch: %d\n", surface->pitch);
     printf("BitsPerPixel: %d\n", surface->format->BitsPerPixel);
     printf("BytesPerPixel: %d\n", surface->format->BytesPerPixel);
-    printf("Color Key: 0x%X\n", surface->format->colorkey);
-    printf("Alpha: %d\n", surface->format->alpha);
+    {
+        Uint32 key = 0;
+        if (SDL_HasColorKey(surface) && SDL_GetColorKey(surface, &key) == 0)
+            printf("Color Key: 0x%X\n", key);
+        else
+            printf("Color Key: (none)\n");
+    }
+    Uint8 alpha_dummy = 0;
+    printf("Alpha: %d\n", SDL_GetSurfaceAlphaMod(surface, &alpha_dummy));
     printf("Mask: %X %X %X %X\n\n", surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
 }
 

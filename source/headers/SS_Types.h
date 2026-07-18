@@ -13,7 +13,10 @@
 
 #include "SS_Config.h"
 
-#define DEBUGF(N,V...) if (SS_DEBUG >= N) printf(V)
+// Pull in the linked-list templates early. SS_Templates.h does NOT include
+// SS_Types.h back (that would be circular), so this ordering is safe and
+// makes TListNode/TObjectList/TIterator available to the typedefs below.
+#include "SS_Templates.h"
 
 //
 // Forward Class Declarations
@@ -103,6 +106,9 @@ enum stringAlign {
 #include <SDL.h>
 #include <SDL_opengl.h>
 
+// SDL 1.2 -> 2.x compatibility bridge (SS_GetKeyState, SS_EnableKeyRepeat, etc.)
+#include "SS_sdl2.h"
+
 #ifndef CALLBACK
 #define CALLBACK
 #endif
@@ -151,7 +157,7 @@ enum stringAlign {
 
 #define RANDFLOAT(x, y) (float)RANDINT(x,y)
 
-#define SS_ROTINDEX(x)  ((Uint16)floorf((x) * 65536.0f / 360.0f))
+#define SS_ROTINDEX(x)  ((Uint16)((int)floorf((x) * 65536.0f / 360.0f) & 0xFFFF))
 #define SS_ROTANGLE(x)  ((float)x * 360.0f / 65536.0f)
 #define BASEANGLE(x)    SS_ROTANGLE(SS_ROTINDEX(x))
 
@@ -264,13 +270,12 @@ static __inline__ void gl_poly_mode(GLenum mode)
 
     gl_state.poly_mode = mode;
 }
-
 //
+
 // SS Linked List types
 //
-#include "SS_Templates.h"
-
-typedef TListNode<char*>        SS_CharNode;                // char
+// (TListNode/TLinkedList/TIterator/TObjectList are provided by SS_Templates.h,
+//  included near the top of this file. No second include needed here.)
 typedef TLinkedList<char*>      SS_CharList;
 typedef TIterator<char*>        SS_CharIterator;
 

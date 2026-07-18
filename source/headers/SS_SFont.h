@@ -123,7 +123,7 @@ class SS_String : public SS_LayerItem
         inline float        Bottom()            { return ypos + Descender(); }
 
         // Setters
-        inline void         SetFont(SS_SFont *font) { sfont = font; }
+        inline void         SetFont(SS_SFont * const font) { sfont = font; }
         void                SetText(const char *t);
         void                StringCopy(const char *t);
         void                SetWithFloat(const float f);
@@ -270,4 +270,3 @@ class SS_TextLayer : public SS_Layer
 
 
 #endif
-

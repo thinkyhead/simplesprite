@@ -16,6 +16,10 @@
 #include <stdio.h>
 #include <string.h>
 
+// SS_ASSERT / SS_ASSERT_FINITE are defined in SS_Config.h. Include it so this
+// header is self-contained regardless of include order in the TU.
+#include "SS_Config.h"
+
 class SS_RefCounter
 {
     private:
@@ -54,6 +58,11 @@ class SS_RefCounter
 
         virtual int Release()
                     {
+                        // SS_ASSERT_ON: a release when count is already <= 0 means
+                        // a double-release / premature free — the usual source of a
+                        // dangling pointer that later crashes mid-emit (use-after-free).
+                        SS_ASSERT(refCount > 0);
+
                         int ref = --refCount;
 
                         #if REF_DEBUG

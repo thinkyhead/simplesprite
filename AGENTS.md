@@ -121,3 +121,13 @@ Uses OpenGL 1.x fixed-function pipeline (no shaders). Texture tinting via `GL_CO
 ## Video Configuration (SS_Game.cpp)
 - Default: 1024x768 windowed, VSync off
 - Config file `ssgame.cfg` stored in app folder
+
+## Current State
+- **SDL 2.x port complete** (2026-07-17). The engine now builds `libSimpleSprite.a`
+  and runs against SDL2/SDL2_image/SDL2_mixer from `~/Projects/SDL/_LIBS/SDL/Frameworks/`.
+  The SDL1.2→SDL2 seam is the bridge in `source/headers/SS_sdl2.h`. The architecture
+  below still describes the engine accurately; only the "SDL 1.2" build deps are
+  historical. Games that use it: `../solarfire`, `../deepspace` (both revived and
+  playable). See `~/wiki/llm-wiki/sdl-games-revival.md`.
+- During the revival a GL_LIGHTING bug in `SS_Game::InitScreen` was fixed (sprites
+  were rendering invisible); rebuild `libSimpleSprite.a` after any engine change.

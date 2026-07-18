@@ -19,6 +19,7 @@
 // Useful OpenGL Globals
 glState     gl_state;
 
+//
 extern bool SS_VSYNC;
 
 
@@ -72,7 +73,7 @@ void SS_World::Init()
     renderQuit      = false;
     worldQuit       = false;
 
-    keyState        = NULL;
+    keyState        = SS_GetKeyState(NULL);
     mouseButtons    = 0x00;
     mouseClick      = false;
     mouseDown       = false;
@@ -207,7 +208,7 @@ void SS_World::Start()
 
 #if SS_THREADS
     worldMutex = SDL_CreateMutex();
-    processThread = SDL_CreateThread(SS_World::process_thread, this);
+    processThread = SDL_CreateThread(SS_World::process_thread, "SS_World::process_thread", this);
 #endif
 
     renderQuit = false;
@@ -292,13 +293,15 @@ void SS_World::SetSurface(SDL_Surface *s)
 
     int w, h;
 
-    if ((surface = s))
-    {
+    if (s) {
         w = s->w;
         h = s->h;
     }
-    else
-        w = h = 0;
+    else {
+        // SDL 2.x has no screen surface; use the GL window dimensions.
+        w = SS_Game::ScreenWidth();
+        h = SS_Game::ScreenHeight();
+    }
 
     view_w = w;
     view_h = h;
@@ -312,7 +315,7 @@ void SS_World::GetInput()
 {
     int x, y;
 
-    keyState = SDL_GetKeyState(NULL);
+    keyState = SS_GetKeyState(NULL);
 
     mouseButtons = SDL_GetMouseState(&x, &y);
 }
@@ -404,7 +407,7 @@ void SS_World::Render()
     // unlock the processor. On modern machines this works fine.
     //
     #ifdef WIN32
-    SDL_GL_SwapBuffers();
+    SDL_GL_SwapWindow(SS_Game::TheWindow());
     #endif
 
     #if SS_THREADS
@@ -412,7 +415,7 @@ void SS_World::Render()
     #endif
 
     #ifndef WIN32
-    SDL_GL_SwapBuffers();
+    SDL_GL_SwapWindow(SS_Game::TheWindow());
     #endif
 
     //
@@ -500,6 +503,7 @@ void SS_World::HandleEvents()
 
             case SDL_KEYDOWN:
                 k = event.key.keysym.sym;
+
                 if (event.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT | KMOD_CAPS) && (k >= 'a' && k <= 'z'))
                 {
                     k -= ('a' - 'A');

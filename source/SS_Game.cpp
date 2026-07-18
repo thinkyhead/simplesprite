@@ -17,6 +17,8 @@
 #include "SS_World.h"
 #include "SS_Sound.h"
 
+#include "SS_sdl2.h"        // SDL 1.2 -> 2.x bridge
+
 #include <SDL_opengl.h>
 
 #include <string.h>
@@ -52,6 +54,8 @@ bool    SS_FULLSCREEN = 0;
 
 // Static Initializers
 SDL_Surface *SS_Game::ss_screen  = NULL;
+SDL_Window  *SS_Game::ss_window  = NULL;
+SDL_GLContext SS_Game::ss_glcontext = NULL;
 float       SS_Game::SS_cos[65536];
 float       SS_Game::SS_sin[65536];
 SS_SFont    *SS_Game::tinyFont = NULL, *SS_Game::smallFont = NULL, *SS_Game::mediumFont = NULL, *SS_Game::largeFont = NULL;
@@ -128,29 +132,32 @@ void SS_Game::InitScreen()
     //
     // Get a screen or a window
     //
-    if ( SDL_Init( (SDL_INIT_NOPARACHUTE|SDL_INIT_VIDEO|(SS_JOYSTICK_ENABLE ? SDL_INIT_JOYSTICK : 0x00)|(SS_AUDIO_ENABLE ? SDL_INIT_AUDIO : 0x00)) ) < 0 )
+    if ( SDL_Init( (SDL_INIT_VIDEO|(SS_JOYSTICK_ENABLE ? SDL_INIT_JOYSTICK : 0x00)|(SS_AUDIO_ENABLE ? SDL_INIT_AUDIO : 0x00)) ) < 0 )
         throw "Couldn't initialize SDL: %s\n";
 
-    const SDL_VideoInfo *info = SDL_GetVideoInfo();
-    int                 bpp = info->vfmt->BitsPerPixel;
-
-    ss_screen = SDL_SetVideoMode(SS_VIDEO_W, SS_VIDEO_H, bpp, SDL_OPENGL|(SS_FULLSCREEN ? SDL_FULLSCREEN : 0x00));
-
-    if (!ss_screen)
-        throw "Can't get Video Mode: %s\n";
-
-    SDL_WM_GrabInput(SDL_GRAB_ON);      // Keep mouse pointer in window
-    SDL_ShowCursor(SDL_DISABLE);        // Hide the system pointer
+    int bpp = 32;   // SDL 1.2 picked the desktop depth; 32 is the safe GL default
 
     //
-    // Enable OpenGL
+    // SDL 2.x: create a window + OpenGL context instead of SDL_SetVideoMode
     //
+    Uint32 windowFlags = SDL_WINDOW_OPENGL | (SS_FULLSCREEN ? SDL_WINDOW_FULLSCREEN : 0x00);
+    ss_window = SDL_CreateWindow("SimpleSprite", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SS_VIDEO_W, SS_VIDEO_H, windowFlags);
+    if (!ss_window)
+        throw "Can't create Window: %s\n";
+
+    ss_glcontext = SDL_GL_CreateContext(ss_window);
+    if (!ss_glcontext)
+        throw "Can't create GL context: %s\n";
+
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    SDL_SetWindowGrab(ss_window, SDL_TRUE);     // Keep mouse pointer in window
+    SDL_ShowCursor(SDL_DISABLE);                // Hide the system pointer
 
     //
     // Turn off 3D features
@@ -161,17 +168,21 @@ void SS_Game::InitScreen()
     //
     // The Viewport clears to black
     //
-    glViewport(0, 0, ss_screen->w, ss_screen->h);
+    glViewport(0, 0, SS_VIDEO_W, SS_VIDEO_H);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT /*| GL_DEPTH_BUFFER_BIT*/);
 
     //
-    // This will allow us to tint textures
-    // using the lighting features of OpenGL
+    // Flat 2D rendering: NO OpenGL lighting. Enabling GL_LIGHTING (with no
+    // normals/light model set up) drove the fixed-function lighting equation
+    // to zero and erased translucent textured sprites (reticle, title text).
+    // Tinting is done via the texture environment (GL_MODULATE) combined with
+    // glColor, so every sprite/frame draws with its own tint + alpha.
     //
-    glEnable(GL_COLOR_MATERIAL);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);            // A default light that points straight on
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+    glDisable(GL_COLOR_MATERIAL);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     //
     // Would like to see smoother edges on rounded rect, for example

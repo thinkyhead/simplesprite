@@ -17,6 +17,8 @@
 #include "SS_Utilities.h"
 #include "SS_World.h"
 
+#include <cmath>
+
 
 //--------------------------------------------------------------
 // SS_LayerItem
@@ -686,7 +688,13 @@ void SS_LayerItem::SetAnimateProc(spriteProcPtr proc)
 //
 void SS_LayerItem::SetAngularVelocity(float ang, float vel)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetAngularVelocity(%.2f, %.2f)\n", this, ang, vel);
+    // SS_ASSERT_ON: catch a dangling/garbage 'this' or a non-finite angle
+    // before we index the trig tables or write to member velocities.
+    SS_ASSERT(this != NULL);
+    SS_ASSERT_FINITE(ang);
+
+    if (!std::isfinite(ang))
+        ang = 0.0f;
 
     Uint16  i = SS_ROTINDEX(ang);
     xvel = SS_Game::Sin(i) * vel;
