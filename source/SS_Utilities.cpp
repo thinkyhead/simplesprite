@@ -121,19 +121,12 @@ bool MakeTextureFromSurface(
     glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
     if (width != expw) return false;
 
-    // Create a 32-bit surface for a copy of the image
-    surface = SDL_CreateRGBSurface(SDL_SWSURFACE, expw, exph, 32,
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-                    0xFF000000,
-                    0x00FF0000,
-                    0x0000FF00,
-                    0x000000FF);
-#else
-                    0x000000FF,
-                    0x0000FF00,
-                    0x00FF0000,
-                    0xFF000000);
-#endif
+    // Create a 32-bit surface for a copy of the image.
+    // SDL3: SDL_CreateRGBSurface(flags,w,h,depth,rm,gm,bm,am) ->
+    //       SDL_CreateSurface(w,h,SDL_PIXELFORMAT_*). The pixel-format mask
+    //       args are gone; SDL_PIXELFORMAT_RGBA32 picks the right layout for
+    //       the host byte order automatically.
+    surface = SDL_CreateSurface(expw, exph, SDL_PIXELFORMAT_RGBA32);
 
     if(!surface)
         throw "Can't create Surface for image.";
@@ -218,7 +211,9 @@ Uint32 GetPixel(SDL_Surface *surface, Sint16 x, Sint16 y)
     if (x < 0 || x >= surface->w || y < 0 || y >= surface->h)
         return 0;
 
-    bpp = surface->format->BytesPerPixel;
+    const SDL_PixelFormatDetails *fmt = SDL_GetPixelFormatDetails(surface->format);
+
+    bpp = fmt->bytes_per_pixel;
 
     SDL_LockSurface(surface);
     bits = ((Uint8*)surface->pixels) + (y * surface->pitch) + (x * bpp);
@@ -235,10 +230,10 @@ Uint32 GetPixel(SDL_Surface *surface, Sint16 x, Sint16 y)
 
         case 3:
         {
-            Uint8 r = *(bits + surface->format->Rshift / 8);
-            Uint8 g = *(bits + surface->format->Gshift / 8);
-            Uint8 b = *(bits + surface->format->Bshift / 8);
-            color = SDL_MapRGB(surface->format, r, g, b);
+            Uint8 r = *(bits + fmt->Rshift / 8);
+            Uint8 g = *(bits + fmt->Gshift / 8);
+            Uint8 b = *(bits + fmt->Bshift / 8);
+            color = SDL_MapRGB(fmt, NULL, r, g, b);
 
             if (SDL_HasColorKey(surface)) {
                 Uint32 key;
@@ -410,8 +405,8 @@ void printSurfaceInfo(char *name, SDL_Surface *surface)
     printf("Size: %d x %d\n", surface->w, surface->h);
     printf("Flags: 0x%X\n", surface->flags);
     printf("Pitch: %d\n", surface->pitch);
-    printf("BitsPerPixel: %d\n", surface->format->BitsPerPixel);
-    printf("BytesPerPixel: %d\n", surface->format->BytesPerPixel);
+    printf("BitsPerPixel: %d\n", SDL_GetPixelFormatDetails(surface->format)->bits_per_pixel);
+    printf("BytesPerPixel: %d\n", SDL_GetPixelFormatDetails(surface->format)->bytes_per_pixel);
     {
         Uint32 key = 0;
         if (SDL_HasColorKey(surface) && SDL_GetColorKey(surface, &key) == 0)
@@ -420,8 +415,10 @@ void printSurfaceInfo(char *name, SDL_Surface *surface)
             printf("Color Key: (none)\n");
     }
     Uint8 alpha_dummy = 0;
-    printf("Alpha: %d\n", SDL_GetSurfaceAlphaMod(surface, &alpha_dummy));
-    printf("Mask: %X %X %X %X\n\n", surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
+    SDL_GetSurfaceAlphaMod(surface, &alpha_dummy);
+    printf("Alpha: %d\n", alpha_dummy);
+    const SDL_PixelFormatDetails *fmti = SDL_GetPixelFormatDetails(surface->format);
+    printf("Mask: %X %X %X %X\n\n", fmti->Rmask, fmti->Gmask, fmti->Bmask, fmti->Amask);
 }
 
 //--------------------------------------------------------------

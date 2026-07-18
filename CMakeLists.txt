@@ -29,18 +29,34 @@ else()
     # Leave CMAKE_OSX_ARCHITECTURES unset -> CMake uses the host arch.
 endif()
 
-# ----- SDL2 (from _LIBS, kept alongside the project) -------------------------
-set(SDL_LIBS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL/Frameworks")
-get_filename_component(SDL_LIBS_DIR "${SDL_LIBS_DIR}" ABSOLUTE)
+# ----- SDL3 (vendored into _LIBS, no Homebrew at build time) ---------------
+# SDL 1.2/2.x -> 3.x port. SDL3 ships headers under <SDL3/SDL.h>,
+# <SDL3_image/SDL_image.h>, <SDL3_mixer/SDL_mixer.h>; the engine's bare
+# <SDL.h> etc. are satisfied by the sdl3_compat/ forwarding shims on the
+# include path (see source/headers/sdl3_compat/).
+set(SDL3_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL3")
+get_filename_component(SDL3_DIR "${SDL3_DIR}" ABSOLUTE)
 
-set(SDL2_FRAMEWORK       "${SDL_LIBS_DIR}/SDL2.framework")
-set(SDL2_IMAGE_FRAMEWORK "${SDL_LIBS_DIR}/SDL2_image.framework")
-set(SDL2_MIXER_FRAMEWORK "${SDL_LIBS_DIR}/SDL2_mixer.framework")
+# Header search: the compat shims live in source/headers/sdl3_compat so the
+# engine's #include <SDL.h> resolves to <SDL3/SDL.h>. We ALSO add the vendored
+# include root so <SDL3/...> and <SDL3_image/...> resolve directly.
+set(SDL3_INCLUDE_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/source/headers/sdl3_compat"
+    "${SDL3_DIR}/include")
 
-foreach(fw ${SDL2_FRAMEWORK} ${SDL2_IMAGE_FRAMEWORK} ${SDL2_MIXER_FRAMEWORK})
-    if(NOT EXISTS "${fw}")
-        message(FATAL_ERROR "Missing SDL framework: ${fw}\n"
-            "Install SDL2 into ${SDL_LIBS_DIR} or adjust SDL_LIBS_DIR.")
+# Vendored dylibs + link libs. Each dylib is re-id'd to @rpath/<name>, so we
+# add an rpath to the vendored lib dir and link the three SDL3 libs (the codec
+# transitive deps resolve via @rpath at load time).
+set(SDL3_LIB_DIR "${SDL3_DIR}/lib")
+set(SDL3_LINK_LIBS
+    "${SDL3_LIB_DIR}/libSDL3.dylib"
+    "${SDL3_LIB_DIR}/libSDL3_image.dylib"
+    "${SDL3_LIB_DIR}/libSDL3_mixer.dylib")
+
+foreach(lib ${SDL3_LINK_LIBS})
+    if(NOT EXISTS "${lib}")
+        message(FATAL_ERROR "Missing SDL3 library: ${lib}\n"
+            "Expected vendored SDL3 at ${SDL3_DIR}. Run the vendoring step.")
     endif()
 endforeach()
 
@@ -64,30 +80,21 @@ endif()
 #  - -F for framework-style <SDL2/SDL.h> (and the linker)
 #  - -I on each framework's Headers dir so bare <SDL.h> / <SDL_image.h> / <SDL_mixer.h> resolve
 target_include_directories(SimpleSprite PRIVATE
-    "${SDL2_FRAMEWORK}/Headers"
-    "${SDL2_IMAGE_FRAMEWORK}/Headers"
-    "${SDL2_MIXER_FRAMEWORK}/Headers")
+    ${SDL3_INCLUDE_DIRS})
 
-# Framework search path + link the three SDL2 frameworks.
-target_compile_options(SimpleSprite PRIVATE
-    "-F${SDL_LIBS_DIR}")
-target_link_options(SimpleSprite PRIVATE
-    "-F${SDL_LIBS_DIR}"
-    "-Wl,-framework,SDL2"
-    "-Wl,-framework,SDL2_image"
-    "-Wl,-framework,SDL2_mixer")
+# Link the three vendored SDL3 dylibs; transitive codec deps resolve via @rpath.
+target_link_libraries(SimpleSprite PRIVATE
+    ${SDL3_LINK_LIBS}
+    "-Wl,-rpath,${SDL3_LIB_DIR}")
 
 # OpenGL (system framework, still ships on macOS)
 target_link_libraries(SimpleSprite PUBLIC
     "-framework OpenGL")
 
-# Make SDL/SDL_image/SDL_mixer headers reachable as <SDL.h>, <SDL_image.h>, ...
-set_target_properties(SimpleSprite PROPERTIES
-    FRAMEWORK_SEARCH_PATHS "${SDL_LIBS_DIR}")
-
 # Quiet the deprecation noise from SDL_SetAlpha etc. (kept for minimal churn)
 target_compile_definitions(SimpleSprite PRIVATE
-    SDL_DISABLE_DEPRECATED=0)
+    SDL_DISABLE_DEPRECATED=0
+    SDL_ENABLE_OLD_NAMES=1)
 
 # Legacy code freely narrows double->float in vector initializer lists; the
 # values are well-defined so silence the C++11 narrowing error.

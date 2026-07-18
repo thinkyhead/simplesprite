@@ -296,8 +296,8 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
             //
             if (keyFocusGadget) {
                 ssevent.type = SS_EVENT_KEYDOWN;
-                ssevent.key = e->key.keysym.sym;
-                ssevent.mod = e->key.keysym.mod;
+                ssevent.key = e->key.key;
+                ssevent.mod = e->key.mod;
                 did = keyFocusGadget->HandleEvent(&ssevent);
             }
 
@@ -1064,7 +1064,7 @@ Uint16 SS_Gadget::CountClicks()
 {
     DEBUGF(1, "[%08X] SS_Gadget::CountClicks()\n", this);
 
-    Uint32  t = SDL_GetTicks();
+    Uint64  t = SDL_GetTicks();
 
     if (t - lastClickTime < 400)
     {
