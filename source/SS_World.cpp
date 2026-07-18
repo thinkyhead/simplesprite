@@ -313,11 +313,11 @@ void SS_World::SetSurface(SDL_Surface *s)
 //
 void SS_World::GetInput()
 {
-    int x, y;
+    float fx, fy;
 
     keyState = SS_GetKeyState(NULL);
 
-    mouseButtons = SDL_GetMouseState(&x, &y);
+    mouseButtons = SDL_GetMouseState(&fx, &fy);
 }
 
 //
@@ -376,7 +376,7 @@ void SS_World::Animate()
 //
 void SS_World::Render()
 {
-    Uint32       tick = SDL_GetTicks();
+    Uint64       tick = SDL_GetTicks();
 
     #if SS_THREADS
     SDL_LockMutex(worldMutex);  // No processing in this portion
@@ -502,13 +502,13 @@ void SS_World::HandleEvents()
                 break;
 
             case SDL_KEYDOWN:
-                k = event.key.keysym.sym;
+                k = event.key.key;
 
-                if (event.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT | KMOD_CAPS) && (k >= 'a' && k <= 'z'))
+                if (event.key.mod & (KMOD_LSHIFT | KMOD_RSHIFT | KMOD_CAPS) && (k >= 'a' && k <= 'z'))
                 {
                     k -= ('a' - 'A');
                 }
-                else if (event.key.keysym.mod & KMOD_SHIFT)
+                else if (event.key.mod & KMOD_SHIFT)
                 {
                     switch(k)
                     {
@@ -587,7 +587,7 @@ void SS_World::HandleEvents()
                 }
 
                 if (k)
-                    event.key.keysym.sym = (SDLKey)k;
+                    event.key.key = (SDLKey)k;
                 else
                     return;
 

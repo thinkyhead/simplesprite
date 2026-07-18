@@ -50,7 +50,7 @@ class SampleWorld : public SS_World
 			{
 				case SDL_KEYDOWN:
 
-					switch ((int)event->key.keysym.sym)
+					switch ((int)event->key.key)
 					{
 						case SDLK_ESCAPE:
 							Quit();

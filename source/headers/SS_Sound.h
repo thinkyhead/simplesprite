@@ -6,13 +6,18 @@
  *
  *  $Id: SS_Sound.h,v 1.1 2007/03/02 08:05:45 slurslee Exp $
  *
+ *  SDL3 / SDL3_mixer (3.x) port: the old SDL2_mixer Mix_Chunk API was removed
+ *  in SDL3_mixer, replaced by a MIX_Mixer / MIX_Audio / MIX_Track model.
+ *  SS_Sound now wraps one MIX_Audio (decoded sample) plus one MIX_Track
+ *  (a playback voice) created on demand. SS_Music reuses the exact same
+ *  machinery with a dedicated track. See SS_Sound.cpp for the mapping.
  */
 
 #ifndef __SS_SOUND_H__
 #define __SS_SOUND_H__
 
 #include <SDL.h>
-#include <SDL_mixer.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 #include "SS_RefCounter.h"
 
@@ -33,7 +38,8 @@ class SS_Sound : public SS_RefCounter
         Uint32      flags;
         Uint32      minWait;            // minimum time before playing again
         Uint32      lastPlay;           // last time it was played
-        Mix_Chunk   *soundChunk;
+        MIX_Audio   *soundChunk;        // decoded sample (was Mix_Chunk*)
+        MIX_Track   *soundTrack;        // playback voice (created lazily)
 
     public:
                     SS_Sound(Uint32 min=0);
@@ -42,13 +48,13 @@ class SS_Sound : public SS_RefCounter
 
         static void InitAudioMixer(Uint32 channels);
 
-        static void Stop(int channel)                       { Mix_HaltChannel(channel); }
-        static void Pause(int channel)                      { Mix_Pause(channel); }
-        static void Resume(int channel)                     { Mix_Resume(channel); }
-        static void FadeOut(int channel, int ms)            { (void)Mix_FadeOutChannel(channel, ms); }
-        static void SetVolume(int channel, int vol)         { (void)Mix_Volume(channel, vol); }
-        static void SetPanning(int channel, Uint8 pan)      { (void)Mix_SetPanning(channel, pan, 255 - pan); }
-        static bool IsChannelPlaying(int channel)           { return Mix_Playing(channel); }
+        static void Stop(int channel)                       { if (channel>=0) MixHalt(channel); }
+        static void Pause(int channel)                      { if (channel>=0) MixPause(channel); }
+        static void Resume(int channel)                     { if (channel>=0) MixResume(channel); }
+        static void FadeOut(int channel, int ms)            { if (channel>=0) MixFadeOut(channel, ms); }
+        static void SetVolume(int channel, int vol)         { if (channel>=0) MixVolume(channel, vol); }
+        static void SetPanning(int channel, Uint8 pan)      { if (channel>=0) MixPan(channel, pan); }
+        static bool IsChannelPlaying(int channel)           { return (channel>=0) ? MixPlaying(channel) : false; }
 
         inline void SetMinWait(Uint32 min)                  { minWait = min; }
 
@@ -62,6 +68,17 @@ class SS_Sound : public SS_RefCounter
 
     private:
         void        Init();
+
+        // Static helpers map old "channel number" calls onto the live track set.
+        // In the new model a "channel" is just an index into the active tracks;
+        // we keep the old integer-channel API so game code is untouched.
+        static void MixHalt(int channel);
+        static void MixPause(int channel);
+        static void MixResume(int channel);
+        static void MixFadeOut(int channel, int ms);
+        static void MixVolume(int channel, int vol);
+        static void MixPan(int channel, Uint8 pan);
+        static bool MixPlaying(int channel);
 };
 
 #pragma mark -
@@ -75,7 +92,8 @@ class SS_Music
 {
     protected:
         Uint32      flags;
-        Mix_Music   *music;
+        MIX_Audio   *music;             // decoded music data (was Mix_Music*)
+        MIX_Track   *musicTrack;        // dedicated music playback voice
 
     public:
                     SS_Music();
@@ -84,15 +102,15 @@ class SS_Music
 
         void        Load(char *filename);
 
-        inline int  Play(int loops=-1)          { return Mix_PlayMusic(music, loops); }
-        inline int  FadeIn(int loops, int ms)   { return Mix_FadeInMusic(music, loops, ms); }
-        inline int  FadeOut(int ms)             { return Mix_FadeOutMusic(ms); }
-        inline int  SetVolume(int vol)          { return Mix_VolumeMusic(vol); }
+        inline int  Play(int loops=-1)          { return MusicPlay(musicTrack, music, loops, 0); }
+        inline int  FadeIn(int loops, int ms)   { return MusicPlay(musicTrack, music, loops, ms); }
+        void        FadeOut(int ms);
+        inline int  SetVolume(int vol)          { if (musicTrack) MIX_SetTrackGain(musicTrack, vol/128.0f); return vol; }
 
         void        Pause();
         void        Stop();
 
-        void        Dispose()                   { if (music) Mix_FreeMusic(music); }
+        void        Dispose()                   { if (music) { MIX_DestroyAudio(music); music=NULL; } if (musicTrack) { MIX_DestroyTrack(musicTrack); musicTrack=NULL; } }
 
         void        SetVolume(Uint32 vol);
         void        SetRate(Uint32 rate);
@@ -100,6 +118,7 @@ class SS_Music
 
     private:
         void        Init();
+        static int  MusicPlay(MIX_Track *&track, MIX_Audio *audio, int loops, int fadeMs);
 };
 
 #endif

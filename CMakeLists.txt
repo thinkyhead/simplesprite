@@ -29,20 +29,27 @@ else()
     # Leave CMAKE_OSX_ARCHITECTURES unset -> CMake uses the host arch.
 endif()
 
-# ----- SDL2 (from _LIBS, kept alongside the project) -------------------------
-set(SDL_LIBS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL/Frameworks")
-get_filename_component(SDL_LIBS_DIR "${SDL_LIBS_DIR}" ABSOLUTE)
+# ----- SDL3 (headers: vendored sdl3_compat; linking: Homebrew) ---------------
+# Header shims live in source/headers/sdl3_compat so bare #include <SDL.h> etc.
+# resolve to <SDL3/SDL.h>. The vendored SDL3 include dir adds <SDL3/...> and
+# <SDL3_image/...> paths.
+set(SDL3_VENDORED "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL3")
+set(SDL3_INCLUDE_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/source/headers/sdl3_compat"
+    "${SDL3_VENDORED}/include")
 
-set(SDL2_FRAMEWORK       "${SDL_LIBS_DIR}/SDL2.framework")
-set(SDL2_IMAGE_FRAMEWORK "${SDL_LIBS_DIR}/SDL2_image.framework")
-set(SDL2_MIXER_FRAMEWORK "${SDL_LIBS_DIR}/SDL2_mixer.framework")
+# For development, link against Homebrew-installed dylibs (all transitive deps
+# resolve via /opt/homebrew/lib). For distribution, bundle dylibs manually.
+find_library(SDL3_LIB_REAL NAMES SDL3 SDL3.0 SDL3-3.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3/lib NO_DEFAULT_PATH)
+find_library(SDL3_IMAGE_LIB_REAL NAMES SDL3_image SDL3_image.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3_image/lib NO_DEFAULT_PATH)
+find_library(SDL3_MIXER_LIB_REAL NAMES SDL3_mixer SDL3_mixer.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3_mixer/lib NO_DEFAULT_PATH)
 
-foreach(fw ${SDL2_FRAMEWORK} ${SDL2_IMAGE_FRAMEWORK} ${SDL2_MIXER_FRAMEWORK})
-    if(NOT EXISTS "${fw}")
-        message(FATAL_ERROR "Missing SDL framework: ${fw}\n"
-            "Install SDL2 into ${SDL_LIBS_DIR} or adjust SDL_LIBS_DIR.")
-    endif()
-endforeach()
+set(SDL3_LINK_LIBS
+    "${SDL3_LIB_REAL}" "${SDL3_IMAGE_LIB_REAL}" "${SDL3_MIXER_LIB_REAL}"
+    "-Wl,-rpath,/opt/homebrew/lib")
 
 # ----- Sources ----------------------------------------------------------------
 file(GLOB SS_SOURCES CONFIGURE_DEPENDS
@@ -57,37 +64,28 @@ target_include_directories(SimpleSprite PUBLIC
 # SS_ASSERT_ON enables SS_ASSERT / SS_ASSERT_FINITE in SS_Config.h — used to
 # catch ref-count underflow (dangling pointers) and NaN angles during bring-up.
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(SimpleSprite PRIVATE SS_ASSERT_ON=1)
+    target_compile_definitions(SimpleSprite PRIVATE SS_ASSERT_ON=1 GL_SILENCE_DEPRECATION=1)
 endif()
 
 # SDL2 framework headers are reached three ways:
 #  - -F for framework-style <SDL2/SDL.h> (and the linker)
 #  - -I on each framework's Headers dir so bare <SDL.h> / <SDL_image.h> / <SDL_mixer.h> resolve
 target_include_directories(SimpleSprite PRIVATE
-    "${SDL2_FRAMEWORK}/Headers"
-    "${SDL2_IMAGE_FRAMEWORK}/Headers"
-    "${SDL2_MIXER_FRAMEWORK}/Headers")
+    ${SDL3_INCLUDE_DIRS})
 
-# Framework search path + link the three SDL2 frameworks.
-target_compile_options(SimpleSprite PRIVATE
-    "-F${SDL_LIBS_DIR}")
-target_link_options(SimpleSprite PRIVATE
-    "-F${SDL_LIBS_DIR}"
-    "-Wl,-framework,SDL2"
-    "-Wl,-framework,SDL2_image"
-    "-Wl,-framework,SDL2_mixer")
+# Link the three vendored SDL3 dylibs; transitive codec deps resolve via @rpath.
+target_link_libraries(SimpleSprite PRIVATE
+    ${SDL3_LINK_LIBS})
 
 # OpenGL (system framework, still ships on macOS)
 target_link_libraries(SimpleSprite PUBLIC
     "-framework OpenGL")
 
-# Make SDL/SDL_image/SDL_mixer headers reachable as <SDL.h>, <SDL_image.h>, ...
-set_target_properties(SimpleSprite PROPERTIES
-    FRAMEWORK_SEARCH_PATHS "${SDL_LIBS_DIR}")
-
 # Quiet the deprecation noise from SDL_SetAlpha etc. (kept for minimal churn)
 target_compile_definitions(SimpleSprite PRIVATE
-    SDL_DISABLE_DEPRECATED=0)
+    SDL_DISABLE_DEPRECATED=0
+    SDL_ENABLE_OLD_NAMES=1
+    GL_SILENCE_DEPRECATION=1)
 
 # Legacy code freely narrows double->float in vector initializer lists; the
 # values are well-defined so silence the C++11 narrowing error.
@@ -97,3 +95,42 @@ target_compile_options(SimpleSprite PRIVATE
 # ----- Install (optional) -----------------------------------------------------
 install(TARGETS SimpleSprite ARCHIVE DESTINATION lib)
 install(DIRECTORY source/headers/ DESTINATION include/SimpleSprite FILES_MATCHING PATTERN "*.h")
+
+# ----- Sample App (macOS bundle, Xcode-friendly) -----------------------------
+add_executable(SimpleSpriteTest MACOSX_BUNDLE
+    "SimpleSprite Application/source/My_Game.h"
+    "SimpleSprite Application/source/My_Game.cpp"
+    "SimpleSprite Application/source/main.mm"
+)
+target_sources(SimpleSpriteTest PRIVATE
+    "source/headers/SimpleSprite.h"
+)
+target_include_directories(SimpleSpriteTest PRIVATE
+    "source/headers"
+    "source/headers/sdl3_compat"
+    "SimpleSprite Application/source"
+    ${SDL3_INCLUDE_DIRS}
+)
+target_compile_definitions(SimpleSpriteTest PRIVATE
+    SDL_ENABLE_OLD_NAMES=1 SDL_MAIN_HANDLED=1 GL_SILENCE_DEPRECATION=1)
+target_compile_options(SimpleSpriteTest PRIVATE -Wno-c++11-narrowing -fobjc-arc)
+
+# Link the engine + SDL3 libraries
+target_link_libraries(SimpleSpriteTest PRIVATE
+    SimpleSprite
+    ${SDL3_LINK_LIBS}
+    "-framework OpenGL"
+    "-framework Cocoa"
+)
+set_target_properties(SimpleSpriteTest PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER "com.thinkyhead.ss-sdl3-test"
+    MACOSX_BUNDLE_BUNDLE_NAME "SimpleSprite SDL3 Test"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+# Copy font data into the bundle's Resources
+add_custom_command(TARGET SimpleSpriteTest POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/SimpleSprite Application/data"
+        "$<TARGET_BUNDLE_CONTENT_DIR:SimpleSpriteTest>/Resources/data"
+    COMMENT "Copying font data into app bundle")

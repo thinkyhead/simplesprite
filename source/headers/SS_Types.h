@@ -107,7 +107,7 @@ enum stringAlign {
 #include <SDL_opengl.h>
 
 // SDL 1.2 -> 2.x compatibility bridge (SS_GetKeyState, SS_EnableKeyRepeat, etc.)
-#include "SS_sdl2.h"
+#include "SS_sdl3.h"
 
 #ifndef CALLBACK
 #define CALLBACK
@@ -120,8 +120,12 @@ enum stringAlign {
     #define M_PI 3.14159265358979323846
 #endif
 
-#define YES true
-#define NO  false
+#ifndef YES
+  #define YES true
+#endif
+#ifndef NO
+  #define NO  false
+#endif
 
 #define NUM_ELEMENTS(x) (sizeof(x)/sizeof(x[0]))
 #define SWAP(a,b,t) do {t=a;a=b;b=t;} while (0)

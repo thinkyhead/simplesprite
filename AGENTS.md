@@ -102,18 +102,23 @@ Uses OpenGL 1.x fixed-function pipeline (no shaders). Texture tinting via `GL_CO
 5. Tracks FPS
 
 ### Build Dependencies
-- SDL 1.2.x (SDL.framework on macOS)
-- SDL_image 1.x (PNG loading)
-- SDL_mixer 1.x (audio)
-- smpeg (MP3 support via SDL_mixer)
+- SDL 3.x (vendored dylibs + headers at `~/Projects/SDL/_LIBS/SDL3/`)
+- SDL3_image (PNG loading, vendored alongside SDL3)
+- SDL3_mixer (audio, vendored alongside SDL3 — note: 3.x is a new MIX_* API,
+  not the old Mix_Chunk API; `SS_Sound` was rewritten for it)
 - OpenGL.framework
-- Cocoa.framework (macOS SDLMain)
+- Cocoa.framework (macOS SDLMain, now the thin `SDL_MAIN_HANDLED` bootstrap)
 
-_Note: The project currently uses SDL 1.2. Stable SDL2 frameworks are already at `_LIBS/SDL/Frameworks/` (SDL2.framework, SDL2_image.framework, SDL2_mixer.framework). The code uses SDL 1.2 APIs throughout and would need porting to SDL2 (SDL_SetVideoMode → SDL_CreateWindow/SDL_CreateRenderer, SDL_GetVideoInfo → SDL_GetCurrentDisplayMode, SDL_WM_* → SDL_SetWindow*)._
+### Rendering Pipeline
+Uses OpenGL 1.x fixed-function pipeline (no shaders). Texture tinting is done via
+the texture environment (`GL_MODULATE`) combined with `glColor` — **not** `GL_LIGHTING`.
+`SS_Game::InitScreen` explicitly disables `GL_LIGHTING`/`GL_LIGHT0`/`GL_COLOR_MATERIAL`
+(news: enabling them with no normals set erased translucent textured sprites).
+Each frame renders via display list. Layer prepares modelview matrix with
+offset/scale/rotation. World runs `PreRender()` → layers → `PostRender()`.
 
 ## Build Configuration (SS_Config.h)
 - `SS_DEBUG` — debug output level (0-2)
-- `SS_THREADS` — threaded world processing
 - `SS_AUDIO_ENABLE` — audio on/off
 - `SS_JOYSTICK_ENABLE` — joystick support
 - `SS_MAX_WORLDS` — world stack depth (10)
@@ -125,11 +130,23 @@ _Note: The project currently uses SDL 1.2. Stable SDL2 frameworks are already at
 - Config file `ssgame.cfg` stored in app folder
 
 ## Current State
-- **SDL 2.x port complete** (2026-07-17). The engine now builds `libSimpleSprite.a`
-  and runs against SDL2/SDL2_image/SDL2_mixer from `~/Projects/SDL/_LIBS/SDL/Frameworks/`.
-  The SDL1.2→SDL2 seam is the bridge in `source/headers/SS_sdl2.h`. The architecture
-  below still describes the engine accurately; only the "SDL 1.2" build deps are
-  historical. Games that use it: `../solarfire`, `../deepspace` (both revived and
-  playable). See `~/wiki/llm-wiki/sdl-games-revival.md`.
+- **SDL 3.x port complete** (2026-07-18). The engine builds `libSimpleSprite.a`
+  and links against vendored SDL3/SDL3_image/SDL3_mixer from
+  `~/Projects/SDL/_LIBS/SDL3/` (no Homebrew at build time). The SDL1.2→SDL3 seam is
+  the bridge in `source/headers/SS_sdl3.h`; `<SDL.h>` etc. resolve via the
+  `source/headers/sdl3_compat/` forwarding-include shims. `SDL_ENABLE_OLD_NAMES=1`
+  is defined so the renamed-but-aliased SDL3 symbols (SDL_KEYDOWN, SDL_mutex,
+  KMOD_NONE, …) resolve — SDL3 *poisons* those names by default.
+  Games that use it: `../solarfire`, `../deepspace`. See `~/wiki/llm-wiki/sdl-games-revival.md`.
+- **Audio rewrite:** SDL3_mixer 3.x removed the old `Mix_Chunk` API entirely (it is a
+  new MIX_Mixer/MIX_Audio/MIX_Track model). `SS_Sound`/`SS_Music` were rewritten onto
+  the new `MIX_*` API in `source/SS_Sound.cpp` + `source/headers/SS_Sound.h`; the old
+  integer-channel API (Stop/Pause/SetVolume/SetPanning/…) is preserved via a channel→
+  track registry. Future-feature hooks (3D position, fades, frequency ratio) are
+  commented in that file.
 - During the revival a GL_LIGHTING bug in `SS_Game::InitScreen` was fixed (sprites
   were rendering invisible); rebuild `libSimpleSprite.a` after any engine change.
+- **Headless note:** under `SDL_VIDEODRIVER=dummy`/`SDL_AUDIODRIVER=dummy` the engine
+  *hangs* in `SDL_GL_CreateContext` (dummy GL) and in `MIX_CreateMixer` (dummy audio),
+  because the sandbox has no display/audio device. That is an environment limit, not a
+  code bug — verify rendering/audio on a real display.

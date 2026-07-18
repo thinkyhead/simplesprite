@@ -20,8 +20,8 @@ extern int SS_VIDEO_W, SS_VIDEO_H;
 #include <SDL.h>
 #include "SS_Types.h"
 
-// SDL 2.x bridge (SS_GetKeyState, SS_EnableKeyRepeat, SDL_VIDEO_W alias)
-#include "SS_sdl2.h"
+// SDL 3.x bridge (SS_GetKeyState, SS_EnableKeyRepeat, renames)
+#include "SS_sdl3.h"
 
 class SS_Game
 {

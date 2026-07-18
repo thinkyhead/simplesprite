@@ -17,7 +17,7 @@
 #include "SS_World.h"
 #include "SS_Sound.h"
 
-#include "SS_sdl2.h"        // SDL 1.2 -> 2.x bridge
+#include "SS_sdl3.h"        // SDL 1.2 -> 3.x bridge
 
 #include <SDL_opengl.h>
 
@@ -132,7 +132,7 @@ void SS_Game::InitScreen()
     //
     // Get a screen or a window
     //
-    if ( SDL_Init( (SDL_INIT_VIDEO|(SS_JOYSTICK_ENABLE ? SDL_INIT_JOYSTICK : 0x00)|(SS_AUDIO_ENABLE ? SDL_INIT_AUDIO : 0x00)) ) < 0 )
+    if ( !SDL_Init( (SDL_INIT_VIDEO|(SS_JOYSTICK_ENABLE ? SDL_INIT_JOYSTICK : 0x00)|(SS_AUDIO_ENABLE ? SDL_INIT_AUDIO : 0x00)) ) )
         throw "Couldn't initialize SDL: %s\n";
 
     int bpp = 32;   // SDL 1.2 picked the desktop depth; 32 is the safe GL default
