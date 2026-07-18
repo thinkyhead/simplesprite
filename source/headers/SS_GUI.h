@@ -62,7 +62,7 @@ class SS_GUI : public SS_Layer
         static void         SetGadgetSuite(SS_LayerItem *check, SS_ItemGroup *slider=NULL, SS_Scrollbar *scroller=NULL);
 
         inline void         SetFont(char *filename, float desc) { guiFont = new SS_SFont(filename, desc); }
-        inline void         SetFont(SS_SFont *font) { guiFont = font; }
+        inline void         SetFont(SS_SFont * const font) { guiFont = font; }
         inline SS_SFont*    Font() { return guiFont; }
 
         void                AddGadget(SS_Gadget *gadget);
@@ -243,7 +243,7 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
         void                    SetItemGroup(SS_ItemGroup *grp);
         inline void             SetItemGroup(char *file1, char *file2 = NULL, char *file3 = NULL, char *file4 = NULL);
 
-        virtual inline void     SetFont(SS_SFont *font) { gadFont = font; }
+        virtual inline void     SetFont(SS_SFont * const font) { gadFont = font; }
 
         void                    SetLabel(char *text);
         inline void             SetLabel(SS_String *str);
@@ -700,7 +700,7 @@ class SS_TextInput : public SS_Gadget
 
         virtual void        Move(float x, float y);
         inline void         SetText(const char *t) { editString->SetText(t); }
-        inline void         SetFont(const SS_SFont *f) { editString->SetFont(f); }
+        inline void         SetFont(SS_SFont *f) { editString->SetFont(f); }
 
         inline void         GainFocus() { editString->GainFocus(); }
         inline void         LoseFocus() { editString->LoseFocus(); }
@@ -855,4 +855,3 @@ class SS_CustomGadget : public SS_Gadget
 };
 
 #endif
-

@@ -1,0 +1,1087 @@
+// !$*UTF8*$!
+{
+	archiveVersion = "1";
+	classes = {
+	};
+	objectVersion = "42";
+	objects = {
+		22C24DD41E3596B40027628D = {
+			fileRef = "22C24DD31E3596B40027628D";
+			isa = "PBXBuildFile";
+		};
+		22C24DD91E3596F60027628D = {
+			fileRef = "22C24DD51E3596F60027628D";
+			isa = "PBXBuildFile";
+		};
+		22C24DDA1E3596F60027628D = {
+			fileRef = "22C24DD61E3596F60027628D";
+			isa = "PBXBuildFile";
+		};
+		22C24DDC1E3596F60027628D = {
+			fileRef = "22C24DD81E3596F60027628D";
+			isa = "PBXBuildFile";
+		};
+		22C24DDE1E35975F0027628D = {
+			fileRef = "22C24DDD1E35975F0027628D";
+			isa = "PBXBuildFile";
+		};
+		8D11072B0486CEB800E47090 = {
+			fileRef = "089C165CFE840E0CC02AAC07";
+			isa = "PBXBuildFile";
+		};
+		8D11072F0486CEB800E47090 = {
+			fileRef = "1058C7A1FEA54F0111CA2CBB";
+			isa = "PBXBuildFile";
+		};
+		BD08D7B405CD9F5E00527326 = {
+			fileRef = "BD08D7B205CD9F5E00527326";
+			isa = "PBXBuildFile";
+		};
+		BD08D7B505CD9F5E00527326 = {
+			fileRef = "BD08D7B305CD9F5E00527326";
+			isa = "PBXBuildFile";
+		};
+		BD17B71D070677EC00120DD8 = {
+			fileRef = "BD17B71C070677EC00120DD8";
+			isa = "PBXBuildFile";
+		};
+		BD259F6405566E2600C3B94A = {
+			fileRef = "BD259E0005566E2600C3B94A";
+			isa = "PBXBuildFile";
+		};
+		BD427BE30554A83B008FD831 = {
+			fileRef = "BD427BE00554A83B008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427BE40554A83B008FD831 = {
+			fileRef = "BD427BE10554A83B008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427BFC0554A8DA008FD831 = {
+			fileRef = "BD427BF50554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427BFD0554A8DA008FD831 = {
+			fileRef = "BD427BF60554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427BFE0554A8DA008FD831 = {
+			fileRef = "BD427BF70554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427BFF0554A8DA008FD831 = {
+			fileRef = "BD427BF80554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427C000554A8DA008FD831 = {
+			fileRef = "BD427BF90554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD427C010554A8DA008FD831 = {
+			fileRef = "BD427BFA0554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD4285F30554B297008FD831 = {
+			fileRef = "BD4285F20554B297008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD4ED3D407152285005C78C2 = {
+			fileRef = "BD427E6C0554AA8E008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD5469C1064ED2750010177E = {
+			fileRef = "BD5469BF064ED2750010177E";
+			isa = "PBXBuildFile";
+		};
+		BD5469C2064ED2750010177E = {
+			fileRef = "BD5469C0064ED2750010177E";
+			isa = "PBXBuildFile";
+		};
+		BD5469C4064ED3110010177E = {
+			fileRef = "BD5469C3064ED3110010177E";
+			isa = "PBXBuildFile";
+		};
+		BD5469D8064ED34F0010177E = {
+			fileRef = "BD5469D7064ED34F0010177E";
+			isa = "PBXBuildFile";
+		};
+		BD683186064D72B70085AB7A = {
+			fileRef = "BD683184064D72B70085AB7A";
+			isa = "PBXBuildFile";
+		};
+		BD683187064D72B70085AB7A = {
+			fileRef = "BD683185064D72B70085AB7A";
+			isa = "PBXBuildFile";
+		};
+		BD9D550807E44DCC00A43072 = {
+			fileRef = "BD427BFB0554A8DA008FD831";
+			isa = "PBXBuildFile";
+		};
+		BD7F59AB08D9222A00EC37E7 = {
+			buildActionMask = "2147483647";
+			dstPath = "";
+			dstSubfolderSpec = "10";
+			files = ();
+			isa = "PBXCopyFilesBuildPhase";
+			runOnlyForDeploymentPostprocessing = "0";
+		};
+		089C165DFE840E0CC02AAC07 = {
+			fileEncoding = "10";
+			isa = "PBXFileReference";
+			lastKnownFileType = "text.plist.strings";
+			name = "English";
+			path = "English.lproj/InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		1058C7A1FEA54F0111CA2CBB = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "Cocoa.framework";
+			path = "/System/Library/Frameworks/Cocoa.framework";
+			sourceTree = "<absolute>";
+		};
+		22C24DD31E3596B40027628D = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL_image.framework";
+			path = "Frameworks/SDL_image.framework";
+			sourceTree = "libSDL";
+		};
+		22C24DD51E3596F60027628D = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL_mixer.framework";
+			path = "Frameworks/SDL_mixer.framework";
+			sourceTree = "libSDL";
+		};
+		22C24DD61E3596F60027628D = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL.framework";
+			path = "Frameworks/SDL.framework";
+			sourceTree = "libSDL";
+		};
+		22C24DD81E3596F60027628D = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "smpeg.framework";
+			path = "Frameworks/smpeg.framework";
+			sourceTree = "libSDL";
+		};
+		22C24DDD1E35975F0027628D = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SimpleSprite.framework";
+			path = "Frameworks/SimpleSprite.framework";
+			sourceTree = "libSDL";
+		};
+		8D1107310486CEB800E47090 = {
+			fileEncoding = "4";
+			isa = "PBXFileReference";
+			lastKnownFileType = "text.plist";
+			path = "Info.plist";
+			sourceTree = "<group>";
+		};
+		8D1107320486CEB800E47090 = {
+			explicitFileType = "archive.ar";
+			includeInIndex = "0";
+			isa = "PBXFileReference";
+			name = "libSimpleSprite.a";
+			path = "libSimpleSprite.a";
+			sourceTree = "BUILT_PRODUCTS_DIR";
+		};
+		BD08D7B205CD9F5E00527326 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_FileBrowser.cpp";
+			sourceTree = "<group>";
+		};
+		BD08D7B305CD9F5E00527326 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_FileBrowser.h";
+			sourceTree = "<group>";
+		};
+		BD17B71C070677EC00120DD8 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_Config.h";
+			sourceTree = "<group>";
+		};
+		BD259E0005566E2600C3B94A = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "folder";
+			name = "data";
+			path = "../data";
+			sourceTree = "SOURCE_ROOT";
+		};
+		BD427BE00554A83B008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "SDLMain.h";
+			sourceTree = "<group>";
+		};
+		BD427BE10554A83B008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.objc";
+			path = "SDLMain.m";
+			sourceTree = "<group>";
+		};
+		BD427BF50554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_ConfigFile.h";
+			sourceTree = "<group>";
+		};
+		BD427BF60554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_Game.cpp";
+			sourceTree = "<group>";
+		};
+		BD427BF70554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_Game.h";
+			sourceTree = "<group>";
+		};
+		BD427BF80554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_Ship.cpp";
+			sourceTree = "<group>";
+		};
+		BD427BF90554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_Ship.h";
+			sourceTree = "<group>";
+		};
+		BD427BFA0554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_SpaceLevel.cpp";
+			sourceTree = "<group>";
+		};
+		BD427BFB0554A8DA008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_TileMapEditor.cpp";
+			sourceTree = "<group>";
+		};
+		BD427E6C0554AA8E008FD831 = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "OpenGL.framework";
+			path = "/System/Library/Frameworks/OpenGL.framework";
+			sourceTree = "<absolute>";
+		};
+		BD4285F20554B297008FD831 = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "main.cpp";
+			sourceTree = "<group>";
+		};
+		BD5469BF064ED2750010177E = {
+			fileEncoding = "4";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_InteriorLevel.h";
+			sourceTree = "<group>";
+		};
+		BD5469C0064ED2750010177E = {
+			fileEncoding = "4";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_InteriorLevel.cpp";
+			sourceTree = "<group>";
+		};
+		BD5469C3064ED3110010177E = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_SpaceLevel.h";
+			sourceTree = "<group>";
+		};
+		BD5469D7064ED34F0010177E = {
+			fileEncoding = "30";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_TileMapEditor.h";
+			sourceTree = "<group>";
+		};
+		BD683184064D72B70085AB7A = {
+			fileEncoding = "4";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.c.h";
+			path = "DS_GrapplingHook.h";
+			sourceTree = "<group>";
+		};
+		BD683185064D72B70085AB7A = {
+			fileEncoding = "4";
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			path = "DS_GrapplingHook.cpp";
+			sourceTree = "<group>";
+		};
+		8D11072E0486CEB800E47090 = {
+			buildActionMask = "2147483647";
+			files = (
+				"16520C692C2A369F9B420A69",
+"EE43670333F95E8F38F37C88",
+"0942D1662C69B120D531A526",
+"0CA2966D38388EE8E21214B6",
+			);
+			isa = "PBXFrameworksBuildPhase";
+			runOnlyForDeploymentPostprocessing = "0";
+		};
+		1058C7A0FEA54F0111CA2CBB = {
+			children = (
+				"1058C7A1FEA54F0111CA2CBB",
+			);
+			isa = "PBXGroup";
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB = {
+			children = (
+				"22C24DDD1E35975F0027628D",
+"22C24DD61E3596F60027628D",
+"22C24DD31E3596B40027628D",
+"22C24DD51E3596F60027628D",
+"22C24DD81E3596F60027628D",
+"BD427E6C0554AA8E008FD831",
+			);
+			isa = "PBXGroup";
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB = {
+			children = (
+				"8D1107320486CEB800E47090",
+			);
+			isa = "PBXGroup";
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA = {
+			children = (
+				"29B97315FDCFA39411CA2CEA",
+"BD427BDE0554A800008FD831",
+"29B97317FDCFA39411CA2CEA",
+"29B97323FDCFA39411CA2CEA",
+"19C28FACFE9D520D11CA2CBB",
+			);
+			isa = "PBXGroup";
+			name = "DeepSpace";
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA = {
+			children = (
+				"BD427C110554A927008FD831",
+"BD427C140554A953008FD831",
+			);
+			isa = "PBXGroup";
+			name = "Deep Space Rifter";
+			path = "../common";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA = {
+			children = (
+				"BD259E0005566E2600C3B94A",
+"8D1107310486CEB800E47090",
+"089C165CFE840E0CC02AAC07",
+			);
+			isa = "PBXGroup";
+			name = "Resources";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA = {
+			children = (
+				"1058C7A0FEA54F0111CA2CBB",
+"1058C7A2FEA54F0111CA2CBB",
+			);
+			isa = "PBXGroup";
+			name = "Frameworks";
+			sourceTree = "<group>";
+		};
+		BD427BDE0554A800008FD831 = {
+			children = (
+				"BD427BE00554A83B008FD831",
+"BD427BE10554A83B008FD831",
+			);
+			isa = "PBXGroup";
+			name = "SDL Glue";
+			sourceTree = "<group>";
+		};
+		BD427C110554A927008FD831 = {
+			children = (
+				"BD17B71C070677EC00120DD8",
+"BD427BF50554A8DA008FD831",
+"BD08D7B305CD9F5E00527326",
+"BD427BF70554A8DA008FD831",
+"BD683184064D72B70085AB7A",
+"BD5469BF064ED2750010177E",
+"BD427BF90554A8DA008FD831",
+"BD5469C3064ED3110010177E",
+"BD5469D7064ED34F0010177E",
+			);
+			isa = "PBXGroup";
+			name = "headers";
+			sourceTree = "<group>";
+		};
+		BD427C140554A953008FD831 = {
+			children = (
+				"BD4285F20554B297008FD831",
+"BD427BF60554A8DA008FD831",
+"BD683185064D72B70085AB7A",
+"BD08D7B205CD9F5E00527326",
+"BD5469C0064ED2750010177E",
+"BD427BF80554A8DA008FD831",
+"BD427BFA0554A8DA008FD831",
+"BD427BFB0554A8DA008FD831",
+			);
+			isa = "PBXGroup";
+			name = "source";
+			sourceTree = "<group>";
+		};
+		8D1107270486CEB800E47090 = {
+			buildActionMask = "2147483647";
+			files = (
+				"BD427BE30554A83B008FD831",
+"BD427BFC0554A8DA008FD831",
+"BD427BFE0554A8DA008FD831",
+"BD427C000554A8DA008FD831",
+"BD08D7B505CD9F5E00527326",
+"BD683186064D72B70085AB7A",
+"BD5469C1064ED2750010177E",
+"BD5469C4064ED3110010177E",
+"BD5469D8064ED34F0010177E",
+"BD17B71D070677EC00120DD8",
+			);
+			isa = "PBXHeadersBuildPhase";
+			runOnlyForDeploymentPostprocessing = "0";
+		};
+		8D1107260486CEB800E47090 = {
+			buildConfigurationList = "BD583540085A91C50065E9EE";
+			buildPhases = (
+				"8D1107270486CEB800E47090",
+"8D1107290486CEB800E47090",
+"8D11072C0486CEB800E47090",
+"8D11072E0486CEB800E47090",
+"BD7F59AB08D9222A00EC37E7",
+			);
+			buildRules = ();
+			dependencies = ();
+			isa = "PBXNativeTarget";
+			name = "SimpleSprite";
+			productInstallPath = "$(HOME)/Applications";
+			productName = "SimpleSprite";
+			productReference = "8D1107320486CEB800E47090";
+			productType = "com.apple.product-type.library.static";
+		};
+		29B97313FDCFA39411CA2CEA = {
+			attributes = {
+			};
+			buildConfigurationList = "BD583544085A91C50065E9EE";
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = "English";
+			hasScannedForEncodings = "1";
+			isa = "PBXProject";
+			knownRegions = (
+				"English",
+"en",
+			);
+			mainGroup = "29B97314FDCFA39411CA2CEA";
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"8D1107260486CEB800E47090",
+			);
+		};
+		8D1107290486CEB800E47090 = {
+			buildActionMask = "2147483647";
+			files = ();
+			isa = "PBXResourcesBuildPhase";
+			runOnlyForDeploymentPostprocessing = "0";
+		};
+		8D11072C0486CEB800E47090 = {
+			buildActionMask = "2147483647";
+			files = (
+				"D3324A2586F5508DF8A8E240",
+"27A3D1E0FA8A291946BB4B47",
+"37537286A2E090EDE1114C6A",
+"F6FD00D97D5E0A2B4F9D79A5",
+"B649DD0ED1CF511EC6C73A1C",
+"422D97C8EBEB39B524764723",
+"EAFD7DAE9483B4E0C419D205",
+"2E5D0565E54150AE2987D03E",
+"4C821BAFFCC4FDA5B91BAFED",
+"4A0EB9BDC22C6CF6DD27C1AC",
+"2A6FD8E88CF9B93BC3F295A8",
+"FDD6541EF14CA4B99269A643",
+"3E058487E2B61729D8A014A5",
+"125B208DB4CA0FBDBBF6AC9E",
+"CAFA14B352FBD4291E2223D0",
+"BCA3EEDB6704D3F813BFD952",
+"B4578F89AF71F1B5010F7169",
+"F816FC2579DD0560913945EA",
+"218B3F2AA46D913074B857DD",
+"25B8E82E85A6741CE5375E5F",
+"3566A0790666E0BAD8DEABF1",
+			);
+			isa = "PBXSourcesBuildPhase";
+			runOnlyForDeploymentPostprocessing = "0";
+		};
+		089C165CFE840E0CC02AAC07 = {
+			children = (
+				"089C165DFE840E0CC02AAC07",
+			);
+			isa = "PBXVariantGroup";
+			name = "InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		BD583541085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				COPY_PHASE_STRIP = "NO";
+				DEBUGGING_SYMBOLS = "YES";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = "NO";
+				GCC_ENABLE_FIX_AND_CONTINUE = "YES";
+				GCC_ENABLE_PASCAL_STRINGS = "NO";
+				GCC_ENABLE_TRIGRAPHS = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				GCC_PRECOMPILE_PREFIX_HEADER = "NO";
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = "NO";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = "NO";
+				GCC_WARN_UNKNOWN_PRAGMAS = "NO";
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				INFOPLIST_FILE = "Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SimpleSprite";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+"-Wno-four-char-constants",
+"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = "app";
+				ZERO_LINK = "NO";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Development";
+		};
+		BD583542085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				COPY_PHASE_STRIP = "YES";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = "NO";
+				GCC_ENABLE_TRIGRAPHS = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				GCC_PRECOMPILE_PREFIX_HEADER = "NO";
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = "NO";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = "NO";
+				GCC_WARN_UNKNOWN_PRAGMAS = "NO";
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				INFOPLIST_FILE = "Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SimpleSprite";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+"-Wno-four-char-constants",
+"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = "app";
+				ZERO_LINK = "NO";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Deployment";
+		};
+		BD583543085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_ENABLE_TRIGRAPHS = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				GCC_PRECOMPILE_PREFIX_HEADER = "NO";
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = "NO";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = "NO";
+				GCC_WARN_UNKNOWN_PRAGMAS = "NO";
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				INFOPLIST_FILE = "Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SimpleSprite";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+"-Wno-four-char-constants",
+"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = "app";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Default";
+		};
+		BD583545085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				PRODUCT_NAME = "SimpleSprite";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Development";
+		};
+		BD583546085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				PRODUCT_NAME = "SimpleSprite";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Deployment";
+		};
+		BD583547085A91C50065E9EE = {
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../_LIBS/SDL/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SDL_DISABLE_DEPRECATED=0",
+				);
+				HEADER_SEARCH_PATHS = (
+					"source/headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework/Headers",
+"$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework/Headers",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "10.15";
+				ONLY_ACTIVE_ARCH = "YES";
+				OTHER_CFLAGS = (
+					"-Wno-c++11-narrowing",
+				);
+				PRODUCT_NAME = "SimpleSprite";
+			};
+			isa = "XCBuildConfiguration";
+			name = "Default";
+		};
+		BD583540085A91C50065E9EE = {
+			buildConfigurations = (
+				"BD583541085A91C50065E9EE",
+"BD583542085A91C50065E9EE",
+"BD583543085A91C50065E9EE",
+			);
+			defaultConfigurationIsVisible = "0";
+			defaultConfigurationName = "Default";
+			isa = "XCConfigurationList";
+		};
+		BD583544085A91C50065E9EE = {
+			buildConfigurations = (
+				"BD583545085A91C50065E9EE",
+"BD583546085A91C50065E9EE",
+"BD583547085A91C50065E9EE",
+			);
+			defaultConfigurationIsVisible = "0";
+			defaultConfigurationName = "Default";
+			isa = "XCConfigurationList";
+		};
+		D3324A25E11648FB5C7ADC29 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_AI.cpp";
+			path = "source/SS_AI.cpp";
+			sourceTree = "<group>";
+		};
+		D3324A2586F5508DF8A8E240 = {
+			fileRef = "D3324A25E11648FB5C7ADC29";
+			isa = "PBXBuildFile";
+		};
+		27A3D1E0B900428B9BD59F6E = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Collisions.cpp";
+			path = "source/SS_Collisions.cpp";
+			sourceTree = "<group>";
+		};
+		27A3D1E0FA8A291946BB4B47 = {
+			fileRef = "27A3D1E0B900428B9BD59F6E";
+			isa = "PBXBuildFile";
+		};
+		375372865794D6091E16F843 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Deformers.cpp";
+			path = "source/SS_Deformers.cpp";
+			sourceTree = "<group>";
+		};
+		37537286A2E090EDE1114C6A = {
+			fileRef = "375372865794D6091E16F843";
+			isa = "PBXBuildFile";
+		};
+		F6FD00D9D00D07F19981EDCC = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Files.cpp";
+			path = "source/SS_Files.cpp";
+			sourceTree = "<group>";
+		};
+		F6FD00D97D5E0A2B4F9D79A5 = {
+			fileRef = "F6FD00D9D00D07F19981EDCC";
+			isa = "PBXBuildFile";
+		};
+		B649DD0E86639BABD24951D5 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Frame.cpp";
+			path = "source/SS_Frame.cpp";
+			sourceTree = "<group>";
+		};
+		B649DD0ED1CF511EC6C73A1C = {
+			fileRef = "B649DD0E86639BABD24951D5";
+			isa = "PBXBuildFile";
+		};
+		422D97C8A2DF285B4CFF858A = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Game.cpp";
+			path = "source/SS_Game.cpp";
+			sourceTree = "<group>";
+		};
+		422D97C8EBEB39B524764723 = {
+			fileRef = "422D97C8A2DF285B4CFF858A";
+			isa = "PBXBuildFile";
+		};
+		EAFD7DAED864D59A9178E16C = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_GUI.cpp";
+			path = "source/SS_GUI.cpp";
+			sourceTree = "<group>";
+		};
+		EAFD7DAE9483B4E0C419D205 = {
+			fileRef = "EAFD7DAED864D59A9178E16C";
+			isa = "PBXBuildFile";
+		};
+		2E5D05659ED36306131205F7 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_ItemGroup.cpp";
+			path = "source/SS_ItemGroup.cpp";
+			sourceTree = "<group>";
+		};
+		2E5D0565E54150AE2987D03E = {
+			fileRef = "2E5D05659ED36306131205F7";
+			isa = "PBXBuildFile";
+		};
+		4C821BB05BD1B4428DDD1804 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_ItemList.cpp";
+			path = "source/SS_ItemList.cpp";
+			sourceTree = "<group>";
+		};
+		4C821BAFFCC4FDA5B91BAFED = {
+			fileRef = "4C821BB05BD1B4428DDD1804";
+			isa = "PBXBuildFile";
+		};
+		4A0EB9BD6A8417CEAA8B4245 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Layer.cpp";
+			path = "source/SS_Layer.cpp";
+			sourceTree = "<group>";
+		};
+		4A0EB9BDC22C6CF6DD27C1AC = {
+			fileRef = "4A0EB9BD6A8417CEAA8B4245";
+			isa = "PBXBuildFile";
+		};
+		2A6FD8E830283B730616C841 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_LayerItem.cpp";
+			path = "source/SS_LayerItem.cpp";
+			sourceTree = "<group>";
+		};
+		2A6FD8E88CF9B93BC3F295A8 = {
+			fileRef = "2A6FD8E830283B730616C841";
+			isa = "PBXBuildFile";
+		};
+		FDD6541EAAE10039CC47DA6A = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Math.cpp";
+			path = "source/SS_Math.cpp";
+			sourceTree = "<group>";
+		};
+		FDD6541EF14CA4B99269A643 = {
+			fileRef = "FDD6541EAAE10039CC47DA6A";
+			isa = "PBXBuildFile";
+		};
+		3E05848838193C84A25616CC = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Messages.cpp";
+			path = "source/SS_Messages.cpp";
+			sourceTree = "<group>";
+		};
+		3E058487E2B61729D8A014A5 = {
+			fileRef = "3E05848838193C84A25616CC";
+			isa = "PBXBuildFile";
+		};
+		125B208E1689CF2BC067C617 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Particles.cpp";
+			path = "source/SS_Particles.cpp";
+			sourceTree = "<group>";
+		};
+		125B208DB4CA0FBDBBF6AC9E = {
+			fileRef = "125B208E1689CF2BC067C617";
+			isa = "PBXBuildFile";
+		};
+		CAFA14B2F16418925F3BD699 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_SFont.cpp";
+			path = "source/SS_SFont.cpp";
+			sourceTree = "<group>";
+		};
+		CAFA14B352FBD4291E2223D0 = {
+			fileRef = "CAFA14B2F16418925F3BD699";
+			isa = "PBXBuildFile";
+		};
+		BCA3EEDB11C063D0473E7FDB = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Sound.cpp";
+			path = "source/SS_Sound.cpp";
+			sourceTree = "<group>";
+		};
+		BCA3EEDB6704D3F813BFD952 = {
+			fileRef = "BCA3EEDB11C063D0473E7FDB";
+			isa = "PBXBuildFile";
+		};
+		B4578F89EE62CD955EA32880 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Sprite.cpp";
+			path = "source/SS_Sprite.cpp";
+			sourceTree = "<group>";
+		};
+		B4578F89AF71F1B5010F7169 = {
+			fileRef = "B4578F89EE62CD955EA32880";
+			isa = "PBXBuildFile";
+		};
+		F816FC25BDF75A763714C2C3 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Tiles.cpp";
+			path = "source/SS_Tiles.cpp";
+			sourceTree = "<group>";
+		};
+		F816FC2579DD0560913945EA = {
+			fileRef = "F816FC25BDF75A763714C2C3";
+			isa = "PBXBuildFile";
+		};
+		218B3F2A53F6F92D5E973414 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Utilities.cpp";
+			path = "source/SS_Utilities.cpp";
+			sourceTree = "<group>";
+		};
+		218B3F2AA46D913074B857DD = {
+			fileRef = "218B3F2A53F6F92D5E973414";
+			isa = "PBXBuildFile";
+		};
+		25B8E82EE740E40DE66277D6 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_Vectors.cpp";
+			path = "source/SS_Vectors.cpp";
+			sourceTree = "<group>";
+		};
+		25B8E82E85A6741CE5375E5F = {
+			fileRef = "25B8E82EE740E40DE66277D6";
+			isa = "PBXBuildFile";
+		};
+		3566A0795E2439F333661278 = {
+			fileEncoding = 4;
+			isa = "PBXFileReference";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+			name = "SS_World.cpp";
+			path = "source/SS_World.cpp";
+			sourceTree = "<group>";
+		};
+		3566A0790666E0BAD8DEABF1 = {
+			fileRef = "3566A0795E2439F333661278";
+			isa = "PBXBuildFile";
+		};
+		D84AE0834A7168762E1B1417 = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL2.framework";
+			path = "$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2.framework";
+			sourceTree = "<group>";
+		};
+		16520C692C2A369F9B420A69 = {
+			fileRef = "D84AE0834A7168762E1B1417";
+			isa = "PBXBuildFile";
+		};
+		1204C159A50760156C74624F = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL2_image.framework";
+			path = "$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_image.framework";
+			sourceTree = "<group>";
+		};
+		EE43670333F95E8F38F37C88 = {
+			fileRef = "1204C159A50760156C74624F";
+			isa = "PBXBuildFile";
+		};
+		CB3BA580ECBBE87287F3804A = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "SDL2_mixer.framework";
+			path = "$(SRCROOT)/../_LIBS/SDL/Frameworks/SDL2_mixer.framework";
+			sourceTree = "<group>";
+		};
+		0942D1662C69B120D531A526 = {
+			fileRef = "CB3BA580ECBBE87287F3804A";
+			isa = "PBXBuildFile";
+		};
+		F454E1380571BEE6620249BA = {
+			isa = "PBXFileReference";
+			lastKnownFileType = "wrapper.framework";
+			name = "OpenGL.framework";
+			path = "/System/Library/Frameworks/OpenGL.framework";
+			sourceTree = "SDKROOT";
+		};
+		0CA2966D38388EE8E21214B6 = {
+			fileRef = "F454E1380571BEE6620249BA";
+			isa = "PBXBuildFile";
+		};
+	};
+	rootObject = "29B97313FDCFA39411CA2CEA";
+}

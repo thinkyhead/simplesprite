@@ -22,7 +22,7 @@
 #ifndef __SS_TEMPLATES_H__
 #define __SS_TEMPLATES_H__
 
-#include <Carbon/Carbon.h>
+#include "SS_macos_types.h"   // Carbon is gone; just need SInt16/UInt16 etc.
 
 #include <assert.h>
 #include <stdlib.h>
@@ -30,7 +30,11 @@
 #include <SDL.h>
 #include <stdexcept>
 
-#include "SS_Types.h"
+#include "SS_Config.h"   // provides SS_DEBUG + DEBUGF macro
+
+// SS_Types.h is included by the TU before this header (it pulls in SS_Templates.h
+// after defining DEBUGF), so we intentionally do NOT include it back here to
+// avoid a circular dependency.
 
 // forward declarations
 template<class T> class TListNode;

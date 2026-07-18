@@ -44,4 +44,24 @@
 #define SS_COLLISION_LISTS      100
 #define SS_COLLISION_BAND_SIZE  200
 
+                        //
+                        // Debug output macro (also used by SS_Templates.h)
+                        //
+#define DEBUGF(N,V...) if (SS_DEBUG >= N) printf(V)
+
+                        //
+                        // Asserts for testing (gated by SS_ASSERT_ON, set by the
+                        // Debug CMake config). Fires on ref-count underflow, NaN
+                        // angles, and dangling pointers — the usual SDL2-port gotchas.
+                        //
+#ifdef SS_ASSERT_ON
+  #include <cassert>
+  #include <cmath>
+  #define SS_ASSERT(c)        assert(c)
+  #define SS_ASSERT_FINITE(f) assert(std::isfinite(f))
+#else
+  #define SS_ASSERT(c)        ((void)0)
+  #define SS_ASSERT_FINITE(f) ((void)0)
+#endif
+
 #endif

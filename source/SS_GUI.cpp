@@ -2389,12 +2389,12 @@ bool SS_TextInput::HandleEvent(SS_Event *event)
 
         case SS_EVENT_GAIN_FOCUS:
             GainFocus();
-            SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+            SS_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
             break;
 
         case SS_EVENT_LOSE_FOCUS:
             LoseFocus();
-            SDL_EnableKeyRepeat(0, 0);
+            SS_EnableKeyRepeat(0, 0);
             break;
 
         default:
