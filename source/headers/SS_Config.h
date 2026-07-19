@@ -34,6 +34,16 @@
 #define SS_JOYSTICK_ENABLE  1
 
                         //
+                        // Box2D physics (ON / OFF — OFF by default for
+                        // existing games that don't need physics). When
+                        // enabled, links libbox2d.a and compiles the
+                        // SS_Physics subsystem. PIXELS_PER_METER = 32.
+                        //
+#ifndef SS_PHYSICS_ENABLE
+#define SS_PHYSICS_ENABLE   0
+#endif
+
+                        //
                         // Maximum number of concurrent worlds
                         //
 #define SS_MAX_WORLDS       10

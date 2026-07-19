@@ -20,6 +20,15 @@
 #include <SDL_thread.h>
 #include <SDL.h>
 
+class SS_Physics;
+
+// ---------------------------------------------------------------------------
+// Optional Box2D physics subsystem (gated by SS_PHYSICS_ENABLE).
+// ---------------------------------------------------------------------------
+#if SS_PHYSICS_ENABLE
+  #include "SS_Physics.h"
+#endif
+
 typedef bool (*worldEventProc)(SS_World *w, SDL_Event *e);
 typedef void (*worldProc)(SS_World *w);
 
@@ -162,6 +171,20 @@ class SS_World : public SS_Broadcaster, public SS_Listener, public SS_LayerList,
         void                Process();
         void                Animate();
         void                Render();
+
+        // Box2D physics world (optional, null by default). Always present
+        // in the struct layout for layout consistency.
+        SS_Physics          *physics = nullptr;
+
+#if SS_PHYSICS_ENABLE
+
+        // Create and configure the physics world.
+        void                EnablePhysics(b2Vec2 gravity = b2Vec2{0.0f, -10.0f});
+
+        // Step physics and sync all items' transforms. Called between
+        // Process() and Animate() when SS_PHYSICS_ENABLE.
+        void                AnimatePhysics(float dt);
+#endif
 
         // Overridable Render and Process
         virtual void        PostProcess();

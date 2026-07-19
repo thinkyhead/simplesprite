@@ -19,6 +19,17 @@
 #include "SS_Messages.h"
 #include "SS_Utilities.h"
 
+// ---------------------------------------------------------------------------
+// Optional Box2D physics body per item — always present in the struct layout
+// so the class layout is identical regardless of SS_PHYSICS_ENABLE,
+// preventing fatal binary mismatch between engine .o and game .o files.
+// Only the implementation methods are gated.
+// ---------------------------------------------------------------------------
+#include <box2d/id.h>
+#if SS_PHYSICS_ENABLE
+  #include <box2d/types.h>  // b2BodyDef, b2Vec2 for method declarations
+#endif
+
 // Sprite Proc Pointer
 typedef void (*spriteProcPtr)(SS_LayerItem*);
 
@@ -104,6 +115,27 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
 
         float                   misc[SS_MISC_FIELDS];       // whatever
         bool                    yesno[SS_MISC_FIELDS];      // whatever
+
+        // ------------------------------------------------------------------
+        // Box2D physics body (optional). Always present for layout
+        // consistency. Publicly accessible — game code can call Box2D
+        // C API functions directly on this id.
+        // ------------------------------------------------------------------
+        b2BodyId                physicsBody = b2_nullBodyId;
+
+#if SS_PHYSICS_ENABLE
+        // Attach a body in the given b2World using the provided def.
+        // The body is created at the item's current position / rotation
+        // (converted to meters via PIXELS_PER_METER).
+        void                    AttachPhysicsBody(b2WorldId worldId, b2BodyDef *def);
+
+        // Destroy the associated physics body, if any.
+        void                    DetachPhysicsBody();
+
+        // Copy the body's transform back to the item (called by SS_World
+        // after each physics step when physicsBody is valid).
+        void                    SyncPhysicsBody();
+#endif
 
     public:
                                 SS_LayerItem();

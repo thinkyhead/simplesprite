@@ -51,6 +51,9 @@ set(SDL3_LINK_LIBS
     "${SDL3_LIB_REAL}" "${SDL3_IMAGE_LIB_REAL}" "${SDL3_MIXER_LIB_REAL}"
     "-Wl,-rpath,/opt/homebrew/lib")
 
+# ----- Box2D physics (optional, default OFF) ----------------------------------
+option(SS_PHYSICS_ENABLE "Enable Box2D physics" OFF)
+
 # ----- Sources ----------------------------------------------------------------
 file(GLOB SS_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
@@ -86,6 +89,14 @@ target_compile_definitions(SimpleSprite PRIVATE
     SDL_DISABLE_DEPRECATED=0
     SDL_ENABLE_OLD_NAMES=1
     GL_SILENCE_DEPRECATION=1)
+
+# ----- Box2D (static lib, optional physics subsystem) -----------------------
+# Include path is always added (harmless when SS_PHYSICS_ENABLE=0). The static
+# lib is harmless to link unconditionally since the linker discards unreferenced
+# symbols from .a archives.
+set(BOX2D_VENDORED "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/Box2D")
+target_include_directories(SimpleSprite PUBLIC "${BOX2D_VENDORED}/include")
+target_link_libraries(SimpleSprite PRIVATE "${BOX2D_VENDORED}/lib/libbox2d.a")
 
 # Legacy code freely narrows double->float in vector initializer lists; the
 # values are well-defined so silence the C++11 narrowing error.

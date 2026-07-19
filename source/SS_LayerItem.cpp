@@ -19,6 +19,10 @@
 
 #include <cmath>
 
+#if SS_PHYSICS_ENABLE
+  #include "SS_Physics.h"      // for PPM constant
+#endif
+
 
 //--------------------------------------------------------------
 // SS_LayerItem
@@ -35,6 +39,10 @@ SS_LayerItem::SS_LayerItem()
 SS_LayerItem::~SS_LayerItem()
 {
     DEBUGF(1, "[%p] ~SS_LayerItem()\n", this);
+
+#if SS_PHYSICS_ENABLE
+    DetachPhysicsBody();
+#endif
 
     RemoveSelf();
 }
@@ -923,3 +931,64 @@ void SS_LayerItem::defaultAnimProc(SS_LayerItem *item)
         item->currFrame = frame;
     }
 }
+
+#if SS_PHYSICS_ENABLE
+
+//--------------------------------------------------------------
+// SS_LayerItem — Box2D physics body attachment/sync
+//--------------------------------------------------------------
+
+//
+// AttachPhysicsBody(worldId, def)
+// Create a b2Body in the given world using the provided body definition.
+// The def should already have position/rotation set in meters, but we
+// override them here from the item's current pixel position.
+//
+void SS_LayerItem::AttachPhysicsBody(b2WorldId worldId, b2BodyDef *def)
+{
+    DetachPhysicsBody();
+
+    if (b2World_IsValid(worldId) && def)
+    {
+        // Position the body at the item's current location, converting
+        // from pixels (SimpleSprite) to metres (Box2D).
+        def->position = b2Vec2{xpos / PPM, ypos / PPM};
+        def->rotation = b2MakeRot(rotation * B2_PI / 180.0f);  // degrees → radians
+
+        physicsBody = b2CreateBody(worldId, def);
+
+        // Set a user pointer so contact callbacks can identify the item
+        b2Body_SetUserData(physicsBody, this);
+    }
+}
+
+//
+// DetachPhysicsBody()
+// Destroy the physics body, if any.
+//
+void SS_LayerItem::DetachPhysicsBody()
+{
+    if (b2Body_IsValid(physicsBody))
+    {
+        b2DestroyBody(physicsBody);
+        physicsBody = b2_nullBodyId;
+    }
+}
+
+//
+// SyncPhysicsBody()
+// Copy the b2Body's transform back to the item (Box2D meters → pixels).
+// Called by SS_World after each physics Step().
+//
+void SS_LayerItem::SyncPhysicsBody()
+{
+    if (b2Body_IsValid(physicsBody))
+    {
+        b2Vec2 pos = b2Body_GetPosition(physicsBody);
+        Move(pos.x * PPM, pos.y * PPM);
+        b2Rot rot = b2Body_GetRotation(physicsBody);
+        SetRotation(b2Rot_GetAngle(rot) * 180.0f / B2_PI);
+    }
+}
+
+#endif // SS_PHYSICS_ENABLE

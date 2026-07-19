@@ -39,6 +39,11 @@ SS_World::~SS_World()
 {
     DEBUGF(1, "[%p] ~SS_World() DESTRUCTOR\n", this);
 
+#if SS_PHYSICS_ENABLE
+    delete physics;
+    physics = nullptr;
+#endif
+
     Stop();
     DisposeAll();
 }
@@ -169,6 +174,16 @@ Uint32 SS_World::Run(SS_Game *g)
             }
 
             Process();
+#if SS_PHYSICS_ENABLE
+            {
+                static Uint32 lastPhysTick = 0;
+                Uint32 now = GetWorldTime();
+                if (lastPhysTick == 0) lastPhysTick = now;
+                float dt = (now - lastPhysTick) / 1000.0f;
+                lastPhysTick = now;
+                AnimatePhysics(dt);
+            }
+#endif
             Animate();
         }
 #endif
@@ -683,6 +698,16 @@ int SS_World::ProcessThread()
 
             SDL_LockMutex(worldMutex);      // increment the mutex, and if >1 then wait
             Process();
+#if SS_PHYSICS_ENABLE
+            {
+                static Uint32 lastPhysTick = 0;
+                Uint32 now = GetWorldTime();
+                if (lastPhysTick == 0) lastPhysTick = now;
+                float dt = (now - lastPhysTick) / 1000.0f;
+                lastPhysTick = now;
+                AnimatePhysics(dt);
+            }
+#endif
             Animate();
             SDL_UnlockMutex(worldMutex);    // decrement the mutex
             SDL_Delay(5);
@@ -718,3 +743,64 @@ int render_thread(void *world)
 {
     return ((SS_World*)world)->RenderThread();
 }
+
+#if SS_PHYSICS_ENABLE
+
+//--------------------------------------------------------------
+// SS_World — Box2D physics integration
+//--------------------------------------------------------------
+
+//
+// EnablePhysics(gravity)
+// Create and configure the physics world.
+//
+void SS_World::EnablePhysics(b2Vec2 gravity)
+{
+    if (physics)
+        delete physics;
+
+    physics = new SS_Physics(gravity);
+
+    DEBUGF(1, "[%p] SS_World::EnablePhysics() — physics enabled\n", this);
+}
+
+//
+// AnimatePhysics(dt)
+// Step the physics simulation and sync all item transforms.
+// Called between Process() and Animate() in the world loop.
+//
+void SS_World::AnimatePhysics(float dt)
+{
+    if (!physics)
+        return;
+
+    // Cap dt to avoid spiral-of-death after pauses / lag spikes
+    if (dt > 0.05f)
+        dt = 0.05f;
+
+    physics->Step(dt);
+
+    // Sync every item's physics body transform back to its render state
+    SS_Layer            *layer;
+    SS_LayerIterator    itr = GetIterator();
+
+    while ((layer = itr.NextItem()))
+    {
+        if (!layer->enabled || layer->paused)
+            continue;
+
+        // Iterate items in this layer via the linked-list head pointer.
+        // layer inherits from TLinkedList<SS_LayerItem*>, so m_head is
+        // the first item node.
+        SS_ItemNode *node = layer->m_head;
+        while (node)
+        {
+            SS_LayerItem *item = node->m_data;
+            if (item)
+                item->SyncPhysicsBody();
+            node = node->m_next;
+        }
+    }
+}
+
+#endif // SS_PHYSICS_ENABLE
