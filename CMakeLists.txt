@@ -29,36 +29,27 @@ else()
     # Leave CMAKE_OSX_ARCHITECTURES unset -> CMake uses the host arch.
 endif()
 
-# ----- SDL3 (vendored into _LIBS, no Homebrew at build time) ---------------
-# SDL 1.2/2.x -> 3.x port. SDL3 ships headers under <SDL3/SDL.h>,
-# <SDL3_image/SDL_image.h>, <SDL3_mixer/SDL_mixer.h>; the engine's bare
-# <SDL.h> etc. are satisfied by the sdl3_compat/ forwarding shims on the
-# include path (see source/headers/sdl3_compat/).
-set(SDL3_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL3")
-get_filename_component(SDL3_DIR "${SDL3_DIR}" ABSOLUTE)
-
-# Header search: the compat shims live in source/headers/sdl3_compat so the
-# engine's #include <SDL.h> resolves to <SDL3/SDL.h>. We ALSO add the vendored
-# include root so <SDL3/...> and <SDL3_image/...> resolve directly.
+# ----- SDL3 (headers: vendored sdl3_compat; linking: Homebrew) ---------------
+# Header shims live in source/headers/sdl3_compat so bare #include <SDL.h> etc.
+# resolve to <SDL3/SDL.h>. The vendored SDL3 include dir adds <SDL3/...> and
+# <SDL3_image/...> paths.
+set(SDL3_VENDORED "${CMAKE_CURRENT_SOURCE_DIR}/../_LIBS/SDL3")
 set(SDL3_INCLUDE_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/source/headers/sdl3_compat"
-    "${SDL3_DIR}/include")
+    "${SDL3_VENDORED}/include")
 
-# Vendored dylibs + link libs. Each dylib is re-id'd to @rpath/<name>, so we
-# add an rpath to the vendored lib dir and link the three SDL3 libs (the codec
-# transitive deps resolve via @rpath at load time).
-set(SDL3_LIB_DIR "${SDL3_DIR}/lib")
+# For development, link against Homebrew-installed dylibs (all transitive deps
+# resolve via /opt/homebrew/lib). For distribution, bundle dylibs manually.
+find_library(SDL3_LIB_REAL NAMES SDL3 SDL3.0 SDL3-3.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3/lib NO_DEFAULT_PATH)
+find_library(SDL3_IMAGE_LIB_REAL NAMES SDL3_image SDL3_image.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3_image/lib NO_DEFAULT_PATH)
+find_library(SDL3_MIXER_LIB_REAL NAMES SDL3_mixer SDL3_mixer.0
+    PATHS /opt/homebrew/lib /opt/homebrew/opt/sdl3_mixer/lib NO_DEFAULT_PATH)
+
 set(SDL3_LINK_LIBS
-    "${SDL3_LIB_DIR}/libSDL3.dylib"
-    "${SDL3_LIB_DIR}/libSDL3_image.dylib"
-    "${SDL3_LIB_DIR}/libSDL3_mixer.dylib")
-
-foreach(lib ${SDL3_LINK_LIBS})
-    if(NOT EXISTS "${lib}")
-        message(FATAL_ERROR "Missing SDL3 library: ${lib}\n"
-            "Expected vendored SDL3 at ${SDL3_DIR}. Run the vendoring step.")
-    endif()
-endforeach()
+    "${SDL3_LIB_REAL}" "${SDL3_IMAGE_LIB_REAL}" "${SDL3_MIXER_LIB_REAL}"
+    "-Wl,-rpath,/opt/homebrew/lib")
 
 # ----- Sources ----------------------------------------------------------------
 file(GLOB SS_SOURCES CONFIGURE_DEPENDS
@@ -84,8 +75,7 @@ target_include_directories(SimpleSprite PRIVATE
 
 # Link the three vendored SDL3 dylibs; transitive codec deps resolve via @rpath.
 target_link_libraries(SimpleSprite PRIVATE
-    ${SDL3_LINK_LIBS}
-    "-Wl,-rpath,${SDL3_LIB_DIR}")
+    ${SDL3_LINK_LIBS})
 
 # OpenGL (system framework, still ships on macOS)
 target_link_libraries(SimpleSprite PUBLIC
@@ -104,3 +94,42 @@ target_compile_options(SimpleSprite PRIVATE
 # ----- Install (optional) -----------------------------------------------------
 install(TARGETS SimpleSprite ARCHIVE DESTINATION lib)
 install(DIRECTORY source/headers/ DESTINATION include/SimpleSprite FILES_MATCHING PATTERN "*.h")
+
+# ----- Sample App (macOS bundle, Xcode-friendly) -----------------------------
+add_executable(SimpleSpriteTest MACOSX_BUNDLE
+    "SimpleSprite Application/source/My_Game.h"
+    "SimpleSprite Application/source/My_Game.cpp"
+    "SimpleSprite Application/source/main.mm"
+)
+target_sources(SimpleSpriteTest PRIVATE
+    "source/headers/SimpleSprite.h"
+)
+target_include_directories(SimpleSpriteTest PRIVATE
+    "source/headers"
+    "source/headers/sdl3_compat"
+    "SimpleSprite Application/source"
+    ${SDL3_INCLUDE_DIRS}
+)
+target_compile_definitions(SimpleSpriteTest PRIVATE
+    SDL_ENABLE_OLD_NAMES=1 SDL_MAIN_HANDLED=1)
+target_compile_options(SimpleSpriteTest PRIVATE -Wno-c++11-narrowing -fobjc-arc)
+
+# Link the engine + SDL3 libraries
+target_link_libraries(SimpleSpriteTest PRIVATE
+    SimpleSprite
+    ${SDL3_LINK_LIBS}
+    "-framework OpenGL"
+    "-framework Cocoa"
+)
+set_target_properties(SimpleSpriteTest PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER "com.thinkyhead.ss-sdl3-test"
+    MACOSX_BUNDLE_BUNDLE_NAME "SimpleSprite SDL3 Test"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+# Copy font data into the bundle's Resources
+add_custom_command(TARGET SimpleSpriteTest POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/SimpleSprite Application/data"
+        "$<TARGET_BUNDLE_CONTENT_DIR:SimpleSpriteTest>/Resources/data"
+    COMMENT "Copying font data into app bundle")

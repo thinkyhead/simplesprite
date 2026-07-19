@@ -174,9 +174,17 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = BDEB14BA08C1138B00ACA5CA /* Build configuration list for PBXProject "SimpleSpriteApp" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* DeepSpace */;
 			projectDirPath = "";
 			projectRoot = "";
