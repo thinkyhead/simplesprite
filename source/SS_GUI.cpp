@@ -572,7 +572,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, const char *file1, const char *file2, const char *file3, const char *file4)
 {
-    DEBUGF(1, "[%p] SS_Gadget(gui, \"%s\", this, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3, file4);
+    DEBUGF(1, "[%p] SS_Gadget(gui, \"%s\", \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3, file4);
 
     Init();
     SetItemGroup(file1, file2, file3, file4);
@@ -910,7 +910,7 @@ bool SS_Gadget::ContainsPoint(float x, float y)
 //
 void SS_Gadget::MarkEntered()
 {
-    DEBUGF(1, "[%p] SS_Gadget::MarkEntered(%p)\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::MarkEntered()\n", this);
 
     if (!IsEntered() && gui) {
         rolloverNode = gui->rolloverList.Append(this);
@@ -1384,7 +1384,7 @@ SS_Button::SS_Button(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
 
 SS_Button::SS_Button(SS_GUI *g, const char *file1, const char *file2, const char *file3) : SS_Gadget(g)
 {
-    DEBUGF(1, "[%p] SS_Button(gui, \"%s\", this, \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3);
+    DEBUGF(1, "[%p] SS_Button(gui, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3);
 
     Init();
     SetItem(file1, file2, file3);
@@ -1745,6 +1745,8 @@ bool SS_Thumb::HandleEvent(SS_Event *event)
 
     switch(event->type)
     {
+        default: break; // SS_EVENT_IDLE, etc.
+
         case SS_EVENT_CLICK:
         {
             if (x >= xthumb && x < xthumb + twidth && y >= ythumb && y < ythumb + theight)

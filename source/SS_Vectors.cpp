@@ -11,6 +11,7 @@
 #include "SS_Vectors.h"
 #include "SS_Game.h"
 #include "SS_Utilities.h"
+#include "headers/SS_Types.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -530,6 +531,7 @@ void SS_VectorFrame::SendGeometry(const SScolorb *inTint)
 
         switch (mode)
         {
+        case SS_NOTYPE: break;
 
         case SS_FRAME:
         case SS_FRAME_RECT:
@@ -780,7 +782,7 @@ void SS_VectorSprite::ReleaseFrames()
 //
 void SS_VectorSprite::SetHandle(float x, float y)
 {
-    DEBUGF(1, "[%p] SS_VectorSprite::SetHandle(%d, %d)\n", this, x, y);
+    DEBUGF(1, "[%p] SS_VectorSprite::SetHandle(%0.2f, %0.2f)\n", this, x, y);
 
     SS_LayerItem::SetHandle(x, y);
 

@@ -609,7 +609,7 @@ SS_DataToken* SS_DataContext::GetToken(const char *k)
     return NULL;
 }
 
-char* SS_DataContext::GetTokenValue(const char *k)
+const char* SS_DataContext::GetTokenValue(const char *k)
 {
     SS_DataToken *tok = GetToken(k);
 

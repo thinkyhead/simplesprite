@@ -505,7 +505,7 @@ void SS_String::SetText(const char *t)
 //
 void SS_String::AlignToRect(SS_Rect &rect, stringAlign position)
 {
-    DEBUGF(1, "[%p] SS_String::AlignToRect(%p, {%.2f, %.2f, %.2f, %.2f}, %X)\n", this, rect.x, rect.y, rect.w, rect.h, position);
+    DEBUGF(1, "[%p] SS_String::AlignToRect(%p (%.2f, %.2f, %.2f, %.2f), %X)\n", this, &rect, rect.x, rect.y, rect.w, rect.h, position);
 
     float       x, y;
     int a = 0;

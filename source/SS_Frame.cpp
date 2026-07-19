@@ -71,7 +71,7 @@ void SS_Frame::Init(frameFlags f)
 //
 void SS_Frame::SetHandle(float x, float y)
 {
-    DEBUGF(1, "[%p] SS_Frame::SetHandle(%d, %d)\n", this, x, y);
+    DEBUGF(1, "[%p] SS_Frame::SetHandle(%0.2f, %0.2f)\n", this, x, y);
 
     xhandle = x;
     yhandle = y;

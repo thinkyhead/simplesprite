@@ -1057,7 +1057,7 @@ public:
     //
     void Dispose( TListNode<T> *node )
     {
-        DEBUGF(2, "[%p] TObjectList::Dispose(%p)\n", this);
+        DEBUGF(2, "[%p] TObjectList::Dispose(node=%p)\n", this, node);
 
         if (node->m_data)
             delete node->m_data;
