@@ -25,7 +25,7 @@
 
 SS_Sprite::SS_Sprite()
 {
-    DEBUGF(1, "[%08X] SS_Sprite() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Sprite() CONSTRUCTOR\n", this);
 
     Init();
 }
@@ -40,7 +40,7 @@ SS_Sprite::SS_Sprite(char *spriteFile)
 
 SS_Sprite::~SS_Sprite()
 {
-    DEBUGF(1, "[%08X] ~SS_Sprite()\n", this);
+    DEBUGF(1, "[%p] ~SS_Sprite()\n", this);
 
     ReleaseFrames();
 }
@@ -51,7 +51,7 @@ SS_Sprite::~SS_Sprite()
 //
 const SS_Sprite& SS_Sprite::operator=(const SS_Sprite &src)
 {
-    DEBUGF(1, "[%08X] SS_Sprite::operator=(%08X)\n", this, &src);
+    DEBUGF(1, "[%p] SS_Sprite::operator=(%p)\n", this, &src);
 
     if (&src != this) {
         SS_Collider::operator=(src);
@@ -70,7 +70,7 @@ const SS_Sprite& SS_Sprite::operator=(const SS_Sprite &src)
 //
 void SS_Sprite::Init()
 {
-    DEBUGF(1, "[%08X] SS_Sprite::Init()\n", this);
+    DEBUGF(1, "[%p] SS_Sprite::Init()\n", this);
 
     frameArray  = NULL;
     frameBlocks = 0;
@@ -83,7 +83,7 @@ void SS_Sprite::Init()
 //
 void SS_Sprite::ReleaseFrames()
 {
-    DEBUGF(1, "[%08X] SS_Sprite::ReleaseFrames()\n", this);
+    DEBUGF(1, "[%p] SS_Sprite::ReleaseFrames()\n", this);
 
     if (frameCount > 0)
     {
@@ -103,7 +103,7 @@ void SS_Sprite::ReleaseFrames()
 //
 void SS_Sprite::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_Sprite::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_Sprite::SetWorld(%p)\n", this, w);
 
     if ((world = w))
     {
@@ -124,7 +124,7 @@ void SS_Sprite::SetWorld(SS_World *w)
 //
 void SS_Sprite::AddFrame(SS_Frame *frame)
 {
-    DEBUGF(1, "[%08X] SS_Sprite::AddFrame(%d)\n", this, frameCount);
+    DEBUGF(1, "[%p] SS_Sprite::AddFrame(%d)\n", this, frameCount);
 
     if ((frameCount % SS_FRAME_BLOCK) == 0)
     {
@@ -588,5 +588,3 @@ bool SS_Sprite::TestPointCollision(float x, float y, bool isLocal)
 
     return false;
 }
-
-

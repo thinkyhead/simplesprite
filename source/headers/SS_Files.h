@@ -308,7 +308,7 @@ class SS_DataContext
         ~SS_DataContext();
 
         SS_DataToken*   GetToken(const char *k);
-        char*           GetTokenValue(const char *k);
+        const char*     GetTokenValue(const char *k);
         void*           GetTokenRaw(const char *k);
         void            CopyTokenData(const char *k, void *dest);
 
@@ -369,7 +369,7 @@ class SS_FlatFile
         inline void         SetToken(const char *k, void *data, int len)    { currContext->AddToken(new SS_DataToken(k, data, len)); }
 
         // GetTokenValue gets a token's raw string value
-        inline char*        GetTokenValue(const char *k) { return currContext->GetTokenValue(k); }
+        inline const char*  GetTokenValue(const char *k) { return currContext->GetTokenValue(k); }
         inline void*        GetTokenRaw(const char *k) { return currContext->GetTokenRaw(k); }
         inline void         CopyTokenData(const char *k, void *dest) { currContext->CopyTokenData(k, dest); }
 
@@ -385,7 +385,7 @@ class SS_FlatFile
 
         inline bool         GetBoolean(const char *k) { int i; sscanf(GetTokenValue(k), "%d", &i); return (i != 0); }
         inline int          GetInteger(const char *k) { int i; sscanf(GetTokenValue(k), "%d", &i); return i; }
-        inline char*        GetString(const char *k) { return GetTokenValue(k); }
+        inline const char*  GetString(const char *k) { return GetTokenValue(k); }
         inline float        GetFloat(const char *k) { float f; sscanf(GetTokenValue(k), "%f", &f); return f; }
         inline void*        GetRaw(const char *k) { return GetTokenRaw(k); }
 

@@ -26,7 +26,7 @@
 //
 SS_Layer* SS_World::NewLayer(Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_World::NewLayer(%04X)\n", this, f);
+    DEBUGF(1, "[%p] SS_World::NewLayer(%04X)\n", this, f);
 
     SS_Layer *layer = new SS_Layer(this, f);
     return layer;
@@ -39,7 +39,7 @@ SS_Layer* SS_World::NewLayer(Uint32 f)
 //
 void SS_World::AddLayer(SS_Layer *layer)
 {
-    DEBUGF(1, "[%08X] SS_World::AddLayer(%08X)\n", this, layer);
+    DEBUGF(1, "[%p] SS_World::AddLayer(%p)\n", this, layer);
 
     layer->SetWorld(this);
     Append(layer);
@@ -80,7 +80,7 @@ void SS_World::LayerToBack(SS_Layer *layer)
 
 SS_Layer::SS_Layer(Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_Layer(%04X) CONSTRUCTOR\n", this, f);
+    DEBUGF(1, "[%p] SS_Layer(%04X) CONSTRUCTOR\n", this, f);
 
     Init(f);
 }
@@ -88,7 +88,7 @@ SS_Layer::SS_Layer(Uint32 f)
 
 SS_Layer::SS_Layer(SS_World *w, Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_Layer(%08X, %04X) CONSTRUCTOR\n", this, w, f);
+    DEBUGF(1, "[%p] SS_Layer(%p, %04X) CONSTRUCTOR\n", this, w, f);
 
     Init(f);
     w->AddLayer(this);
@@ -97,7 +97,7 @@ SS_Layer::SS_Layer(SS_World *w, Uint32 f)
 
 SS_Layer::~SS_Layer()
 {
-    DEBUGF(1, "[%08X] ~SS_Layer() DESTRUCTOR\n", this);
+    DEBUGF(1, "[%p] ~SS_Layer() DESTRUCTOR\n", this);
 
     RemoveSelf();
 }
@@ -114,7 +114,7 @@ void SS_Layer::RemoveSelf()
 //
 void SS_Layer::Init(Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_Layer::Init(flags)\n", this);
+    DEBUGF(1, "[%p] SS_Layer::Init(flags)\n", this);
 
     Clear();
     visibleList.Clear();
@@ -140,7 +140,7 @@ void SS_Layer::Init(Uint32 f)
 //
 void SS_Layer::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_Layer::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_Layer::SetWorld(%p)\n", this, w);
 
     world = w;
 
@@ -156,7 +156,7 @@ void SS_Layer::SetWorld(SS_World *w)
 //
 void SS_Layer::AddItem(SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Layer::AddItem(item)\n", this);
+    DEBUGF(1, "[%p] SS_Layer::AddItem(item)\n", this);
 
     item->SetLayer(this);
     item->SetHidden(false);
@@ -174,7 +174,7 @@ void SS_Layer::AddItem(SS_LayerItem *item)
 //
 void SS_Layer::PrependItem(SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Layer::PrependItem(item)\n", this);
+    DEBUGF(1, "[%p] SS_Layer::PrependItem(item)\n", this);
 
     item->SetLayer(this);
     item->SetHidden(false);
@@ -244,7 +244,7 @@ void SS_Layer::Render()
 //
 void SS_Layer::RemoveItem(SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Layer::RemoveSprite(%08X)\n", this, item);
+    DEBUGF(1, "[%p] SS_Layer::RemoveSprite(%p)\n", this, item);
 
     visibleList.Remove(item);
     SS_ItemList::RemoveItem(item);
@@ -263,7 +263,7 @@ void SS_Layer::RemoveItem(SS_LayerItem *item)
 //
 void SS_Layer::DisposeItem(SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Layer::DisposeItem(%08X)\n", this, item);
+    DEBUGF(1, "[%p] SS_Layer::DisposeItem(%p)\n", this, item);
 
     visibleList.Remove(item);
     delete item;
@@ -301,4 +301,3 @@ void SS_Layer::PrepareMatrix()
     glLoadIdentity();
     glOrtho(x, x + w, y + h, y, -1.0f, 1.0f);
 }
-

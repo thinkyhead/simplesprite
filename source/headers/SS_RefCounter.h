@@ -38,7 +38,7 @@ class SS_RefCounter
                         }
                         else if (refCount < 0)
                         {
-                            printf("[%08X] %s RefCount Below Zero! (%d)\n", this, name, refCount);
+                            printf("[%p] %s RefCount Below Zero! (%d)\n", this, name, refCount);
                         }
                         #endif
 
@@ -52,7 +52,7 @@ class SS_RefCounter
                     {
                         refCount++;
                         #if REF_DEBUG
-                        if (name) printf("[%08X] Retain %s (%d)\n", this, name, refCount);
+                        if (name) printf("[%p] Retain %s (%d)\n", this, name, refCount);
                         #endif
                     }
 
@@ -66,7 +66,7 @@ class SS_RefCounter
                         int ref = --refCount;
 
                         #if REF_DEBUG
-                        printf("[%08X] Release %s (%d)\n", this, name, ref);
+                        printf("[%p] Release %s (%d)\n", this, name, ref);
                         #endif
 
                         if (ref == 0) delete this;
