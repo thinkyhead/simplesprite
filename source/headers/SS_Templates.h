@@ -60,12 +60,12 @@ public:
 
     void Init()
     {
-        m_array     = NULL;
+        m_array     = nullptr;
         m_count     = 0;
         block_size  = 10;
     }
 
-    inline UInt16   Size()          { return m_count; }
+    inline UInt16   Size() const        { return m_count; }
     virtual inline void Clear()     { Resize(0); }
 
     inline void ZeroElements()      { if (m_count) memset(m_array, 0, m_count * sizeof(T)); }
@@ -124,7 +124,7 @@ public:
                 else
                 {
                     free(m_array);
-                    m_array = NULL;
+                    m_array = nullptr;
                 }
             }
             else
@@ -170,7 +170,7 @@ public:
         if (index < m_count)
             return &m_array[index];
         else
-            return NULL;
+            return nullptr;
     }
 
     //
@@ -246,9 +246,9 @@ public:
     //
     // Clear
     //
-    inline void Clear()                     { DisposeAll(); this->Resize(0); }
+    inline void Clear()                      override{ DisposeAll(); this->Resize(0); }
 
-    virtual void ExpandOrContract(UInt16 index, SInt16 size, bool noZero=false)
+    virtual void ExpandOrContract(UInt16 index, SInt16 size, bool noZero=false) override
     {
         if (size < 0)
             DisposeMembers(index, index - size - 1);
@@ -280,10 +280,10 @@ public:
 
         for (int i=start; i<=end; i++)
         {
-            if (this->m_array[i] != NULL)
+            if (this->m_array[i] != nullptr)
             {
                 delete this->m_array[i];
-                this->m_array[i] = NULL;
+                this->m_array[i] = nullptr;
             }
         }
     }
@@ -322,7 +322,7 @@ public:
         if (index < this->m_count)
             return this->m_array[index];
         else
-            return NULL;
+            return nullptr;
     }
 
     //
@@ -358,14 +358,14 @@ public:
     //
     // Delete / PopFirst / PopLast
     //
-    inline void Delete(UInt16 index, UInt16 count=1)
+    inline void Delete(UInt16 index, UInt16 count=1) override
     {
         DisposeMembers(index, index+count-1);
         ExpandOrContract(index, -count);
     }
 
-    inline void PopFirst(UInt16 count=1)    { if (count < this->m_count) { Delete(0, count); } else Clear(); }
-    inline void PopLast(UInt16 count=1)     { if (count < this->m_count) { Delete(this->m_count-count, count); } else Clear(); }
+    inline void PopFirst(UInt16 count=1)     override{ if (count < this->m_count) { Delete(0, count); } else Clear(); }
+    inline void PopLast(UInt16 count=1)      override{ if (count < this->m_count) { Delete(this->m_count-count, count); } else Clear(); }
 
     //
     // operator=
@@ -414,7 +414,7 @@ public:
 
         if ( m_prev ) m_prev->m_next = m_next;
         if ( m_next ) m_next->m_prev = m_prev;
-//      m_prev = m_next = NULL;
+//      m_prev = m_next = nullptr;
     }
 
     //
@@ -466,7 +466,7 @@ public:
 
         // if there is a node after this one, make it point to
         // newnode
-        if ( m_next != NULL )
+        if ( m_next != nullptr )
             m_next->m_prev = newnode;
 
         // make the current node point to newnode.
@@ -500,7 +500,7 @@ public:
 
         // if there is a node before this one, make it point to
         // newnode
-        if ( m_prev != NULL )
+        if ( m_prev != nullptr )
             m_prev->m_next = newnode;
 
         // make the current node point to newnode.
@@ -529,8 +529,8 @@ public:
     //
     TLinkedList()
     {
-        m_head = NULL;
-        m_tail = NULL;
+        m_head = nullptr;
+        m_tail = nullptr;
         m_count = 0;
     }
 
@@ -551,8 +551,8 @@ public:
         TListNode<T>* node = m_head;
         TListNode<T>* next;
 
-        m_head = NULL;
-        m_tail = NULL;
+        m_head = nullptr;
+        m_tail = nullptr;
         m_count = 0;
 
         while( node )
@@ -588,8 +588,8 @@ public:
             // create a new head node.
             m_head = m_tail = new TListNode<T>;
             m_head->m_data = p_data;
-            m_head->m_next = NULL;
-            m_head->m_prev = NULL;
+            m_head->m_next = nullptr;
+            m_head->m_prev = nullptr;
         }
 
         m_count++;
@@ -616,7 +616,7 @@ public:
         else
         {
             m_head = m_tail = newnode;
-            newnode->m_next = newnode->m_prev = NULL;
+            newnode->m_next = newnode->m_prev = nullptr;
         }
 
         m_count++;
@@ -643,8 +643,8 @@ public:
             // create a new head node.
             m_head = m_tail = new TListNode<T>;
             m_head->m_data = p_data;
-            m_head->m_next = NULL;
-            m_head->m_prev = NULL;
+            m_head->m_next = nullptr;
+            m_head->m_prev = nullptr;
         }
         m_count++;
         m_head->m_container = this;
@@ -732,7 +732,7 @@ public:
     {
         DEBUGF(2, "[%p] TLinkedList::RemoveHead()\n", this);
 
-        TListNode<T>* node = NULL;
+        TListNode<T>* node = nullptr;
 
         if ( m_head )
         {
@@ -748,9 +748,9 @@ public:
             // in the list. set the tail to 0.
             // if not, set the previous pointer to 0.
             if ( m_head )
-                m_head->m_prev = NULL;
+                m_head->m_prev = nullptr;
             else
-                m_tail = NULL;
+                m_tail = nullptr;
 
             m_count--;
         }
@@ -764,7 +764,7 @@ public:
     {
         DEBUGF(2, "[%p] TLinkedList::RemoveTail()\n", this);
 
-        TListNode<T>* node = NULL;
+        TListNode<T>* node = nullptr;
 
         if ( m_tail )
         {
@@ -780,9 +780,9 @@ public:
             // in the list. set the head to 0.
             // if not, set the next pointer to 0.
             if ( m_tail)
-                m_tail->m_next = NULL;
+                m_tail->m_next = nullptr;
             else
-                m_head = NULL;
+                m_head = nullptr;
 
             m_count--;
         }
@@ -974,7 +974,7 @@ public:
     // Size
     // Return the size of the list
     //
-    Uint16 Size()
+    Uint16 Size() const
     {
         return m_count;
     }
@@ -986,7 +986,7 @@ public:
     //
     bool SaveToDisk( char* p_filename )
     {
-        FILE*           outfile = NULL;
+        FILE*           outfile = nullptr;
         TListNode<T>    *itr = m_head;
 
         // open the file
@@ -1018,7 +1018,7 @@ public:
     //
     bool ReadFromDisk( char* p_filename )
     {
-        FILE*   infile = NULL;
+        FILE*   infile = nullptr;
         T       buffer;
         Uint16  count = 0;
 
@@ -1126,8 +1126,8 @@ public:
         // temporary node pointers.
         TListNode<T> *node = this->m_head, *next;
 
-        this->m_head = NULL;
-        this->m_tail = NULL;
+        this->m_head = nullptr;
+        this->m_tail = nullptr;
         this->m_count = 0;
 
         while( node )
@@ -1166,7 +1166,7 @@ public:
     // TIterator
     // Constructor; creates an iterator that points to the given list and node
     //
-    TIterator( TLinkedList<T>* p_list=NULL, TListNode<T>* p_node=NULL )
+    TIterator( TLinkedList<T>* p_list=nullptr, TListNode<T>* p_node=nullptr )
     {
         m_list = p_list;
         m_node = p_node;
@@ -1220,7 +1220,7 @@ public:
             return o_node->m_data;
         }
 
-        return NULL;
+        return nullptr;
     }
 
 
@@ -1250,7 +1250,7 @@ public:
             return o_node->m_data;
         }
 
-        return NULL;
+        return nullptr;
     }
 
 
@@ -1274,7 +1274,7 @@ public:
     {
         DEBUGF(2, "[%p] TIterator::IsValid()\n", this);
 
-        return (m_node != NULL);
+        return (m_node != nullptr);
     }
 
 

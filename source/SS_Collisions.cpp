@@ -104,7 +104,7 @@ SS_ColliderNode* SS_CollisionManager::AddToColliders(SS_Collider *item)
         return colliderList[SPATIAL_INDEX(xx)].Append(item);
     }
     else
-        return NULL;
+        return nullptr;
 }
 
 //
@@ -135,7 +135,7 @@ SS_ColliderNode* SS_CollisionManager::AddToColliders(SS_Collider *item)
 //  the collision lists of the items which can collide
 //  with it, and which are also in its spatial sphere.
 //
-//  Aa with the spatial lists, colliders don't need to check
+//  As with the spatial lists, colliders don't need to check
 //  against lower-numbered lists.
 //
 //  An optimal scheme would maintain a Generate / Receive
@@ -153,7 +153,7 @@ void SS_CollisionManager::RunCollisionTest()
     #if COLLISION_SLEW > 1
         static  Uint16 collisionSlew = 0;
     #else
-        const   Uint16 collisionSlew = 0;
+        static constexpr Uint16 collisionSlew = 0;
     #endif
 
 /*
@@ -213,7 +213,7 @@ SS_ColliderList* SS_CollisionManager::CollidersAtPoint(float x, float y)
 
 SS_Collider* SS_CollisionManager::FirstColliderOnLine(float x1, float y1, float x2, float y2)
 {
-    return NULL;
+    return nullptr;
 }
 
 SS_Collider* SS_CollisionManager::FirstColliderAt(float x, float y)
@@ -235,14 +235,14 @@ SS_Collider* SS_CollisionManager::FirstColliderAt(float x, float y)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void SS_CollisionManager::DrawCollisionGraph()
 {
 //  glMatrixMode(GL_PROJECTION);
 //  glLoadIdentity();
-//  glOrtho(0, SS_VIDEO_W, SS_VIDEO_H, 0, -1.0f, 1.0f);
+//  glOrtho(0, ss_video_w, ss_video_h, 0, -1.0f, 1.0f);
 
     //
     // Draw a bar graph of the collision list lengths
@@ -252,11 +252,11 @@ void SS_CollisionManager::DrawCollisionGraph()
     {
         float x1 = 10 + q * 10;
         float x2 = x1 + 8;
-        float y2 = SS_VIDEO_H - 5;
+        float y2 = ss_video_h - 5;
 
         for (int j=0; j<colliderList[q].m_count; j++)
         {
-            float y1 = SS_VIDEO_H - 5 - j * 5;
+            float y1 = ss_video_h - 5 - j * 5;
             glRectf(x1, y1, x2, y1 + 3);
         }
     }
@@ -275,7 +275,7 @@ void SS_CollisionManager::DrawCollisionGraph()
 //
 void SS_Collider::Init()
 {
-    collNode            = NULL;
+    collNode            = nullptr;
     isCollider          = false;
     collisions          = 0;
     collisionOut        = 0;
@@ -354,7 +354,7 @@ const SS_Collider& SS_Collider::operator=(const SS_Collider &src)
 
         // Initialize collision membership
         isCollider      = false;
-        collNode        = NULL;
+        collNode        = nullptr;
         listNumber      = -1;
 
         // Initialize collision testing
@@ -416,7 +416,7 @@ void SS_Collider::RemoveFromColliders()
     if (isCollider) {
         ColliderNode()->RemoveSelf();
         isCollider = false;
-        collNode = NULL;
+        collNode = nullptr;
     }
 }
 
@@ -505,26 +505,20 @@ void SS_Collider::CollideWith(SS_Collider *s)
 //
 Uint32 SS_Collider::GetNewCollisions()
 {
-    Uint32  coll;
+    if (!collisionUpdated) return 0;
+    collisionUpdated = false;
 
-    if (collisionUpdated)
+    // 1. Ignore collisions that were already set
+    Uint32 coll = collisions;           // get actual collisions
+    if (coll)
     {
-        collisionUpdated = false;
-
-        // 1. Ignore collisions that were already set
-
-        if ((coll = collisions))            // get actual collisions
-        {
-            coll &= ~collisionIgnore;       // remove ignored collisions
-            collisionIgnore |= coll;        // add the rest to the ignore list
-        }
-        else
-            collisionIgnore = 0;            // stop ignoring collisions if there are none
-
-        collisions = 0;
+        coll &= ~collisionIgnore;       // remove ignored collisions
+        collisionIgnore |= coll;        // add the rest to the ignore list
     }
     else
-        coll = 0;
+        collisionIgnore = 0;            // stop ignoring collisions if there are none
+
+    collisions = 0;
 
     return coll;
 }

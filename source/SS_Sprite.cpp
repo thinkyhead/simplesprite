@@ -72,8 +72,7 @@ void SS_Sprite::Init()
 {
     DEBUGF(1, "[%p] SS_Sprite::Init()\n", this);
 
-    frameArray  = NULL;
-    frameBlocks = 0;
+    frameArray.clear();
 }
 
 
@@ -91,8 +90,7 @@ void SS_Sprite::ReleaseFrames()
             (void)frameArray[i]->Release();
 
         frameCount = 0;
-        frameBlocks = 0;
-        free(frameArray);
+        frameArray.clear();
     }
 }
 
@@ -126,20 +124,8 @@ void SS_Sprite::AddFrame(SS_Frame *frame)
 {
     DEBUGF(1, "[%p] SS_Sprite::AddFrame(%d)\n", this, frameCount);
 
-    if ((frameCount % SS_FRAME_BLOCK) == 0)
-    {
-        frameBlocks++;
-
-        if (!frameArray)
-            frameArray = (SS_Frame**)malloc(sizeof(SS_Frame*) * SS_FRAME_BLOCK);
-        else
-            frameArray = (SS_Frame**)realloc(frameArray, sizeof(SS_Frame*) * SS_FRAME_BLOCK * frameBlocks);
-
-        if (!frameArray)
-            throw "Can't allocate memory for Frames.";
-    }
-
-    frameArray[frameCount++] = frame;
+    frameArray.push_back(frame);
+    frameCount = static_cast<Uint16>(frameArray.size());
     frame->Retain("Frame in Sprite");
 
     if (frame->width > width)

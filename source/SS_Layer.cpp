@@ -44,7 +44,7 @@ void SS_World::AddLayer(SS_Layer *layer)
     layer->SetWorld(this);
     Append(layer);
 
-    if (pointerSprite != NULL)
+    if (pointerSprite != nullptr)
         LayerToFront(pointerSprite->Layer());
 }
 
@@ -57,7 +57,7 @@ void SS_World::LayerToFront(SS_Layer *layer)
     Remove(layer);
     Append(layer);
 
-    if (pointerSprite != NULL && layer != pointerSprite->Layer())
+    if (pointerSprite != nullptr && layer != pointerSprite->Layer())
         LayerToFront(pointerSprite->Layer());
 }
 
@@ -124,7 +124,7 @@ void SS_Layer::Init(Uint32 f)
     paused      = false;
     removeFlag  = false;
 
-    world       = NULL;
+    world       = nullptr;
 
     spatialScale = 1.0f;
 

@@ -54,8 +54,8 @@ void SS_Frame::Init(frameFlags f)
     DEBUGF(1, "[%p] SS_Frame::Init()\n", this);
 
     flags           = f;
-    surface         = NULL;
-    mask            = NULL;
+    surface         = nullptr;
+    mask            = nullptr;
     gl_texture      = 0;
     gl_list         = 0;
     texw            = 0;
@@ -97,7 +97,7 @@ void SS_Frame::LoadImage(const char *filename)
     if (flags & (SS_KEEP_SURFACE | SS_COLLISION_MASK))
         save = &surface;
     else
-        save = NULL;
+        save = nullptr;
 
     ::GetTextureFromImage(filename, &width, &height, &gl_texture, &texw, &texh, save);
 
@@ -126,18 +126,18 @@ void SS_Frame::LoadSurface(SDL_Surface *surf, const SDL_Rect *section)
 
     DisposeTexture();
 
-    if (section != NULL)
+    if (section != nullptr)
     {
     }
     else
     {
-        if (!::MakeTextureFromSurface(surf, NULL, &gl_texture, &texw, &texh))
+        if (!::MakeTextureFromSurface(surf, nullptr, &gl_texture, &texw, &texh))
             throw "OpenGL texture could not be created.";
 
         width = surf->w;
         height = surf->h;
 
-        if (surface == NULL && (flags & (SS_COLLISION_MASK|SS_KEEP_SURFACE)))
+        if (surface == nullptr && (flags & (SS_COLLISION_MASK|SS_KEEP_SURFACE)))
         {
             surface = surf;
 
@@ -145,7 +145,7 @@ void SS_Frame::LoadSurface(SDL_Surface *surf, const SDL_Rect *section)
             {
                 MakeCollisionMask();
                 if (!(flags & SS_KEEP_SURFACE))
-                    surface = NULL;
+                    surface = nullptr;
             }
         }
     }
@@ -163,7 +163,7 @@ void SS_Frame::DisposeSurface()
 
     if (surface) {
         free(surface);
-        surface = NULL;
+        surface = nullptr;
     }
 }
 
@@ -177,7 +177,7 @@ void SS_Frame::DisposeMask()
 
     if (mask) {
         free(mask);
-        mask = NULL;
+        mask = nullptr;
     }
 }
 

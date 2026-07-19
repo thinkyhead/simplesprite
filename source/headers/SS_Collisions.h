@@ -47,12 +47,12 @@ class SS_Collider : public SS_LayerItem
                                 SS_Collider() { Init(); }
                                 SS_Collider(const SS_Collider &src) { Init(); *this = src; }
 
-        void                    SetWorld(SS_World *w);
+        void                    SetWorld(SS_World *w) override;
 
         virtual const SS_Collider&      operator=(const SS_Collider &src);
-        virtual SS_Collider*            Clone()                 { return new SS_Collider(*this); }
+        virtual SS_Collider*            Clone() override        { return new SS_Collider(*this); }
 
-        virtual void            RemoveSelf();
+        virtual void            RemoveSelf() override;
 
         Uint16                  GetSpatialIndex();
         inline SS_ColliderNode* ColliderNode()                  { return collNode; }
@@ -75,7 +75,7 @@ class SS_Collider : public SS_LayerItem
                 }
         inline void             SetCollisionOrigin(Uint16 n)    { collisionSource = n; }
 
-        virtual void            _Process();
+        virtual void            _Process() override;
 
         void                    EnableCollisions(Uint32 out, Uint32 in);
         void                    AddToColliders();
@@ -119,4 +119,3 @@ class SS_CollisionManager
 };
 
 #endif
-

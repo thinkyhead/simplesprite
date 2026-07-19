@@ -110,7 +110,7 @@ class SS_Music
         void        Pause();
         void        Stop();
 
-        void        Dispose()                   { if (music) { MIX_DestroyAudio(music); music=NULL; } if (musicTrack) { MIX_DestroyTrack(musicTrack); musicTrack=NULL; } }
+        void        Dispose()                   { if (music) { MIX_DestroyAudio(music); music=nullptr; } if (musicTrack) { MIX_DestroyTrack(musicTrack); musicTrack=nullptr; } }
 
         void        SetVolume(Uint32 vol);
         void        SetRate(Uint32 rate);

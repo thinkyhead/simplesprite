@@ -36,7 +36,7 @@
 // Module state
 //--------------------------------------------------------------
 
-static MIX_Mixer   *g_mixer   = NULL;     // the one global mixer
+static MIX_Mixer   *g_mixer   = nullptr;     // the one global mixer
 static SDL_AudioSpec g_spec;              // cached mixer format (for ms<->frames)
 static std::vector<MIX_Track*> g_channels; // channel index -> live track
 
@@ -101,8 +101,8 @@ void SS_Sound::Init()
     flags = 0;
     minWait = 0;
     lastPlay = 0;
-    soundChunk = NULL;
-    soundTrack  = NULL;
+    soundChunk = nullptr;
+    soundTrack  = nullptr;
 }
 
 
@@ -199,11 +199,11 @@ void SS_Sound::Dispose()
         auto it = std::find(g_channels.begin(), g_channels.end(), soundTrack);
         if (it != g_channels.end()) g_channels.erase(it);
         MIX_DestroyTrack(soundTrack);
-        soundTrack = NULL;
+        soundTrack = nullptr;
     }
     if (soundChunk) {
         MIX_DestroyAudio(soundChunk);
-        soundChunk = NULL;
+        soundChunk = nullptr;
     }
 }
 
@@ -250,7 +250,7 @@ void SS_Sound::InitAudioMixer(Uint32 channels)
 
 static MIX_Track *track_for_channel(int channel)
 {
-    if (channel < 0 || channel >= (int)g_channels.size()) return NULL;
+    if (channel < 0 || channel >= (int)g_channels.size()) return nullptr;
     return g_channels[channel];
 }
 
@@ -340,8 +340,8 @@ void SS_Music::Init()
     DEBUGF(1, "[%p] SS_Music::Init()\n", this);
 
     flags = 0;
-    music = NULL;
-    musicTrack = NULL;
+    music = nullptr;
+    musicTrack = nullptr;
 }
 
 

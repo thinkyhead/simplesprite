@@ -62,11 +62,11 @@ class SS_SFont
         void            LoadFont(const char *filename, float desc=0.0f);
 
         // Accessors
-        inline float    XSpace() { return xspace; }
-        inline float    YSpace() { return yspace; }
-        inline float    Height() { return height; }
-        inline float    Ascent() { return height - descender; }
-        inline float    Descender() { return descender; }
+        inline float    XSpace() const { return xspace; }
+        inline float    YSpace() const { return yspace; }
+        inline float    Height() const { return height; }
+        inline float    Ascent() const { return height - descender; }
+        inline float    Descender() const { return descender; }
 
         // Setters
         inline void     SetSpacing(float h, float v) { xspace = h; yspace = v; }
@@ -83,8 +83,8 @@ class SS_SFont
 
         // Rendering
         void            UpdateCursor(const char *text, float *x, float *y);
-        void            Render(char chr, float x, float y, SScolorb *tint=NULL, SDL_Rect *bounds=NULL);
-        void            Render(const char *text, float x, float y, SScolorb *tint=NULL, SDL_Rect *bounds=NULL);
+        void            Render(char chr, float x, float y, SScolorb *tint=nullptr, SDL_Rect *bounds=nullptr);
+        void            Render(const char *text, float x, float y, SScolorb *tint=nullptr, SDL_Rect *bounds=nullptr);
 };
 
 
@@ -136,14 +136,14 @@ class SS_String : public SS_LayerItem
         inline Uint16       IndexOfPoint(float pixx, float pixy=0) { return sfont->IndexOfPoint(text.c_str(), pixx + (drawx - xpos), pixy + (drawy - ypos)); }
 
         // Movement
-        inline void         Move(float x, float y) { SS_LayerItem::Move(x, y); RedoAlignment(); }
+        inline void         Move(float x, float y)  override{ SS_LayerItem::Move(x, y); RedoAlignment(); }
         void                SetAlignment(stringAlign align) { alignment = align; RedoAlignment(); }
         void                AlignToRect(SS_Rect &rect, stringAlign position=(stringAlign)(SA_LEFT|SA_CENTERV));
         void                AlignToSprite(SS_LayerItem *spr, stringAlign position=(stringAlign)(SA_LEFT|SA_CENTERV));
         void                AlignToPoint(float x, float y, stringAlign position=(stringAlign)(SA_LEFT|SA_CENTERV));
         void                RedoAlignment();
 
-        void                Render(SScolorb &inTint, SDL_Rect *rect=NULL);
+        void                Render(SScolorb &inTint, SDL_Rect *rect=nullptr);
 
     private:
         void                Init();
@@ -214,8 +214,8 @@ class SS_EditString : public SS_String
 
         void                HandleKey(SDLKey k, SDLMod m=KMOD_NONE);
 
-        void                Render(const SScolorb &inTint, SDL_Rect *bounds=NULL);
-        void                RenderCursor(const SScolorb &inTint, SDL_Rect *bounds=NULL);
+        void                Render(const SScolorb &inTint, SDL_Rect *bounds=nullptr);
+        void                RenderCursor(const SScolorb &inTint, SDL_Rect *bounds=nullptr);
 
     private:
         void                Init();
@@ -243,7 +243,7 @@ class SS_TextLayer : public SS_Layer
                             SS_TextLayer(SS_SFont *font);
                             ~SS_TextLayer();
 
-        inline void         SetBaseFont(SS_SFont *font, bool own=false) { basefont=font; isMyFont=own; if (runfont == NULL) runfont = font; }
+        inline void         SetBaseFont(SS_SFont *font, bool own=false) { basefont=font; isMyFont=own; if (runfont == nullptr) runfont = font; }
         inline void         SetRunFont(SS_SFont *font) { runfont = font; }
         void                AddString(SS_String *string) { AddItem(string); }
         void                MoveCursor(float x, float y) { xcurs = x; ycurs = y; }
@@ -262,8 +262,8 @@ class SS_TextLayer : public SS_Layer
 //      void                Clear();
 
 //      void                Process();
-        void                Animate() {}
-        void                Render();
+        void                Animate()  override{}
+        void                Render() override;
 
     private:
         void                Init();

@@ -849,7 +849,7 @@ bool SS_VectorSprite::IsOnScreen()
     float   le = -fr->xhandle * xscale;
     float   ri = le + fr->width * xscale;
 
-    if ((ri - le) > SS_VIDEO_W)
+    if ((ri - le) > ss_video_w)
         return true;
 
     float   to = -fr->yhandle * yscale;

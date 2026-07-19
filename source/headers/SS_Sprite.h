@@ -15,6 +15,8 @@
 #include "SS_LayerItem.h"
 #include "SS_Layer.h"
 
+#include <vector>
+
 #pragma mark -
 //--------------------------------------------------------------
 // SS_Sprite
@@ -47,12 +49,10 @@
 //		CollisionManager::PointInItemGroup(SDL_Point &pt, SS_ItemGroup *group)
 //		CollisionManager::PointInSprite(SDL_Point &pt, SS_Sprite *sprite)
 //
-#define SS_FRAME_BLOCK	5
 class SS_Sprite : public SS_Collider
 {
     protected:
-		Uint16				frameBlocks;			// size of the allocated frame array
-		SS_Frame			**frameArray;			// pointer to an array of frame pointers
+		std::vector<SS_Frame*>    frameArray;             // owned frame pointers
 
     public:
 							SS_Sprite();
@@ -61,7 +61,7 @@ class SS_Sprite : public SS_Collider
 		virtual				~SS_Sprite();
 
 		virtual const SS_Sprite&	operator=(const SS_Sprite &src);
-		virtual SS_Sprite*			Clone() { return new SS_Sprite(*this); }
+		virtual SS_Sprite*			Clone()  override{ return new SS_Sprite(*this); }
 
 		virtual itemType	Type() { return SS_ITEM_SPRITE; }
 
@@ -72,25 +72,25 @@ class SS_Sprite : public SS_Collider
 		inline void			AddFrame(const char *frameFile, frameFlags f) { AddFrame(new SS_Frame(frameFile, f)); }
 		inline SS_Frame*	Frame(Uint16 fr) { return frameArray[fr]; }
 
-		virtual void		Render(const SScolorb &inTint);
+		virtual void		Render(const SScolorb &inTint) override;
 
 		void				ReleaseFrames();
 
 		// Setters
-		void				SetWorld(SS_World *w);
+		void				SetWorld(SS_World *w) override;
 		void				SetHandle(Uint16 frame, float x, float y);
-		void				SetHandle(float x, float y);
+		void				SetHandle(float x, float y) override;
 		void				CenterHandle(Uint16 frame);
-		void				CenterHandle();
-		void				SetFrameIndex(Uint16 f);
-		void				SetAnimRange(Uint16 start, Uint16 end);
+		void				CenterHandle() override;
+		void				SetFrameIndex(Uint16 f) override;
+		void				SetAnimRange(Uint16 start, Uint16 end) override;
 
 		// Diagnostics
 		virtual bool		IsOnScreen();
 
 		// Collisions
-		bool				TestPointCollision(float x, float y, bool isLocal=false);
-		bool				_TestCollision(SS_Collider *other);
+		bool				TestPointCollision(float x, float y, bool isLocal=false) override;
+		bool				_TestCollision(SS_Collider *other) override;
 
 
 	private:

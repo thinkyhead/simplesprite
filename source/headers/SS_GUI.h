@@ -50,16 +50,16 @@ class SS_GUI : public SS_Layer
 
         virtual inline layerType Type() { return SS_LAYER_GUI; }
 
-        void                SetEnabled(bool e);
+        void                SetEnabled(bool e) override;
         void                Activate();
         static void         ActivateNone();
         inline void         SetDormant(bool b) { dormant = b; }
 
-        virtual void        SetWorld(SS_World *w);
+        virtual void        SetWorld(SS_World *w) override;
         inline SS_World*    World() { return world; }
 
         // Set all the default gadgets
-        static void         SetGadgetSuite(SS_LayerItem *check, SS_ItemGroup *slider=NULL, SS_Scrollbar *scroller=NULL);
+        static void         SetGadgetSuite(SS_LayerItem *check, SS_ItemGroup *slider=nullptr, SS_Scrollbar *scroller=nullptr);
 
         inline void         SetFont(const char *filename, float desc) { guiFont = new SS_SFont(filename, desc); }
         inline void         SetFont(SS_SFont * const font) { guiFont = font; }
@@ -72,13 +72,13 @@ class SS_GUI : public SS_Layer
         inline SS_Gadget*   KeyFocus() { return keyFocusGadget; }
         void                SetKeyFocus(SS_Gadget *g);
 
-        virtual bool        HandleEvent(SDL_Event *e);
-        virtual void        HandleCommand(long command) { }
+        virtual bool        HandleEvent(SDL_Event *e) override;
+        virtual void        HandleCommand(long command)  override{ }
         void                ExitAllRollovers();
 
-        virtual void        Process() {}
-        void                Animate();
-        void                Render();
+        virtual void        Process()  override{}
+        void                Animate() override;
+        void                Render() override;
 
     private:
         void                Init();
@@ -167,7 +167,7 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
                                 SS_Gadget(SS_GUI *g, float w, float h, Uint32 f=GAD_NOFLAGS);
                                 SS_Gadget(SS_GUI *g, SS_LayerItem *item);
                                 SS_Gadget(SS_GUI *g, SS_ItemGroup *grp);
-                                SS_Gadget(SS_GUI *g, const char *file1, const char *file2=NULL, const char *file3=NULL, const char *file4=NULL);
+                                SS_Gadget(SS_GUI *g, const char *file1, const char *file2=nullptr, const char *file3=nullptr, const char *file4=nullptr);
 
         virtual                 ~SS_Gadget();
 
@@ -184,7 +184,7 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
         inline Uint32           Flags(Uint32 m) const   { return flags & m; }
         inline Uint16           State() const           { return state; }
         inline SS_String*       String() const          { return labelString; }
-        inline const char*      Label() const           { if (labelString) { return labelString->Text(); } else { return NULL; } }
+        inline const char*      Label() const           { if (labelString) { return labelString->Text(); } else { return nullptr; } }
         inline SS_SFont*        Font() const            { return gadFont; }
         inline SS_LayerItem*    Sprite() const          { return gadSprite; }
         inline SS_ItemGroup*    SpriteGroup() const     { return (SS_ItemGroup*)this; }
@@ -234,14 +234,14 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
 
         inline void             SetState(Uint16 s) { state = s; }
 
-        static SS_Sprite*       MakeSprite(const char *file1, const char *file2=NULL, const char *file3=NULL, const char *file4=NULL);
-        static SS_ItemGroup*    MakeSpriteGroup(const char *file1, const char *file2 = NULL, const char *file3=NULL, const char *file4=NULL);
+        static SS_Sprite*       MakeSprite(const char *file1, const char *file2=nullptr, const char *file3=nullptr, const char *file4=nullptr);
+        static SS_ItemGroup*    MakeSpriteGroup(const char *file1, const char *file2 = nullptr, const char *file3=nullptr, const char *file4=nullptr);
 
         void                    SetItem(SS_LayerItem *item);
-        inline void             SetItem(const char *file1, const char *file2 = NULL, const char *file3 = NULL, const char *file4 = NULL);
+        inline void             SetItem(const char *file1, const char *file2 = nullptr, const char *file3 = nullptr, const char *file4 = nullptr);
 
         void                    SetItemGroup(SS_ItemGroup *grp);
-        inline void             SetItemGroup(const char *file1, const char *file2 = NULL, const char *file3 = NULL, const char *file4 = NULL);
+        inline void             SetItemGroup(const char *file1, const char *file2 = nullptr, const char *file3 = nullptr, const char *file4 = nullptr);
 
         virtual inline void     SetFont(SS_SFont * const font) { gadFont = font; }
 
@@ -258,17 +258,17 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
         virtual bool            HandleEvent(SS_Event *event);
         inline void             SetCommand(long command)    { Command = command; }
         virtual inline void     SendCommand(long command)   { if (gui) gui->HandleCommand(command); }
-        inline void             DoIdle()                    { if (idleProc) (*idleProc)(this, NULL); }
-        inline void             DoGainFocus()               { if (gainFocusProc) (*gainFocusProc)(this, NULL); }
-        inline void             DoLoseFocus()               { if (loseFocusProc) (*loseFocusProc)(this, NULL); }
-        inline void             DoChange()                  { if (onChangeProc) (*onChangeProc)(this, NULL); }
+        inline void             DoIdle()                    { if (idleProc) (*idleProc)(this, nullptr); }
+        inline void             DoGainFocus()               { if (gainFocusProc) (*gainFocusProc)(this, nullptr); }
+        inline void             DoLoseFocus()               { if (loseFocusProc) (*loseFocusProc)(this, nullptr); }
+        inline void             DoChange()                  { if (onChangeProc) (*onChangeProc)(this, nullptr); }
 
         virtual void            Update()                    {}      // Implement this to receive updates on your gadget
 
         // Event Support
         void                    MarkEntered();
         void                    MarkExited();
-        bool                    IsEntered() const           { return rolloverNode != NULL; }
+        bool                    IsEntered() const           { return rolloverNode != nullptr; }
 
         virtual inline bool     IsPressed() const           { return Flags(GAD_AUTOPRESS) && IsClicked() && (Flags(GAD_DRAGGABLE) || pointerIn); }
         virtual inline bool     IsHover() const             { return Flags(GAD_AUTOROLLOVER) && !IsPressed() && IsEntered(); }
@@ -299,12 +299,12 @@ class SS_Button : public SS_Gadget
 {
     public:
                         SS_Button(SS_GUI *g);
-                        SS_Button(SS_GUI *g, float w, float h, const char *lab=NULL);
+                        SS_Button(SS_GUI *g, float w, float h, const char *lab=nullptr);
                         SS_Button(SS_GUI *g, SS_Sprite *sprite);
-                        SS_Button(SS_GUI *g, const char *file1, const char *file2=NULL, const char *file3=NULL);
+                        SS_Button(SS_GUI *g, const char *file1, const char *file2=nullptr, const char *file3=nullptr);
                         ~SS_Button();
 
-        virtual bool    HandleEvent(SS_Event *event);
+        virtual bool    HandleEvent(SS_Event *event) override;
 
     private:
         void            Init();
@@ -328,17 +328,17 @@ class SS_Checkbox : public SS_Gadget
     public:
         static SS_LayerItem *checkboxSprite;
 
-                            SS_Checkbox(SS_GUI *g, const char *label=NULL);
-                            SS_Checkbox(SS_GUI *g, float w, float h, const char *label=NULL);
+                            SS_Checkbox(SS_GUI *g, const char *label=nullptr);
+                            SS_Checkbox(SS_GUI *g, float w, float h, const char *label=nullptr);
                             ~SS_Checkbox();
 
-        void                LoadImages(const char *off1, const char *on1, const char *off2=NULL, const char *on2=NULL);
-        static void         LoadDefaultImages(const char *off1, const char *on1, const char *off2=NULL, const char *on2=NULL);
+        void                LoadImages(const char *off1, const char *on1, const char *off2=nullptr, const char *on2=nullptr);
+        static void         LoadDefaultImages(const char *off1, const char *on1, const char *off2=nullptr, const char *on2=nullptr);
 
         virtual Uint16      FrameForState();
 
-        bool                HandleEvent(SS_Event *event);
-        void                Render(const SScolorb &inTint);
+        bool                HandleEvent(SS_Event *event) override;
+        void                Render(const SScolorb &inTint) override;
 
     private:
         void                Init();
@@ -366,14 +366,14 @@ class SS_RadioButton : public SS_Gadget
         Uint16              groupNum;
 
     public:
-                            SS_RadioButton(SS_GUI *g, Uint16 val, char *label=NULL);
+                            SS_RadioButton(SS_GUI *g, Uint16 val, char *label=nullptr);
                             ~SS_RadioButton();
 
         static inline void  BeginGroup(Uint16 g) { SS_RadioButton::currentGroupNum = g; }
 
         virtual Uint16      FrameForState();
 
-        bool                HandleEvent(SS_Event *event);
+        bool                HandleEvent(SS_Event *event) override;
 
     private:
         void                Init();
@@ -412,7 +412,7 @@ class SS_Dial : public SS_Gadget
         void            SetAngle(float x);
 
         void            UpdateThumb();
-        bool            HandleEvent(SS_Event *event);
+        bool            HandleEvent(SS_Event *event) override;
 
     private:
         inline void     Init(float loval, float hival, float loangle, float hiangle);
@@ -443,8 +443,8 @@ class SS_Thumb : public SS_Gadget
                         SS_Thumb(SS_GUI *g, const char *file1, const char *file2, const char *file3);
                         ~SS_Thumb();
 
-        bool            HandleEvent(SS_Event *event);
-        void            Render(const SScolorb &inTint);
+        bool            HandleEvent(SS_Event *event) override;
+        void            Render(const SScolorb &inTint) override;
         void            SetThumbPos(float x, float y)                           { xthumb = x; ythumb = y; UpdateValues(); }
         void            SetWholeSpan(float x1, float y1, float x2, float y2)    { minxv = x1; minyv = y1; maxxv = x2; maxyv = y2; UpdateSpan(); }
         void            SetThumbSpan(float rx, float ry)                        { trepx = rx; trepy = ry; UpdateSpan(); }
@@ -516,8 +516,8 @@ class SS_Slider : public SS_Gadget
                         SS_Slider(SS_GUI *g, float x1, float x2, float y, float v1, float v2, bool isVert=false);
                         ~SS_Slider();
 
-        static void     LoadImages(const char *file1, const char *file2, const char *file3=NULL, const char *file4=NULL);
-        static void     LoadDefaultImages(const char *file1, const char *file2, const char *file3=NULL, const char *file4=NULL);
+        static void     LoadImages(const char *file1, const char *file2, const char *file3=nullptr, const char *file4=nullptr);
+        static void     LoadDefaultImages(const char *file1, const char *file2, const char *file3=nullptr, const char *file4=nullptr);
 
         inline void     SetVRange(float v1, float v2) { minVal = v1; maxVal = v2; }
         inline void     SetXRange(float x1, float x2) { minX = x1; maxX = x2; }
@@ -526,7 +526,7 @@ class SS_Slider : public SS_Gadget
         void            SetPosition(float x);
 
         void            UpdateThumb();
-        bool            HandleEvent(SS_Event *event);
+        bool            HandleEvent(SS_Event *event) override;
 
     private:
         inline void     Init(float x1, float x2, float y, float v1, float v2, bool isVert=false);
@@ -613,9 +613,9 @@ class SS_Scrollbar : public SS_Gadget
         float           Amount() { return amount; }
         void            SetThumbRail(float x) { thumbRail = x; UpdateThumb(); }
 
-        void            Update() {}         // Update uses the width and height to
+        void            Update()  override{}         // Update uses the width and height to
         void            UpdateThumb();
-        bool            HandleEvent(SS_Event *event);
+        bool            HandleEvent(SS_Event *event) override;
 
         void            LoadByName(char *prefix);
 
@@ -624,19 +624,19 @@ class SS_Scrollbar : public SS_Gadget
         void            LoadStructure(
                             const char *topGroove,        const char *bottomGroove,     const char *stretchGroove,
                             const char *upNormal,         const char *downNormal,
-                            const char *upPressed=NULL,   const char *downPressed=NULL,
-                            const char *upHover=NULL,     const char *downHover=NULL );
+                            const char *upPressed=nullptr,   const char *downPressed=nullptr,
+                            const char *upHover=nullptr,     const char *downHover=nullptr );
 
         void            LoadThumb(
                             const char *topNormal,        const char *bottomNormal,         const char *stretchNormal,
-                            const char *topPressed=NULL,  const char *bottomPressed=NULL,   const char *stretchPressed=NULL,
-                            const char *topHover=NULL,    const char *bottomHover=NULL,     const char *stretchHover=NULL,
-                            const char *gripNormal=NULL,  const char *gripPressed=NULL,     const char *gripHover=NULL );
+                            const char *topPressed=nullptr,  const char *bottomPressed=nullptr,   const char *stretchPressed=nullptr,
+                            const char *topHover=nullptr,    const char *bottomHover=nullptr,     const char *stretchHover=nullptr,
+                            const char *gripNormal=nullptr,  const char *gripPressed=nullptr,     const char *gripHover=nullptr );
 
         void            MakeDefault();
         inline void     ExpandWidth(Uint16 w) { if (w > Width()) SetWidth(w); }
 
-        void            SetRegion(float w, float h) { SS_Gadget::SetRegion(w, h); Update(); }
+        void            SetRegion(float w, float h)  override{ SS_Gadget::SetRegion(w, h); Update(); }
         inline void     Resize(float w, float h) { SetRegion(w, h); }
 
     private:
@@ -662,7 +662,7 @@ class SS_Dragger : public SS_Gadget
                         SS_Dragger(SS_GUI *g, float w, float h, Uint32 f=GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
                         ~SS_Dragger();
 
-        bool            HandleEvent(SS_Event *event);
+        bool            HandleEvent(SS_Event *event) override;
 
     private:
         void            Init(Uint32 f);
@@ -691,16 +691,16 @@ class SS_TextInput : public SS_Gadget
                             SS_TextInput(SS_GUI *g, float w, float h);
                             ~SS_TextInput();
 
-        virtual void        Reset();
+        virtual void        Reset() override;
 
         inline void         SetStringOffset(float x, float y) { xoff = x; yoff = y; }
 
         inline void         SetMaxStringLength(const Uint16 max) { editString->SetMaxStringLength(max); }
         inline void         SetMaxStringWidth(const Uint16 max) { editString->SetMaxStringWidth(max); }
 
-        virtual void        Move(float x, float y);
+        virtual void        Move(float x, float y) override;
         inline void         SetText(const char *t) { editString->SetText(t); }
-        inline void         SetFont(SS_SFont *f) { editString->SetFont(f); }
+        inline void         SetFont(SS_SFont *f)  override{ editString->SetFont(f); }
 
         inline void         GainFocus() { editString->GainFocus(); }
         inline void         LoseFocus() { editString->LoseFocus(); }
@@ -726,9 +726,9 @@ class SS_TextInput : public SS_Gadget
         inline void         SetSelectionTint(GLubyte r, GLubyte g, GLubyte b) { editString->SetSelectionTint(r, g, b); }
         inline void         SetSelectionAlpha(GLubyte a) { editString->SetSelectionAlpha(a); }
 
-        virtual void        Render(const SScolorb &inTint);
+        virtual void        Render(const SScolorb &inTint) override;
 
-        bool                HandleEvent(SS_Event *event);
+        bool                HandleEvent(SS_Event *event) override;
 
     private:
         void                Init();
@@ -744,7 +744,7 @@ class SS_TextInput : public SS_Gadget
 class SS_StaticItem : public SS_Gadget
 {
     public:
-                        SS_StaticItem(SS_GUI *g, const char *text=NULL, SS_LayerItem *spr=NULL);
+                        SS_StaticItem(SS_GUI *g, const char *text=nullptr, SS_LayerItem *spr=nullptr);
                         SS_StaticItem(SS_GUI *g, float w, float h, Uint32 f=GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
                         ~SS_StaticItem();
 
@@ -768,7 +768,7 @@ class SS_MenuItem : public SS_Gadget
         SS_MenuItem     *nextItem, *prevItem;
 
     public:
-                        SS_MenuItem(SS_GUI *g, char *font=NULL);
+                        SS_MenuItem(SS_GUI *g, char *font=nullptr);
                         ~SS_MenuItem();
 
     private:
@@ -788,7 +788,7 @@ class SS_Menu : public SS_Gadget
         SS_MenuItem *firstItem, *lastItem;
 
     public:
-                    SS_Menu(SS_GUI *g, const char *font=NULL);
+                    SS_Menu(SS_GUI *g, const char *font=nullptr);
                     ~SS_Menu();
 
         void        AppendItem(SS_Sprite *spr, const char *text);
@@ -810,10 +810,10 @@ class SS_Menubar : public SS_Gadget
         SS_MenuItem *firstItem, *lastItem;
 
     public:
-                    SS_Menubar(SS_GUI *g, const char *font=NULL);
+                    SS_Menubar(SS_GUI *g, const char *font=nullptr);
                     ~SS_Menubar();
 
-        void        AppendMenu(SS_Sprite *spr, const char *text=NULL);
+        void        AppendMenu(SS_Sprite *spr, const char *text=nullptr);
 
     private:
         void        Init();
@@ -837,18 +837,18 @@ class SS_CustomGadget : public SS_Gadget
         float           misc[10];
         int             vals[10];
 
-                        SS_CustomGadget(SS_GUI *g, gadgetRenderProcPtr r=NULL);
-                        SS_CustomGadget(SS_GUI *g, float w, float h, gadgetRenderProcPtr r=NULL);
-                        SS_CustomGadget(SS_GUI *g, const char *file, gadgetRenderProcPtr r=NULL);
-                        SS_CustomGadget(SS_GUI *g, SS_Sprite *sprite, gadgetRenderProcPtr r=NULL);
-                        ~SS_CustomGadget() { if (storage != NULL) delete storage; }
+                        SS_CustomGadget(SS_GUI *g, gadgetRenderProcPtr r=nullptr);
+                        SS_CustomGadget(SS_GUI *g, float w, float h, gadgetRenderProcPtr r=nullptr);
+                        SS_CustomGadget(SS_GUI *g, const char *file, gadgetRenderProcPtr r=nullptr);
+                        SS_CustomGadget(SS_GUI *g, SS_Sprite *sprite, gadgetRenderProcPtr r=nullptr);
+                        ~SS_CustomGadget() { if (storage != nullptr) delete storage; }
 
         inline void     SetRenderProc(gadgetRenderProcPtr r) { renderProc = r; }
         char*           AllocStorage(int size) { char *s = new char[size]; storage = s; return s; }
 
         void            PushAndPrepareMatrix();
         inline void     RestoreMatrix() { glPopMatrix(); }
-        virtual void    Render(const SScolorb &inTint);
+        virtual void    Render(const SScolorb &inTint) override;
 
     private:
         void            Init();

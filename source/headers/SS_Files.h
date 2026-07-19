@@ -54,24 +54,24 @@ class SS_File
 
         // File Open and Close
         bool            Open(const char *p, const char *mode);
-        inline bool     Open(const char *p=NULL) { return OpenRead(p); }
-        inline bool     OpenRead(const char *p=NULL) { return Open(p, "r"); }
-        inline bool     OpenWrite(const char *p=NULL) { return Open(p, "w"); }
-        inline bool     OpenRW(const char *p=NULL) { return Open(p, "r+"); }
-        inline bool     OpenAppend(const char *p=NULL) { return Open(p, "a"); }
-        inline bool     OpenRWAppend(const char *p=NULL) { return Open(p, "a+"); }
-        inline void     Close() { if (stream != NULL) fclose(stream), stream = NULL; GetStatus(); }
+        inline bool     Open(const char *p=nullptr) { return OpenRead(p); }
+        inline bool     OpenRead(const char *p=nullptr) { return Open(p, "r"); }
+        inline bool     OpenWrite(const char *p=nullptr) { return Open(p, "w"); }
+        inline bool     OpenRW(const char *p=nullptr) { return Open(p, "r+"); }
+        inline bool     OpenAppend(const char *p=nullptr) { return Open(p, "a"); }
+        inline bool     OpenRWAppend(const char *p=nullptr) { return Open(p, "a+"); }
+        inline void     Close() { if (stream != nullptr) fclose(stream), stream = nullptr; GetStatus(); }
         inline void     Touch() { OpenWrite(); Close(); }
         inline bool     Exists() { return exists; }
 
         // File Status
         void            GetStatus();
-        inline struct stat* Status() { return exists ? &itemstat : NULL; }
-        inline bool     GetEOF() { return ((stream != NULL) ? (feof(stream) != 0) : false); }
-        inline void     ClearError() { if (stream != NULL) clearerr(stream); }
-        inline std::string BaseName() { return SS_File::basename(path.c_str()); }
-        inline std::string DirName() { return SS_File::dirname(path.c_str()); }
-        inline const char* Path() { return path.c_str(); }
+        inline struct stat* Status() { return exists ? &itemstat : nullptr; }
+        inline bool     GetEOF() { return ((stream != nullptr) ? (feof(stream) != 0) : false); }
+        inline void     ClearError() { if (stream != nullptr) clearerr(stream); }
+        inline std::string BaseName() const { return SS_File::basename(path.c_str()); }
+        inline std::string DirName() const { return SS_File::dirname(path.c_str()); }
+        inline const char* Path() const { return path.c_str(); }
 
         static std::string basename(const char *path)
         {
@@ -88,7 +88,7 @@ class SS_File
         size_t          ReadLine();
         size_t          ReadAll();
         char            GetChar() { Read(PrepareBuffer(1), 1); return buffer[0]; }
-        char*           GetLine() { return ReadLine() ? buffer : NULL; }
+        char*           GetLine() { return ReadLine() ? buffer : nullptr; }
         char*           GetAll() { ReadAll(); return buffer; }
         void            Dump();
 
@@ -104,7 +104,7 @@ class SS_File
 
         // Status Accessors
         inline FILE*    Stream() { return stream; }
-        inline size_t   Size() { return (exists ? itemstat.st_size : 0); }
+        inline size_t   Size() const { return (exists ? itemstat.st_size : 0); }
 
     private:
         void            Init();
@@ -138,12 +138,12 @@ class SS_Folder
         static inline const char* WorkingDir() { return workingDir.c_str(); }
 
         static void         cd(const char *dir);
-        static void         cdAppFolder(const char *dir=NULL);
-        static void         cdDataFolder(const char *dir=NULL);
+        static void         cdAppFolder(const char *dir=nullptr);
+        static void         cdDataFolder(const char *dir=nullptr);
 
         static void         push(const char *dir);
-        static void         pushAppFolder(const char *dir=NULL);
-        static void         pushDataFolder(const char *dir=NULL);
+        static void         pushAppFolder(const char *dir=nullptr);
+        static void         pushDataFolder(const char *dir=nullptr);
         static const char*  pop();
 
         static std::string  FullPath(const char *file);
@@ -211,7 +211,7 @@ class SS_FolderIterator
         SS_Folder*          CurrentFolder()     { return folder->GetFolderForEntry(iter_pos); }
 
     private:
-        void                Init() { Reset(); folder = NULL; }
+        void                Init() { Reset(); folder = nullptr; }
 };
 
 #pragma mark -
@@ -336,7 +336,7 @@ class SS_FlatFile
         void                EnterContext(const char *k);
 
         // Exit the current context - not implemented for flat files
-        void                ExitContext(const char *k=NULL) {}
+        void                ExitContext(const char *k=nullptr) {}
 
         // SetToken adds a new token to the last-added context
         inline void         SetToken(const char *k, bool v)                 { SetToken(k, v ? 1 : 0); }

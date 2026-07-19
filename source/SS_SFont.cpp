@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int SS_VIDEO_W, SS_VIDEO_H;
+extern int ss_video_w, ss_video_h;
 
 #define SS_SPACEFACTOR  3
 
@@ -247,7 +247,7 @@ void SS_SFont::Render(char chr, float x, float y, SScolorb *inTint, SDL_Rect *bo
     float   h = height * yscale;
     SScolorb *t;
 
-    if (inTint != NULL)
+    if (inTint != nullptr)
         t = inTint;
     else
     {
@@ -292,7 +292,7 @@ void SS_SFont::Render(char chr, float x, float y, SScolorb *inTint, SDL_Rect *bo
     // Turn off the clipping
     //
     if (bounds)
-        ClipRectangle(NULL);
+        ClipRectangle(nullptr);
 
     glPopMatrix();
 }
@@ -475,7 +475,7 @@ void SS_String::Init()
 {
     DEBUGF(1, "[%p] SS_String::Init()\n", this);
 
-    sfont           = NULL;
+    sfont           = nullptr;
     alignment       = SA_LEFT;
     xpos            = 0;
     ypos            = 0;
@@ -1088,7 +1088,7 @@ void SS_EditString::RenderCursor(const SScolorb &inTint, SDL_Rect *bounds)
     }
 
     if (bounds)
-        ClipRectangle(NULL);
+        ClipRectangle(nullptr);
 }
 
 #pragma mark -
@@ -1134,10 +1134,10 @@ SS_TextLayer::~SS_TextLayer()
 //
 void SS_TextLayer::Init()
 {
-    SDL_Rect whole = { 0, 0, SS_VIDEO_W, SS_VIDEO_H };
+    SDL_Rect whole = { 0, 0, ss_video_w, ss_video_h };
 
-    basefont    = NULL;     // No font yet set
-    runfont     = NULL;     // No running font set
+    basefont    = nullptr;     // No font yet set
+    runfont     = nullptr;     // No running font set
     xcurs       = 0;
     ycurs       = 0;
     bounds      = whole;

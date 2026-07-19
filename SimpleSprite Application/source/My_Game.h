@@ -21,7 +21,7 @@ class My_Game : public SS_Game
 						My_Game();
 						~My_Game() {}
 	
-		void			Run();
+		void			Run() override;
 };
 
 #endif

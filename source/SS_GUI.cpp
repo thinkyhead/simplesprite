@@ -20,10 +20,10 @@
 #include "SS_Vectors.h"
 #include "SS_World.h"
 
-SS_LayerItem        *SS_Checkbox::checkboxSprite = NULL;
-SS_LayerItem        *SS_RadioButton::radioButtonSprite = NULL;
-SS_ItemGroup        *SS_Slider::sliderSprite = NULL;
-SS_Scrollbar        *SS_Scrollbar::defaultScrollbar = NULL;
+SS_LayerItem        *SS_Checkbox::checkboxSprite = nullptr;
+SS_LayerItem        *SS_RadioButton::radioButtonSprite = nullptr;
+SS_ItemGroup        *SS_Slider::sliderSprite = nullptr;
+SS_Scrollbar        *SS_Scrollbar::defaultScrollbar = nullptr;
 
 /*
 #undef SS_DEBUG
@@ -56,7 +56,7 @@ SS_GUI* SS_World::NewGUI(SS_SFont *font)
 // SS_GUI
 //
 
-SS_GUI *SS_GUI::activeGUI = NULL;
+SS_GUI *SS_GUI::activeGUI = nullptr;
 
 //
 // Constructors
@@ -87,11 +87,11 @@ void SS_GUI::Init()
     DEBUGF(1, "[%p] SS_GUI::Init()\n", this);
 
     // Event listeners
-    clickedGadget   = NULL;
-    keyFocusGadget  = NULL;
+    clickedGadget   = nullptr;
+    keyFocusGadget  = nullptr;
     dormant         = false;
 
-    SetFont((SS_SFont*)NULL);
+    SetFont((SS_SFont*)nullptr);
 }
 
 //
@@ -142,8 +142,8 @@ void SS_GUI::SetEnabled(bool e)
 
         rolloverList.Clear();
 
-        clickedGadget = NULL;
-        keyFocusGadget = NULL;
+        clickedGadget = nullptr;
+        keyFocusGadget = nullptr;
 
         SS_GadgetIterator itr = gadgetList.GetIterator();
         while ((gad = itr.NextItem()))
@@ -159,7 +159,7 @@ void SS_GUI::Activate()
 {
     if (SS_GUI::activeGUI != this)
     {
-        if (SS_GUI::activeGUI != NULL)
+        if (SS_GUI::activeGUI != nullptr)
             SS_GUI::activeGUI->ExitAllRollovers();
 
         SS_GUI::activeGUI = this;
@@ -172,9 +172,9 @@ void SS_GUI::Activate()
 //
 void SS_GUI::ActivateNone()
 {
-    if (SS_GUI::activeGUI != NULL) {
+    if (SS_GUI::activeGUI != nullptr) {
         SS_GUI::activeGUI->ExitAllRollovers();
-        SS_GUI::activeGUI = NULL;
+        SS_GUI::activeGUI = nullptr;
     }
 }
 
@@ -276,7 +276,7 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
     // Store gadget-local coordinates in the event
     if (theGad)
     {
-        theGad->pointerIn = clickedGadget == NULL || isInside;
+        theGad->pointerIn = clickedGadget == nullptr || isInside;
 
         // Deactivate the old GUI if there is one
         Activate();
@@ -346,8 +346,8 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
                     }
                     else if (clickedGadget)     // a click in no gadget
                     {
-                        clickedGadget = NULL;
-                        w->LatchLayer(NULL);
+                        clickedGadget = nullptr;
+                        w->LatchLayer(nullptr);
                     }
                     break;
 
@@ -422,8 +422,8 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
                 did = theGad->HandleEvent(&ssevent);
             }
 
-            clickedGadget = NULL;
-            w->LatchLayer(NULL);
+            clickedGadget = nullptr;
+            w->LatchLayer(nullptr);
             break;
     }
 
@@ -463,7 +463,7 @@ SS_Gadget* SS_GUI::GadgetAtPointer()
 {
     return MousePointer() ?
         GadgetAtXY(MousePointer()->xpos /* - xoffset */, MousePointer()->ypos /* - yoffset */) :
-        NULL;
+        nullptr;
 }
 
 //
@@ -552,7 +552,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_LayerItem *item)
 
     Init();
 
-    if (item != NULL)
+    if (item != nullptr)
         SetItem(item->Clone());
 
     g->AddGadget(this);
@@ -564,7 +564,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 
     Init();
 
-    if (group != NULL)
+    if (group != nullptr)
         SetItemGroup(group->Clone());
 
     g->AddGadget(this);
@@ -599,19 +599,19 @@ void SS_Gadget::Init()
 {
     DEBUGF(1, "[%p] SS_Gadget::Init()\n", this);
 
-    gui             = NULL;
+    gui             = nullptr;
 
-    guiNode         = NULL;
-    rolloverNode    = NULL;
+    guiNode         = nullptr;
+    rolloverNode    = nullptr;
 
     lastClickTime   = 0;
     clickCount      = 0;
     maxClicks       = 1;
 
-    gadGroup        = NULL;
-    gadSprite       = NULL;
-    bkgdSprite      = NULL;
-    labelString     = NULL;
+    gadGroup        = nullptr;
+    gadSprite       = nullptr;
+    bkgdSprite      = nullptr;
+    labelString     = nullptr;
     labelAlignment  = (stringAlign)(SA_LEFT|SA_CENTERV);
 
     colorSet normColor = { 2,
@@ -635,7 +635,7 @@ void SS_Gadget::Init()
     setDisabled = normColor;
     setDisabled.fillColor.a = setDisabled.borderColor.a = setDisabled.labelColor.a = 0x7F;
 
-    SetFont(NULL);
+    SetFont(nullptr);
 
     enabled             = true;
     hideFlag            = false;
@@ -646,17 +646,17 @@ void SS_Gadget::Init()
     SetRegion(0, 0);
 
     Command             = 0x00000000;
-    mouseEnterProc      = NULL;
-    mouseMoveProc       = NULL;
-    mouseExitProc       = NULL;
-    mouseDownProc       = NULL;
-    mouseDragProc       = NULL;
-    mouseUpProc         = NULL;
-    keyDownProc         = NULL;
-    keyUpProc           = NULL;
-    idleProc            = NULL;
-    gainFocusProc       = NULL;
-    loseFocusProc       = NULL;
+    mouseEnterProc      = nullptr;
+    mouseMoveProc       = nullptr;
+    mouseExitProc       = nullptr;
+    mouseDownProc       = nullptr;
+    mouseDragProc       = nullptr;
+    mouseUpProc         = nullptr;
+    keyDownProc         = nullptr;
+    keyUpProc           = nullptr;
+    idleProc            = nullptr;
+    gainFocusProc       = nullptr;
+    loseFocusProc       = nullptr;
 }
 
 //
@@ -679,8 +679,8 @@ void SS_Gadget::RemoveSelf()
     if (gui) {
         MarkExited();
         guiNode->RemoveSelf();
-        guiNode = NULL;
-        gui = NULL;
+        guiNode = nullptr;
+        gui = nullptr;
     }
 }
 
@@ -721,7 +721,7 @@ void SS_Gadget::SetGUI(SS_GUI *g)
     if (g)
         SetWorld(g->World());
     else
-        SetWorld(NULL);
+        SetWorld(nullptr);
 }
 
 //
@@ -735,15 +735,15 @@ SS_Sprite* SS_Gadget::MakeSprite(const char *file1, const char *file2, const cha
 
     sprite->AddFrame(file1);
 
-    if (file2 != NULL)
+    if (file2 != nullptr)
     {
         sprite->AddFrame(file2);
 
-        if (file3 != NULL)
+        if (file3 != nullptr)
         {
             sprite->AddFrame(file3);
 
-            if (file4 != NULL)
+            if (file4 != nullptr)
                 sprite->AddFrame(file4);
         }
     }
@@ -773,7 +773,7 @@ SS_ItemGroup* SS_Gadget::MakeSpriteGroup(const char *file1, const char *file2, c
     sprite->SetHandle(0,0);
     group->AddItem(sprite);
 
-    if (file2 != NULL)
+    if (file2 != nullptr)
         group->AddItem(SS_Gadget::MakeSprite(file2, file3, file4));
 
     return group;
@@ -795,8 +795,8 @@ void SS_Gadget::SetItem(SS_LayerItem *item)
 {
     DEBUGF(1, "[%p] SS_Gadget::SetItem(%p)\n", this, item);
 
-    gadGroup = NULL;
-    bkgdSprite = NULL;
+    gadGroup = nullptr;
+    bkgdSprite = nullptr;
     gadSprite = item;
 
     item->SetHandle(0, 0);
@@ -927,7 +927,7 @@ void SS_Gadget::MarkExited()
 
     if (IsEntered()) {
         gui->rolloverList.Remove(rolloverNode);
-        rolloverNode = NULL;
+        rolloverNode = nullptr;
     }
 }
 
@@ -1312,8 +1312,8 @@ SS_CustomGadget::SS_CustomGadget(SS_GUI *g, SS_Sprite *sprite, gadgetRenderProcP
 void SS_CustomGadget::Init()
 {
     rotation    = 0.0f;
-    storage     = NULL;
-    renderProc  = NULL;
+    storage     = nullptr;
+    renderProc  = nullptr;
 
     DisableFlag(GAD_DRAWBACKGROUND);
 
@@ -1346,7 +1346,7 @@ void SS_CustomGadget::Render(const SScolorb &inTint)
 {
     SS_Gadget::Render(inTint);
 
-    if (renderProc != NULL)
+    if (renderProc != nullptr)
     {
         PushAndPrepareMatrix();
         (renderProc)(this);
@@ -1371,7 +1371,7 @@ SS_Button::SS_Button(SS_GUI *g, float w, float h, const char *lab) : SS_Gadget(g
 
     Init();
 
-    if (lab != NULL)
+    if (lab != nullptr)
         SetLabel(lab);
 }
 
@@ -1480,7 +1480,7 @@ SS_Checkbox::SS_Checkbox(SS_GUI *g, const char *label) : SS_Gadget(g, SS_Checkbo
 
     Init();
 
-    if (label != NULL)
+    if (label != nullptr)
         SetLabel(label);
 }
 
@@ -1490,7 +1490,7 @@ SS_Checkbox::SS_Checkbox(SS_GUI *g, float w, float h, const char *label) : SS_Ga
 
     Init();
 
-    if (label != NULL)
+    if (label != nullptr)
         SetLabel(label);
 
     EnableFlag(GAD_DRAWBORDER|GAD_DRAWBACKGROUND);
@@ -1602,7 +1602,7 @@ SS_RadioButton::SS_RadioButton(SS_GUI *g, Uint16 val, char *label) : SS_Gadget(g
 
     Init();
 
-    if (label != NULL)
+    if (label != nullptr)
         SetLabel(label);
 }
 
@@ -1822,7 +1822,7 @@ SS_Slider::SS_Slider(SS_GUI *g, float x1, float x2, float y, float v1, float v2,
     //
     // Make default graphics with vectors
     //
-    if (SS_Slider::sliderSprite == NULL)
+    if (SS_Slider::sliderSprite == nullptr)
     {
         SS_ItemGroup *vgroup = new SS_ItemGroup();
         SS_VectorSprite *vsprite = new SS_VectorSprite();
@@ -1934,7 +1934,7 @@ SS_Scrollbar::SS_Scrollbar(SS_GUI *g, float startVal, float endVal, float a) : S
 {
     DEBUGF(1, "[%p] SS_Scrollbar(g, topVal, bottomVal, isVert) CONSTRUCTOR\n", this);
 
-//  if (SS_Scrollbar::defaultScrollbar != NULL)
+//  if (SS_Scrollbar::defaultScrollbar != nullptr)
 //
 
     Init(startVal, endVal, a);
@@ -2036,7 +2036,7 @@ void SS_Scrollbar::LoadStructure(
 
     structureGroup = stGroup;
 
-    if (gadGroup == NULL)
+    if (gadGroup == nullptr)
         gadGroup = new SS_ItemGroup();
 
     gadGroup->AddItem(stGroup);
@@ -2268,7 +2268,7 @@ SS_TextInput::SS_TextInput(SS_GUI *g, float w, float h) : SS_Gadget(g, w, h)
 
 SS_TextInput::~SS_TextInput()
 {
-    if (editString != NULL)
+    if (editString != nullptr)
         delete editString;
 }
 

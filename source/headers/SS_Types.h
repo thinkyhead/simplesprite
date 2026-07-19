@@ -218,7 +218,7 @@ typedef struct {
 
 extern glState gl_state;
 
-static __inline__ void gl_do_blend(bool on)
+inline void gl_do_blend(bool on)
 {
     if(gl_state.do_blend == on)
         return;
@@ -229,7 +229,7 @@ static __inline__ void gl_do_blend(bool on)
     gl_state.do_blend = on;
 }
 
-static __inline__ void gl_do_texture(bool on)
+inline void gl_do_texture(bool on)
 {
     if(gl_state.do_texture == on)
         return;
@@ -240,7 +240,7 @@ static __inline__ void gl_do_texture(bool on)
     gl_state.do_texture = on;
 }
 
-static __inline__ void gl_bind_texture(GLuint tx)
+inline void gl_bind_texture(GLuint tx)
 {
     if(gl_state.texture_id == tx)
         return;
@@ -249,12 +249,12 @@ static __inline__ void gl_bind_texture(GLuint tx)
     gl_state.texture_id = tx;
 }
 
-static __inline__ void gl_line_width(GLfloat lw)
+inline void gl_line_width(GLfloat lw)
 {
     glLineWidth(lw);
 }
 
-static __inline__ void gl_antialias(bool on)
+inline void gl_antialias(bool on)
 {
     if(gl_state.antialias == on)
         return;
@@ -265,7 +265,7 @@ static __inline__ void gl_antialias(bool on)
     gl_state.antialias = on;
 }
 
-static __inline__ void gl_poly_mode(GLenum mode)
+inline void gl_poly_mode(GLenum mode)
 {
     if(gl_state.poly_mode == mode)
         return;

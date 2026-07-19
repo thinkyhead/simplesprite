@@ -1,7 +1,7 @@
 # SimpleSprite Modernization Report
 
-**Date:** 2026-07-19  **Status:** String migration (char* → std::string) **COMPLETED**  
-**Language Standard:** C++17 (existing)  
+**Date:** 2026-07-19  **Status:** String migration (char* → std::string) **COMPLETED**; Section D (override, nullptr, inline, const-getters) **COMPLETED**; A4 frameArray→std::vector **COMPLETED** — all specified modernization items done  \
+**Language Standard:** C++17 (now enforced in engine + both game CMakeLists)  \
 **Target Philosophy:** "Basic C++ without template noise"  
 **Scope:** STL data structures, memory management, const-correctness, modern C++ idioms
 
@@ -112,16 +112,43 @@ char* SS_Folder::pop() {
 
 ---
 
-### A4. `TArray`/`TObjectArray` for frame storage in `SS_Sprite` → `std::vector<SS_Frame*>`
+### A4. `TArray`/`TObjectArray` for frame storage in `SS_Sprite` → `std::vector<SS_Frame*>` **[COMPLETED 2026-07-19]**
 
-**Priority:** MED  
-**Files:** `SS_Sprite.h` (lines 54–55), `SS_Sprite.cpp`
+**Priority:** MED  \
+**Files:** `SS_Sprite.h`, `SS_Sprite.cpp`
 
+> **Note:** `SS_FRAME_BLOCK` (was `#define`d to 5 in `SS_Sprite.h`) is now unused and was removed. `frameCount` still tracks the logical frame count; `AddFrame` sets it from `frameArray.size()`.
+
+**Before:**
 ```cpp
-// SS_Sprite.h:54-55
+// SS_Sprite.h
 Uint16      frameBlocks;            // size of the allocated frame array
 SS_Frame    **frameArray;           // pointer to an array of frame pointers
+
+// SS_Sprite.cpp - AddFrame
+if ((frameCount % SS_FRAME_BLOCK) == 0) {
+    frameBlocks++;
+    if (!frameArray)
+        frameArray = (SS_Frame**)malloc(sizeof(SS_Frame*) * SS_FRAME_BLOCK);
+    else
+        frameArray = (SS_Frame**)realloc(frameArray, sizeof(SS_Frame*) * SS_FRAME_BLOCK * frameBlocks);
+    if (!frameArray) throw "Can't allocate memory for Frames.";
+}
+frameArray[frameCount++] = frame;
 ```
+
+**After:**
+```cpp
+// SS_Sprite.h
+#include <vector>
+std::vector<SS_Frame*>    frameArray;   // owned frame pointers
+
+// SS_Sprite.cpp - AddFrame
+frameArray.push_back(frame);
+frameCount = static_cast<Uint16>(frameArray.size());
+```
+
+`ReleaseFrames()` now calls `frameArray.clear()` (vector owns the storage; `free()` removed). `Init()` clears the vector. All existing `frameArray[i]` / `other->frameArray[...]` accesses (engine + game `DS_SpaceLevel.cpp`, `SF_Arsenal.cpp`) remain valid via `std::vector::operator[]`. Ownership: the vector holds non-owning `SS_RefCounter*` pointers; `ReleaseFrames` still calls `Release()` on each, preserving the refcount contract.
 
 The frame array uses a manual block-growth scheme (similar to `std::vector`). A `std::vector<SS_Frame*>` would replace both `frameBlocks` and `frameArray` with `.size()` and `.data()`.
 
@@ -291,9 +318,9 @@ The `workingDir` is currently a `char*` with manual `new[]`/`delete[]`. `std::st
 
 ## D. const-correctness and Modern C++
 
-### D1. Missing `override` on virtual methods
+### D1. Missing `override` on virtual methods **[COMPLETED 2026-07-19]**
 
-**Priority:** MED (low effort)  
+**Priority:** MED (low effort)  \
 **Scope:** Every subclass of `SS_LayerItem`, `SS_RefCounter`, `SS_Broadcaster`, `SS_Listener`
 
 **Missing `override` examples:**
@@ -308,10 +335,10 @@ Adding `override` turns missing-base-class-changes into compile errors instead o
 
 ---
 
-### D2. `NULL` → `nullptr`
+### D2. `NULL` → `nullptr` **[COMPLETED 2026-07-19]**
 
-**Priority:** MED (mechanical change, low risk)  
-**Scope:** ~200+ occurrences across all files
+**Priority:** MED (mechanical change, low risk)  \
+**Scope:** ~200+ occurrences across all files (engine + DeepSpace + SolarFire compiled sources)
 
 C++17 code should use `nullptr`. This is a mechanical search-and-replace that can be done per-file with no behavioral change. Example:
 
@@ -329,28 +356,28 @@ void Init() { m_array = nullptr; m_count = 0; block_size = 10; }
 
 ---
 
-### D3. Missing `const` on getter methods
+### D3. Missing `const` on getter methods **[COMPLETED 2026-07-19]**
 
-**Priority:** MED  
+**Priority:** MED  \
 **Scope:** Various
 
-Examples of non-`const` accessors that should be `const`:
+> **Note:** the original examples referenced `SS_File.h`, but the actual header is `SS_Files.h`. Applied as specified below.
 
 | Location | Method | Current | Should Be |
 |---|---|---|---|
 | `SS_Frame.h:45-46` | `Height()`, `Width()` | `inline float Height()` | `inline float Height() const` |
-| `SS_SFont.h:64-68` | `XSpace()`, `YSpace()`, `Height()` etc. | Not const | Add `const` |
-| `SS_File.h:67-69` | `BaseName()`, `DirName()`, `Path()` | Not const | Add `const` |
-| `SS_File.h:128` | `Size()` | Not const | Add `const` |
-| `SS_RefCounter.h:49` | `RefCount()` | Not const | Add `const` |
+| `SS_SFont.h:64-68` | `XSpace()`, `YSpace()`, `Height()`, `Ascent()`, `Descender()` | Not const | Add `const` |
+| `SS_Files.h:72-74` | `BaseName()`, `DirName()`, `Path()` | Not const | Add `const` |
+| `SS_Files.h:107` | `Size()` | Not const | Add `const` |
+| `SS_RefCounter.h:43` | `RefCount()` | Not const | Add `const` |
 | `SS_Templates.h:68` | `TArray::Size()` | Not const | Add `const` |
 | `SS_Templates.h:977` | `TLinkedList::Size()` | Not const | Add `const` |
 
 ---
 
-### D4. `static __inline__` → `inline`
+### D4. `static __inline__` → `inline` **[COMPLETED 2026-07-19]**
 
-**Priority:** LOW  
+**Priority:** LOW  \
 **Files:** `SS_Types.h` (lines 221–276)
 
 The `static __inline__` syntax is a GCC extension from the early 2000s. C++17's `inline` keyword is standard:
@@ -387,6 +414,21 @@ Examples:
 Several manual-iterator loops could use range-for, but the custom `TIterator` type doesn't support it. If `TObjectList` is kept (recommended in A3), these loops stay as they are.
 
 Manual `for (int i=...; i--;)` reverse loops (e.g., `SS_Game.cpp:110`, `SS_LayerItem.cpp:116`) are idiomatic for backward iteration and fine as-is.
+
+---
+
+### D. Implementation Notes (2026-07-19)
+
+Applying D1/D2/D4 surfaced two latent issues that had to be fixed for the games to build under C++17:
+
+1. **Games were compiling as C++14.** Neither `DeepSpace/CMakeLists.txt` nor `SolarFire/CMakeLists.txt` set `CMAKE_CXX_STANDARD`, so their TUs used the compiler default (`__cplusplus == 201402L`). The C2 string migration introduced `std::filesystem::path` in `SS_Files.h` (`basename`/`dirname`), which is invisible at C++14 → `no member named 'filesystem' in namespace 'std'`. **Fix:** added `set(CMAKE_CXX_STANDARD 17)` + `CMAKE_CXX_STANDARD_REQUIRED ON` + `CMAKE_CXX_EXTENSIONS OFF` to both game CMakeLists (matching the engine). This is now required for the modernized engine; do not remove.
+
+2. **String-migration const-correctness fallouts in game code** (the engine API return types changed `char*` → `const char*`):
+   - `DS_SpaceLevel.cpp` / `SF_SpaceArena.cpp`: the debug `Slot(i)` helper returned `string[i]->Text()` (now `const char*`) and was used as the write target of `snprintf(...)` — undefined behavior (writing into immutable `std::string` data). **Fix:** each debug layer now holds a `char slotBuf[N][64]` scratch array; `Slot(i)` returns `slotBuf[i]` and a new `SetSlot(i)` pushes it into the backing `SS_String` via `SetText(...)`. All `snprintf(debug->Slot(...))` call sites now call `debug->SetSlot(...)` afterward.
+   - `DS_TileMapEditor.cpp`: `SetData(void*)` / `Broadcast(Uint32,Uint32,int,void*)` received `editField->Text()` (now `const char*`); added `const_cast<char*>(...)` at the two call sites (the message system only stores the pointer; no write occurs downstream).
+   - `DS_SpaceLevel.cpp` `Process()`: `snprintf` into `degreeLabel->Label()` (now `const char*`) replaced with a local `char buf[16]` + `SetLabel(buf)`.
+
+These changes are engine-API-compatible and behavioral-equivalent. DeepSpace and SolarFire require **no** string (char*→std::string) changes of their own — the modernization was entirely engine-internal with `const char*` kept on the public boundary.
 
 ---
 

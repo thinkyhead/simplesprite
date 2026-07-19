@@ -26,24 +26,24 @@ class SS_ItemGroup : public SS_Collider, public SS_ColliderObjectList
         virtual ~SS_ItemGroup() {}
 
         virtual const SS_ItemGroup&     operator=(const SS_ItemGroup &src);
-        virtual SS_ItemGroup*           Clone() { return new SS_ItemGroup(*this); }
+        virtual SS_ItemGroup*           Clone()  override{ return new SS_ItemGroup(*this); }
 
         virtual inline itemType Type() { return SS_ITEM_GROUP; }
 
-        void            SetWorld(SS_World *w);      // Set the world for all contained items
-        void            SetLayer(SS_Layer *l);      // Set the layer and world for all contained items
-        void            SetHidden(bool h);          // Set hidden on all contained Sprites
+        void            SetWorld(SS_World *w) override;      // Set the world for all contained items
+        void            SetLayer(SS_Layer *l) override;      // Set the layer and world for all contained items
+        void            SetHidden(bool h) override;          // Set hidden on all contained Sprites
 
         void            AddItem(SS_Collider *item);     // Add a LayerItem to the Group
 //      inline void     Append(SS_LayerItem *item) { AddItem(item); }
 
         virtual bool    IsOnScreen();
 
-        void            Process();
-        void            Animate();
-        void            AutoMove();
-        void            PushAndPrepareMatrix();
-        void            Render(const SScolorb &inTint);
+        void            Process() override;
+        void            Animate() override;
+        void            AutoMove() override;
+        void            PushAndPrepareMatrix() override;
+        void            Render(const SScolorb &inTint) override;
 
         void            EnableCollisions(Uint32 out, Uint32 in);
         void            UpdateCollisions();

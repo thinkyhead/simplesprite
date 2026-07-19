@@ -104,9 +104,9 @@ class SS_TileLayer : public SS_Layer
         virtual inline layerType   Type() { return SS_LAYER_TILE; }
         void        SetTileMap(SS_TileMap *map);
 
-        void        Process();
-        void        Animate();
-        void        Render();
+        void        Process() override;
+        void        Animate() override;
+        void        Render() override;
 
     private:
         void        Init(Uint32 f=SS_NONE);

@@ -38,27 +38,35 @@ typedef void (APIENTRY *SWAP_PROC)(int interval);
 
 #endif
 
-#undef SS_VIDEO_W
-#undef SS_VIDEO_H
-#undef SS_VSYNC
-#undef SS_FULLSCREEN
+#ifndef SS_VIDEO_W
+  #define SS_VIDEO_W 1920
+#endif
+#ifndef SS_VIDEO_H
+  #define SS_VIDEO_H 1080 - 30 - 30
+#endif
+#ifndef SS_VSYNC
+  #define SS_VSYNC false
+#endif
+#ifndef SS_FULLSCREEN
+  #define SS_FULLSCREEN false
+#endif
 
-int     SS_VIDEO_W = 1024;
-int     SS_VIDEO_H = 768;
-bool    SS_VSYNC = 0;
-bool    SS_FULLSCREEN = 0;
+int     ss_video_w = SS_VIDEO_W;
+int     ss_video_h = SS_VIDEO_H;
+bool    ss_vsync = SS_VSYNC;
+bool    ss_fullscreen = SS_FULLSCREEN;
 
 //--------------------------------------------------------------
 // SS_Game
 //--------------------------------------------------------------
 
 // Static Initializers
-SDL_Surface *SS_Game::ss_screen  = NULL;
-SDL_Window  *SS_Game::ss_window  = NULL;
-SDL_GLContext SS_Game::ss_glcontext = NULL;
+SDL_Surface *SS_Game::ss_screen  = nullptr;
+SDL_Window  *SS_Game::ss_window  = nullptr;
+SDL_GLContext SS_Game::ss_glcontext = nullptr;
 float       SS_Game::SS_cos[65536];
 float       SS_Game::SS_sin[65536];
-SS_SFont    *SS_Game::tinyFont = NULL, *SS_Game::smallFont = NULL, *SS_Game::mediumFont = NULL, *SS_Game::largeFont = NULL;
+SS_SFont    *SS_Game::tinyFont = nullptr, *SS_Game::smallFont = nullptr, *SS_Game::mediumFont = nullptr, *SS_Game::largeFont = nullptr;
 
 SS_Game::SS_Game()
 {
@@ -85,17 +93,17 @@ void SS_Game::LoadConfig()
     dataFile.EnterContext("SS");
 
     if (!dataFile.Exists()) {
-        dataFile.SetToken("Width", SS_VIDEO_W);
-        dataFile.SetToken("Height", SS_VIDEO_H);
-        dataFile.SetToken("Fullscreen", SS_FULLSCREEN);
-        dataFile.SetToken("Vsync", SS_VSYNC);
+        dataFile.SetToken("Width", ss_video_w);
+        dataFile.SetToken("Height", ss_video_h);
+        dataFile.SetToken("Fullscreen", ss_fullscreen);
+        dataFile.SetToken("Vsync", ss_vsync);
         dataFile.Export();
     }
 
-    SS_VIDEO_W = dataFile.GetInteger("Width");
-    SS_VIDEO_H = dataFile.GetInteger("Height");
-    SS_FULLSCREEN = dataFile.GetBoolean("Fullscreen");
-    SS_VSYNC = dataFile.GetBoolean("Vsync");
+    ss_video_w = dataFile.GetInteger("Width");
+    ss_video_h = dataFile.GetInteger("Height");
+    ss_fullscreen = dataFile.GetBoolean("Fullscreen");
+    ss_vsync = dataFile.GetBoolean("Vsync");
 }
 
 //
@@ -103,12 +111,12 @@ void SS_Game::LoadConfig()
 //
 void SS_Game::Init()
 {
-    world           = NULL;
+    world           = nullptr;
     bQuit           = false;
 
     worldCount  = 0;
     for (int i=SS_MAX_WORLDS;i--;)
-        worlds[i] = NULL;
+        worlds[i] = nullptr;
 
     InitTrigonometry();             // Prepare sine and cosine arrays
     InitScreen();                   // Prepare the screen / window
@@ -117,7 +125,7 @@ void SS_Game::Init()
     // Send all printed output to a file
     SS_Folder::cdAppFolder();
     FILE *stream = freopen(SS_Folder::FullPath("ssgame.out").c_str(), "w", stdout);
-    if (stream == NULL) exit(-1);
+    if (stream == nullptr) exit(-1);
     fprintf(stdout, "Testing 123...\n");
 
     SS_Folder::SetWorkingDir("");
@@ -140,8 +148,8 @@ void SS_Game::InitScreen()
     //
     // SDL 2.x: create a window + OpenGL context instead of SDL_SetVideoMode
     //
-    Uint32 windowFlags = SDL_WINDOW_OPENGL | (SS_FULLSCREEN ? SDL_WINDOW_FULLSCREEN : 0x00);
-    ss_window = SDL_CreateWindow("SimpleSprite", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SS_VIDEO_W, SS_VIDEO_H, windowFlags);
+    Uint32 windowFlags = SDL_WINDOW_OPENGL | (ss_fullscreen ? SDL_WINDOW_FULLSCREEN : 0x00);
+    ss_window = SDL_CreateWindow("SimpleSprite", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ss_video_w, ss_video_h, windowFlags);
     if (!ss_window)
         throw "Can't create Window: %s\n";
 
@@ -168,7 +176,7 @@ void SS_Game::InitScreen()
     //
     // The Viewport clears to black
     //
-    glViewport(0, 0, SS_VIDEO_W, SS_VIDEO_H);
+    glViewport(0, 0, ss_video_w, ss_video_h);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT /*| GL_DEPTH_BUFFER_BIT*/);
 
@@ -233,7 +241,7 @@ void SS_Game::SyncVblank(long sync)
 #ifdef WIN32
 
     SWAP_PROC wglSwapIntervalEXT = (SWAP_PROC) wglGetProcAddress("wglSwapIntervalEXT");
-    if (wglSwapIntervalEXT != NULL) wglSwapIntervalEXT(sync);
+    if (wglSwapIntervalEXT != nullptr) wglSwapIntervalEXT(sync);
 
 #elif defined(__APPLE__)
 
@@ -272,7 +280,7 @@ void SS_Game::PopWorld()
     if (--worldCount)
         world = worlds[worldCount - 1];
     else
-        world = NULL;
+        world = nullptr;
 }
 
 /*

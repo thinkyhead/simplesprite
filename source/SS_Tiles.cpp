@@ -77,7 +77,7 @@ SS_TilePalette::SS_TilePalette(const char *filename, int tw, int th)
 {
     DEBUGF(1, "SS_TilePalette::SS_TilePalette(\"%s\", %d, %d)\n", filename, tw, th);
 
-    ::GetTextureFromImage(filename, NULL, NULL, &gl_texture, &image_w, &image_h);
+    ::GetTextureFromImage(filename, nullptr, nullptr, &gl_texture, &image_w, &image_h);
 
     tile_w      = tw;
     tile_h      = th;
@@ -129,8 +129,8 @@ void SS_TileMap::Init()
 {
     DEBUGF(1, "[%p] SS_TileMap::Init()\n", this);
 
-    tilePalette = NULL;
-    theMap      = NULL;
+    tilePalette = nullptr;
+    theMap      = nullptr;
     xpos        = 0;
     ypos        = 0;
     columns     = 0;
@@ -189,7 +189,7 @@ void SS_TileMap::DisposePalette()
 
     if (tilePalette) {
         (void) tilePalette->Release();
-        tilePalette = NULL;
+        tilePalette = nullptr;
         tile_w = 0;
         tile_h = 0;
     }
@@ -202,7 +202,7 @@ void SS_TileMap::InitMap(int w, int h)
 {
     DEBUGF(1, "[%p] SS_TileMap::InitMap(%d, %d)\n", this, w, h);
 
-    if (theMap != NULL)
+    if (theMap != nullptr)
         DisposeMap();
 
     if (w || h)
@@ -258,9 +258,9 @@ void SS_TileMap::DisposeMap()
 {
     DEBUGF(1, "SS_TileMap::DisposeMap()\n");
 
-    if (theMap != NULL) {
+    if (theMap != nullptr) {
         free(theMap);
-        theMap = NULL;
+        theMap = nullptr;
     }
 
     columns = 0;
@@ -428,7 +428,7 @@ SS_TileLayer::~SS_TileLayer()
 //
 void SS_TileLayer::Init(Uint32 f)
 {
-    tileMap = NULL;
+    tileMap = nullptr;
     flags = f;
 }
 
@@ -439,7 +439,7 @@ void SS_TileLayer::SetTileMap(SS_TileMap *map)
 {
     DEBUGF(1, "[%p] SS_TileLayer::SetTileMap(%p)\n", this, map);
 
-    if (tileMap != NULL)
+    if (tileMap != nullptr)
         delete tileMap;
 
     tileMap = map;

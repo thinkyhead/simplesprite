@@ -15,7 +15,7 @@
 
 // Global video dimensions (defined in SS_Game.cpp). Declared up-front so the
 // inline accessors below can reference them regardless of include order.
-extern int SS_VIDEO_W, SS_VIDEO_H;
+extern int ss_video_w, ss_video_h;
 
 #include <SDL.h>
 #include "SS_Types.h"
@@ -106,8 +106,8 @@ class SS_Game
         void                        InitScreen();
         static inline SDL_Surface*  TheScreen() { return ss_screen; }
         static inline SDL_Window*   TheWindow() { return ss_window; }
-        static inline int           ScreenWidth() { return SS_VIDEO_W; }
-        static inline int           ScreenHeight() { return SS_VIDEO_H; }
+        static inline int           ScreenWidth() { return ss_video_w; }
+        static inline int           ScreenHeight() { return ss_video_h; }
         static void                 SyncVblank(long sync);
 
         void                        PushWorld(SS_World *w);

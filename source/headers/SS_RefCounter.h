@@ -40,7 +40,7 @@ class SS_RefCounter
                         #endif
                     }
 
-        inline int  RefCount()  { return refCount; }
+        inline int  RefCount() const  { return refCount; }
 
         inline void Retain()
                     {

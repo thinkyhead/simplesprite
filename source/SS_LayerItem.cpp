@@ -51,10 +51,10 @@ void SS_LayerItem::Init()
     name.clear();
 
     // System connections
-    world           = NULL;
-    layer           = NULL;
-    group           = NULL;
-//  mainNode        = NULL;
+    world           = nullptr;
+    layer           = nullptr;
+    group           = nullptr;
+//  mainNode        = nullptr;
 
     oldW            = 0.0f;
     oldH            = 0.0f;
@@ -85,7 +85,7 @@ void SS_LayerItem::Init()
     // Motion behavior
     moveInterval    = 20;
     lastMoveTime    = 0;
-    moveProc        = NULL;
+    moveProc        = nullptr;
 
     // Tint
     SetTint(0xFF, 0xFF, 0xFF, 0xFF);
@@ -143,7 +143,7 @@ void SS_LayerItem::SetLayer(SS_Layer *l)
 {
     DEBUGF(1, "[%p] SS_LayerItem::SetLayer(%p)\n", this, l);
 
-    SetWorld((layer = l) ? l->World() : NULL);
+    SetWorld((layer = l) ? l->World() : nullptr);
 }
 
 
@@ -155,7 +155,7 @@ void SS_LayerItem::SetGroup(SS_ItemGroup *g)
 {
     DEBUGF(1, "[%p] SS_LayerItem::SetGroup(%p)\n", this, g);
 
-    SetLayer((group = g) ? g->layer : NULL);
+    SetLayer((group = g) ? g->layer : nullptr);
 }
 
 
@@ -173,9 +173,9 @@ const SS_LayerItem& SS_LayerItem::operator=(const SS_LayerItem &src)
         SS_RefCounter::operator=(src);
 
         // Initialize some to default values
-        world           = NULL;
-        layer           = NULL;
-        group           = NULL;
+        world           = nullptr;
+        layer           = nullptr;
+        group           = nullptr;
 
         oldW            = 0.0f;
         oldH            = 0.0f;
@@ -304,12 +304,12 @@ void SS_LayerItem::RemoveSelf() // aka "Unlink()"
 
     if (group) {
         group->Remove(dynamic_cast<SS_Collider*>(this));
-        SetGroup(NULL);
+        SetGroup(nullptr);
     }
     else if (layer) {
 //      layer->visibleList.Remove(this);
         layer->Remove(this);
-        SetLayer(NULL);
+        SetLayer(nullptr);
     }
 }
 
@@ -319,7 +319,7 @@ void SS_LayerItem::RemoveSelf() // aka "Unlink()"
 //
 void SS_LayerItem::AddPeer(SS_LayerItem *item) const
 {
-    if (layer != NULL)
+    if (layer != nullptr)
         layer->AddItem(item);
 }
 
@@ -329,7 +329,7 @@ void SS_LayerItem::AddPeer(SS_LayerItem *item) const
 //
 void SS_LayerItem::PrependPeer(SS_LayerItem *item) const
 {
-    if (layer != NULL)
+    if (layer != nullptr)
         layer->PrependItem(item);
 }
 
@@ -687,9 +687,8 @@ void SS_LayerItem::SetAnimateProc(spriteProcPtr proc)
 //
 void SS_LayerItem::SetAngularVelocity(float ang, float vel)
 {
-    // SS_ASSERT_ON: catch a dangling/garbage 'this' or a non-finite angle
-    // before we index the trig tables or write to member velocities.
-    SS_ASSERT(this != NULL);
+    // SS_ASSERT_ON: catch non-finite angle before we index
+    // the trig tables or write to member velocities.
     SS_ASSERT_FINITE(ang);
 
     if (!std::isfinite(ang))

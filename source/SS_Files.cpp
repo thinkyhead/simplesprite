@@ -49,7 +49,7 @@ SS_Folder::~SS_Folder()
 void SS_Folder::Init()
 {
     dir_count   = 0;
-    dir_entries = NULL;
+    dir_entries = nullptr;
 }
 
 //
@@ -103,7 +103,7 @@ void SS_Folder::FreeEntries()
         free(dir_entries);
 
         dir_count = 0;
-        dir_entries = NULL;
+        dir_entries = nullptr;
     }
 }
 
@@ -132,7 +132,7 @@ void SS_Folder::cdAppFolder(const char *dir)
     SetWorkingDir("");
 #endif
 
-    if (dir != NULL) cd(dir);
+    if (dir != nullptr) cd(dir);
 }
 
 //
@@ -144,7 +144,7 @@ void SS_Folder::cdAppFolder(const char *dir)
 void SS_Folder::cdDataFolder(const char *dir)
 {
     SetWorkingDir("data");
-    if (dir != NULL) cd(dir);
+    if (dir != nullptr) cd(dir);
 }
 
 //
@@ -288,8 +288,8 @@ SS_File::~SS_File()
 //
 void SS_File::Init()
 {
-    stream  = NULL;
-    buffer  = NULL;
+    stream  = nullptr;
+    buffer  = nullptr;
     bufsize = 0;
     exists  = false;
     is_open = false;
@@ -328,7 +328,7 @@ void SS_File::GetStatus()
 //
 char* SS_File::PrepareBuffer(int size)
 {
-    if (buffer != NULL)
+    if (buffer != nullptr)
         delete [] buffer;
 
     buffer = new char[size+1];  // allocate +1 byte for terminating null
@@ -347,7 +347,7 @@ bool SS_File::Open(const char *p, const char *mode)
     if (is_open)
         Close();
 
-    if (p != NULL)
+    if (p != nullptr)
         SetPath(p);
 
     if ((stream = fopen(path.c_str(), mode)))
@@ -406,7 +406,7 @@ size_t SS_File::ReadLine()
 
         buf = PrepareBuffer(s);
 
-        if (tbuf != NULL && s > 0)
+        if (tbuf != nullptr && s > 0)
             bcopy(tbuf, buf, s);
 
 #ifdef WIN32
@@ -560,14 +560,14 @@ SS_DataToken* SS_DataContext::GetToken(const char *k)
         if (tok->Match(k))
             return tok;
 
-    return NULL;
+    return nullptr;
 }
 
 const char* SS_DataContext::GetTokenValue(const char *k)
 {
     SS_DataToken *tok = GetToken(k);
 
-    if (tok != NULL)
+    if (tok != nullptr)
         return tok->Value();
     else
         return "";
@@ -577,16 +577,16 @@ void* SS_DataContext::GetTokenRaw(const char *k)
 {
     SS_DataToken *tok = GetToken(k);
 
-    if (tok != NULL)
+    if (tok != nullptr)
         return tok->Raw();
     else
-        return NULL;
+        return nullptr;
 }
 
 void SS_DataContext::CopyTokenData(const char *k, void *dest)
 {
     SS_DataToken *tok = GetToken(k);
-    if (tok != NULL) tok->Copy(dest);
+    if (tok != nullptr) tok->Copy(dest);
 }
 
 void SS_DataContext::Write(FILE *file)
@@ -651,7 +651,7 @@ SS_DataContext* SS_FlatFile::GetContext(const char *k)
         if (ctx->Match(k))
             return ctx;
 
-    return NULL;
+    return nullptr;
 }
 
 //

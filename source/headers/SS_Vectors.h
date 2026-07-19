@@ -173,7 +173,7 @@ class SS_VectorFrame : public SS_RefCounter
         void            Begin(SSVectorType m=SS_POINTS, bool front=false);
         void            End();
 
-        inline SS_VectorUnit* Unit()    { return (begunUnit > 0) ? unitList.Object(begunUnit-1) : NULL; }
+        inline SS_VectorUnit* Unit()    { return (begunUnit > 0) ? unitList.Object(begunUnit-1) : nullptr; }
 
         void            LoadImage(const char *filename);
         void            LoadSurface(SDL_Surface *s);
@@ -286,7 +286,7 @@ class SS_VectorSprite : public SS_Collider
         virtual         ~SS_VectorSprite();
 
         virtual const SS_VectorSprite&  operator=(const SS_VectorSprite &src);
-        virtual SS_VectorSprite*        Clone() { return new SS_VectorSprite(*this); }
+        virtual SS_VectorSprite*        Clone()  override{ return new SS_VectorSprite(*this); }
 
         void            AddFrame(SS_VectorFrame *frame);
         inline void     AddFrame(char *vectorFile) { AddFrame(new SS_VectorFrame(vectorFile)); }
@@ -294,16 +294,16 @@ class SS_VectorSprite : public SS_Collider
         void            ReleaseFrames();
 
         // Setters
-        void            SetFrameIndex(Uint16 f) { currFrame = f % frameCount; /* frameArray[currFrame]->GetHandle(&xhandle, &yhandle); */ }
+        void            SetFrameIndex(Uint16 f)  override{ currFrame = f % frameCount; /* frameArray[currFrame]->GetHandle(&xhandle, &yhandle); */ }
         void            SetAnimIncrement(Uint16 inc) { animIncrement = inc; }
-        void            SetHandle(float x, float y);
-        void            CenterHandle();
+        void            SetHandle(float x, float y) override;
+        void            CenterHandle() override;
 
         // Diagnostics
         virtual bool    IsOnScreen();
-        bool            TestPointCollision(float x, float y, bool isLocal);
+        bool            TestPointCollision(float x, float y, bool isLocal) override;
 
-        virtual void    Render(const SScolorb &inTint);
+        virtual void    Render(const SScolorb &inTint) override;
 
         Uint32          GetNewCollisions() { return 0x00000000; }
 

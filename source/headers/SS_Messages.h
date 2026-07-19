@@ -36,7 +36,7 @@ class SS_Message
 
 	public:
 		SS_Message() { Set(0,0); }
-		SS_Message(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL) { Set(mclass, mcode, mval, data); }
+		SS_Message(Uint32 mclass, Uint32 mcode, int mval=0, void *data=nullptr) { Set(mclass, mcode, mval, data); }
 
 		inline Uint32	Class() const	{ return message_class; }
 		inline Uint32	Code() const	{ return message_code; }
@@ -44,7 +44,7 @@ class SS_Message
 		inline const void*	Data() const	{ return message_data; }
 		inline bool		IsSet() const	{ return Class() && Code(); }
 
-		inline void		Set(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL)
+		inline void		Set(Uint32 mclass, Uint32 mcode, int mval=0, void *data=nullptr)
 				{
 					message_class = mclass;	message_code = mcode;
 					message_value = mval;	message_data = data;
@@ -83,7 +83,7 @@ class SS_Listener
 		inline void		RemoveAllBroadcasters()					{ broadcasterList.Clear(); }
 
 		virtual void	HandleMessage(const SS_Message &message) {}
-		inline void		HandleMessage(Uint32 mclass, Uint32 mcode, int mval=0, void *mdata=NULL) { HandleMessage(SS_Message(mclass, mcode, mval, mdata)); }
+		inline void		HandleMessage(Uint32 mclass, Uint32 mcode, int mval=0, void *mdata=nullptr) { HandleMessage(SS_Message(mclass, mcode, mval, mdata)); }
 };
 
 typedef TListNode<SS_Listener*>		SS_ListenerNode;
@@ -110,7 +110,7 @@ class SS_Broadcaster
 						SS_Broadcaster();
 						~SS_Broadcaster();
 
-		inline void		SetMessage(Uint32 mclass, Uint32 mcode, int mval=0, void *mdata=NULL) { message.Set(mclass, mcode, mval, mdata); }
+		inline void		SetMessage(Uint32 mclass, Uint32 mcode, int mval=0, void *mdata=nullptr) { message.Set(mclass, mcode, mval, mdata); }
 		inline bool		MessageIsSet() const					{ return message.IsSet(); }
 		inline void		AddListener(SS_Listener *listener)		{ listenerList.Append(listener); }
 		inline void		RemoveListener(SS_Listener *listener)	{ listenerList.Remove(listener, false); }
@@ -119,7 +119,7 @@ class SS_Broadcaster
 	protected:
 		void			Broadcast() { Broadcast(message); }
 		void			Broadcast(const SS_Message &msg);
-		inline void		Broadcast(Uint32 mclass, Uint32 mcode, int mval=0, void *data=NULL) { Broadcast(SS_Message(mclass, mcode, mval, data)); }
+		inline void		Broadcast(Uint32 mclass, Uint32 mcode, int mval=0, void *data=nullptr) { Broadcast(SS_Message(mclass, mcode, mval, data)); }
 		inline void		Broadcast(char *text) { message.SetData(text); Broadcast(); }
 		inline void		Broadcast(float &num) { message.SetData(&num); Broadcast(); }
 		inline void		Broadcast(int &num)  { message.SetData(&num); Broadcast(); }

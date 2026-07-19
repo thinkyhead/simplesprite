@@ -42,11 +42,11 @@ class SS_Frame : public SS_RefCounter
                         SS_Frame(SDL_Surface *s, frameFlags f=SS_FRAME_NONE);
                         ~SS_Frame();
 
-        inline float    Height() { return height; }
-        inline float    Width() { return width; }
+        inline float    Height() const { return height; }
+        inline float    Width() const { return width; }
 
         void            LoadImage(const char *filename);
-        void            LoadSurface(SDL_Surface *s, const SDL_Rect *section=NULL);
+        void            LoadSurface(SDL_Surface *s, const SDL_Rect *section=nullptr);
         inline void     SendGeometry();
         void            InitDisplayList();
         inline void     MakeCollisionMask() { MakeCollisionMask(0x00); }

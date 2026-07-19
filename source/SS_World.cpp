@@ -20,7 +20,7 @@
 glState     gl_state;
 
 //
-extern bool SS_VSYNC;
+extern bool ss_vsync;
 
 
 //--------------------------------------------------------------
@@ -50,14 +50,14 @@ void SS_World::Init()
 {
     DEBUGF(1, "[%p] SS_World::Init()\n", this);
 
-    eventHandler    = NULL;
-    preRenderProc   = NULL;
-    postRenderProc  = NULL;
-    postProcessor   = NULL;
+    eventHandler    = nullptr;
+    preRenderProc   = nullptr;
+    postRenderProc  = nullptr;
+    postProcessor   = nullptr;
 
-    worldMutex      = NULL;
-    processThread   = NULL;
-    renderThread    = NULL;
+    worldMutex      = nullptr;
+    processThread   = nullptr;
+    renderThread    = nullptr;
 
     calibrating     = false;
     caliCount       = 0;
@@ -73,7 +73,7 @@ void SS_World::Init()
     renderQuit      = false;
     worldQuit       = false;
 
-    keyState        = SS_GetKeyState(NULL);
+    keyState        = SS_GetKeyState(nullptr);
     mouseButtons    = 0x00;
     mouseClick      = false;
     mouseDown       = false;
@@ -85,8 +85,8 @@ void SS_World::Init()
     lastAutoTime    = 0;
     fireAuto        = false;
 
-    pointerSprite   = NULL;
-    latchedLayer    = NULL;
+    pointerSprite   = nullptr;
+    latchedLayer    = nullptr;
 
     SetSurface(SS_Game::TheScreen());
     SetLeftTop(0, 0);
@@ -103,7 +103,7 @@ void SS_World::SetPointerSprite(SS_LayerItem *s)
 
     if (pointerSprite) {
         delete pointerSprite->Layer();
-        pointerSprite = NULL;
+        pointerSprite = nullptr;
     }
 
     if ((pointerSprite = s)) {
@@ -143,7 +143,7 @@ Uint32 SS_World::Run(SS_Game *g)
     if (g->IsQuitting())
         return 0;
 
-    if (SS_VSYNC)
+    if (ss_vsync)
         Calibrate();
 
     Start();
@@ -235,20 +235,20 @@ void SS_World::Stop()
     if (processThread) {
         processQuit = true;
         SDL_WaitThread(processThread, &dummy);
-        processThread = NULL;
+        processThread = nullptr;
     }
 
 /*
     if (renderThread) {
         renderQuit = true;
         SDL_WaitThread(renderThread, &dummy);
-        renderThread = NULL;
+        renderThread = nullptr;
     }
 */
 
     if (worldMutex) {
         SDL_DestroyMutex(worldMutex);
-        worldMutex = NULL;
+        worldMutex = nullptr;
     }
 }
 
@@ -315,7 +315,7 @@ void SS_World::GetInput()
 {
     float fx, fy;
 
-    keyState = SS_GetKeyState(NULL);
+    keyState = SS_GetKeyState(nullptr);
 
     mouseButtons = SDL_GetMouseState(&fx, &fy);
 }
@@ -442,7 +442,7 @@ void SS_World::Render()
 //
 void SS_World::PreRender()
 {
-    if (preRenderProc != NULL)
+    if (preRenderProc != nullptr)
         preRenderProc(this);
 }
 
@@ -452,7 +452,7 @@ void SS_World::PreRender()
 //
 void SS_World::PostRender()
 {
-    if (postRenderProc != NULL)
+    if (postRenderProc != nullptr)
         postRenderProc(this);
 }
 
@@ -612,7 +612,7 @@ void SS_World::HandleEvents()
         //
         itr.End();
         while ((layer = itr.PreviousItem()))
-            if ((layer->enabled && !layer->paused) && (latchedLayer == NULL || latchedLayer == layer) && (did = layer->HandleEvent(&event)))
+            if ((layer->enabled && !layer->paused) && (latchedLayer == nullptr || latchedLayer == layer) && (did = layer->HandleEvent(&event)))
             {
                 break;
             }
@@ -625,7 +625,7 @@ void SS_World::HandleEvents()
         // decide whether it will activate upon completion. This behavior might
         // be movable into the SS_GUI class.
         //
-        if (layer == NULL)
+        if (layer == nullptr)
             SS_GUI::ActivateNone();
         else if (layer->Type() == SS_LAYER_GUI)
             ((SS_GUI*)layer)->Activate();

@@ -61,7 +61,7 @@ class SS_Layer : public SS_Broadcaster, public SS_Listener, public SS_ItemList
         inline Uint32           Flags() const           { return flags; }
         inline Uint32           Flags(Uint32 m) const   { return flags & m; }
         inline bool             IsEnabled() const       { return enabled; }
-        inline SS_LayerItem*    MousePointer() const    { return world ? world->MousePointer() : NULL; }
+        inline SS_LayerItem*    MousePointer() const    { return world ? world->MousePointer() : nullptr; }
         inline GLubyte          Alpha() const           { return tint.a; }
         inline SScolorb         Tint() const            { return tint; }
 
@@ -89,7 +89,7 @@ class SS_Layer : public SS_Broadcaster, public SS_Listener, public SS_ItemList
 
         inline void             AddToVisible(SS_LayerItem *item) { visibleList.Append(item); }
 
-        virtual void            RemoveItem(SS_LayerItem *item);
+        virtual void            RemoveItem(SS_LayerItem *item) override;
         void                    DisposeItem(SS_LayerItem *item);
 
         virtual void            Process();

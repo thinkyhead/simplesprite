@@ -17,7 +17,7 @@
 
 // Utility Functions
 bool InitSimpleSprite();
-void GetTextureFromImage(const char* filename, float *w, float *h, GLuint *texture, Uint16 *tw, Uint16 *th, SDL_Surface **save_source=NULL, Uint16 flags=0);
+void GetTextureFromImage(const char* filename, float *w, float *h, GLuint *texture, Uint16 *tw, Uint16 *th, SDL_Surface **save_source=nullptr, Uint16 flags=0);
 bool MakeTextureFromSurface(SDL_Surface *source, SDL_Rect *rect, GLuint *texture, Uint16 *tw, Uint16 *th, Uint16 flags=0);
 void ClipRectangle(SDL_Rect *bounds);
 Uint32 GetPixel(SDL_Surface *surface, Sint16 x, Sint16 y);

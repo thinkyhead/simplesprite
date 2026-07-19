@@ -64,7 +64,7 @@ void GetTextureFromImage(
 
 //  printSurfaceInfo(filename, source);
 
-    if (!::MakeTextureFromSurface(source, NULL, outTexture, outTxWidth, outTxHeight, flags))
+    if (!::MakeTextureFromSurface(source, nullptr, outTexture, outTxWidth, outTxHeight, flags))
         throw "OpenGL texture could not be created.";
 
     if (outWidth)   *outWidth = source->w;
@@ -117,7 +117,7 @@ bool MakeTextureFromSurface(
 
     // Test whether OpenGL can handle this texture size
     GLint   width;
-    glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA8, expw, exph, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA8, expw, exph, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
     glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
     if (width != expw) return false;
 
@@ -131,13 +131,13 @@ bool MakeTextureFromSurface(
     if(!surface)
         throw "Can't create Surface for image.";
 
-//  printSurfaceInfo(NULL, surface);
+//  printSurfaceInfo(nullptr, surface);
 
     if (outTxWidth)     *outTxWidth = expw;
     if (outTxHeight)    *outTxHeight = exph;
 
     SDL_SetSurfaceAlphaMod(source, SDL_ALPHA_OPAQUE);    // Tell SDL to copy verbatim
-    SDL_BlitSurface(source, &sRect, surface, NULL);
+    SDL_BlitSurface(source, &sRect, surface, nullptr);
 
     glGenTextures(1, outTexture);                       // Generate one texture
     glBindTexture(GL_TEXTURE_2D, *outTexture);          // Bind it to the 2D Texture
@@ -233,7 +233,7 @@ Uint32 GetPixel(SDL_Surface *surface, Sint16 x, Sint16 y)
             Uint8 r = *(bits + fmt->Rshift / 8);
             Uint8 g = *(bits + fmt->Gshift / 8);
             Uint8 b = *(bits + fmt->Bshift / 8);
-            color = SDL_MapRGB(fmt, NULL, r, g, b);
+            color = SDL_MapRGB(fmt, nullptr, r, g, b);
 
             if (SDL_HasColorKey(surface)) {
                 Uint32 key;
