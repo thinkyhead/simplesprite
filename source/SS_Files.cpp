@@ -495,7 +495,7 @@ SS_DataToken::SS_DataToken(const char *k, const char *v)
 SS_DataToken::SS_DataToken(const char *k, int v)
 {
     char    *temp = new char[50];
-    sprintf(temp, "%d", v);
+    snprintf(temp, 49, "%d", v);
     Set(k, temp);
     delete [] temp;
 }
@@ -503,7 +503,7 @@ SS_DataToken::SS_DataToken(const char *k, int v)
 SS_DataToken::SS_DataToken(const char *k, Uint32 v)
 {
     char    *temp = new char[50];
-    sprintf(temp, "%u", v);
+    snprintf(temp, 49, "%u", v);
     Set(k, temp);
     delete [] temp;
 }
@@ -511,7 +511,7 @@ SS_DataToken::SS_DataToken(const char *k, Uint32 v)
 SS_DataToken::SS_DataToken(const char *k, float v)
 {
     char    *temp = new char[100];
-    sprintf(temp, "%f", v);
+    snprintf(temp, 99, "%f", v);
     Set(k, temp);
     delete [] temp;
 }

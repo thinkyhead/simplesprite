@@ -671,7 +671,7 @@ void SS_String::SetWithInt(const int i)
 void SS_String::SetHex(const int h)
 {
     if (text)
-        sprintf(text, "%08X", h);
+        snprintf(text, 9, "%08X", h);
 }
 
 //
