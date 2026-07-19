@@ -107,9 +107,9 @@ void SS_SFont::LoadFont(const char *filename, float desc)
     SDL_Rect    charRect;
 
     SDL_Surface *rawfont;
-    char        *full = SS_Folder::FullPath(filename);
+    std::string full = SS_Folder::FullPath(filename);
 
-    if (!(rawfont = IMG_Load(full))) {
+    if (!(rawfont = IMG_Load(full.c_str()))) {
         printf("%s\n", SDL_GetError());
         throw "Can't Load SFont image file.";
     }
@@ -466,8 +466,6 @@ SS_String::SS_String(SS_SFont *font)
 
 SS_String::~SS_String()
 {
-    if (text)
-        delete [] text;
 }
 
 //
@@ -478,7 +476,6 @@ void SS_String::Init()
     DEBUGF(1, "[%p] SS_String::Init()\n", this);
 
     sfont           = NULL;
-    text            = NULL;
     alignment       = SA_LEFT;
     xpos            = 0;
     ypos            = 0;
@@ -496,8 +493,7 @@ void SS_String::SetText(const char *t)
 {
     DEBUGF(1, "[%p] SS_String::SetText(%s)\n", this, t);
 
-    if (text) delete [] text;
-    text = t ? newstring(t) : NULL;
+    text = t ? t : "";
 }
 
 //
@@ -635,8 +631,7 @@ void SS_String::StringCopy(const char *t)
 {
     DEBUGF(1, "[%p] SS_String::StringCopy(%s)\n", this, t);
 
-    if (text)
-        strcpy(text, t);
+    text = t;
 }
 
 //
@@ -644,12 +639,7 @@ void SS_String::StringCopy(const char *t)
 //
 void SS_String::SetWithFloat(const float f)
 {
-    char *temp;
-    if (asprintf(&temp, "%.2f", f) != -1)
-    {
-        SetText(temp);
-        free(temp);
-    }
+    text = std::to_string(f);
 }
 
 //
@@ -657,12 +647,7 @@ void SS_String::SetWithFloat(const float f)
 //
 void SS_String::SetWithInt(const int i)
 {
-    char *temp;
-    if (asprintf(&temp, "%d", i) != -1)
-    {
-        SetText(temp);
-        free(temp);
-    }
+    text = std::to_string(i);
 }
 
 //
@@ -670,8 +655,9 @@ void SS_String::SetWithInt(const int i)
 //
 void SS_String::SetHex(const int h)
 {
-    if (text)
-        snprintf(text, 9, "%08X", h);
+    char buf[9];
+    snprintf(buf, sizeof(buf), "%08X", h);
+    text = buf;
 }
 
 //
@@ -687,7 +673,7 @@ void SS_String::Render(SScolorb &inTint, SDL_Rect *rect)
 {
     SScolorb outTint;
     MultiplyColorQuads(inTint, tint, outTint);
-    sfont->Render(text, drawx, drawy, &outTint, rect);
+    sfont->Render(text.c_str(), drawx, drawy, &outTint, rect);
 }
 
 
@@ -911,8 +897,8 @@ void SS_EditString::SetSelection(Sint16 s, Sint16 l)
 
     if (s < 0) s = 0;                   // aucun commencer en-dessous de 0
     if (s + l < 0) l = -s;              // aucun choix en-dessous de 0
-    if (s > len) { s = len; l = 0; }    // aucun commencer aprs l'extrŽmitŽ
-    if (s + l > len) l = len - s;       // aucun choix aprs l'extrŽmitŽ
+    if (s > len) { s = len; l = 0; }    // aucun commencer aprï¿½s l'extrï¿½mitï¿½
+    if (s + l > len) l = len - s;       // aucun choix aprï¿½s l'extrï¿½mitï¿½
 
     selectionStart = s;
     selectionLength = l;
@@ -931,26 +917,13 @@ void SS_EditString::ReplaceSelection(const char *t)
 
     if (l < 0) { s += l; l = -l; }
 
-    Uint16  len = Length() + tlen - l;
-    char    *newStr = new char[len + 1];
+    std::string newStr = text.substr(0, s) + t + text.substr(s + l);
 
-    // Copy string up to the selection
-    if (s)
-        strncpy(newStr, text, s);
-
-    // Append the insertion string
-    strcpy(&newStr[s], t);
-
-    // Append everything after the selection
-    strcpy(&newStr[s + tlen], &text[s + l]);
-
-    if ((maxWidth == 0 || sfont->StringWidth(newStr) <= maxWidth) && (maxLength == 0 || len <= maxLength))
+    if ((maxWidth == 0 || sfont->StringWidth(newStr.c_str()) <= maxWidth) && (maxLength == 0 || newStr.size() <= maxLength))
     {
-        SetText(newStr);
+        text = newStr;
         SetSelection(s + (tlen ? 1 : 0));
     }
-
-    delete [] newStr;
 }
 
 //

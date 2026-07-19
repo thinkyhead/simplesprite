@@ -113,11 +113,11 @@ void SS_Sound::Load(const char *filename)
 {
     DEBUGF(1, "[%p] SS_Sound::Load(%s)\n", this, filename);
 
-    char * const full = SS_Folder::FullPath(filename);
+    std::string full = SS_Folder::FullPath(filename);
 
     // MIX_LoadAudio replaces Mix_LoadWAV. predecode=true so playback is
     // cheap (the sample is fully decoded up front, just like Mix_Chunk).
-    if ( ! (soundChunk = MIX_LoadAudio(g_mixer, full, true)) ) {
+    if ( ! (soundChunk = MIX_LoadAudio(g_mixer, full.c_str(), true)) ) {
         printf("%s\n", SDL_GetError());
         throw ("Can't load sound file!");
     }
@@ -351,11 +351,11 @@ void SS_Music::Init()
 void SS_Music::Load(const char *filename)
 {
     DEBUGF(1, "[%p] SS_Music::Load(%s)\n", this, filename);
-    char        *full = SS_Folder::FullPath(filename);
+    std::string full = SS_Folder::FullPath(filename);
 
     // Same MIX_Audio type as SFX; just a longer sample. (Streaming via
     // MIX_SetTrackIOStream would be the FUTURE choice for very large tracks.)
-    if ( ! (music = MIX_LoadAudio(g_mixer, full, true)) ) {
+    if ( ! (music = MIX_LoadAudio(g_mixer, full.c_str(), true)) ) {
         printf("%s\n", SDL_GetError());
         throw ("Can't load music file!");
     }

@@ -19,6 +19,7 @@
 #include "SS_LayerItem.h"
 
 #include <string.h>
+#include <string>
 
 // Cursor Styles
 enum cursorStyle {
@@ -102,7 +103,7 @@ class SS_String : public SS_LayerItem
         SS_SFont            *sfont;
         stringAlign         alignment;
         float               drawx, drawy;
-        char                *text;
+        std::string         text;
 
     public:
                             SS_String(SS_SFont *font);
@@ -112,10 +113,10 @@ class SS_String : public SS_LayerItem
         virtual itemType    Type() { return SS_ITEM_STRING; }
 
         // Accessors
-        inline char*        Text()              { return text; }
-        inline Uint16       Length()            { return text ? strlen(text) : 0; }
-        inline float        Width()             { return sfont->StringWidth(text); }
-        inline float        Width(Uint16 pos)   { return sfont->StringWidth(text, pos); }
+        inline const char*  Text()              { return text.c_str(); }
+        inline Uint16       Length()            { return text.size(); }
+        inline float        Width()             { return sfont->StringWidth(text.c_str()); }
+        inline float        Width(Uint16 pos)   { return sfont->StringWidth(text.c_str(), pos); }
         inline float        Height()            { return sfont->Height(); }
         inline float        Ascent()            { return sfont->Ascent(); }
         inline float        Descender()         { return sfont->Descender(); }
@@ -131,8 +132,8 @@ class SS_String : public SS_LayerItem
         void                SetHex(const int h);
 
         // Evaluators
-        inline bool         IsPointInside(float pixx, float pixy) { return sfont->IsPointInside(text, pixx - drawx, pixy - drawy); }
-        inline Uint16       IndexOfPoint(float pixx, float pixy=0) { return sfont->IndexOfPoint(text, pixx + (drawx - xpos), pixy + (drawy - ypos)); }
+        inline bool         IsPointInside(float pixx, float pixy) { return sfont->IsPointInside(text.c_str(), pixx - drawx, pixy - drawy); }
+        inline Uint16       IndexOfPoint(float pixx, float pixy=0) { return sfont->IndexOfPoint(text.c_str(), pixx + (drawx - xpos), pixy + (drawy - ypos)); }
 
         // Movement
         inline void         Move(float x, float y) { SS_LayerItem::Move(x, y); RedoAlignment(); }

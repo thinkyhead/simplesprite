@@ -13,8 +13,9 @@
 
 #define REF_DEBUG 0
 
-#include <stdio.h>
 #include <string.h>
+#include <string>
+#include <stdio.h>
 
 // SS_ASSERT / SS_ASSERT_FINITE are defined in SS_Config.h. Include it so this
 // header is self-contained regardless of include order in the TU.
@@ -22,28 +23,21 @@
 
 class SS_RefCounter
 {
-    private:
+    protected:
         int     refCount;
-        char    *name;
+        std::string name;
 
     public:
-                    SS_RefCounter() { refCount = 0; name = new char[20]; strcpy(name, "unnamed"); }
+                    SS_RefCounter() : refCount(0), name("unnamed") {}
 
         virtual     ~SS_RefCounter()
                     {
                         #if REF_DEBUG
                         if (refCount > 0)
-                        {
-                            printf("%s Prematurely Deleted! (%d)\n", name, refCount);
-                        }
+                            printf("%s Prematurely Deleted! (%d)\n", name.c_str(), refCount);
                         else if (refCount < 0)
-                        {
-                            printf("[%p] %s RefCount Below Zero! (%d)\n", this, name, refCount);
-                        }
+                            printf("[%p] %s RefCount Below Zero! (%d)\n", this, name.c_str(), refCount);
                         #endif
-
-                        if (name)
-                            delete name;
                     }
 
         inline int  RefCount()  { return refCount; }
@@ -52,7 +46,7 @@ class SS_RefCounter
                     {
                         refCount++;
                         #if REF_DEBUG
-                        if (name) printf("[%p] Retain %s (%d)\n", this, name, refCount);
+                        if (!name.empty()) printf("[%p] Retain %s (%d)\n", this, name.c_str(), refCount);
                         #endif
                     }
 
@@ -66,7 +60,7 @@ class SS_RefCounter
                         int ref = --refCount;
 
                         #if REF_DEBUG
-                        printf("[%p] Release %s (%d)\n", this, name, ref);
+                        printf("[%p] Release %s (%d)\n", this, name.c_str(), ref);
                         #endif
 
                         if (ref == 0) delete this;
@@ -75,35 +69,14 @@ class SS_RefCounter
 
         void        Retain(const char *n)
                     {
-                        if (name != NULL) {
-                            delete name;
-                            name = NULL;
-                        }
-
-                        if (n) {
-                            name = new char[strlen(n)+1];
-                            strcpy(name, n);
-                            }
+                        if (n) name = n;
                         Retain();
                     }
 
         const SS_RefCounter& operator=(const SS_RefCounter& src)
         {
             refCount = 0;
-
-            if (name) delete name;
-
-            if (src.name)
-            {
-                name = new char[strlen(src.name) + 10];
-                strcpy(name, src.name);
-                strcat(name, "*");
-            }
-            else
-            {
-                name = new char[10];
-                strcpy(name, "(no name)");
-            }
+            name = src.name.empty() ? "(no name)" : src.name + "*";
             return *this;
         }
 };

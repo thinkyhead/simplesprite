@@ -48,7 +48,7 @@ void SS_LayerItem::Init()
     DEBUGF(1, "[%p] SS_LayerItem::Init()\n", this);
 
     // Helpful name
-    name            = NULL;
+    name.clear();
 
     // System connections
     world           = NULL;
@@ -231,8 +231,7 @@ const SS_LayerItem& SS_LayerItem::operator=(const SS_LayerItem &src)
         }
 
         // The name needs to be copied
-        if (name) delete[] name;
-        name = src.name ? newstring(src.name) : NULL;
+        name = src.name;
 
         src.AddPeer(this);
     }

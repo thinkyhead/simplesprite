@@ -105,8 +105,6 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
         float                   misc[SS_MISC_FIELDS];       // whatever
         bool                    yesno[SS_MISC_FIELDS];      // whatever
 
-        char                    *name;
-
     public:
                                 SS_LayerItem();
                                 SS_LayerItem(const SS_LayerItem &src) { Init(); *this = src; }
@@ -137,7 +135,7 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
         virtual void            SetWorld(SS_World *w);
         virtual void            SetLayer(SS_Layer *l);
         virtual void            SetGroup(SS_ItemGroup *g);
-        inline void             SetName(const char *n) { if (name) delete[] name; name = newstring(n); }
+        inline void             SetName(const char *n) { name = n ? n : ""; }
 
         virtual inline void     SetFlags(Uint32 f)      { flags = f; }
         virtual inline void     EnableFlag(Uint32 f)    { flags |= f; }

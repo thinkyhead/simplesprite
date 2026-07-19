@@ -24,8 +24,8 @@
 //--------------------------------------------------------------
 
 // Static Initializers
-char*       SS_Folder::workingDir = NULL;
-SS_CharList SS_Folder::directoryStack;
+std::string              SS_Folder::workingDir;
+std::vector<std::string> SS_Folder::directoryStack;
 
 SS_Folder::SS_Folder()
 {
@@ -41,12 +41,6 @@ SS_Folder::SS_Folder(const char *path)
 SS_Folder::~SS_Folder()
 {
     FreeEntries();
-
-    if (path)
-        delete [] path;
-
-    if (pathStorage)
-        delete [] pathStorage;
 }
 
 //
@@ -54,8 +48,6 @@ SS_Folder::~SS_Folder()
 //
 void SS_Folder::Init()
 {
-    path        = NULL;
-    pathStorage = NULL;
     dir_count   = 0;
     dir_entries = NULL;
 }
@@ -75,8 +67,7 @@ SS_FolderIterator* SS_Folder::GetIterator()
 //
 void SS_Folder::SetPath(const char *p)
 {
-    if (path) delete[] path;
-    path = newstring(p);
+    path = p;
     RefreshListing();
 }
 
@@ -91,8 +82,8 @@ int SS_Folder::RefreshListing()
 
     FreeEntries();
 
-    if (path != NULL)
-        r = scandir((const char *)path, (struct dirent ***)&dir_entries, (int (*)(const struct dirent *))_select_all, (int (*)(const struct dirent **, const struct dirent **))alphasort);
+    if (!path.empty())
+        r = scandir(path.c_str(), (struct dirent ***)&dir_entries, (int (*)(const struct dirent *))_select_all, (int (*)(const struct dirent **, const struct dirent **))alphasort);
 
     dir_count = r;
     return r;
@@ -121,17 +112,11 @@ void SS_Folder::FreeEntries()
 //
 char* SS_Folder::GetFullPathOfEntry(int index)
 {
-    if (pathStorage != NULL)
-        delete [] pathStorage;
-
     struct dirent *de = dir_entries[index];
 
-    pathStorage = new char[strlen(path)+de->d_namlen+1];
-    strcpy(pathStorage, path);
-    strcat(pathStorage, "/");
-    strncat(pathStorage, de->d_name, de->d_namlen);
+    pathStorage = path + "/" + std::string(de->d_name, de->d_namlen);
 
-    return pathStorage;
+    return const_cast<char*>(pathStorage.c_str());
 }
 
 //
@@ -167,8 +152,7 @@ void SS_Folder::cdDataFolder(const char *dir)
 //
 void SS_Folder::SetWorkingDir(const char *dir)
 {
-    if (workingDir) delete[] workingDir;
-    workingDir = newstring(dir);
+    workingDir = dir;
 }
 
 //
@@ -178,25 +162,19 @@ void SS_Folder::cd(const char *dir)
 {
     if (strcmp("..", dir) == 0)
     {
-        char *c = strrchr(workingDir, '/');     // get the address of last slash
+        size_t pos = workingDir.rfind('/');
 
-        if (c == NULL)                          // no slashes left?
+        if (pos == std::string::npos)
             SetWorkingDir("");
-        else if (c == workingDir)               // starts with a slash?
-            SetWorkingDir("/");                 // then keep the slash
-        else {
-            int l = c - workingDir + 1;
-            char *par = new char[l + 1];
-            strncpy(par, workingDir, l);
-            par[l] = '\0';
-            SetWorkingDir(par);
-            delete [] par;
-        }
+        else if (pos == 0)
+            SetWorkingDir("/");
+        else
+            SetWorkingDir(workingDir.substr(0, pos + 1).c_str());
     }
-    else if (strncmp("/", workingDir, 1) == 0)
+    else if (workingDir.compare(0, 1, "/") == 0)
         SetWorkingDir(dir);
     else
-        SetWorkingDir(FullPath(dir));
+        SetWorkingDir(FullPath(dir).c_str());
 }
 
 //
@@ -204,48 +182,36 @@ void SS_Folder::cd(const char *dir)
 //
 void SS_Folder::push(const char *dir)
 {
-    directoryStack.Append(newstring(workingDir));
+    directoryStack.push_back(workingDir);
     cd(dir);
 }
 
 //
 // pop
 //
-char* SS_Folder::pop()
+const char* SS_Folder::pop()
 {
-    char *dir = NULL;
-
-    SS_CharIterator itr = directoryStack.GetIterator();
-    itr.End();
-    if ((dir = itr.Item())) {
-        SetWorkingDir(dir);
-        free(dir);
-        directoryStack.RemoveTail();
+    if (!directoryStack.empty()) {
+        workingDir = directoryStack.back();
+        directoryStack.pop_back();
     }
 
-    return workingDir;
+    return workingDir.c_str();
 }
 
 //
 // FullPath(filename)
 //
-char* SS_Folder::FullPath(const char *file)
+std::string SS_Folder::FullPath(const char *file)
 {
-    static char pathString[1024];
-
-    if (workingDir != NULL)
-    {
-        int l = strlen(workingDir);
-        strcpy(pathString, workingDir);
-        if (l > 0 && pathString[l - 1] != '/')
-            strcat(pathString, "/");
+    std::string result;
+    if (!workingDir.empty()) {
+        result = workingDir;
+        if (result.back() != '/')
+            result += '/';
     }
-    else
-        pathString[0] = 0;
-
-    strcat(pathString, file);
-
-    return pathString;
+    result += file;
+    return result;
 }
 
 //
@@ -322,7 +288,6 @@ SS_File::~SS_File()
 //
 void SS_File::Init()
 {
-    path    = NULL;
     stream  = NULL;
     buffer  = NULL;
     bufsize = 0;
@@ -335,8 +300,7 @@ void SS_File::Init()
 //
 void SS_File::SetPath(const char *p)
 {
-    if (path) delete [] path;
-    path = newstring(SS_Folder::FullPath(p));
+    path = SS_Folder::FullPath(p);
 
     GetStatus();
 }
@@ -354,7 +318,7 @@ int SS_File::Seek(long offset)
 //
 void SS_File::GetStatus()
 {
-    int s = stat(path, &itemstat);
+    int s = stat(path.c_str(), &itemstat);
 
     exists = (s == 0);
 }
@@ -386,7 +350,7 @@ bool SS_File::Open(const char *p, const char *mode)
     if (p != NULL)
         SetPath(p);
 
-    if ((stream = fopen(path, mode)))
+    if ((stream = fopen(path.c_str(), mode)))
         is_open = true;
 
     return is_open;
@@ -494,34 +458,27 @@ SS_DataToken::SS_DataToken(const char *k, const char *v)
 
 SS_DataToken::SS_DataToken(const char *k, int v)
 {
-    char    *temp = new char[50];
-    snprintf(temp, 49, "%d", v);
-    Set(k, temp);
-    delete [] temp;
+    key = k;
+    value = std::to_string(v);
 }
 
 SS_DataToken::SS_DataToken(const char *k, Uint32 v)
 {
-    char    *temp = new char[50];
-    snprintf(temp, 49, "%u", v);
-    Set(k, temp);
-    delete [] temp;
+    key = k;
+    value = std::to_string(v);
 }
 
 SS_DataToken::SS_DataToken(const char *k, float v)
 {
-    char    *temp = new char[100];
-    snprintf(temp, 99, "%f", v);
-    Set(k, temp);
-    delete [] temp;
+    key = k;
+    value = std::to_string(v);
 }
 
 SS_DataToken::SS_DataToken(const char *k, SScolorb &color)
 {
-    key = newstring(k);
-
-    value = new char[sizeof(SScolorb)];
-    bcopy(&color, value, sizeof(SScolorb));
+    key = k;
+    value.resize(sizeof(SScolorb));
+    memcpy(value.data(), &color, sizeof(SScolorb));
 
     isRaw = true;
     rawLen = sizeof(SScolorb);
@@ -529,9 +486,9 @@ SS_DataToken::SS_DataToken(const char *k, SScolorb &color)
 
 SS_DataToken::SS_DataToken(const char *k, void *data, int len)
 {
-    key = newstring(k);
-    value = new char[len];
-    bcopy(data, value, len);
+    key = k;
+    value.resize(len);
+    bcopy(data, &value[0], len);
 
     isRaw = true;
     rawLen = len;
@@ -539,19 +496,17 @@ SS_DataToken::SS_DataToken(const char *k, void *data, int len)
 
 SS_DataToken::~SS_DataToken()
 {
-    delete [] key;
-    delete [] value;
 }
 
 void SS_DataToken::Set(const char *k, const char *v)
 {
-    key = newstring(k);
+    key = k;
 
     if (v[0] == '{')
     {
         isRaw = true;
         rawLen = strlen(v) / 2 - 1;
-        value = new char[rawLen];
+        value.resize(rawLen);
         for (int i=0; i<rawLen; i++) {
             char h = v[i*2+1], l = v[i*2+2];
             value[i] = (h-(h>='A'?'A'-10:'0'))*16+(l-(l>='A'?'A'-10:'0'));
@@ -561,24 +516,24 @@ void SS_DataToken::Set(const char *k, const char *v)
     {
         isRaw = false;
         rawLen = 0;
-        value = newstring(v);
+        value = v;
     }
 }
 
 void SS_DataToken::Write(FILE *file)
 {
-    fprintf(file, "%s=", key);
+    fprintf(file, "%s=", key.c_str());
     if (isRaw)
     {
         fprintf(file, "{");
 
         for (int i=0; i<rawLen; i++)
-            fprintf(file, "%02X", value[i]);
+            fprintf(file, "%02X", (unsigned char)value[i]);
 
         fprintf(file, "}\n");
     }
     else
-        fprintf(file, "%s\n", value);
+        fprintf(file, "%s\n", value.c_str());
 }
 
 #pragma mark -
@@ -589,12 +544,11 @@ void SS_DataToken::Write(FILE *file)
 
 SS_DataContext::SS_DataContext(const char *k)
 {
-    key = newstring(k);
+    key = k;
 }
 
 SS_DataContext::~SS_DataContext()
 {
-    delete [] key;
 }
 
 SS_DataToken* SS_DataContext::GetToken(const char *k)
@@ -637,7 +591,7 @@ void SS_DataContext::CopyTokenData(const char *k, void *dest)
 
 void SS_DataContext::Write(FILE *file)
 {
-    fprintf(file, "[%s]\n", key);
+    fprintf(file, "[%s]\n", key.c_str());
 
     SS_DataToken        *tok;
     SS_TokenIterator    itr = tokenList.GetIterator();

@@ -54,10 +54,10 @@ void GetTextureFromImage(
     DEBUGF(1, "GetTextureFromImage()\n");
 
     SDL_Surface *source;
-    char        *full = SS_Folder::FullPath(filename);
+    std::string full = SS_Folder::FullPath(filename);
 
     // Load up stuff for the tile map
-    if (!(source = IMG_Load(full))) {
+    if (!(source = IMG_Load(full.c_str()))) {
         printf("%s\n", SDL_GetError());
         throw "Can't Load image file.";
     }

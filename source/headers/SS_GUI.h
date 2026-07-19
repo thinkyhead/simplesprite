@@ -184,7 +184,7 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
         inline Uint32           Flags(Uint32 m) const   { return flags & m; }
         inline Uint16           State() const           { return state; }
         inline SS_String*       String() const          { return labelString; }
-        inline char*            Label() const           { if (labelString) { return labelString->Text(); } else { return NULL; } }
+        inline const char*      Label() const           { if (labelString) { return labelString->Text(); } else { return NULL; } }
         inline SS_SFont*        Font() const            { return gadFont; }
         inline SS_LayerItem*    Sprite() const          { return gadSprite; }
         inline SS_ItemGroup*    SpriteGroup() const     { return (SS_ItemGroup*)this; }
@@ -706,7 +706,7 @@ class SS_TextInput : public SS_Gadget
         inline void         LoseFocus() { editString->LoseFocus(); }
 
         inline Uint16       Length() { return editString->Length(); }
-        inline char*        Text() { return editString->Text(); }
+        inline const char*  Text() { return editString->Text(); }
 
         inline void         SelectAll() { SetSelection(0, Length()); }
         inline void         SelectWord(Uint16 i, bool ext=false) { editString->SelectWord(i, ext); }

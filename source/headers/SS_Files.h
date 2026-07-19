@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <dirent.h>
 
 #ifndef WIN32
@@ -24,12 +25,16 @@
 
 #include <sys/stat.h>
 
+#include <string>
+#include <vector>
+#include <filesystem>
+
 
 class SS_File
 {
     protected:
         FILE        *stream;
-        char        *path;
+        std::string path;
         size_t      bufsize;
         char        *buffer;
         struct stat itemstat;
@@ -64,44 +69,18 @@ class SS_File
         inline struct stat* Status() { return exists ? &itemstat : NULL; }
         inline bool     GetEOF() { return ((stream != NULL) ? (feof(stream) != 0) : false); }
         inline void     ClearError() { if (stream != NULL) clearerr(stream); }
-        inline char*    BaseName() { return SS_File::basename(path); }
-        inline char*    DirName() { return SS_File::dirname(path); }
-        inline char*    Path() { return path; }
+        inline std::string BaseName() { return SS_File::basename(path.c_str()); }
+        inline std::string DirName() { return SS_File::dirname(path.c_str()); }
+        inline const char* Path() { return path.c_str(); }
 
-        static char* basename(const char *path)
+        static std::string basename(const char *path)
         {
-            int i=0, s=0, e=strlen(path);
-            char *temp = new char[e+1];
-
-            while (i < e)
-                if (path[i++] == '/')
-                    s = i;
-
-            i = 0;
-            while (s <= e)
-                temp[i++] = path[s++];
-
-            return temp;
+            return std::filesystem::path(path).filename().string();
         }
 
-        static char* dirname(const char *path)
+        static std::string dirname(const char *path)
         {
-            int i=0, s=0, e=strlen(path);
-            char *temp = new char[e+1];
-
-            while (i < e)
-                if (path[i++] == '/')
-                    s = i-1;
-
-            i = 0;
-            while (i < s) {
-                temp[i] = path[i];
-                i++;
-            }
-
-            temp[i] = 0;
-
-            return temp;
+            return std::filesystem::path(path).parent_path().string();
         }
 
         // File Reading
@@ -140,13 +119,13 @@ class SS_File
 class SS_Folder
 {
     protected:
-        char                *path;
-        char                *pathStorage;
-        int                 dir_count;
-        struct dirent       **dir_entries;
+        std::string             path;
+        std::string             pathStorage;
+        int                     dir_count;
+        struct dirent           **dir_entries;
 
-        static char         *workingDir;                // Declare static members (init elsewhere)
-        static SS_CharList  directoryStack;
+        static std::string             workingDir;
+        static std::vector<std::string> directoryStack;
 
     public:
         SS_Folder();
@@ -156,7 +135,7 @@ class SS_Folder
         SS_FolderIterator*  GetIterator();
 
         static void         SetWorkingDir(const char *dir);
-        static inline char* WorkingDir() { return workingDir; }
+        static inline const char* WorkingDir() { return workingDir.c_str(); }
 
         static void         cd(const char *dir);
         static void         cdAppFolder(const char *dir=NULL);
@@ -165,9 +144,9 @@ class SS_Folder
         static void         push(const char *dir);
         static void         pushAppFolder(const char *dir=NULL);
         static void         pushDataFolder(const char *dir=NULL);
-        static char*        pop();
+        static const char*  pop();
 
-        static char*        FullPath(const char *file);
+        static std::string  FullPath(const char *file);
 
         void                SetPath(const char *path);
         int                 RefreshListing();
@@ -265,8 +244,8 @@ typedef TIterator<SS_DataContext*>  SS_ContextIterator;
 class SS_DataToken
 {
     public:
-        char            *key;
-        char            *value;
+        std::string     key;
+        std::string     value;
         bool            isRaw;
         int             rawLen;
 
@@ -279,11 +258,11 @@ class SS_DataToken
         ~SS_DataToken();
 
         void    Set(const char *k, const char *v);
-        bool    Match(const char *k) { return strcmp(key, k) == 0; }
+        bool    Match(const char *k) { return key == k; }
 
-        char*   Value() { return value; }
-        void*   Raw() { return (void*)value; }
-        void    Copy(void *dest) { if (rawLen) bcopy(value, dest, rawLen); }
+        const char* Value() { return value.c_str(); }
+        void*   Raw() { return (void*)value.data(); }
+        void    Copy(void *dest) { if (rawLen) bcopy(value.data(), dest, rawLen); }
 
         void    Write(FILE *file);      // write this token out to a file
 };
@@ -300,7 +279,7 @@ class SS_DataToken
 class SS_DataContext
 {
     public:
-        char            *key;
+        std::string     key;
         SS_TokenList    tokenList;  // list of nodes, each one having a token pointer
 
         SS_DataContext();
@@ -316,7 +295,7 @@ class SS_DataContext
 
         void            Write(FILE *file);   // write the context and tell all tokens to write
 
-        bool            Match(const char *k) { return strcmp(key, k) == 0; }
+        bool            Match(const char *k) { return key == k; }
         int             Size() { return tokenList.Size(); }
 };
 
@@ -340,7 +319,7 @@ class SS_FlatFile
         SS_File         *currFile;
         SS_DataContext  *currContext;
         SS_DataToken    *currToken;
-        char            *currData;
+        std::string     currData;
 
     public:
         SS_FlatFile();

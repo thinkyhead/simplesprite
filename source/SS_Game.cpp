@@ -116,7 +116,7 @@ void SS_Game::Init()
 
     // Send all printed output to a file
     SS_Folder::cdAppFolder();
-    FILE *stream = freopen(SS_Folder::FullPath("ssgame.out"), "w", stdout);
+    FILE *stream = freopen(SS_Folder::FullPath("ssgame.out").c_str(), "w", stdout);
     if (stream == NULL) exit(-1);
     fprintf(stdout, "Testing 123...\n");
 
