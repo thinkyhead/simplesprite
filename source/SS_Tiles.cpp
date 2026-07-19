@@ -73,7 +73,7 @@ SS_TileLayer* SS_World::NewTileLayer()
 // An image containing regularly-sized tiles for use in tile-maps
 //--------------------------------------------------------------
 
-SS_TilePalette::SS_TilePalette(char *filename, int tw, int th)
+SS_TilePalette::SS_TilePalette(const char *filename, int tw, int th)
 {
     DEBUGF(1, "SS_TilePalette::SS_TilePalette(\"%s\", %d, %d)\n", filename, tw, th);
 
@@ -109,7 +109,7 @@ SS_TileMap::SS_TileMap(int w, int h)
     InitMap(w, h);
 }
 
-SS_TileMap::SS_TileMap(char *filename)
+SS_TileMap::SS_TileMap(const char *filename)
 {
     Init();
     if (filename)
@@ -144,7 +144,7 @@ void SS_TileMap::Init()
 //
 // LoadPalette(filename, tw, th)
 //
-void SS_TileMap::LoadPalette(char *filename, int tw, int th)
+void SS_TileMap::LoadPalette(const char *filename, int tw, int th)
 {
     DEBUGF(1, "[%p] SS_TileMap::LoadPalette()\n", this);
 
@@ -222,7 +222,7 @@ void SS_TileMap::InitMap(int w, int h)
 // LoadMap(filename)
 // Load a tile map file
 //
-void SS_TileMap::LoadMap(char *filename)
+void SS_TileMap::LoadMap(const char *filename)
 {
     DEBUGF(1, "SS_TileMap::LoadMap(%s)\n", filename);
 
@@ -239,7 +239,7 @@ void SS_TileMap::LoadMap(char *filename)
 // SaveMap(filename)
 // Save a tile map file
 //
-bool SS_TileMap::SaveMap(char *filename)
+bool SS_TileMap::SaveMap(const char *filename)
 {
     DEBUGF(1, "SS_TileMap::SaveMap(%s)\n", filename);
 

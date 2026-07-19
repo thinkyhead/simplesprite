@@ -20,7 +20,7 @@
 // A single image for use in sprites
 //--------------------------------------------------------------
 
-SS_Frame::SS_Frame(char* filename, frameFlags f)
+SS_Frame::SS_Frame(const char *filename, frameFlags f)
 {
     Init(f);
     LoadImage(filename);

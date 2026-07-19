@@ -118,7 +118,7 @@ void SS_World::SetPointerSprite(SS_LayerItem *s)
 //
 // CreatePointerSprite
 //
-SS_Sprite* SS_World::CreatePointerSprite(char *file)
+SS_Sprite* SS_World::CreatePointerSprite(const char *file)
 {
     DEBUGF(1, "SS_World::CreatePointerSprite(file)\n");
 

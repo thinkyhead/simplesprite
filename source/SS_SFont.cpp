@@ -55,14 +55,14 @@ SS_TextLayer* SS_World::NewTextLayer(SS_SFont *sfont)
     return layer;
 }
 
-SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc, Uint32 f)
+SS_TextLayer* SS_World::NewTextLayer(const char *filename, float desc, Uint32 f)
 {
     DEBUGF(1, "[%p] SS_World::NewTextLayer(\"%s\")\n", this, filename);
 
     return NewTextLayer(new SS_SFont(filename, desc), f);
 }
 
-SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc)
+SS_TextLayer* SS_World::NewTextLayer(const char *filename, float desc)
 {
     DEBUGF(1, "[%p] SS_World::NewTextLayer(\"%s\")\n", this, filename);
 
@@ -77,7 +77,7 @@ SS_TextLayer* SS_World::NewTextLayer(char *filename, float desc)
 //  An SFont that can be used to print stuff
 //--------------------------------------------------------------
 
-SS_SFont::SS_SFont(char *filename, float desc)
+SS_SFont::SS_SFont(const char *filename, float desc)
 {
     DEBUGF(1, "[%p] SS_SFont::SS_SFont(\"%s\")\n", this, filename);
 
@@ -97,7 +97,7 @@ SS_SFont::~SS_SFont()
 // LoadFont
 // Load an SFont file and create textures for every character
 //
-void SS_SFont::LoadFont(char *filename, float desc)
+void SS_SFont::LoadFont(const char *filename, float desc)
 {
     DEBUGF(1, "[%p] SS_SFont::LoadFont(\"%s\")\n", this, filename);
 
@@ -301,7 +301,7 @@ void SS_SFont::Render(char chr, float x, float y, SScolorb *inTint, SDL_Rect *bo
 // Render(text, x, y, color)
 // Render a string of characters at the given screen coordinates
 //
-void SS_SFont::Render(char *text, float x, float y, SScolorb *inTint, SDL_Rect *bounds)
+void SS_SFont::Render(const char *text, float x, float y, SScolorb *inTint, SDL_Rect *bounds)
 {
     char        c;
     float       left = 0;
@@ -327,7 +327,7 @@ void SS_SFont::Render(char *text, float x, float y, SScolorb *inTint, SDL_Rect *
 // UpdateCursor
 // Move the cursor to the position it would be at after printing a given string
 //
-void SS_SFont::UpdateCursor(char *text, float *x, float *y)
+void SS_SFont::UpdateCursor(const char *text, float *x, float *y)
 {
     char    c;
     float   left = 0;
@@ -351,7 +351,7 @@ void SS_SFont::UpdateCursor(char *text, float *x, float *y)
 // StringWidth
 // Return the pixel width of a given string
 //
-float SS_SFont::StringWidth(char *text, Sint16 pos)
+float SS_SFont::StringWidth(const char *text, Sint16 pos)
 {
     char    c;
     float   wide = 0, left = 0;
@@ -380,7 +380,7 @@ float SS_SFont::StringWidth(char *text, Sint16 pos)
 // IndexOfPoint
 // Return the index in the string for the given local coordinate
 //
-Uint16 SS_SFont::IndexOfPoint(char *text, float pixx, float pixy)
+Uint16 SS_SFont::IndexOfPoint(const char *text, float pixx, float pixy)
 {
     char    c;
     Uint16  i = 0, ind = strlen(text);
@@ -425,7 +425,7 @@ Uint16 SS_SFont::IndexOfPoint(char *text, float pixx, float pixy)
 // IsPointInside
 // Return whether a point is inside some text
 //
-bool SS_SFont::IsPointInside(char *text, float pixx, float pixy)
+bool SS_SFont::IsPointInside(const char *text, float pixx, float pixy)
 {
     return ( pixx >= 0
         && pixx < StringWidth(text)
@@ -441,7 +441,7 @@ bool SS_SFont::IsPointInside(char *text, float pixx, float pixy)
 //  A bit of text associated with a font and stuff
 //--------------------------------------------------------------
 
-SS_String::SS_String(SS_SFont *font, char *t, float x, float y)
+SS_String::SS_String(SS_SFont *font, const char *t, float x, float y)
 {
     DEBUGF(1, "[%p] SS_String(font, text, x, y) CONSTRUCTOR\n", this);
 
@@ -704,7 +704,7 @@ SS_EditString::SS_EditString(SS_SFont *font) : SS_String(font)
     Init();
 }
 
-SS_EditString::SS_EditString(SS_SFont *font, char *t, float x, float y) : SS_String(font, t, x, y)
+SS_EditString::SS_EditString(SS_SFont *font, const char *t, float x, float y) : SS_String(font, t, x, y)
 {
     DEBUGF(1, "[%p] SS_EditString(font, t, x, y) CONSTRUCTOR\n", this);
 
@@ -1124,13 +1124,13 @@ void SS_EditString::RenderCursor(const SScolorb &inTint, SDL_Rect *bounds)
 //  A layer containing string objects
 //--------------------------------------------------------------
 
-SS_TextLayer::SS_TextLayer(char *filename, float desc) : SS_Layer(SS_NOSCROLL|SS_NOZOOM)
+SS_TextLayer::SS_TextLayer(const char *filename, float desc) : SS_Layer(SS_NOSCROLL|SS_NOZOOM)
 {
     Init();
     SetBaseFont(new SS_SFont(filename, desc), true);
 }
 
-SS_TextLayer::SS_TextLayer(char *filename, float desc, Uint32 f) : SS_Layer(f)
+SS_TextLayer::SS_TextLayer(const char *filename, float desc, Uint32 f) : SS_Layer(f)
 {
     Init();
     SetBaseFont(new SS_SFont(filename, desc), true);
@@ -1204,7 +1204,7 @@ void SS_TextLayer::CenterCursorY()
 //
 // Print(font, text, x, y)
 //
-SS_String* SS_TextLayer::Print(SS_SFont *font, char *text, float x, float y)
+SS_String* SS_TextLayer::Print(SS_SFont *font, const char *text, float x, float y)
 {
     SS_String   *string = new SS_String(font, text, x, y);
     AddString(string);

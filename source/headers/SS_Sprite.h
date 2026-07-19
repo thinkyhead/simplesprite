@@ -68,8 +68,8 @@ class SS_Sprite : public SS_Collider
 		void				Export(char *fileName);
 
 		void				AddFrame(SS_Frame *frame);
-		inline void			AddFrame(char *frameFile) { AddFrame(new SS_Frame(frameFile)); }
-		inline void			AddFrame(char *frameFile, frameFlags f) { AddFrame(new SS_Frame(frameFile, f)); }
+		inline void			AddFrame(const char *frameFile) { AddFrame(new SS_Frame(frameFile)); }
+		inline void			AddFrame(const char *frameFile, frameFlags f) { AddFrame(new SS_Frame(frameFile, f)); }
 		inline SS_Frame*	Frame(Uint16 fr) { return frameArray[fr]; }
 
 		virtual void		Render(const SScolorb &inTint);
@@ -99,4 +99,3 @@ class SS_Sprite : public SS_Collider
 
 
 #endif
-

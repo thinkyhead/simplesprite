@@ -55,10 +55,10 @@ class SS_SFont
         float           descender;              // the size of the dangly bits
 
     public:
-                        SS_SFont(char *filename, float desc=0.0f);
+                        SS_SFont(const char *filename, float desc=0.0f);
                         ~SS_SFont();
 
-        void            LoadFont(char *filename, float desc=0.0f);
+        void            LoadFont(const char *filename, float desc=0.0f);
 
         // Accessors
         inline float    XSpace() { return xspace; }
@@ -74,16 +74,16 @@ class SS_SFont
 
         // Evaluations
         inline float    CharacterWidth(char chr) { return width[chr - SS_FIRST_CHR]; }
-        inline float    StringWidth(char *text) { return StringWidth(text, -1); }
-        float           StringWidth(char *text, Sint16 pos);
+        inline float    StringWidth(const char *text) { return StringWidth(text, -1); }
+        float           StringWidth(const char *text, Sint16 pos);
 
-        bool            IsPointInside(char *text, float pixx, float pixy);
-        Uint16          IndexOfPoint(char *text, float pixx, float pixy=0);
+        bool            IsPointInside(const char *text, float pixx, float pixy);
+        Uint16          IndexOfPoint(const char *text, float pixx, float pixy=0);
 
         // Rendering
-        void            UpdateCursor(char *text, float *x, float *y);
+        void            UpdateCursor(const char *text, float *x, float *y);
         void            Render(char chr, float x, float y, SScolorb *tint=NULL, SDL_Rect *bounds=NULL);
-        void            Render(char *text, float x, float y, SScolorb *tint=NULL, SDL_Rect *bounds=NULL);
+        void            Render(const char *text, float x, float y, SScolorb *tint=NULL, SDL_Rect *bounds=NULL);
 };
 
 
@@ -106,7 +106,7 @@ class SS_String : public SS_LayerItem
 
     public:
                             SS_String(SS_SFont *font);
-                            SS_String(SS_SFont *font, char *t, float x, float y);
+                            SS_String(SS_SFont *font, const char *t, float x, float y);
                             ~SS_String();
 
         virtual itemType    Type() { return SS_ITEM_STRING; }
@@ -170,7 +170,7 @@ class SS_EditString : public SS_String
 
     public:
                             SS_EditString(SS_SFont *font);
-                            SS_EditString(SS_SFont *font, char *t, float x, float y);
+                            SS_EditString(SS_SFont *font, const char *t, float x, float y);
         virtual             ~SS_EditString();
 
         inline void         SetMaxStringLength(const Uint16 max) { maxLength = max; }
@@ -235,9 +235,9 @@ class SS_TextLayer : public SS_Layer
         float           xcurs, ycurs;
 
     public:
-                            SS_TextLayer(char *filename, float desc, Uint32 f);
-                            SS_TextLayer(char *filename, float desc);
-//                          SS_TextLayer(char *filename);
+                            SS_TextLayer(const char *filename, float desc, Uint32 f);
+                            SS_TextLayer(const char *filename, float desc);
+//                          SS_TextLayer(const char *filename);
                             SS_TextLayer(SS_SFont *font, Uint32 f);
                             SS_TextLayer(SS_SFont *font);
                             ~SS_TextLayer();
@@ -249,14 +249,14 @@ class SS_TextLayer : public SS_Layer
         void                CenterCursor();
         void                CenterCursorX();
         void                CenterCursorY();
-        SS_String*          Print(SS_SFont *font, char *text, float x, float y);
-        inline SS_String*   Print(SS_SFont *font, char *text) { return Print(font, text, xcurs, ycurs); }
-        inline SS_String*   Print(char *text, float x, float y) { return Print(runfont, text, x, y); }
-        inline SS_String*   Print(char *text) { return Print(text, xcurs, ycurs); }
-        inline SS_String*   PrintCenter(SS_SFont *font, char *text, float x, float y) { return Print(font, text, x - font->StringWidth(text) / 2, y); }
-        inline SS_String*   PrintCenter(SS_SFont *font, char *text) { return PrintCenter(font, text, xcurs, ycurs); }
-        inline SS_String*   PrintCenter(char *text, float x, float y) { return PrintCenter(runfont, text, x, y); }
-        inline SS_String*   PrintCenter(char *text) { return PrintCenter(runfont, text, xcurs, ycurs); }
+        SS_String*          Print(SS_SFont *font, const char *text, float x, float y);
+        inline SS_String*   Print(SS_SFont *font, const char *text) { return Print(font, text, xcurs, ycurs); }
+        inline SS_String*   Print(const char *text, float x, float y) { return Print(runfont, text, x, y); }
+        inline SS_String*   Print(const char *text) { return Print(text, xcurs, ycurs); }
+        inline SS_String*   PrintCenter(SS_SFont *font, const char *text, float x, float y) { return Print(font, text, x - font->StringWidth(text) / 2, y); }
+        inline SS_String*   PrintCenter(SS_SFont *font, const char *text) { return PrintCenter(font, text, xcurs, ycurs); }
+        inline SS_String*   PrintCenter(const char *text, float x, float y) { return PrintCenter(runfont, text, x, y); }
+        inline SS_String*   PrintCenter(const char *text) { return PrintCenter(runfont, text, xcurs, ycurs); }
 
 //      void                Clear();
 

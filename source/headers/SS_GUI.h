@@ -61,7 +61,7 @@ class SS_GUI : public SS_Layer
         // Set all the default gadgets
         static void         SetGadgetSuite(SS_LayerItem *check, SS_ItemGroup *slider=NULL, SS_Scrollbar *scroller=NULL);
 
-        inline void         SetFont(char *filename, float desc) { guiFont = new SS_SFont(filename, desc); }
+        inline void         SetFont(const char *filename, float desc) { guiFont = new SS_SFont(filename, desc); }
         inline void         SetFont(SS_SFont * const font) { guiFont = font; }
         inline SS_SFont*    Font() { return guiFont; }
 
@@ -167,7 +167,7 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
                                 SS_Gadget(SS_GUI *g, float w, float h, Uint32 f=GAD_NOFLAGS);
                                 SS_Gadget(SS_GUI *g, SS_LayerItem *item);
                                 SS_Gadget(SS_GUI *g, SS_ItemGroup *grp);
-                                SS_Gadget(SS_GUI *g, char *file1, char *file2=NULL, char *file3=NULL, char *file4=NULL);
+                                SS_Gadget(SS_GUI *g, const char *file1, const char *file2=NULL, const char *file3=NULL, const char *file4=NULL);
 
         virtual                 ~SS_Gadget();
 
@@ -234,18 +234,18 @@ class SS_Gadget : public SS_Broadcaster, public SS_Listener
 
         inline void             SetState(Uint16 s) { state = s; }
 
-        static SS_Sprite*       MakeSprite(char *file1, char *file2=NULL, char *file3=NULL, char *file4=NULL);
-        static SS_ItemGroup*    MakeSpriteGroup(char *file1, char *file2 = NULL, char *file3=NULL, char *file4=NULL);
+        static SS_Sprite*       MakeSprite(const char *file1, const char *file2=NULL, const char *file3=NULL, const char *file4=NULL);
+        static SS_ItemGroup*    MakeSpriteGroup(const char *file1, const char *file2 = NULL, const char *file3=NULL, const char *file4=NULL);
 
         void                    SetItem(SS_LayerItem *item);
-        inline void             SetItem(char *file1, char *file2 = NULL, char *file3 = NULL, char *file4 = NULL);
+        inline void             SetItem(const char *file1, const char *file2 = NULL, const char *file3 = NULL, const char *file4 = NULL);
 
         void                    SetItemGroup(SS_ItemGroup *grp);
-        inline void             SetItemGroup(char *file1, char *file2 = NULL, char *file3 = NULL, char *file4 = NULL);
+        inline void             SetItemGroup(const char *file1, const char *file2 = NULL, const char *file3 = NULL, const char *file4 = NULL);
 
         virtual inline void     SetFont(SS_SFont * const font) { gadFont = font; }
 
-        void                    SetLabel(char *text);
+        void                    SetLabel(const char *text);
         inline void             SetLabel(SS_String *str);
         void                    RealignLabel();
 
@@ -299,9 +299,9 @@ class SS_Button : public SS_Gadget
 {
     public:
                         SS_Button(SS_GUI *g);
-                        SS_Button(SS_GUI *g, float w, float h, char *lab=NULL);
+                        SS_Button(SS_GUI *g, float w, float h, const char *lab=NULL);
                         SS_Button(SS_GUI *g, SS_Sprite *sprite);
-                        SS_Button(SS_GUI *g, char *file1, char *file2=NULL, char *file3=NULL);
+                        SS_Button(SS_GUI *g, const char *file1, const char *file2=NULL, const char *file3=NULL);
                         ~SS_Button();
 
         virtual bool    HandleEvent(SS_Event *event);
@@ -328,12 +328,12 @@ class SS_Checkbox : public SS_Gadget
     public:
         static SS_LayerItem *checkboxSprite;
 
-                            SS_Checkbox(SS_GUI *g, char *label=NULL);
-                            SS_Checkbox(SS_GUI *g, float w, float h, char *label=NULL);
+                            SS_Checkbox(SS_GUI *g, const char *label=NULL);
+                            SS_Checkbox(SS_GUI *g, float w, float h, const char *label=NULL);
                             ~SS_Checkbox();
 
-        void                LoadImages(char *off1, char *on1, char *off2=NULL, char *on2=NULL);
-        static void         LoadDefaultImages(char *off1, char *on1, char *off2=NULL, char *on2=NULL);
+        void                LoadImages(const char *off1, const char *on1, const char *off2=NULL, const char *on2=NULL);
+        static void         LoadDefaultImages(const char *off1, const char *on1, const char *off2=NULL, const char *on2=NULL);
 
         virtual Uint16      FrameForState();
 
@@ -438,9 +438,9 @@ class SS_Thumb : public SS_Gadget
                         SS_Thumb();
                         SS_Thumb(SS_GUI *g, float w, float h);
                         SS_Thumb(SS_GUI *g, SS_Sprite *sprite);
-                        SS_Thumb(SS_GUI *g, char *file1);
-                        SS_Thumb(SS_GUI *g, char *file1, char *file2);
-                        SS_Thumb(SS_GUI *g, char *file1, char *file2, char *file3);
+                        SS_Thumb(SS_GUI *g, const char *file1);
+                        SS_Thumb(SS_GUI *g, const char *file1, const char *file2);
+                        SS_Thumb(SS_GUI *g, const char *file1, const char *file2, const char *file3);
                         ~SS_Thumb();
 
         bool            HandleEvent(SS_Event *event);
@@ -516,8 +516,8 @@ class SS_Slider : public SS_Gadget
                         SS_Slider(SS_GUI *g, float x1, float x2, float y, float v1, float v2, bool isVert=false);
                         ~SS_Slider();
 
-        static void     LoadImages(char *file1, char *file2, char *file3=NULL, char *file4=NULL);
-        static void     LoadDefaultImages(char *file1, char *file2, char *file3=NULL, char *file4=NULL);
+        static void     LoadImages(const char *file1, const char *file2, const char *file3=NULL, const char *file4=NULL);
+        static void     LoadDefaultImages(const char *file1, const char *file2, const char *file3=NULL, const char *file4=NULL);
 
         inline void     SetVRange(float v1, float v2) { minVal = v1; maxVal = v2; }
         inline void     SetXRange(float x1, float x2) { minX = x1; maxX = x2; }
@@ -622,16 +622,16 @@ class SS_Scrollbar : public SS_Gadget
         void            SetParts(SS_Button *upArrow, SS_Button *downArrow, SS_Slider *scrollSlider);
 
         void            LoadStructure(
-                            char *topGroove,        char *bottomGroove,     char *stretchGroove,
-                            char *upNormal,         char *downNormal,
-                            char *upPressed=NULL,   char *downPressed=NULL,
-                            char *upHover=NULL,     char *downHover=NULL );
+                            const char *topGroove,        const char *bottomGroove,     const char *stretchGroove,
+                            const char *upNormal,         const char *downNormal,
+                            const char *upPressed=NULL,   const char *downPressed=NULL,
+                            const char *upHover=NULL,     const char *downHover=NULL );
 
         void            LoadThumb(
-                            char *topNormal,        char *bottomNormal,         char *stretchNormal,
-                            char *topPressed=NULL,  char *bottomPressed=NULL,   char *stretchPressed=NULL,
-                            char *topHover=NULL,    char *bottomHover=NULL,     char *stretchHover=NULL,
-                            char *gripNormal=NULL,  char *gripPressed=NULL,     char *gripHover=NULL );
+                            const char *topNormal,        const char *bottomNormal,         const char *stretchNormal,
+                            const char *topPressed=NULL,  const char *bottomPressed=NULL,   const char *stretchPressed=NULL,
+                            const char *topHover=NULL,    const char *bottomHover=NULL,     const char *stretchHover=NULL,
+                            const char *gripNormal=NULL,  const char *gripPressed=NULL,     const char *gripHover=NULL );
 
         void            MakeDefault();
         inline void     ExpandWidth(Uint16 w) { if (w > Width()) SetWidth(w); }
@@ -656,9 +656,9 @@ class SS_Dragger : public SS_Gadget
 
                         SS_Dragger();
                         SS_Dragger(SS_GUI *g, SS_Sprite *sprite);
-                        SS_Dragger(SS_GUI *g, char *file1);
-                        SS_Dragger(SS_GUI *g, char *file1, char *file2);
-                        SS_Dragger(SS_GUI *g, char *file1, char *file2, char *file3);
+                        SS_Dragger(SS_GUI *g, const char *file1);
+                        SS_Dragger(SS_GUI *g, const char *file1, const char *file2);
+                        SS_Dragger(SS_GUI *g, const char *file1, const char *file2, const char *file3);
                         SS_Dragger(SS_GUI *g, float w, float h, Uint32 f=GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
                         ~SS_Dragger();
 
@@ -744,14 +744,14 @@ class SS_TextInput : public SS_Gadget
 class SS_StaticItem : public SS_Gadget
 {
     public:
-                        SS_StaticItem(SS_GUI *g, char *text=NULL, SS_LayerItem *spr=NULL);
+                        SS_StaticItem(SS_GUI *g, const char *text=NULL, SS_LayerItem *spr=NULL);
                         SS_StaticItem(SS_GUI *g, float w, float h, Uint32 f=GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
                         ~SS_StaticItem();
 
 //      void            Init();
 
-//      void            SetSpriteAndText(SS_Sprite *spr, char *text) { SetItem(spr); SetLabel(text); }
-//      void            SetText(char *text, stringAlign align=(stringAlign)0);
+//      void            SetSpriteAndText(SS_Sprite *spr, const char *text) { SetItem(spr); SetLabel(text); }
+//      void            SetText(const char *text, stringAlign align=(stringAlign)0);
 };
 
 
@@ -788,10 +788,10 @@ class SS_Menu : public SS_Gadget
         SS_MenuItem *firstItem, *lastItem;
 
     public:
-                    SS_Menu(SS_GUI *g, char *font=NULL);
+                    SS_Menu(SS_GUI *g, const char *font=NULL);
                     ~SS_Menu();
 
-        void        AppendItem(SS_Sprite *spr, char *text);
+        void        AppendItem(SS_Sprite *spr, const char *text);
 
     private:
         void        Init();
@@ -810,10 +810,10 @@ class SS_Menubar : public SS_Gadget
         SS_MenuItem *firstItem, *lastItem;
 
     public:
-                    SS_Menubar(SS_GUI *g, char *font=NULL);
+                    SS_Menubar(SS_GUI *g, const char *font=NULL);
                     ~SS_Menubar();
 
-        void        AppendMenu(SS_Sprite *spr, char *text=NULL);
+        void        AppendMenu(SS_Sprite *spr, const char *text=NULL);
 
     private:
         void        Init();
@@ -839,7 +839,7 @@ class SS_CustomGadget : public SS_Gadget
 
                         SS_CustomGadget(SS_GUI *g, gadgetRenderProcPtr r=NULL);
                         SS_CustomGadget(SS_GUI *g, float w, float h, gadgetRenderProcPtr r=NULL);
-                        SS_CustomGadget(SS_GUI *g, char *file, gadgetRenderProcPtr r=NULL);
+                        SS_CustomGadget(SS_GUI *g, const char *file, gadgetRenderProcPtr r=NULL);
                         SS_CustomGadget(SS_GUI *g, SS_Sprite *sprite, gadgetRenderProcPtr r=NULL);
                         ~SS_CustomGadget() { if (storage != NULL) delete storage; }
 
