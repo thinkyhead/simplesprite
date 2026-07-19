@@ -6,3 +6,7 @@ xcode-*/
 *.mode1
 *.mode1v3
 *.mode2
+
+# CMake build directories
+build/
+build-*/
