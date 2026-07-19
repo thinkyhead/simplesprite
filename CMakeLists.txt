@@ -64,7 +64,7 @@ target_include_directories(SimpleSprite PUBLIC
 # SS_ASSERT_ON enables SS_ASSERT / SS_ASSERT_FINITE in SS_Config.h — used to
 # catch ref-count underflow (dangling pointers) and NaN angles during bring-up.
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(SimpleSprite PRIVATE SS_ASSERT_ON=1)
+    target_compile_definitions(SimpleSprite PRIVATE SS_ASSERT_ON=1 GL_SILENCE_DEPRECATION=1)
 endif()
 
 # SDL2 framework headers are reached three ways:
@@ -84,7 +84,8 @@ target_link_libraries(SimpleSprite PUBLIC
 # Quiet the deprecation noise from SDL_SetAlpha etc. (kept for minimal churn)
 target_compile_definitions(SimpleSprite PRIVATE
     SDL_DISABLE_DEPRECATED=0
-    SDL_ENABLE_OLD_NAMES=1)
+    SDL_ENABLE_OLD_NAMES=1
+    GL_SILENCE_DEPRECATION=1)
 
 # Legacy code freely narrows double->float in vector initializer lists; the
 # values are well-defined so silence the C++11 narrowing error.
@@ -111,7 +112,7 @@ target_include_directories(SimpleSpriteTest PRIVATE
     ${SDL3_INCLUDE_DIRS}
 )
 target_compile_definitions(SimpleSpriteTest PRIVATE
-    SDL_ENABLE_OLD_NAMES=1 SDL_MAIN_HANDLED=1)
+    SDL_ENABLE_OLD_NAMES=1 SDL_MAIN_HANDLED=1 GL_SILENCE_DEPRECATION=1)
 target_compile_options(SimpleSpriteTest PRIVATE -Wno-c++11-narrowing -fobjc-arc)
 
 # Link the engine + SDL3 libraries
