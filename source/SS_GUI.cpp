@@ -109,7 +109,7 @@ void SS_GUI::SetGadgetSuite(SS_LayerItem *check, SS_ItemGroup *slider, SS_Scroll
 //
 // LoadTheme
 //
-void SS_GUI::LoadTheme(char *theme)
+void SS_GUI::LoadTheme(const char *theme)
 {
     Folder::cdDataFolder(theme);
 
@@ -570,7 +570,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
     g->AddGadget(this);
 }
 
-SS_Gadget::SS_Gadget(SS_GUI *g, char *file1, char *file2, char *file3, char *file4)
+SS_Gadget::SS_Gadget(SS_GUI *g, const char *file1, const char *file2, const char *file3, const char *file4)
 {
     DEBUGF(1, "[%p] SS_Gadget(gui, \"%s\", this, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3, file4);
 
@@ -727,7 +727,7 @@ void SS_Gadget::SetGUI(SS_GUI *g)
 //
 // MakeSprite(file1, file2, file3, file4)
 //
-SS_Sprite* SS_Gadget::MakeSprite(char *file1, char *file2, char *file3, char *file4)
+SS_Sprite* SS_Gadget::MakeSprite(const char *file1, const char *file2, const char *file3, const char *file4)
 {
     DEBUGF(1, "SS_Gadget::MakeSprite(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
 
@@ -761,7 +761,7 @@ SS_Sprite* SS_Gadget::MakeSprite(char *file1, char *file2, char *file3, char *fi
 //      file3 = gadget clicked state
 //      file4 = gadget hover state
 //
-SS_ItemGroup* SS_Gadget::MakeSpriteGroup(char *file1, char *file2, char *file3, char *file4)
+SS_ItemGroup* SS_Gadget::MakeSpriteGroup(const char *file1, const char *file2, const char *file3, const char *file4)
 {
     DEBUGF(1, "SS_GUI::MakeSpriteGroup(\"%s\", \"%s\", \"%s\", \"%s\")\n", file1, file2, file3, file4);
 
@@ -783,7 +783,7 @@ SS_ItemGroup* SS_Gadget::MakeSpriteGroup(char *file1, char *file2, char *file3, 
 // SetItem(file1, file2, file3, file4)
 // Set the sprite from a set of image files
 //
-void SS_Gadget::SetItem(char *file1, char *file2, char *file3, char *file4)
+void SS_Gadget::SetItem(const char *file1, const char *file2, const char *file3, const char *file4)
 {
     SetItem(SS_Gadget::MakeSprite(file1, file2, file3, file4));
 }
@@ -821,7 +821,7 @@ void SS_Gadget::SetItem(SS_LayerItem *item)
 // SetItemGroup(file1, file2, file3, file4)
 // Set a sprite group from a set of image files
 //
-void SS_Gadget::SetItemGroup(char *file1, char *file2, char *file3, char *file4)
+void SS_Gadget::SetItemGroup(const char *file1, const char *file2, const char *file3, const char *file4)
 {
     SetItemGroup(SS_Gadget::MakeSpriteGroup(file1, file2, file3, file4));
 }
@@ -850,7 +850,7 @@ void SS_Gadget::SetItemGroup(SS_ItemGroup *group)
 //
 // SetLabel(text)
 //
-void SS_Gadget::SetLabel(char *text)
+void SS_Gadget::SetLabel(const char *text)
 {
     DEBUGF(1, "[%p] SS_Gadget::SetLabel(\"%s\")\n", this, text);
 
@@ -1293,7 +1293,7 @@ SS_CustomGadget::SS_CustomGadget(SS_GUI *g, float w, float h, gadgetRenderProcPt
     SetRenderProc(r);
 }
 
-SS_CustomGadget::SS_CustomGadget(SS_GUI *g, char *file, gadgetRenderProcPtr r) : SS_Gadget(g)
+SS_CustomGadget::SS_CustomGadget(SS_GUI *g, const char *file, gadgetRenderProcPtr r) : SS_Gadget(g)
 {
     Init();
     SetItem(file);
@@ -1365,7 +1365,7 @@ SS_Button::SS_Button(SS_GUI *g) : SS_Gadget(g)
     Init();
 }
 
-SS_Button::SS_Button(SS_GUI *g, float w, float h, char *lab) : SS_Gadget(g, w, h)
+SS_Button::SS_Button(SS_GUI *g, float w, float h, const char *lab) : SS_Gadget(g, w, h)
 {
     DEBUGF(1, "[%p] SS_Button(gui, w, h, l) CONSTRUCTOR\n", this);
 
@@ -1382,7 +1382,7 @@ SS_Button::SS_Button(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
     Init();
 }
 
-SS_Button::SS_Button(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadget(g)
+SS_Button::SS_Button(SS_GUI *g, const char *file1, const char *file2, const char *file3) : SS_Gadget(g)
 {
     DEBUGF(1, "[%p] SS_Button(gui, \"%s\", this, \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3);
 
@@ -1474,7 +1474,7 @@ bool SS_Button::HandleEvent(SS_Event *event)
 // SS_Checkbox
 //
 
-SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::checkboxSprite)
+SS_Checkbox::SS_Checkbox(SS_GUI *g, const char *label) : SS_Gadget(g, SS_Checkbox::checkboxSprite)
 {
     DEBUGF(1, "[%p] SS_Checkbox(%p, %s) CONSTRUCTOR\n", this, g, label);
 
@@ -1484,7 +1484,7 @@ SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::che
         SetLabel(label);
 }
 
-SS_Checkbox::SS_Checkbox(SS_GUI *g, float w, float h, char *label) : SS_Gadget(g, w, h)
+SS_Checkbox::SS_Checkbox(SS_GUI *g, float w, float h, const char *label) : SS_Gadget(g, w, h)
 {
     DEBUGF(1, "[%p] SS_Checkbox(%p, %.2f, %.2f, %s) CONSTRUCTOR\n", this, g, w, h, label);
 
@@ -1706,19 +1706,19 @@ SS_Thumb::SS_Thumb(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
     Init(f);
 }
 
-SS_Thumb::SS_Thumb(SS_GUI *g, char *file) : SS_Gadget(g)
+SS_Thumb::SS_Thumb(SS_GUI *g, const char *file) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE);
     SetItem(file);
 }
 
-SS_Thumb::SS_Thumb(SS_GUI *g, char *file1, char *file2) : SS_Gadget(g)
+SS_Thumb::SS_Thumb(SS_GUI *g, const char *file1, const char *file2) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE|GAD_AUTOPRESS);
     SetItem(file1, file2);
 }
 
-SS_Thumb::SS_Thumb(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadget(g)
+SS_Thumb::SS_Thumb(SS_GUI *g, const char *file1, const char *file2, const char *file3) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE|GAD_AUTOPRESS|GAD_AUTOROLLOVER);
     SetItem(file1, file2, file3);
@@ -1963,10 +1963,10 @@ void SS_Scrollbar::Init(float v1, float v2, float a)
 // relative to the gadget position (which also has a handle of 0,0)
 //
 void SS_Scrollbar::LoadStructure(
-    char *topGroove,    char *bottomGroove,     char *stretchGroove,
-    char *upNormal,     char *downNormal,
-    char *upPressed,    char *downPressed,
-    char *upHover,      char *downHover )
+    const char *topGroove,    const char *bottomGroove,     const char *stretchGroove,
+    const char *upNormal,     const char *downNormal,
+    const char *upPressed,    const char *downPressed,
+    const char *upHover,      const char *downHover )
 {
     SS_ItemGroup  *stGroup;
     SS_Sprite       *stSprite;
@@ -2054,10 +2054,10 @@ void SS_Scrollbar::LoadStructure(
 // This takes a lot of arguments, sorry
 //
 void SS_Scrollbar::LoadThumb(
-    char *topNormal,    char *bottomNormal,     char *stretchNormal,
-    char *topPressed,   char *bottomPressed,    char *stretchPressed,
-    char *topHover,     char *bottomHover,      char *stretchHover,
-    char *gripNormal,   char *gripPressed,      char *gripHover )
+    const char *topNormal,    const char *bottomNormal,     const char *stretchNormal,
+    const char *topPressed,   const char *bottomPressed,    const char *stretchPressed,
+    const char *topHover,     const char *bottomHover,      const char *stretchHover,
+    const char *gripNormal,   const char *gripPressed,      const char *gripHover )
 {
     SS_ItemGroup  *thGroup = new SS_ItemGroup();
     SS_Sprite       *thSprite;
@@ -2191,19 +2191,19 @@ SS_Dragger::SS_Dragger(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
     Init(f);
 }
 
-SS_Dragger::SS_Dragger(SS_GUI *g, char *file) : SS_Gadget(g)
+SS_Dragger::SS_Dragger(SS_GUI *g, const char *file) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE);
     SetItem(file);
 }
 
-SS_Dragger::SS_Dragger(SS_GUI *g, char *file1, char *file2) : SS_Gadget(g)
+SS_Dragger::SS_Dragger(SS_GUI *g, const char *file1, const char *file2) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE|GAD_AUTOPRESS);
     SetItem(file1, file2);
 }
 
-SS_Dragger::SS_Dragger(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadget(g)
+SS_Dragger::SS_Dragger(SS_GUI *g, const char *file1, const char *file2, const char *file3) : SS_Gadget(g)
 {
     Init(GAD_DRAGGABLE|GAD_AUTOPRESS|GAD_AUTOROLLOVER);
     SetItem(file1, file2, file3);
@@ -2413,7 +2413,7 @@ bool SS_TextInput::HandleEvent(SS_Event *event)
 // which are completely non-interactive.
 //
 
-SS_StaticItem::SS_StaticItem(SS_GUI *g, char *text, SS_LayerItem *spr) : SS_Gadget(g, spr)
+SS_StaticItem::SS_StaticItem(SS_GUI *g, const char *text, SS_LayerItem *spr) : SS_Gadget(g, spr)
 {
     colorSet normColor = { 2,
             { 0xFF, 0xFF, 0xFF, 0xFF },     // border

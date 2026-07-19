@@ -37,7 +37,7 @@ class SS_Frame : public SS_RefCounter
         float           xhandle, yhandle;   // handle for relative positioning
         float           width, height;      // size of image area
 
-                        SS_Frame(char *filename, frameFlags f=SS_FRAME_NONE);
+                        SS_Frame(const char *filename, frameFlags f=SS_FRAME_NONE);
                         SS_Frame(SDL_Surface *s, const SDL_Rect *section, frameFlags f=SS_FRAME_NONE);
                         SS_Frame(SDL_Surface *s, frameFlags f=SS_FRAME_NONE);
                         ~SS_Frame();
@@ -74,4 +74,3 @@ class SS_Frame : public SS_RefCounter
 };
 
 #endif
-

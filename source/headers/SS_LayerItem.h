@@ -137,7 +137,7 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
         virtual void            SetWorld(SS_World *w);
         virtual void            SetLayer(SS_Layer *l);
         virtual void            SetGroup(SS_ItemGroup *g);
-        inline void             SetName(char *n)        { if (name) delete[] name; name = newstring(n); }
+        inline void             SetName(const char *n) { if (name) delete[] name; name = newstring(n); }
 
         virtual inline void     SetFlags(Uint32 f)      { flags = f; }
         virtual inline void     EnableFlag(Uint32 f)    { flags |= f; }
@@ -248,4 +248,3 @@ class SS_LayerItem : public SS_Broadcaster, public SS_Listener, public SS_RefCou
 };
 
 #endif
-

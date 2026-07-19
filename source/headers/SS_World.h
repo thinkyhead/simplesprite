@@ -127,8 +127,8 @@ class SS_World : public SS_Broadcaster, public SS_Listener, public SS_LayerList,
 
         SS_TextLayer*       NewTextLayer(SS_SFont *sfont, Uint32 f);
         SS_TextLayer*       NewTextLayer(SS_SFont *sfont);
-        SS_TextLayer*       NewTextLayer(char *filename, float desc, Uint32 f);
-        SS_TextLayer*       NewTextLayer(char *filename, float desc);
+        SS_TextLayer*       NewTextLayer(const char *filename, float desc, Uint32 f);
+        SS_TextLayer*       NewTextLayer(const char *filename, float desc);
 
         SS_GUI*             NewGUI();
         SS_GUI*             NewGUI(SS_SFont *font);
@@ -142,7 +142,7 @@ class SS_World : public SS_Broadcaster, public SS_Listener, public SS_LayerList,
         virtual void        HandleEvent(SDL_Event *e);
         inline void         SetEventHandler(worldEventProc ep)  { eventHandler = ep; }
         void                SetPointerSprite(SS_LayerItem *s);
-        SS_Sprite*          CreatePointerSprite(char *file);
+        SS_Sprite*          CreatePointerSprite(const char *file);
         inline void         SetPreRenderProc(worldProc p)       { preRenderProc = p; }
         inline void         SetPostRenderProc(worldProc p)      { postRenderProc = p; }
         inline void         SetPostProcessor(worldProc p)       { postProcessor = p; }
@@ -184,4 +184,3 @@ class SS_World : public SS_Broadcaster, public SS_Listener, public SS_LayerList,
 };
 
 #endif
-

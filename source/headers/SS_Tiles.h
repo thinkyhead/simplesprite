@@ -33,7 +33,7 @@ class SS_TilePalette : public SS_RefCounter
         float       tile_pw, tile_ph;               // tile size as percentage of palette size
         Uint16      tiles_across, tiles_down;       // how many tiles across and down
 
-                    SS_TilePalette(char *filename, int tw, int th);
+                    SS_TilePalette(const char *filename, int tw, int th);
                     ~SS_TilePalette();
 };
 
@@ -59,17 +59,17 @@ class SS_TileMap
         SScolorb        radarColor;                 // The map's color on radar
 
                     SS_TileMap(int w, int h);
-                    SS_TileMap(char* filename);
+                    SS_TileMap(const char *filename);
                     ~SS_TileMap();
 
         void        InitMap(int w, int h);
-        void        LoadMap(char *filename);
-        bool        SaveMap(char *filename);
+        void        LoadMap(const char *filename);
+        bool        SaveMap(const char *filename);
         void        DisposeMap();
 
         void        SetRadarColor(GLuint r, GLuint g, GLuint b, GLuint a) { radarColor.r = r; radarColor.g = g; radarColor.b = b; radarColor.a = a; }
 
-        void        LoadPalette(char *filename, int tw, int th);
+        void        LoadPalette(const char *filename, int tw, int th);
         void        SetPalette(SS_TilePalette *palette);
         void        DisposePalette();
 
@@ -113,4 +113,3 @@ class SS_TileLayer : public SS_Layer
 };
 
 #endif
-

@@ -43,7 +43,7 @@ class SS_Sound : public SS_RefCounter
 
     public:
                     SS_Sound(Uint32 min=0);
-                    SS_Sound(char *filename, Uint32 min=0);
+                    SS_Sound(const char *filename, Uint32 min=0);
                     ~SS_Sound();
 
         static void InitAudioMixer(Uint32 channels);
@@ -58,7 +58,7 @@ class SS_Sound : public SS_RefCounter
 
         inline void SetMinWait(Uint32 min)                  { minWait = min; }
 
-        void        Load(char *filename);
+        void        Load(const char *filename);
 
         int         Play(int times=0);
         int         PlayAtPosition(Sint16 angle, Uint8 distance, int loops=0);
@@ -97,10 +97,10 @@ class SS_Music
 
     public:
                     SS_Music();
-                    SS_Music(char *filename);
+                    SS_Music(const char *filename);
         virtual     ~SS_Music();
 
-        void        Load(char *filename);
+        void        Load(const char *filename);
 
         inline int  Play(int loops=-1)          { return MusicPlay(musicTrack, music, loops, 0); }
         inline int  FadeIn(int loops, int ms)   { return MusicPlay(musicTrack, music, loops, ms); }

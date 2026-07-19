@@ -74,7 +74,7 @@ SS_Sound::SS_Sound(Uint32 min)
     minWait = min;
 }
 
-SS_Sound::SS_Sound(char *filename, Uint32 min)
+SS_Sound::SS_Sound(const char *filename, Uint32 min)
 {
     DEBUGF(1, "[%p] SS_Sound::SS_Sound(%s)\n", this, filename);
 
@@ -109,11 +109,11 @@ void SS_Sound::Init()
 //
 // Load(filename)
 //
-void SS_Sound::Load(char *filename)
+void SS_Sound::Load(const char *filename)
 {
     DEBUGF(1, "[%p] SS_Sound::Load(%s)\n", this, filename);
 
-    char *full = SS_Folder::FullPath(filename);
+    char * const full = SS_Folder::FullPath(filename);
 
     // MIX_LoadAudio replaces Mix_LoadWAV. predecode=true so playback is
     // cheap (the sample is fully decoded up front, just like Mix_Chunk).
@@ -316,7 +316,7 @@ SS_Music::SS_Music()
     Init();
 }
 
-SS_Music::SS_Music(char *filename)
+SS_Music::SS_Music(const char *filename)
 {
     DEBUGF(1, "[%p] SS_Music::SS_Music(%s)\n", this, filename);
 
@@ -348,7 +348,7 @@ void SS_Music::Init()
 //
 // Load(filename)
 //
-void SS_Music::Load(char *filename)
+void SS_Music::Load(const char *filename)
 {
     DEBUGF(1, "[%p] SS_Music::Load(%s)\n", this, filename);
     char        *full = SS_Folder::FullPath(filename);
