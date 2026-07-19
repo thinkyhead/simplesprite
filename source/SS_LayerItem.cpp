@@ -27,14 +27,14 @@
 
 SS_LayerItem::SS_LayerItem()
 {
-    DEBUGF(1, "[%08X] SS_LayerItem() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_LayerItem() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_LayerItem::~SS_LayerItem()
 {
-    DEBUGF(1, "[%08X] ~SS_LayerItem()\n", this);
+    DEBUGF(1, "[%p] ~SS_LayerItem()\n", this);
 
     RemoveSelf();
 }
@@ -45,7 +45,7 @@ SS_LayerItem::~SS_LayerItem()
 //
 void SS_LayerItem::Init()
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::Init()\n", this);
+    DEBUGF(1, "[%p] SS_LayerItem::Init()\n", this);
 
     // Helpful name
     name            = NULL;
@@ -126,7 +126,7 @@ void SS_LayerItem::Init()
 //
 void SS_LayerItem::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_LayerItem::SetWorld(%p)\n", this, w);
 
     if ((world = w)) {
         oldW = w->ZoomWidth();
@@ -141,7 +141,7 @@ void SS_LayerItem::SetWorld(SS_World *w)
 //
 void SS_LayerItem::SetLayer(SS_Layer *l)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetLayer(%08X)\n", this, l);
+    DEBUGF(1, "[%p] SS_LayerItem::SetLayer(%p)\n", this, l);
 
     SetWorld((layer = l) ? l->World() : NULL);
 }
@@ -153,7 +153,7 @@ void SS_LayerItem::SetLayer(SS_Layer *l)
 //
 void SS_LayerItem::SetGroup(SS_ItemGroup *g)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetGroup(%08X)\n", this, g);
+    DEBUGF(1, "[%p] SS_LayerItem::SetGroup(%p)\n", this, g);
 
     SetLayer((group = g) ? g->layer : NULL);
 }
@@ -164,7 +164,7 @@ void SS_LayerItem::SetGroup(SS_ItemGroup *g)
 //
 const SS_LayerItem& SS_LayerItem::operator=(const SS_LayerItem &src)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::operator=(%08X)\n", this, &src);
+    DEBUGF(1, "[%p] SS_LayerItem::operator=(%p)\n", this, &src);
 
     if (&src != this)
     {
@@ -301,7 +301,7 @@ void SS_LayerItem::Tokenize(SS_FlatFile &dataFile)
 //
 void SS_LayerItem::RemoveSelf() // aka "Unlink()"
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::RemoveSelf()\n", this);
+    DEBUGF(1, "[%p] SS_LayerItem::RemoveSelf()\n", this);
 
     if (group) {
         group->Remove(dynamic_cast<SS_Collider*>(this));
@@ -646,7 +646,7 @@ float SS_LayerItem::AngleToPointer() const
 //
 void SS_LayerItem::SetMoveProc(spriteProcPtr proc)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetMoveProc(%08X)\n", this, proc);
+    DEBUGF(1, "[%p] SS_LayerItem::SetMoveProc(%p)\n", this, proc);
 
     lastMoveTime = 0;
     moveProc = proc;
@@ -676,7 +676,7 @@ void SS_LayerItem::PrimeProcessor()
 //
 void SS_LayerItem::SetAnimateProc(spriteProcPtr proc)
 {
-    DEBUGF(1, "[%08X] SS_LayerItem::SetAnimateProc(%08X)\n", this, proc);
+    DEBUGF(1, "[%p] SS_LayerItem::SetAnimateProc(%p)\n", this, proc);
 
     lastAnimTime = 0;
     animProc = proc;
@@ -925,5 +925,3 @@ void SS_LayerItem::defaultAnimProc(SS_LayerItem *item)
         item->currFrame = frame;
     }
 }
-
-

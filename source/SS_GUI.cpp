@@ -84,7 +84,7 @@ SS_GUI::~SS_GUI()
 
 void SS_GUI::Init()
 {
-    DEBUGF(1, "[%08X] SS_GUI::Init()\n", this);
+    DEBUGF(1, "[%p] SS_GUI::Init()\n", this);
 
     // Event listeners
     clickedGadget   = NULL;
@@ -184,7 +184,7 @@ void SS_GUI::ActivateNone()
 //
 void SS_GUI::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_GUI::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_GUI::SetWorld(%p)\n", this, w);
 
     SS_Layer::SetWorld(w);
 
@@ -208,7 +208,7 @@ void SS_GUI::SetWorld(SS_World *w)
 //
 void SS_GUI::AddGadget(SS_Gadget *gadget)
 {
-    DEBUGF(1, "[%08X] SS_GUI::AddGadget(%08X)\n", this, gadget);
+    DEBUGF(1, "[%p] SS_GUI::AddGadget(%p)\n", this, gadget);
 
     gadget->SetGUI(this);
     gadget->guiNode = gadgetList.Append(gadget);
@@ -242,7 +242,7 @@ void SS_GUI::SetKeyFocus(SS_Gadget *g)
 //
 bool SS_GUI::HandleEvent(SDL_Event *e)
 {
-    //DEBUGF(1, "[%08X] SS_GUI::HandleEvent(e)\n", this);
+    //DEBUGF(1, "[%p] SS_GUI::HandleEvent(e)\n", this);
 
     if (dormant)
         return false;
@@ -435,7 +435,7 @@ bool SS_GUI::HandleEvent(SDL_Event *e)
 //
 void SS_GUI::ExitAllRollovers()
 {
-    DEBUGF(1, "[%08X] SS_GUI::ExitAllRollovers()\n", this);
+    DEBUGF(1, "[%p] SS_GUI::ExitAllRollovers()\n", this);
 
     SS_Event    ssevent;
 
@@ -515,14 +515,14 @@ void SS_GUI::Render()
 
 SS_Gadget::SS_Gadget()
 {
-    DEBUGF(1, "[%08X] SS_Gadget() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Gadget() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_Gadget::SS_Gadget(SS_GUI *g)
 {
-    DEBUGF(1, "[%08X] SS_Gadget(%08X) CONSTRUCTOR\n", this, g);
+    DEBUGF(1, "[%p] SS_Gadget(%p) CONSTRUCTOR\n", this, g);
 
     Init();
     g->AddGadget(this);
@@ -530,7 +530,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, float w, float h, Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_Gadget(%08X, %f, %f, %d) CONSTRUCTOR\n", this, g, w, h, f);
+    DEBUGF(1, "[%p] SS_Gadget(%p, %f, %f, %d) CONSTRUCTOR\n", this, g, w, h, f);
 
     Init();
 
@@ -548,7 +548,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, float w, float h, Uint32 f)
 //
 SS_Gadget::SS_Gadget(SS_GUI *g, SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Gadget(gui, item) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Gadget(gui, item) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -560,7 +560,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_LayerItem *item)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 {
-    DEBUGF(1, "[%08X] SS_Gadget(gui, group) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Gadget(gui, group) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -572,7 +572,7 @@ SS_Gadget::SS_Gadget(SS_GUI *g, SS_ItemGroup *group)
 
 SS_Gadget::SS_Gadget(SS_GUI *g, char *file1, char *file2, char *file3, char *file4)
 {
-    DEBUGF(1, "[%08X] SS_Gadget(gui, \"%s\", \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3, file4);
+    DEBUGF(1, "[%p] SS_Gadget(gui, \"%s\", this, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3, file4);
 
     Init();
     SetItemGroup(file1, file2, file3, file4);
@@ -597,7 +597,7 @@ SS_Gadget::~SS_Gadget()
 //
 void SS_Gadget::Init()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::Init()\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::Init()\n", this);
 
     gui             = NULL;
 
@@ -674,7 +674,7 @@ void SS_Gadget::Reset()
 //
 void SS_Gadget::RemoveSelf()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::RemoveSelf()\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::RemoveSelf()\n", this);
 
     if (gui) {
         MarkExited();
@@ -689,7 +689,7 @@ void SS_Gadget::RemoveSelf()
 //
 void SS_Gadget::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_Gadget::SetWorld(%p)\n", this, w);
 
     world = w;
 
@@ -709,7 +709,7 @@ void SS_Gadget::SetWorld(SS_World *w)
 //
 void SS_Gadget::SetGUI(SS_GUI *g)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetLayer(%08X)\n", this, g);
+    DEBUGF(1, "[%p] SS_Gadget::SetLayer(%p)\n", this, g);
 
     gui = g;
 
@@ -793,7 +793,7 @@ void SS_Gadget::SetItem(char *file1, char *file2, char *file3, char *file4)
 //
 void SS_Gadget::SetItem(SS_LayerItem *item)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetItem(%08X)\n", this, item);
+    DEBUGF(1, "[%p] SS_Gadget::SetItem(%p)\n", this, item);
 
     gadGroup = NULL;
     bkgdSprite = NULL;
@@ -831,7 +831,7 @@ void SS_Gadget::SetItemGroup(char *file1, char *file2, char *file3, char *file4)
 //
 void SS_Gadget::SetItemGroup(SS_ItemGroup *group)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetItemGroup(%08X)\n", this, group);
+    DEBUGF(1, "[%p] SS_Gadget::SetItemGroup(%p)\n", this, group);
 
     gadGroup = group;
     bkgdSprite = group->m_head->m_data;
@@ -852,7 +852,7 @@ void SS_Gadget::SetItemGroup(SS_ItemGroup *group)
 //
 void SS_Gadget::SetLabel(char *text)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetLabel(\"%s\")\n", this, text);
+    DEBUGF(1, "[%p] SS_Gadget::SetLabel(\"%s\")\n", this, text);
 
     if (!gui)
         throw "The gadget must be added to the gui before using labels.";
@@ -868,7 +868,7 @@ void SS_Gadget::SetLabel(char *text)
 //
 void SS_Gadget::SetLabel(SS_String *str)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::SetLabel(SS_String)\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::SetLabel(SS_String)\n", this);
 
     if (!gui)
         throw "The gadget must be added to the gui before using labels.";
@@ -910,7 +910,7 @@ bool SS_Gadget::ContainsPoint(float x, float y)
 //
 void SS_Gadget::MarkEntered()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::MarkEntered(%08X)\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::MarkEntered(%p)\n", this);
 
     if (!IsEntered() && gui) {
         rolloverNode = gui->rolloverList.Append(this);
@@ -923,7 +923,7 @@ void SS_Gadget::MarkEntered()
 //
 void SS_Gadget::MarkExited()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::MarkExited()\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::MarkExited()\n", this);
 
     if (IsEntered()) {
         gui->rolloverList.Remove(rolloverNode);
@@ -993,7 +993,7 @@ void SS_Gadget::SetHandler(ssEventCode type, gadgetEventProcPtr proc)
 //
 bool SS_Gadget::HandleEvent(SS_Event *event)
 {
-    DEBUGF(1, "[%08X] SS_Gadget::HandleEvent(%d)\n", this, event->type);
+    DEBUGF(1, "[%p] SS_Gadget::HandleEvent(%d)\n", this, event->type);
 
     if (hideFlag) return false;
 
@@ -1062,7 +1062,7 @@ bool SS_Gadget::HandleEvent(SS_Event *event)
 //
 Uint16 SS_Gadget::CountClicks()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::CountClicks()\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::CountClicks()\n", this);
 
     Uint64  t = SDL_GetTicks();
 
@@ -1112,7 +1112,7 @@ void SS_Gadget::Move(float x, float y)
 //
 void SS_Gadget::RealignLabel()
 {
-    DEBUGF(1, "[%08X] SS_Gadget::RealignLabel()\n", this);
+    DEBUGF(1, "[%p] SS_Gadget::RealignLabel()\n", this);
 
     if (labelString)
     {
@@ -1367,7 +1367,7 @@ SS_Button::SS_Button(SS_GUI *g) : SS_Gadget(g)
 
 SS_Button::SS_Button(SS_GUI *g, float w, float h, char *lab) : SS_Gadget(g, w, h)
 {
-    DEBUGF(1, "[%08X] SS_Button(gui, w, h, l) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Button(gui, w, h, l) CONSTRUCTOR\n", this);
 
     Init();
 
@@ -1377,14 +1377,14 @@ SS_Button::SS_Button(SS_GUI *g, float w, float h, char *lab) : SS_Gadget(g, w, h
 
 SS_Button::SS_Button(SS_GUI *g, SS_Sprite *sprite) : SS_Gadget(g, sprite)
 {
-    DEBUGF(1, "[%08X] SS_Button(gui, sprite) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Button(gui, sprite) CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_Button::SS_Button(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadget(g)
 {
-    DEBUGF(1, "[%08X] SS_Button(gui, \"%s\", \"%s\", \"%s\") CONSTRUCTOR\n", this, file1, file2, file3);
+    DEBUGF(1, "[%p] SS_Button(gui, \"%s\", this, \"%s\", \"%s\") CONSTRUCTOR\n", file1, file2, file3);
 
     Init();
     SetItem(file1, file2, file3);
@@ -1395,7 +1395,7 @@ SS_Button::SS_Button(SS_GUI *g, char *file1, char *file2, char *file3) : SS_Gadg
 //
 SS_Button::~SS_Button()
 {
-    DEBUGF(1, "[%08X] SS_Button DESTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Button DESTRUCTOR\n", this);
 }
 
 //
@@ -1403,7 +1403,7 @@ SS_Button::~SS_Button()
 //
 void SS_Button::Init()
 {
-    DEBUGF(1, "[%08X] SS_Button::Init(gui)\n", this);
+    DEBUGF(1, "[%p] SS_Button::Init(gui)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAWBACKGROUND|GAD_DRAWBORDER);
     SetLabelAlignment(SA_CENTER);
@@ -1476,7 +1476,7 @@ bool SS_Button::HandleEvent(SS_Event *event)
 
 SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::checkboxSprite)
 {
-    DEBUGF(1, "[%08X] SS_Checkbox(%08X, %s) CONSTRUCTOR\n", this, g, label);
+    DEBUGF(1, "[%p] SS_Checkbox(%p, %s) CONSTRUCTOR\n", this, g, label);
 
     Init();
 
@@ -1486,7 +1486,7 @@ SS_Checkbox::SS_Checkbox(SS_GUI *g, char *label) : SS_Gadget(g, SS_Checkbox::che
 
 SS_Checkbox::SS_Checkbox(SS_GUI *g, float w, float h, char *label) : SS_Gadget(g, w, h)
 {
-    DEBUGF(1, "[%08X] SS_Checkbox(%08X, %.2f, %.2f, %s) CONSTRUCTOR\n", this, g, w, h, label);
+    DEBUGF(1, "[%p] SS_Checkbox(%p, %.2f, %.2f, %s) CONSTRUCTOR\n", this, g, w, h, label);
 
     Init();
 
@@ -1505,7 +1505,7 @@ SS_Checkbox::~SS_Checkbox()
 //
 void SS_Checkbox::Init()
 {
-    DEBUGF(1, "[%08X] SS_Checkbox::Init()\n", this);
+    DEBUGF(1, "[%p] SS_Checkbox::Init()\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_LABELCLICK);
 }
@@ -1598,7 +1598,7 @@ void SS_Checkbox::Render(const SScolorb &inTint)
 
 SS_RadioButton::SS_RadioButton(SS_GUI *g, Uint16 val, char *label) : SS_Gadget(g, SS_RadioButton::radioButtonSprite)
 {
-    DEBUGF(1, "[%08X] SS_RadioButton(%08X, %d, %s) CONSTRUCTOR\n", this, gui, val, label);
+    DEBUGF(1, "[%p] SS_RadioButton(%p, %d, %s) CONSTRUCTOR\n", this, gui, val, label);
 
     Init();
 
@@ -1618,7 +1618,7 @@ SS_RadioButton::~SS_RadioButton()
 //
 void SS_RadioButton::Init()
 {
-    DEBUGF(1, "[%08X] SS_RadioButton::Init()\n", this);
+    DEBUGF(1, "[%p] SS_RadioButton::Init()\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_LABELCLICK);
 }
@@ -1815,7 +1815,7 @@ void SS_Thumb::Render(const SScolorb &inTint)
 
 SS_Slider::SS_Slider(SS_GUI *g, float x1, float x2, float y, float v1, float v2, bool isVert) : SS_Gadget(g, SS_Slider::sliderSprite)
 {
-    DEBUGF(1, "[%08X] SS_Slider(g, x1, x2, y, v1, v2, isVert) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Slider(g, x1, x2, y, v1, v2, isVert) CONSTRUCTOR\n", this);
 
     //
     // Make default graphics with vectors
@@ -1850,7 +1850,7 @@ SS_Slider::~SS_Slider()
 //
 void SS_Slider::Init(float x1, float x2, float y, float v1, float v2, bool isVert)
 {
-    DEBUGF(1, "[%08X] SS_Slider::Init(x1, x2, y, v1, v2, orient)\n", this);
+    DEBUGF(1, "[%p] SS_Slider::Init(x1, x2, y, v1, v2, orient)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAGGABLE);
 
@@ -1930,7 +1930,7 @@ bool SS_Slider::HandleEvent(SS_Event *event)
 
 SS_Scrollbar::SS_Scrollbar(SS_GUI *g, float startVal, float endVal, float a) : SS_Gadget(g)
 {
-    DEBUGF(1, "[%08X] SS_Scrollbar(g, topVal, bottomVal, isVert) CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Scrollbar(g, topVal, bottomVal, isVert) CONSTRUCTOR\n", this);
 
 //  if (SS_Scrollbar::defaultScrollbar != NULL)
 //
@@ -1947,7 +1947,7 @@ SS_Scrollbar::~SS_Scrollbar()
 //
 void SS_Scrollbar::Init(float v1, float v2, float a)
 {
-    DEBUGF(1, "[%08X] SS_Scrollbar::Init(v1, v2, a)\n", this);
+    DEBUGF(1, "[%p] SS_Scrollbar::Init(v1, v2, a)\n", this);
 
     SetFlags(GAD_AUTOROLLOVER|GAD_AUTOPRESS|GAD_DRAGGABLE);
 
@@ -2251,14 +2251,14 @@ bool SS_Dragger::HandleEvent(SS_Event *event)
 
 SS_TextInput::SS_TextInput(SS_GUI *g, SS_Sprite *spr) : SS_Gadget(g, spr)
 {
-    DEBUGF(1, "[%08X] SS_TextInput(gui, sprite)\n", this);
+    DEBUGF(1, "[%p] SS_TextInput(gui, sprite)\n", this);
 
     Init();
 }
 
 SS_TextInput::SS_TextInput(SS_GUI *g, float w, float h) : SS_Gadget(g, w, h)
 {
-    DEBUGF(1, "[%08X] SS_TextInput(gui, w, h)\n", this);
+    DEBUGF(1, "[%p] SS_TextInput(gui, w, h)\n", this);
 
     Init();
     SetMaxStringWidth((int)w + 100);            // pixel width input limit
@@ -2275,7 +2275,7 @@ SS_TextInput::~SS_TextInput()
 //
 void SS_TextInput::Init()
 {
-    DEBUGF(1, "[%08X] SS_TextInput::Init()\n", this);
+    DEBUGF(1, "[%p] SS_TextInput::Init()\n", this);
 
     SetFlags(GAD_DRAWBORDER|GAD_KEYFOCUS);
     editString = new SS_EditString(gui->Font());
@@ -2438,4 +2438,3 @@ SS_StaticItem::SS_StaticItem(SS_GUI *g, float w, float h, Uint32 f) : SS_Gadget(
 SS_StaticItem::~SS_StaticItem()
 {
 }
-

@@ -410,7 +410,7 @@ public:
     //
     virtual void Unlink()
     {
-        DEBUGF(2, "[%08X] TListNode::Unlink()\n", this);
+        DEBUGF(2, "[%p] TListNode::Unlink()\n", this);
 
         if ( m_prev ) m_prev->m_next = m_next;
         if ( m_next ) m_next->m_prev = m_prev;
@@ -433,7 +433,7 @@ public:
     //
     virtual void RemoveSelf()
     {
-        DEBUGF(2, "[%08X] TListNode::RemoveSelf()\n", this);
+        DEBUGF(2, "[%p] TListNode::RemoveSelf()\n", this);
 
         m_container->Remove(this);
     }
@@ -444,7 +444,7 @@ public:
     //
     inline void InsertAfter( T p_data )
     {
-        DEBUGF(2, "[%08X] TListNode::InsertAfter(p_data)\n", this);
+        DEBUGF(2, "[%p] TListNode::InsertAfter(p_data)\n", this);
 
         TListNode<T>    *newnode = new TListNode<T>;
         newnode->m_data = p_data;
@@ -458,7 +458,7 @@ public:
     //
     void InsertAfter( TListNode<T> *newnode )
     {
-        DEBUGF(2, "[%08X] TListNode::InsertAfter(node)\n", this);
+        DEBUGF(2, "[%p] TListNode::InsertAfter(node)\n", this);
 
         // set up newnode's pointers.
         newnode->m_next = m_next;
@@ -479,7 +479,7 @@ public:
     //
     inline void InsertBefore( T p_data )
     {
-        DEBUGF(2, "[%08X] TListNode::InsertBefore(p_data)\n", this);
+        DEBUGF(2, "[%p] TListNode::InsertBefore(p_data)\n", this);
 
         TListNode<T>    *newnode = new TListNode<T>;
         newnode->m_data = p_data;
@@ -492,7 +492,7 @@ public:
     //
     void InsertBefore( TListNode<T> *newnode )
     {
-        DEBUGF(2, "[%08X] TListNode::InsertBefore(node)\n", this);
+        DEBUGF(2, "[%p] TListNode::InsertBefore(node)\n", this);
 
         // set up newnode's pointers.
         newnode->m_next = this;
@@ -545,7 +545,7 @@ public:
     //
     void Clear()
     {
-        DEBUGF(2, "[%08X] TLinkedList::Clear()\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Clear()\n", this);
 
         // temporary node pointers.
         TListNode<T>* node = m_head;
@@ -574,7 +574,7 @@ public:
     //
     TListNode<T>* Append( T p_data )
     {
-        DEBUGF(2, "[%08X] TLinkedList::Append(p_data)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Append(p_data)\n", this);
 
         // if there is a head node (ie: list is not empty)
         if ( m_head )
@@ -604,7 +604,7 @@ public:
     //
     void Append( TListNode<T> *newnode )
     {
-        DEBUGF(2, "[%08X] TLinkedList::Append(node)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Append(node)\n", this);
 
         // if there is a head node (ie: list is not empty)
         if ( m_head )
@@ -629,7 +629,7 @@ public:
     //
     TListNode<T>* Prepend( T p_data )
     {
-        DEBUGF(2, "[%08X] TLinkedList::Prepent(p_data)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Prepent(p_data)\n", this);
 
         // if there is no head node (ie: list is empty)
         if ( m_head )
@@ -659,7 +659,7 @@ public:
     //
     TListNode<T>* InsertAfter( TIterator<T>& p_iterator, T p_data )
     {
-        DEBUGF(2, "[%08X] TLinkedList::InertAfter(iter, p_data)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::InertAfter(iter, p_data)\n", this);
 
         TListNode<T> *node, *newnode;
 
@@ -695,7 +695,7 @@ public:
     //
     TListNode<T>* InsertBefore( TIterator<T>& p_iterator, T p_data )
     {
-        DEBUGF(2, "[%08X] TLinkedList::InsertBefore(iter, p_data)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::InsertBefore(iter, p_data)\n", this);
 
         TListNode<T> *node, *newnode;
 
@@ -730,7 +730,7 @@ public:
     //
     void RemoveHead()
     {
-        DEBUGF(2, "[%08X] TLinkedList::RemoveHead()\n", this);
+        DEBUGF(2, "[%p] TLinkedList::RemoveHead()\n", this);
 
         TListNode<T>* node = NULL;
 
@@ -762,7 +762,7 @@ public:
     //
     void RemoveTail()
     {
-        DEBUGF(2, "[%08X] TLinkedList::RemoveTail()\n", this);
+        DEBUGF(2, "[%p] TLinkedList::RemoveTail()\n", this);
 
         TListNode<T>* node = NULL;
 
@@ -793,7 +793,7 @@ public:
     //
     void Remove( TListNode<T> *node, bool del=true )
     {
-        DEBUGF(2, "[%08X] TLinkedList::Remove(%08X)\n", this, node);
+        DEBUGF(2, "[%p] TLinkedList::Remove(%p)\n", this, node);
 
         // if the node we want to remove is the head or the tail
         // nodes, then move the head or tail to the next or
@@ -820,7 +820,7 @@ public:
     //
     void Remove( TIterator<T>& p_iterator )
     {
-        DEBUGF(2, "[%08X] TLinkedList::Remove(iter)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Remove(iter)\n", this);
 
         // temporary node pointer.
         TListNode<T>    *node;
@@ -847,7 +847,7 @@ public:
     //
     void Remove(T p_data, bool del=true)
     {
-        DEBUGF(2, "[%08X] TLinkedList::Remove(p_data)\n", this);
+        DEBUGF(2, "[%p] TLinkedList::Remove(p_data)\n", this);
 
         // temporary node pointers.
         TListNode<T>* node = m_head;
@@ -964,7 +964,7 @@ public:
     //
     TIterator<T> GetIterator() const
     {
-        DEBUGF(2, "[%08X] TLinkedList::GetIterator()\n", this);
+        DEBUGF(2, "[%p] TLinkedList::GetIterator()\n", this);
 
         return TIterator<T>( (TLinkedList<T>*)this, m_head );
     }
@@ -1057,7 +1057,7 @@ public:
     //
     void Dispose( TListNode<T> *node )
     {
-        DEBUGF(2, "[%08X] TObjectList::Dispose(%08X)\n", this, node);
+        DEBUGF(2, "[%p] TObjectList::Dispose(%p)\n", this);
 
         if (node->m_data)
             delete node->m_data;
@@ -1072,7 +1072,7 @@ public:
     //
     void Dispose( TIterator<T>& p_iterator )
     {
-        DEBUGF(2, "[%08X] TObjectList::Dispose(iter)\n", this);
+        DEBUGF(2, "[%p] TObjectList::Dispose(iter)\n", this);
 
         // temporary node pointer.
         TListNode<T>    *node;
@@ -1098,7 +1098,7 @@ public:
     //
     void Dispose(T p_data)
     {
-        DEBUGF(2, "[%08X] TObjectList::Dispose(p_data)\n", this);
+        DEBUGF(2, "[%p] TObjectList::Dispose(p_data)\n", this);
 
         // temporary node pointers.
         TListNode<T>* node = this->m_head;
@@ -1121,7 +1121,7 @@ public:
     //
     void DisposeAll()
     {
-        DEBUGF(2, "[%08X] TObjectList::Clear()\n", this);
+        DEBUGF(2, "[%p] TObjectList::Clear()\n", this);
 
         // temporary node pointers.
         TListNode<T> *node = this->m_head, *next;
@@ -1179,7 +1179,7 @@ public:
     //
     inline void Start()
     {
-        DEBUGF(2, "[%08X] TIterator::Start()\n", this);
+        DEBUGF(2, "[%p] TIterator::Start()\n", this);
 
         if ( m_list ) m_node = m_list->m_head;
     }
@@ -1200,7 +1200,7 @@ public:
     //
     inline void Next()
     {
-        DEBUGF(2, "[%08X] TIterator::Next()\n", this);
+        DEBUGF(2, "[%p] TIterator::Next()\n", this);
 
         if ( m_node ) m_node = m_node->m_next;
     }
@@ -1212,7 +1212,7 @@ public:
     //
     inline T NextItem()
     {
-        DEBUGF(2, "[%08X] TIterator::NextItem()\n", this);
+        DEBUGF(2, "[%p] TIterator::NextItem()\n", this);
 
         if ( m_node ) {
             TListNode<T> *o_node = m_node;
@@ -1230,7 +1230,7 @@ public:
     //
     inline void Previous()
     {
-        DEBUGF(2, "[%08X] TIterator::Previous()\n", this);
+        DEBUGF(2, "[%p] TIterator::Previous()\n", this);
 
         if ( m_node ) m_node = m_node->m_prev;
     }
@@ -1242,7 +1242,7 @@ public:
     //
     inline T PreviousItem()
     {
-        DEBUGF(2, "[%08X] TIterator::PreviousItem()\n", this);
+        DEBUGF(2, "[%p] TIterator::PreviousItem()\n", this);
 
         if ( m_node ) {
             TListNode<T> *o_node = m_node;
@@ -1260,7 +1260,7 @@ public:
     //
     inline T& Item()
     {
-        DEBUGF(2, "[%08X] TIterator::Item()\n", this);
+        DEBUGF(2, "[%p] TIterator::Item()\n", this);
 
         return m_node->m_data;
     }
@@ -1272,7 +1272,7 @@ public:
     //
     inline bool IsValid()
     {
-        DEBUGF(2, "[%08X] TIterator::IsValid()\n", this);
+        DEBUGF(2, "[%p] TIterator::IsValid()\n", this);
 
         return (m_node != NULL);
     }

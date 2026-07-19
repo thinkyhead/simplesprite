@@ -37,7 +37,7 @@ void SS_ItemGroup::Init()
 //
 void SS_ItemGroup::SetWorld(SS_World *w)
 {
-    DEBUGF(1, "[%08X] SS_ItemGroup::SetWorld(%08X)\n", this, w);
+    DEBUGF(1, "[%p] SS_ItemGroup::SetWorld(%p)\n", this, w);
 
     SS_Collider::SetWorld(w);
 
@@ -69,7 +69,7 @@ void SS_ItemGroup::SetLayer(SS_Layer *l)
 //
 void SS_ItemGroup::SetHidden(bool h)
 {
-    DEBUGF(1, "[%08X] SS_ItemGroup::SetHidden(%d)\n", this, h);
+    DEBUGF(1, "[%p] SS_ItemGroup::SetHidden(%d)\n", this, h);
 
     hideFlag = h;
 
@@ -103,7 +103,7 @@ void SS_ItemGroup::SetHidden(bool h)
 //
 void SS_ItemGroup::AddItem(SS_Collider *item)
 {
-    DEBUGF(1, "[%08X] SS_ItemGroup::AddItem(%08X)\n", this, item);
+    DEBUGF(1, "[%p] SS_ItemGroup::AddItem(%p)\n", this, item);
 
     item->SetGroup(this);
 
@@ -278,7 +278,7 @@ bool SS_ItemGroup::IsOnScreen()
 //
 void SS_ItemGroup::EnableCollisions(Uint32 out, Uint32 in)
 {
-    DEBUGF(1, "[%08X] SS_ItemGroup::EnableCollisions(%04X, %04X)\n", this, out, in);
+    DEBUGF(1, "[%p] SS_ItemGroup::EnableCollisions(%04X, %04X)\n", this, out, in);
 
     SS_Collider     *item;
     SS_ColliderIterator itr = GetIterator();
@@ -313,7 +313,7 @@ void SS_ItemGroup::UpdateNodePosition()
 //
 Uint32 SS_ItemGroup::GetNewCollisions()
 {
-    DEBUGF(1, "[%08X] SS_ItemGroup::GetNewCollisions()\n", this);
+    DEBUGF(1, "[%p] SS_ItemGroup::GetNewCollisions()\n", this);
 
     Uint32  coll = 0;
 
@@ -333,4 +333,3 @@ Uint32 SS_ItemGroup::GetNewCollisions()
     collisions = 0;
     return coll;
 }
-

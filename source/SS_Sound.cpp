@@ -68,7 +68,7 @@ static SDL_PropertiesID make_play_props(int loops, int fadeMs)
 
 SS_Sound::SS_Sound(Uint32 min)
 {
-    DEBUGF(1, "[%08X] SS_Sound::SS_Sound()\n", this);
+    DEBUGF(1, "[%p] SS_Sound::SS_Sound()\n", this);
 
     Init();
     minWait = min;
@@ -76,7 +76,7 @@ SS_Sound::SS_Sound(Uint32 min)
 
 SS_Sound::SS_Sound(char *filename, Uint32 min)
 {
-    DEBUGF(1, "[%08X] SS_Sound::SS_Sound(%s)\n", this, filename);
+    DEBUGF(1, "[%p] SS_Sound::SS_Sound(%s)\n", this, filename);
 
     Init();
     Load(filename);
@@ -85,7 +85,7 @@ SS_Sound::SS_Sound(char *filename, Uint32 min)
 
 SS_Sound::~SS_Sound()
 {
-    DEBUGF(1, "[%08X] SS_Sound::~SS_Sound()\n", this);
+    DEBUGF(1, "[%p] SS_Sound::~SS_Sound()\n", this);
 
     Dispose();
 }
@@ -96,7 +96,7 @@ SS_Sound::~SS_Sound()
 //
 void SS_Sound::Init()
 {
-    DEBUGF(1, "[%08X] SS_Sound::Init()\n", this);
+    DEBUGF(1, "[%p] SS_Sound::Init()\n", this);
 
     flags = 0;
     minWait = 0;
@@ -111,7 +111,7 @@ void SS_Sound::Init()
 //
 void SS_Sound::Load(char *filename)
 {
-    DEBUGF(1, "[%08X] SS_Sound::Load(%s)\n", this, filename);
+    DEBUGF(1, "[%p] SS_Sound::Load(%s)\n", this, filename);
 
     char *full = SS_Folder::FullPath(filename);
 
@@ -311,14 +311,14 @@ bool SS_Sound::MixPlaying(int channel)
 
 SS_Music::SS_Music()
 {
-    DEBUGF(1, "[%08X] SS_Music::SS_Music()\n", this);
+    DEBUGF(1, "[%p] SS_Music::SS_Music()\n", this);
 
     Init();
 }
 
 SS_Music::SS_Music(char *filename)
 {
-    DEBUGF(1, "[%08X] SS_Music::SS_Music(%s)\n", this, filename);
+    DEBUGF(1, "[%p] SS_Music::SS_Music(%s)\n", this, filename);
 
     Init();
     Load(filename);
@@ -326,7 +326,7 @@ SS_Music::SS_Music(char *filename)
 
 SS_Music::~SS_Music()
 {
-    DEBUGF(1, "[%08X] SS_Music::~SS_Music()\n", this);
+    DEBUGF(1, "[%p] SS_Music::~SS_Music()\n", this);
 
     Dispose();
 }
@@ -337,7 +337,7 @@ SS_Music::~SS_Music()
 //
 void SS_Music::Init()
 {
-    DEBUGF(1, "[%08X] SS_Music::Init()\n", this);
+    DEBUGF(1, "[%p] SS_Music::Init()\n", this);
 
     flags = 0;
     music = NULL;
@@ -350,7 +350,7 @@ void SS_Music::Init()
 //
 void SS_Music::Load(char *filename)
 {
-    DEBUGF(1, "[%08X] SS_Music::Load(%s)\n", this, filename);
+    DEBUGF(1, "[%p] SS_Music::Load(%s)\n", this, filename);
     char        *full = SS_Folder::FullPath(filename);
 
     // Same MIX_Audio type as SFX; just a longer sample. (Streaming via

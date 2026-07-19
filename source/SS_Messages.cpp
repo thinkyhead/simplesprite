@@ -17,12 +17,12 @@
 
 SS_Listener::SS_Listener()
 {
-    DEBUGF(1, "[%08X] SS_Listener() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Listener() CONSTRUCTOR\n", this);
 }
 
 SS_Listener::~SS_Listener()
 {
-    DEBUGF(1, "[%08X] SS_Listener() DESTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Listener() DESTRUCTOR\n", this);
 
     IgnoreAll();
 }
@@ -32,7 +32,7 @@ SS_Listener::~SS_Listener()
 //
 void SS_Listener::ListenTo(SS_Broadcaster *sender)
 {
-    DEBUGF(1, "[%08X] SS_Listener::ListenTo(%08X)\n", this, sender);
+    DEBUGF(1, "[%p] SS_Listener::ListenTo(%p)\n", this, sender);
 
     sender->AddListener(this);
 }
@@ -42,7 +42,7 @@ void SS_Listener::ListenTo(SS_Broadcaster *sender)
 //
 void SS_Listener::Ignore(SS_Broadcaster *sender)
 {
-    DEBUGF(1, "[%08X] SS_Listener::Ignore(%08X)\n", this, sender);
+    DEBUGF(1, "[%p] SS_Listener::Ignore(%p)\n", this, sender);
 
     sender->RemoveListener(this);
     RemoveBroadcaster(sender);
@@ -54,7 +54,7 @@ void SS_Listener::Ignore(SS_Broadcaster *sender)
 //
 void SS_Listener::IgnoreAll()
 {
-    DEBUGF(1, "[%08X] SS_Listener::IgnoreAll()\n", this);
+    DEBUGF(1, "[%p] SS_Listener::IgnoreAll()\n", this);
 
     SS_Broadcaster *item;
     SS_BroadcasterIterator itr = broadcasterList.GetIterator();
@@ -72,7 +72,7 @@ void SS_Listener::IgnoreAll()
 
 SS_Broadcaster::SS_Broadcaster()
 {
-    DEBUGF(1, "[%08X] SS_Broadcaster() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_Broadcaster() CONSTRUCTOR\n", this);
 
     listenerIterator = listenerList.GetIterator();
 }
@@ -95,5 +95,3 @@ void SS_Broadcaster::Broadcast(const SS_Message &msg)
     while ((listener = listenerIterator.NextItem()))
         listener->HandleMessage(msg);
 }
-
-

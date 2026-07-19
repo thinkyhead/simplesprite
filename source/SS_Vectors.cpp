@@ -738,7 +738,7 @@ void SS_VectorSprite::Init()
 //
 void SS_VectorSprite::AddFrame(SS_VectorFrame *frame)
 {
-    DEBUGF(1, "[%08X] SS_VectorSprite::AddFrame(frame) (%d)\n", this, frameCount);
+    DEBUGF(1, "[%p] SS_VectorSprite::AddFrame(frame) (%d)\n", this, frameCount);
 
     frameArray.Append(frame);
     frame->Retain("Frame in VectorSprite");
@@ -780,7 +780,7 @@ void SS_VectorSprite::ReleaseFrames()
 //
 void SS_VectorSprite::SetHandle(float x, float y)
 {
-    DEBUGF(1, "[%08X] SS_VectorSprite::SetHandle(%d, %d)\n", this, x, y);
+    DEBUGF(1, "[%p] SS_VectorSprite::SetHandle(%d, %d)\n", this, x, y);
 
     SS_LayerItem::SetHandle(x, y);
 
@@ -795,7 +795,7 @@ void SS_VectorSprite::SetHandle(float x, float y)
 //
 void SS_VectorSprite::CenterHandle()
 {
-    DEBUGF(1, "[%08X] SS_VectorSprite::CenterHandle() xhandle=%f yhandle=%f\n", this, xhandle, yhandle);
+    DEBUGF(1, "[%p] SS_VectorSprite::CenterHandle() xhandle=%f yhandle=%f\n", this, xhandle, yhandle);
 
     if (frameCount)
         for (int i=0; i < frameCount; ++i)

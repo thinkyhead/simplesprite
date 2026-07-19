@@ -30,14 +30,14 @@ extern bool SS_VSYNC;
 
 SS_World::SS_World()
 {
-    DEBUGF(1, "[%08X] SS_World() CONSTRUCTOR\n", this);
+    DEBUGF(1, "[%p] SS_World() CONSTRUCTOR\n", this);
 
     Init();
 }
 
 SS_World::~SS_World()
 {
-    DEBUGF(1, "[%08X] ~SS_World() DESTRUCTOR\n", this);
+    DEBUGF(1, "[%p] ~SS_World() DESTRUCTOR\n", this);
 
     Stop();
     DisposeAll();
@@ -48,7 +48,7 @@ SS_World::~SS_World()
 //
 void SS_World::Init()
 {
-    DEBUGF(1, "[%08X] SS_World::Init()\n", this);
+    DEBUGF(1, "[%p] SS_World::Init()\n", this);
 
     eventHandler    = NULL;
     preRenderProc   = NULL;
@@ -99,7 +99,7 @@ void SS_World::Init()
 //
 void SS_World::SetPointerSprite(SS_LayerItem *s)
 {
-    DEBUGF(1, "[%08X] SS_World::SetPointerSprite(%08X)\n", this, s);
+    DEBUGF(1, "[%p] SS_World::SetPointerSprite(%p)\n", this, s);
 
     if (pointerSprite) {
         delete pointerSprite->Layer();
@@ -135,7 +135,7 @@ SS_Sprite* SS_World::CreatePointerSprite(char *file)
 //
 Uint32 SS_World::Run(SS_Game *g)
 {
-    DEBUGF(1, "[%08X] SS_World::Run(%08X)\n", this, g);
+    DEBUGF(1, "[%p] SS_World::Run(%p)\n", this, g);
 
     Uint32  interval, old, tick;
 
@@ -200,7 +200,7 @@ Uint32 SS_World::Run(SS_Game *g)
 //
 void SS_World::Start()
 {
-    DEBUGF(1, "[%08X] SS_World::Go()\n", this);
+    DEBUGF(1, "[%p] SS_World::Go()\n", this);
 
     worldQuit = false;
     processQuit = false;
@@ -225,7 +225,7 @@ void SS_World::Start()
 //
 void SS_World::Stop()
 {
-    DEBUGF(1, "[%08X] SS_World::Stop()\n", this);
+    DEBUGF(1, "[%p] SS_World::Stop()\n", this);
 
     int dummy;
 
@@ -272,7 +272,7 @@ void SS_World::SetPaused(bool p)
 //
 void SS_World::Calibrate()
 {
-    DEBUGF(1, "[%08X] SS_World::Calibrate()\n", this);
+    DEBUGF(1, "[%p] SS_World::Calibrate()\n", this);
 
     frameCount = 0;
 
@@ -289,7 +289,7 @@ void SS_World::Calibrate()
 //
 void SS_World::SetSurface(SDL_Surface *s)
 {
-    DEBUGF(1, "[%08X] SS_World::SetSurface(%08X)\n", this, s);
+    DEBUGF(1, "[%p] SS_World::SetSurface(%p)\n", this, s);
 
     int w, h;
 

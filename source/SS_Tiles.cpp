@@ -28,7 +28,7 @@
 //
 SS_TileLayer* SS_World::NewTileLayer(SS_TileMap *map, Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_World::NewTileLayer(%08X, %04X)\n", this, map, f);
+    DEBUGF(1, "[%p] SS_World::NewTileLayer(%p, %04X)\n", this, map, f);
 
     SS_TileLayer *layer = new SS_TileLayer(map, f);
 
@@ -42,7 +42,7 @@ SS_TileLayer* SS_World::NewTileLayer(SS_TileMap *map, Uint32 f)
 //
 SS_TileLayer* SS_World::NewTileLayer(SS_TileMap *map)
 {
-    DEBUGF(1, "[%08X] SS_World::NewTileLayer(%08X)\n", this, map);
+    DEBUGF(1, "[%p] SS_World::NewTileLayer(%p)\n", this, map);
 
     SS_TileLayer *layer = new SS_TileLayer(map);
 
@@ -103,7 +103,7 @@ SS_TilePalette::~SS_TilePalette()
 //--------------------------------------------------------------
 SS_TileMap::SS_TileMap(int w, int h)
 {
-    DEBUGF(1, "[%08X] SS_TileMap::SS_TileMap(%d, %d)\n", this, w, h);
+    DEBUGF(1, "[%p] SS_TileMap::SS_TileMap(%d, %d)\n", this, w, h);
 
     Init();
     InitMap(w, h);
@@ -127,7 +127,7 @@ SS_TileMap::~SS_TileMap()
 //
 void SS_TileMap::Init()
 {
-    DEBUGF(1, "[%08X] SS_TileMap::Init()\n", this);
+    DEBUGF(1, "[%p] SS_TileMap::Init()\n", this);
 
     tilePalette = NULL;
     theMap      = NULL;
@@ -146,7 +146,7 @@ void SS_TileMap::Init()
 //
 void SS_TileMap::LoadPalette(char *filename, int tw, int th)
 {
-    DEBUGF(1, "[%08X] SS_TileMap::LoadPalette()\n", this);
+    DEBUGF(1, "[%p] SS_TileMap::LoadPalette()\n", this);
 
     SS_TilePalette *palette;
 
@@ -165,7 +165,7 @@ void SS_TileMap::LoadPalette(char *filename, int tw, int th)
 //
 void SS_TileMap::SetPalette(SS_TilePalette *palette)
 {
-    DEBUGF(1, "[%08X] SS_TileMap::SetPalette(%08X)\n", this, palette);
+    DEBUGF(1, "[%p] SS_TileMap::SetPalette(%p)\n", this, palette);
 
     if (tilePalette)
         tilePalette->Release();
@@ -200,7 +200,7 @@ void SS_TileMap::DisposePalette()
 //
 void SS_TileMap::InitMap(int w, int h)
 {
-    DEBUGF(1, "[%08X] SS_TileMap::InitMap(%d, %d)\n", this, w, h);
+    DEBUGF(1, "[%p] SS_TileMap::InitMap(%d, %d)\n", this, w, h);
 
     if (theMap != NULL)
         DisposeMap();
@@ -391,14 +391,14 @@ void SS_TileMap::DrawTile(Uint8 tile, GLfloat x1, GLfloat y1)
 
 SS_TileLayer::SS_TileLayer()
 {
-    DEBUGF(1, "[%08X] SS_TileLayer::SS_TileLayer()\n", this);
+    DEBUGF(1, "[%p] SS_TileLayer::SS_TileLayer()\n", this);
 
     Init();
 }
 
 SS_TileLayer::SS_TileLayer(SS_TileMap *map, Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_TileLayer::SS_TileLayer(%08X, %04X)\n", this, map, f);
+    DEBUGF(1, "[%p] SS_TileLayer::SS_TileLayer(%p, %04X)\n", this, map, f);
 
     Init(f);
     SetTileMap(map);
@@ -406,7 +406,7 @@ SS_TileLayer::SS_TileLayer(SS_TileMap *map, Uint32 f)
 
 SS_TileLayer::SS_TileLayer(SS_TileMap *map)
 {
-    DEBUGF(1, "[%08X] SS_TileLayer::SS_TileLayer(%08X)\n", this, map);
+    DEBUGF(1, "[%p] SS_TileLayer::SS_TileLayer(%p)\n", this, map);
 
     Init();
     SetTileMap(map);
@@ -414,7 +414,7 @@ SS_TileLayer::SS_TileLayer(SS_TileMap *map)
 
 SS_TileLayer::SS_TileLayer(Uint32 f)
 {
-    DEBUGF(1, "[%08X] SS_TileLayer::SS_TileLayer(%04X)\n", this, f);
+    DEBUGF(1, "[%p] SS_TileLayer::SS_TileLayer(%04X)\n", this, f);
 
     Init(f);
 }
@@ -437,7 +437,7 @@ void SS_TileLayer::Init(Uint32 f)
 //
 void SS_TileLayer::SetTileMap(SS_TileMap *map)
 {
-    DEBUGF(1, "[%08X] SS_TileLayer::SetTileMap(%08X)\n", this, map);
+    DEBUGF(1, "[%p] SS_TileLayer::SetTileMap(%p)\n", this, map);
 
     if (tileMap != NULL)
         delete tileMap;
