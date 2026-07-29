@@ -510,7 +510,7 @@ void SS_String::AlignToRect(SS_Rect &rect, stringAlign position)
     {
         case 0:
         case SA_LEFT:
-            x = rect.x + rect.w + 2;
+            x = rect.x + 2;
             a = SA_LEFT;
             break;
 
