@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : Class Reference</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li>Class Reference</li>
@@ -27,11 +30,14 @@
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -55,7 +61,7 @@ so don't feel too overwhelmed.
 <p>
 I've followed certain conventions in designing these classes. Many of these
 classes have a Copy Constructor, an <tt>Init</tt> method, an <tt>operator=</tt>
-override, and a <tt>Clone</tt> method. 
+override, and a <tt>Clone</tt> method.
 </p>
 </div>
 
@@ -172,8 +178,7 @@ override, and a <tt>Clone</tt> method.
 
 </div>
 
-</td>
-</tr>
-</table>
+</main>
+</div>
 </body>
 </html>

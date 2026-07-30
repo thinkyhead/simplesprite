@@ -1,31 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_ObjectList&lt;T&gt; Template Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
 	<ul>
-		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="base.html">Base Classes</a>
 			<ul>
 				<li><a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></li>
 				<li><a href="ss_linkedlist.html">SS_LinkedList&lt;T&gt;</a></li>
 				<li><a href="ss_listnode.html">SS_ListNode&lt;T&gt;</a></li>
 				<li>SS_ObjectList&lt;T&gt;</li>
 				<li><a href="ss_refcounter.html">SS_RefCounter</a></li>
+				<li><a href="ss_itemlist.html">SS_ItemList</a></li>
 			</ul>
+        </li>
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
@@ -34,11 +39,14 @@
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -93,7 +101,7 @@ object pointers as opposed to whole objects.</p>
 <pre>void Dispose( SS_ListNode&lt;T&gt; *node)
 void Dispose( SS_Iterator&lt;T&gt;&amp;p_iterator )
 void Dispose(T p_data)</pre>
-<p>Dispose Description...</p>
+<p>Dispose A linked list that disposes its data objects when nodes are removed.</p>
 </div>
 
 
@@ -101,11 +109,11 @@ void Dispose(T p_data)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="DisposeAll"></a><h3>DisposeAll</h3>
 <pre>void DisposeAll()</pre>
-<p>DisposeAll Description...</p>
+<p>Delete all nodes and data.</p>
 </div>
 
 
-</td></tr></table>
-
+</main>
+</div>
 </body>
 </html>

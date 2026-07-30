@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_TileMap Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -22,21 +25,25 @@
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
-		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="tiles.html">Tile Maps</a>
 			<ul>
 				<li><a href="ss_tilelayer.html">SS_TileLayer</a></li>
 				<li>SS_TileMap</li>
 				<li><a href="ss_tilepalette.html">SS_TilePalette</a></li>
 			</ul>
+		</li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -47,7 +54,7 @@
 
 <div id="classbox">
 <h1>SS_TileMap</h1>
-<p>Class Description...</p>
+<p>A grid-based tile environment built from an <tt>SS_TilePalette</tt> and layer masks.</p>
 </div>
 
 
@@ -125,7 +132,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -134,7 +141,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="InitMap"></a><h3>InitMap</h3>
 <pre>void InitMap(int w, int h)</pre>
-<p>InitMap Description...</p>
+<p>Initialize a new tile map with the given dimensions.</p>
 </div>
 
 
@@ -143,7 +150,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="LoadMap"></a><h3>LoadMap</h3>
 <pre>void LoadMap(char *filename)</pre>
-<p>LoadMap Description...</p>
+<p>Load a tile map from a file.</p>
 </div>
 
 
@@ -152,7 +159,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="DisposeMap"></a><h3>DisposeMap</h3>
 <pre>void DisposeMap()</pre>
-<p>DisposeMap Description...</p>
+<p>Free the memory used by the current tile map.</p>
 </div>
 
 
@@ -161,7 +168,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="SetRadarColor"></a><h3>SetRadarColor</h3>
 <pre>void SetRadarColor(GLuint r, GLuint g, GLuint b, GLuint a)</pre>
-<p>SetRadarColor Description...</p>
+<p>Set radar display color.</p>
 </div>
 
 
@@ -170,7 +177,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="LoadPalette"></a><h3>LoadPalette</h3>
 <pre>void LoadPalette(char *filename, int tw, int th)</pre>
-<p>LoadPalette Description...</p>
+<p>Load a tile palette image.</p>
 </div>
 
 
@@ -179,7 +186,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="SetPalette"></a><h3>SetPalette</h3>
 <pre>void SetPalette(SS_TilePalette *palette)</pre>
-<p>SetPalette Description...</p>
+<p>Use an existing palette.</p>
 </div>
 
 
@@ -188,7 +195,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="DisposePalette"></a><h3>DisposePalette</h3>
 <pre>void DisposePalette()</pre>
-<p>DisposePalette Description...</p>
+<p>Release and delete the current tile palette.</p>
 </div>
 
 
@@ -197,7 +204,7 @@ SS_TileMap(char* filename)</pre>
 <a href="#top">top</a>
 <a name="Move"></a><h3>Move</h3>
 <pre>void Move(float x, float y)</pre>
-<p>Move Description...</p>
+<p>gadget to a new position.</p>
 </div>
 
 
@@ -207,7 +214,7 @@ SS_TileMap(char* filename)</pre>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render(float x, float y, float width, float height)
 void Render(SS_World *world, Uint32 flags)</pre>
-<p>Render Description...</p>
+<p>Render Render this object in the current GL state.</p>
 </div>
 
 
@@ -216,12 +223,11 @@ void Render(SS_World *world, Uint32 flags)</pre>
 <a href="#top">top</a>
 <a name="DrawTile"></a><h3>DrawTile</h3>
 <pre>void DrawTile(Uint8 tile, GLfloat x, GLfloat y)</pre>
-<p>DrawTile Description...</p>
+<p>Render one indexed tile.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

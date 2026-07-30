@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_TextLayer Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -23,21 +26,25 @@
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
-		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a>
 			<ul>
 				<li><a href="ss_editstring.html">SS_EditString</a></li>
 				<li><a href="ss_sfont.html">SS_SFont</a></li>
 				<li><a href="ss_string.html">SS_String</a></li>
 				<li>SS_TextLayer</li>
 			</ul>
+		</li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -49,7 +56,7 @@
 <div id="classbox">
 <h1>SS_TextLayer</h1>
 <h4><strong>Superclass</strong>: <a href="ss_layer.html">SS_Layer</a></h4>
-<p>Class Description...</p>
+<p>A layer that renders a list of <tt>SS_String</tt> objects using an <tt>SS_SFont</tt>.</p>
 </div>
 
 
@@ -130,7 +137,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -139,7 +146,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="SetFont"></a><h3>SetFont</h3>
 <pre>void SetFont(SS_SFont * const font)</pre>
-<p>SetFont Description...</p>
+<p>Assign a font.</p>
 </div>
 
 
@@ -148,7 +155,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="AddString"></a><h3>AddString</h3>
 <pre>void AddString(SS_String *string)</pre>
-<p>AddString Description...</p>
+<p>Add a string object to this text layer.</p>
 </div>
 
 
@@ -157,7 +164,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="MoveCursor"></a><h3>MoveCursor</h3>
 <pre>void MoveCursor(float x, float y)</pre>
-<p>MoveCursor Description...</p>
+<p>Move the text cursor to the given position.</p>
 </div>
 
 
@@ -166,7 +173,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="CenterCursor"></a><h3>CenterCursor</h3>
 <pre>void CenterCursor()</pre>
-<p>CenterCursor Description...</p>
+<p>Center the text cursor horizontally and vertically.</p>
 </div>
 
 
@@ -175,7 +182,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="CenterCursorX"></a><h3>CenterCursorX</h3>
 <pre>void CenterCursorX()</pre>
-<p>CenterCursorX Description...</p>
+<p>Center the text cursor horizontally.</p>
 </div>
 
 
@@ -184,7 +191,7 @@ SS_TextLayer(SS_SFont *font)
 <a href="#top">top</a>
 <a name="CenterCursorY"></a><h3>CenterCursorY</h3>
 <pre>void CenterCursorY()</pre>
-<p>CenterCursorY Description...</p>
+<p>Center the text cursor vertically.</p>
 </div>
 
 
@@ -194,7 +201,7 @@ SS_TextLayer(SS_SFont *font)
 <a name="Print"></a><h3>Print</h3>
 <pre>SS_String* Print(char *text, float x, float y)
 SS_String* Print(char *text)</pre>
-<p>Print Description...</p>
+<p>Print Print.</p>
 </div>
 
 
@@ -204,7 +211,7 @@ SS_String* Print(char *text)</pre>
 <a name="PrintCenter"></a><h3>PrintCenter</h3>
 <pre>SS_String* PrintCenter(char *text, float x, float y)
 SS_String* PrintCenter(char *text)</pre>
-<p>PrintCenter Description...</p>
+<p>PrintCenter PrintCenter.</p>
 </div>
 
 
@@ -213,7 +220,7 @@ SS_String* PrintCenter(char *text)</pre>
 <a href="#top">top</a>
 <a name="Clear"></a><h3>Clear</h3>
 <pre>void Clear()</pre>
-<p>Clear Description...</p>
+<p>Remove all strings from this text layer.</p>
 </div>
 
 
@@ -222,7 +229,7 @@ SS_String* PrintCenter(char *text)</pre>
 <a href="#top">top</a>
 <a name="Process"></a><h3>Process</h3>
 <pre>void Process()</pre>
-<p>Process Description...</p>
+<p>Run per-frame update logic.</p>
 </div>
 
 
@@ -231,7 +238,7 @@ SS_String* PrintCenter(char *text)</pre>
 <a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Run animation frame updates.</p>
 </div>
 
 
@@ -240,12 +247,11 @@ SS_String* PrintCenter(char *text)</pre>
 <a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render()</pre>
-<p>Render Description...</p>
+<p>this object in the current GL state.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

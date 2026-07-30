@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SimpleSprite : Sounds &amp; Music</title>
+<title>SimpleSprite : SS_AI</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
@@ -14,7 +14,6 @@
 <a name="top"></a>
 <div id="layout">
 <nav id="nav">
-
 
 <h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
@@ -27,12 +26,7 @@
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
-		<li>Sounds &amp; Music
-			<ul>
-				<li><a href="ss_music.html">SS_Music</a></li>
-				<li><a href="ss_sound.html">SS_Sound</a></li>
-			</ul>
-		</li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
 		<li><a href="physics.html">Physics</a></li>
@@ -40,22 +34,53 @@
 	</ul>
 </ul>
 
-
 </nav>
 <main id="main">
 
-
-<!--
-
-		Class Description
-
--->
-
 <div id="classbox">
-<h1>Sounds &amp; Music</h1>
-<p>About this section...</p>
+<div id="hdr">SS_AI.h</div>
+<h1>SS_AI</h1>
+<p>
+A lightweight AI state container. It stores an entity type, position,
+health, and high-level state enum. Game code normally subclasses or wraps
+this with per-entity behavior logic.
+</p>
 </div>
 
+<div id="databox">
+<h2>Enumerations</h2>
+<table>
+<tr><td><tt>AIType</tt></td><td>AI_ATTACKER, AI_DEFENDER, AI_HUNTER, AI_COLLECTOR, AI_MERCHANT</td></tr>
+<tr><td><tt>AIState</tt></td><td>AI_MAINGOAL, AI_ATTACKING, AI_FINDHEALTH, AI_DOCKING</td></tr>
+<tr><td><tt>AIEvent</tt></td><td>AI_SEEPLAYER, AI_KILLENEMY, AI_GOTHEALTH, AI_DOCKED</td></tr>
+<tr><td><tt>HealthState</tt></td><td>AI_GOODHEALTH, AI_BADHEALTH</td></tr>
+</table>
+</div>
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_AI()
+~SS_AI()</pre>
+</div>
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+<td><ul>
+<li><a href="#Init">Init</a></li>
+</ul></td>
+</tr></table>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Init"></a><h3>Init</h3>
+<pre>void Init(AIType t, float x, float y, int h)</pre>
+<p>
+Initialize type, position, and health. The default state is
+<tt>AI_MAINGOAL</tt>.
+</p>
+</div>
 
 </main>
 </div>

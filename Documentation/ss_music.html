@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_Music Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -24,18 +27,22 @@
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
-		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a>
 			<ul>
 				<li>SS_Music</li>
 				<li><a href="ss_sound.html">SS_Sound</a></li>
 			</ul>
+		</li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -47,7 +54,7 @@
 <div id="classbox">
 <div id="hdr">SS_Sound.h</div>
 <h1>SS_Music</h1>
-<p>Class Description...</p>
+<p>Music playback wrapper using the SDL3_mixer <tt>MIX_Audio</tt>/<tt>MIX_Track</tt> API.</p>
 </div>
 
 
@@ -118,7 +125,7 @@ SS_Music(char *filename)</pre>
 <a href="#top">top</a>
 <a name="Dispose"></a><h3>Dispose</h3>
 <pre>void Dispose()</pre>
-<p>Dispose Description...</p>
+<p>Remove node and delete data.</p>
 </div>
 
 
@@ -127,7 +134,7 @@ SS_Music(char *filename)</pre>
 <a href="#top">top</a>
 <a name="FadeIn"></a><h3>FadeIn</h3>
 <pre>void FadeIn(int loops, int ms)</pre>
-<p>FadeIn Description...</p>
+<p>Fade in over milliseconds.</p>
 </div>
 
 
@@ -136,7 +143,7 @@ SS_Music(char *filename)</pre>
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -145,7 +152,7 @@ SS_Music(char *filename)</pre>
 <a href="#top">top</a>
 <a name="Load"></a><h3>Load</h3>
 <pre>void Load(char *filename)</pre>
-<p>Load Description...</p>
+<p>resources from a file or buffer.</p>
 </div>
 
 
@@ -154,7 +161,7 @@ SS_Music(char *filename)</pre>
 <a href="#top">top</a>
 <a name="Pause"></a><h3>Pause</h3>
 <pre>void Pause()</pre>
-<p>Pause Description...</p>
+<p>processing or playback.</p>
 </div>
 
 
@@ -164,7 +171,7 @@ SS_Music(char *filename)</pre>
 <a name="Play"></a><h3>Play</h3>
 <pre>int Play()
 int Play(int times)</pre>
-<p>Play Description...</p>
+<p>Play Play the sound sample.</p>
 </div>
 
 
@@ -173,7 +180,7 @@ int Play(int times)</pre>
 <a href="#top">top</a>
 <a name="SetFrequency"></a><h3>SetFrequency</h3>
 <pre>void SetFrequency(int freq)</pre>
-<p>SetFrequency Description...</p>
+<p>Set playback frequency.</p>
 </div>
 
 
@@ -182,7 +189,7 @@ int Play(int times)</pre>
 <a href="#top">top</a>
 <a name="SetRate"></a><h3>SetRate</h3>
 <pre>void SetRate(Uint32 rate)</pre>
-<p>SetRate Description...</p>
+<p>Set playback rate.</p>
 </div>
 
 
@@ -191,7 +198,7 @@ int Play(int times)</pre>
 <a href="#top">top</a>
 <a name="SetVolume"></a><h3>SetVolume</h3>
 <pre>void SetVolume(Uint32 vol)</pre>
-<p>SetVolume Description...</p>
+<p>Set mixer volume.</p>
 </div>
 
 
@@ -200,12 +207,11 @@ int Play(int times)</pre>
 <a href="#top">top</a>
 <a name="Stop"></a><h3>Stop</h3>
 <pre>void Stop()</pre>
-<p>Stop Description...</p>
+<p>Stop playback of the music track.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

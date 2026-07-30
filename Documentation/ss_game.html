@@ -1,41 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_Game Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
 	<ul>
 		<li><a href="base.html">Base Classes</a></li>
 		<li><a href="messaging.html">Messaging</a></li>
-		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="contain.html">Container Classes</a>
 			<ul>
 				<li>SS_Game</li>
 				<li><a href="ss_layer.html">SS_Layer</a></li>
 				<li><a href="ss_world.html">SS_World</a></li>
 			</ul>
+		</li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -72,9 +80,12 @@ instances of Demo_Game with the name of your own SS_Game subclass.
 <tr><td><tt>Uint16</tt></td><td><tt>worldCount</tt></td><td>The number of worlds in the world stack.</td></tr>
 <tr><td><tt>SS_World**</tt></td><td><tt>worlds</tt></td><td>The world stack.</td></tr>
 <tr><td><tt>SS_World*</tt></td><td><tt>world</tt></td><td>The active world.</td></tr>
+<tr><td><tt>float*</tt></td><td><tt>SS_cos, SS_sin</tt></td><td>Lookup tables for cosine/sine indexed by <tt>Uint16</tt> rotation index.</td></tr>
+<tr><td><tt>SDL_Window*</tt></td><td><tt>ss_window</tt></td><td>The SDL3 / SDL2 window handle.</td></tr>
+<tr><td><tt>SDL_GLContext</tt></td><td><tt>ss_glcontext</tt></td><td>The OpenGL context for the window.</td></tr>
+<tr><td><tt>SDL_Surface*</tt></td><td><tt>ss_screen</tt></td><td>Legacy SDL 1.x surface; retained for compatibility. Under SDL2/SDL3 the renderable surface is the OpenGL context.</td></tr>
 </table>
 </div>
-
 
 <!--
 
@@ -86,9 +97,11 @@ instances of Demo_Game with the name of your own SS_Game subclass.
 <h2>Constructors</h2>
 <pre>SS_Game()</pre>
 <p>
-When the base game class is instantiated it creates a screen or window based
-on your settings in the SS_Config.h file, initializes the audio system, and
-generates sine and cosine arrays for use in game calculations.
+When the base game class is instantiated it creates a window based on your
+settings in the SS_Config.h file, initializes the audio system via SDL3_mixer,
+and generates sine and cosine tables for use in game calculations.
+</p>
+<p>
 If your game needs to maintain its own game-wide data it should override the
 <a href="#Init">Init</a> method and do its allocation and initialization there.
 </p>
@@ -103,7 +116,6 @@ If your game needs to maintain its own game-wide data it should override the
 
 <div id="methbox">
 <h2>Method Index</h2>
-
 <table>
 <tr valign="top">
 
@@ -136,161 +148,163 @@ If your game needs to maintain its own game-wide data it should override the
 </tr></table>
 </div>
 
-
 <!-- cd -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="cd"></a><h3>cd</h3>
 <pre>void cd(char *dir)</pre>
-<p>cd description.</p>
+<p>Change the engine's working directory.</p>
 </div>
-
 
 <!-- Init -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init description.</p>
+<p>
+Optional per-game initialization hook called after screen, audio, and trig
+are ready. Subclass this to allocate game-wide data.
+</p>
 </div>
-
 
 <!-- InitTrigonometry -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="InitTrigonometry"></a><h3>InitTrigonometry</h3>
 <pre>void InitTrigonometry()</pre>
-<p>InitTrigonometry description.</p>
+<p>
+Fill the <tt>SS_cos</tt>/<tt>SS_sin</tt> tables with one-year-step
+values used by <a href="#Sin">Sin</a> and <a href="#Cos">Cos</a>.
+</p>
 </div>
-
 
 <!-- Cos -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="Cos"></a><h3>Cos</h3>
 <pre>double Cos(Uint16 index)</pre>
-<p>Cos description.</p>
+<p>Return the cosine for a rotation index from the lookup table.</p>
 </div>
-
 
 <!-- Sin -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="Sin"></a><h3>Sin</h3>
 <pre>double Sin(Uint16 index)</pre>
-<p>Sin description.</p>
+<p>Return the sine for a rotation index from the lookup table.</p>
 </div>
-
 
 <!-- InitScreen -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="InitScreen"></a><h3>InitScreen</h3>
 <pre>void InitScreen()</pre>
-<p>InitScreen description.</p>
+<p>
+Create the window and OpenGL context, then set the default GL state for 2D
+rendering. On modern SDL the path is <tt>SDL_CreateWindow</tt> +
+<tt>SDL_GL_CreateContext</tt>; <tt>GL_LIGHTING</tt> is disabled and
+<tt>GL_TEXTURE_ENV_MODE</tt> is set to <tt>GL_MODULATE</tt> so textured
+sprites render with correct alpha.
+</p>
 </div>
-
 
 <!-- TheScreen -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="TheScreen"></a><h3>TheScreen</h3>
 <pre>SDL_Surface* TheScreen()</pre>
-<p>TheScreen description.</p>
+<p>Legacy accessor returning the stored surface; under SDL2/SDL3 this is mainly retained for compatibility.</p>
 </div>
-
 
 <!-- SyncVblank -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="SyncVblank"></a><h3>SyncVblank</h3>
 <pre>void SyncVblank(long sync)</pre>
-<p>SyncVblank description.</p>
+<p>Sync description.</p>
 </div>
-
 
 <!-- SetWorkingDir -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="SetWorkingDir"></a><h3>SetWorkingDir</h3>
 <pre>void SetWorkingDir(char *dir)</pre>
-<p>SetWorkingDir description.</p>
+<p>Set the filesystem working directory for relative asset paths.</p>
 </div>
-
-
-<!-- FullPath -->
-<div class="mitem">
-<a href="#top">top</a>
-<a name="FullPath"></a><h3>FullPath</h3>
-<pre>char* FullPath(char *file)</pre>
-<p>FullPath description.</p>
-</div>
-
 
 <!-- InitAudioMixer -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="InitAudioMixer"></a><h3>InitAudioMixer</h3>
-<pre>void InitAudioMixer(const Uint32 channels)</pre>
-<p>InitAudioMixer description.</p>
+<pre>void InitAudioMixer()</pre>
+<p>
+Initialize the SDL3_mixer global mixer. This is invoked during game init
+when audio is enabled. The SDL3 path creates a device mixer for actual
+playback; <tt>SS_Sound</tt> and <tt>SS_Music</tt> both depend on it.
+</p>
 </div>
-
-
-<!-- PushWorld -->
-<div class="mitem">
-<a href="#top">top</a>
-<a name="PushWorld"></a><h3>PushWorld</h3>
-<pre>void PushWorld(SS_World *world)</pre>
-<p>PushWorld description.</p>
-</div>
-
-
-<!-- PopWorld -->
-<div class="mitem">
-<a href="#top">top</a>
-<a name="PopWorld"></a><h3>PopWorld</h3>
-<pre>void PopWorld()</pre>
-<p>PopWorld description.</p>
-</div>
-
-
-<!-- Run -->
-<div class="mitem">
-<a href="#top">top</a>
-<a name="Run"></a><h3>Run</h3>
-<pre>void Run()</pre>
-<p>Run description.</p>
-</div>
-
-
-<!-- SaveGame -->
-<div class="mitem">
-<a href="#top">top</a>
-<a name="SaveGame"></a><h3>SaveGame</h3>
-<pre>void SaveGame()</pre>
-<p>SaveGame description.</p>
-</div>
-
 
 <!-- LoadGame -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="LoadGame"></a><h3>LoadGame</h3>
 <pre>void LoadGame()</pre>
-<p>LoadGame description.</p>
+<p>Load game state from persistent storage.</p>
 </div>
 
+<!-- SaveGame -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SaveGame"></a><h3>SaveGame</h3>
+<pre>void SaveGame()</pre>
+<p>Save game state to persistent storage.</p>
+</div>
+
+<!-- PushWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PushWorld"></a><h3>PushWorld</h3>
+<pre>void PushWorld(SS_World *w)</pre>
+<p>
+Push a world onto the world stack and make it active. Use this to transition
+between game modes without destroying the previous world.
+</p>
+</div>
+
+<!-- PopWorld -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PopWorld"></a><h3>PopWorld</h3>
+<pre>void PopWorld()</pre>
+<p>
+Remove the current world and restore the previous one on the stack.
+</p>
+</div>
 
 <!-- Quit -->
 <div class="mitem">
 <a href="#top">top</a>
 <a name="Quit"></a><h3>Quit</h3>
-<pre>void Quit()</pre>
-<p>Quit description.</p>
+<pre>void Quit()
+bool IsQuitting()</pre>
+<p>
+Set or inspect the quit flag checked by the main run loop.
+</p>
 </div>
 
+<!-- Run -->
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Run"></a><h3>Run</h3>
+<pre>virtual void Run() = 0</pre>
+<p>
+Main entry point for the game. Subclasses must implement this method. The
+default implementation is normally provided by the sample app's
+<tt>main.cpp</tt>.
+</p>
+</div>
 
-</td></tr></table>
-
+</main>
+</div>
 </body>
 </html>

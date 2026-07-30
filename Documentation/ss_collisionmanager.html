@@ -1,42 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_World Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
 	<ul>
 		<li><a href="base.html">Base Classes</a></li>
 		<li><a href="messaging.html">Messaging</a></li>
-		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="contain.html">Container Classes</a>
 			<ul>
 				<li><a href="ss_game.html">SS_Game</a></li>
 				<li><a href="ss_layer.html">SS_Layer</a></li>
 				<li>SS_World</li>
 			</ul>
+		</li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -218,7 +225,7 @@ handlers set, etc.
 <div class="mitem"><a href="#top">top</a>
 <a name="AddLayer"></a><h3>AddLayer</h3>
 <pre>void AddLayer(SS_Layer *layer)</pre>
-<p>AddLayer Description...</p>
+<p>Owns the spatial collision lists and runs collision tests across all registered <tt>SS_Collider</tt> objects.</p>
 </div>
 
 
@@ -226,7 +233,7 @@ handlers set, etc.
 <div class="mitem"><a href="#top">top</a>
 <a name="AddToColliders"></a><h3>AddToColliders</h3>
 <pre>SS_ItemNode* AddToColliders(SS_LayerItem *item)</pre>
-<p>AddToColliders Description...</p>
+<p>Register with collision lists.</p>
 </div>
 
 
@@ -234,7 +241,7 @@ handlers set, etc.
 <div class="mitem"><a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Run animation frame updates.</p>
 </div>
 
 
@@ -242,7 +249,7 @@ handlers set, etc.
 <div class="mitem"><a href="#top">top</a>
 <a name="Bottom"></a><h3>Bottom</h3>
 <pre>float Bottom() </pre>
-<p>Bottom Description...</p>
+<p>Accessor for the bottom visible edge of the world.</p>
 </div>
 
 
@@ -262,7 +269,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="CreatePointerSprite"></a><h3>CreatePointerSprite</h3>
 <pre>SS_Sprite* CreatePointerSprite(char *file)</pre>
-<p>CreatePointerSprite Description...</p>
+<p>Load and install a sprite to use as the mouse pointer.</p>
 </div>
 
 
@@ -270,7 +277,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="DisposeLayer"></a><h3>DisposeLayer</h3>
 <pre>void DisposeLayer(SS_Layer* layer) </pre>
-<p>DisposeLayer Description...</p>
+<p>Remove and dispose of a layer from the world.</p>
 </div>
 
 
@@ -278,7 +285,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="GetInput"></a><h3>GetInput</h3>
 <pre>void GetInput()</pre>
-<p>GetInput Description...</p>
+<p>Poll SDL events this frame.</p>
 </div>
 
 
@@ -286,7 +293,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="GetWorldTime"></a><h3>GetWorldTime</h3>
 <pre>Uint32 GetWorldTime() </pre>
-<p>GetWorldTime Description...</p>
+<p>Return the current world time in milliseconds.</p>
 </div>
 
 
@@ -294,7 +301,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="HandleEvent"></a><h3>HandleEvent</h3>
 <pre>void HandleEvent(SDL_Event *e)</pre>
-<p>HandleEvent Description...</p>
+<p>Process an SDL Event for this gadget.</p>
 </div>
 
 
@@ -302,7 +309,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="HandleEvents"></a><h3>HandleEvents</h3>
 <pre>void HandleEvents()</pre>
-<p>HandleEvents Description...</p>
+<p>Poll and dispatch SDL events for this world.</p>
 </div>
 
 
@@ -310,7 +317,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="LatchLayer"></a><h3>LatchLayer</h3>
 <pre>void LatchLayer(SS_Layer *l) </pre>
-<p>LatchLayer Description...</p>
+<p>Set the layer that receives input events.</p>
 </div>
 
 
@@ -318,7 +325,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="LayerToBack"></a><h3>LayerToBack</h3>
 <pre>void LayerToBack(SS_Layer *layer)</pre>
-<p>LayerToBack Description...</p>
+<p>Move a layer to the back.</p>
 </div>
 
 
@@ -326,7 +333,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="LayerToFront"></a><h3>LayerToFront</h3>
 <pre>void LayerToFront(SS_Layer *layer)</pre>
-<p>LayerToFront Description...</p>
+<p>Move a layer to the front.</p>
 </div>
 
 
@@ -342,7 +349,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <div class="mitem"><a href="#top">top</a>
 <a name="MousePointer"></a><h3>MousePointer</h3>
 <pre>SS_LayerItem* MousePointer() </pre>
-<p>MousePointer Description...</p>
+<p>Return the sprite used as the mouse pointer.</p>
 </div>
 
 
@@ -351,7 +358,7 @@ is found to be too low then Vertical Blank Synchronization is disabled.
 <a name="NewGUI"></a><h3>NewGUI</h3>
 <pre>SS_GUI* NewGUI()
 SS_GUI* NewGUI(SS_SFont *font)</pre>
-<p>NewGUI Description...</p>
+<p>NewGUI Create a new GUI layer with optional font.</p>
 </div>
 
 
@@ -359,7 +366,7 @@ SS_GUI* NewGUI(SS_SFont *font)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="NewLayer"></a><h3>NewLayer</h3>
 <pre>SS_Layer* NewLayer(Uint32 f=SS_NONE)</pre>
-<p>NewLayer Description...</p>
+<p>Create a new layer owned by this world.</p>
 </div>
 
 
@@ -370,7 +377,7 @@ SS_GUI* NewGUI(SS_SFont *font)</pre>
 SS_TextLayer* NewTextLayer(char *filename, float desc)
 SS_TextLayer* NewTextLayer(SS_SFont *sfont, Uint32 f)
 SS_TextLayer* NewTextLayer(SS_SFont *sfont)</pre>
-<p>NewTextLayer Description...</p>
+<p>NewTextLayer Create a new text layer with an SFont.</p>
 </div>
 
 
@@ -380,7 +387,7 @@ SS_TextLayer* NewTextLayer(SS_SFont *sfont)</pre>
 <pre>SS_TileLayer* NewTileLayer()
 SS_TileLayer* NewTileLayer(SS_TileMap *map, Uint32 f)
 SS_TileLayer* NewTileLayer(SS_TileMap *map)</pre>
-<p>NewTileLayer Description...</p>
+<p>NewTileLayer Create a new tile layer.</p>
 </div>
 
 
@@ -399,7 +406,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="PostProcess"></a><h3>PostProcess</h3>
 <pre>void PostProcess()</pre>
-<p>PostProcess Description...</p>
+<p>Overridable per-world hook after Process.</p>
 </div>
 
 
@@ -407,7 +414,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="PostRender"></a><h3>PostRender</h3>
 <pre>void PostRender()</pre>
-<p>PostRender Description...</p>
+<p>Overridable post-render hook.</p>
 </div>
 
 
@@ -415,7 +422,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="PreRender"></a><h3>PreRender</h3>
 <pre>void PreRender()</pre>
-<p>PreRender Description...</p>
+<p>Overridable pre-render hook.</p>
 </div>
 
 
@@ -423,7 +430,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="Process"></a><h3>Process</h3>
 <pre>void Process()</pre>
-<p>Process Description...</p>
+<p>Run per-frame update logic.</p>
 </div>
 
 
@@ -431,7 +438,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="process_thread"></a><h3>process_thread</h3>
 <pre>static int process_thread(void *world) </pre>
-<p>process_thread Description...</p>
+<p>process_thread Static C-callable thread entry for ProcessThread.</p>
 </div>
 
 
@@ -439,7 +446,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="ProcessFlag"></a><h3>ProcessFlag</h3>
 <pre>bool ProcessFlag() </pre>
-<p>ProcessFlag Description...</p>
+<p>Return true if processing is enabled for this world.</p>
 </div>
 
 
@@ -447,7 +454,7 @@ Without the boolean argument this disables processing.
 <div class="mitem"><a href="#top">top</a>
 <a name="ProcessThread"></a><h3>ProcessThread</h3>
 <pre>int  ProcessThread()</pre>
-<p>ProcessThread Description...</p>
+<p>ProcessThread ProcessThread.</p>
 </div>
 
 
@@ -467,7 +474,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveFromColliders"></a><h3>RemoveFromColliders</h3>
 <pre>void RemoveFromColliders(SS_LayerItem *item)</pre>
-<p>RemoveFromColliders Description...</p>
+<p>Unregister from collision lists.</p>
 </div>
 
 
@@ -475,7 +482,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render()</pre>
-<p>Render Description...</p>
+<p>Render this object in the current GL state.</p>
 </div>
 
 
@@ -483,7 +490,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="RenderThread"></a><h3>RenderThread</h3>
 <pre>int  RenderThread()</pre>
-<p>RenderThread Description...</p>
+<p>RenderThread RenderThread.</p>
 </div>
 
 
@@ -491,7 +498,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="Resume"></a><h3>Resume</h3>
 <pre>void Resume() </pre>
-<p>Resume Description...</p>
+<p>Resume processing or playback.</p>
 </div>
 
 
@@ -499,7 +506,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="Right"></a><h3>Right</h3>
 <pre>float Right() </pre>
-<p>Right Description...</p>
+<p>Accessor for the right visible edge of the world.</p>
 </div>
 
 
@@ -507,7 +514,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="Run"></a><h3>Run</h3>
 <pre>Uint32 Run(SS_Game *g)</pre>
-<p>Run Description...</p>
+<p>Run GetInput -> Process -> Render loop.</p>
 </div>
 
 
@@ -515,7 +522,7 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="RunCollisionTest"></a><h3>RunCollisionTest</h3>
 <pre>void RunCollisionTest()</pre>
-<p>RunCollisionTest Description...</p>
+<p>Run collision detection.</p>
 </div>
 
 
@@ -523,18 +530,18 @@ call Go() followed by Run().
 <div class="mitem"><a href="#top">top</a>
 <a name="ScreenToGlobal"></a><h3>ScreenToGlobal</h3>
 <pre>void ScreenToGlobal(float *x, float *y) </pre>
-<p>ScreenToGlobal Description...</p>
+<p>Convert screen coordinates to world coordinates.</p>
 </div>
 
 
 <!-- SetClearColor -->
 <div class="mitem"><a href="#top">top</a>
 <a name="SetClearColor"></a><h3>SetClearColor</h3>
-<pre>void SetClearColor(float r, float g, float b, float a=1.0) 
+<pre>void SetClearColor(float r, float g, float b, float a=1.0)
 void SetClearColor(GLubyte q[4])
 void SetClearColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a=255)
 void SetClearColor(SScolorf q) </pre>
-<p>SetClearColor Description...</p>
+<p>SetClearColor Set the background clear color.</p>
 </div>
 
 
@@ -542,7 +549,7 @@ void SetClearColor(SScolorf q) </pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetEventHandler"></a><h3>SetEventHandler</h3>
 <pre>void SetEventHandler(worldEventProc ep) </pre>
-<p>SetEventHandler Description...</p>
+<p>Install a custom event handler callback for this world.</p>
 </div>
 
 
@@ -550,7 +557,7 @@ void SetClearColor(SScolorf q) </pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetLeftTop"></a><h3>SetLeftTop</h3>
 <pre>void SetLeftTop(float x, float y) </pre>
-<p>SetLeftTop Description...</p>
+<p>Set the top-left corner of the world's visible view rectangle.</p>
 </div>
 
 
@@ -558,7 +565,7 @@ void SetClearColor(SScolorf q) </pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPaused"></a><h3>SetPaused</h3>
 <pre>void SetPaused(bool p)</pre>
-<p>SetPaused Description...</p>
+<p>Pause or resume.</p>
 </div>
 
 
@@ -566,7 +573,7 @@ void SetClearColor(SScolorf q) </pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPointerSprite"></a><h3>SetPointerSprite</h3>
 <pre>void SetPointerSprite(SS_LayerItem *s)</pre>
-<p>SetPointerSprite Description...</p>
+<p>Set the sprite to use as the mouse pointer.</p>
 </div>
 
 
@@ -586,7 +593,7 @@ to center the world's view rectangle on your game character.
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPostRenderProc"></a><h3>SetPostRenderProc</h3>
 <pre>void SetPostRenderProc(worldProc p) </pre>
-<p>SetPostRenderProc Description...</p>
+<p>Install a post-render hook.</p>
 </div>
 
 
@@ -594,7 +601,7 @@ to center the world's view rectangle on your game character.
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPreRenderProc"></a><h3>SetPreRenderProc</h3>
 <pre>void SetPreRenderProc(worldProc p) </pre>
-<p>SetPreRenderProc Description...</p>
+<p>Install a pre-render hook.</p>
 </div>
 
 
@@ -602,7 +609,7 @@ to center the world's view rectangle on your game character.
 <div class="mitem"><a href="#top">top</a>
 <a name="SetProcessFlag"></a><h3>SetProcessFlag</h3>
 <pre>void SetProcessFlag(bool f) </pre>
-<p>SetProcessFlag Description...</p>
+<p>Enable or disable per-frame processing for this world.</p>
 </div>
 
 
@@ -610,7 +617,7 @@ to center the world's view rectangle on your game character.
 <div class="mitem"><a href="#top">top</a>
 <a name="SetSurface"></a><h3>SetSurface</h3>
 <pre>void SetSurface(SDL_Surface *s)</pre>
-<p>SetSurface Description...</p>
+<p>Set the SDL surface used for rendering.</p>
 </div>
 
 
@@ -618,7 +625,7 @@ to center the world's view rectangle on your game character.
 <div class="mitem"><a href="#top">top</a>
 <a name="SetZoom"></a><h3>SetZoom</h3>
 <pre>void SetZoom(float z) </pre>
-<p>SetZoom Description...</p>
+<p>Set the zoom factor and recompute the visible dimensions.</p>
 </div>
 
 
@@ -639,7 +646,7 @@ Use <a href="#Stop">Stop()</a> to disable processing and rendering.
 <pre>void Stop()</pre>
 <p>
 Stop the processing thread and disable rendering.
-Use <a href="#Start">Start()</a> to re‘nable processing and rendering.
+Use <a href="#Start">Start()</a> to re-enable processing and rendering.
 </p>
 </div>
 
@@ -648,7 +655,7 @@ Use <a href="#Start">Start()</a> to re‘nable processing and rendering.
 <div class="mitem"><a href="#top">top</a>
 <a name="TogglePaused"></a><h3>TogglePaused</h3>
 <pre>void TogglePaused() </pre>
-<p>TogglePaused Description...</p>
+<p>Toggle processing between paused and running.</p>
 </div>
 
 
@@ -664,7 +671,7 @@ Use <a href="#Start">Start()</a> to re‘nable processing and rendering.
 <div class="mitem"><a href="#top">top</a>
 <a name="ViewHeight"></a><h3>ViewHeight</h3>
 <pre>float ViewHeight() </pre>
-<p>ViewHeight Description...</p>
+<p>Return the height of the visible view area.</p>
 </div>
 
 
@@ -672,7 +679,7 @@ Use <a href="#Start">Start()</a> to re‘nable processing and rendering.
 <div class="mitem"><a href="#top">top</a>
 <a name="ViewWidth"></a><h3>ViewWidth</h3>
 <pre>float ViewWidth() </pre>
-<p>ViewWidth Description...</p>
+<p>Return the width of the visible view area.</p>
 </div>
 
 
@@ -706,8 +713,7 @@ divided by the zoom factor.
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

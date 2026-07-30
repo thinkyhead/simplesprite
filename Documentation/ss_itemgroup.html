@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_ItemGroup Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -21,7 +24,7 @@
 		<li><a href="base.html">Base Classes</a></li>
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
-		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a>
 			<ul>
 				<li><a href="ss_frame.html">SS_Frame</a></li>
 				<li>SS_ItemGroup</li>
@@ -30,16 +33,20 @@
 				<li><a href="ss_vectorframe.html">SS_VectorFrame</a></li>
 				<li><a href="ss_vectorsprite.html">SS_VectorSprite</a></li>
 			</ul>
+		</li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -132,7 +139,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="AddItem"></a><h3>AddItem</h3>
 <pre>void AddItem(SS_LayerItem*)</pre>
-<p>AddItem Description...</p>
+<p>A group of collider items that move, process, and render as one transformable unit.</p>
 </div>
 
 
@@ -141,7 +148,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Run animation frame updates.</p>
 </div>
 
 
@@ -150,7 +157,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="Clone"></a><h3>Clone</h3>
 <pre>SS_LayerItem* Clone()</pre>
-<p>Clone Description...</p>
+<p>Create a deep copy of this item group.</p>
 </div>
 
 
@@ -159,7 +166,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="EnableCollisions"></a><h3>EnableCollisions</h3>
 <pre>void EnableCollisions(Uint32 out, Uint32 in)</pre>
-<p>EnableCollisions Description...</p>
+<p>Set collision masks.</p>
 </div>
 
 
@@ -168,7 +175,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="GetNewCollisions"></a><h3>GetNewCollisions</h3>
 <pre>Uint32 GetNewCollisions()</pre>
-<p>GetNewCollisions Description...</p>
+<p>Return new collision bitset.</p>
 </div>
 
 
@@ -177,7 +184,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -186,7 +193,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="IsOnScreen"></a><h3>IsOnScreen</h3>
 <pre>bool IsOnScreen()</pre>
-<p>IsOnScreen Description...</p>
+<p>Return true if item is in the viewport.</p>
 </div>
 
 
@@ -195,7 +202,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="Process"></a><h3>Process</h3>
 <pre>void Process()</pre>
-<p>Process Description...</p>
+<p>Run per-frame update logic.</p>
 </div>
 
 
@@ -204,7 +211,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="PushAndPrepareMatrix"></a><h3>PushAndPrepareMatrix</h3>
 <pre>void PushAndPrepareMatrix()</pre>
-<p>PushAndPrepareMatrix Description...</p>
+<p>Push and set modelview matrix.</p>
 </div>
 
 
@@ -213,7 +220,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render()</pre>
-<p>Render Description...</p>
+<p>Render this object in the current GL state.</p>
 </div>
 
 
@@ -222,7 +229,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="SetHidden"></a><h3>SetHidden</h3>
 <pre>void SetHidden(bool h)</pre>
-<p>SetHidden Description...</p>
+<p>Set the hidden flag on all contained items.</p>
 </div>
 
 
@@ -231,7 +238,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="SetLayer"></a><h3>SetLayer</h3>
 <pre>void SetLayer(SS_SpriteLayer *l)</pre>
-<p>SetLayer Description...</p>
+<p>Set containing layer.</p>
 </div>
 
 
@@ -240,7 +247,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="SetWorld"></a><h3>SetWorld</h3>
 <pre>void SetWorld(SS_World *w)</pre>
-<p>SetWorld Description...</p>
+<p>Set containing world.</p>
 </div>
 
 
@@ -249,7 +256,7 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="UpdateCollisionMembership"></a><h3>UpdateCollisionMembership</h3>
 <pre>void UpdateCollisionMembership()</pre>
-<p>UpdateCollisionMembership Description...</p>
+<p>Update which collision lists the contained items belong to.</p>
 </div>
 
 
@@ -258,13 +265,11 @@ SS_ItemGroup(const SS_ItemGroup &amp;src)</pre>
 <a href="#top">top</a>
 <a name="UpdateCollisions"></a><h3>UpdateCollisions</h3>
 <pre>void UpdateCollisions()</pre>
-<p>UpdateCollisions Description...</p>
+<p>Scan lists and emit collisions.</p>
 </div>
 
 
-</td></tr></table>
-
+</main>
+</div>
 </body>
 </html>
-
-

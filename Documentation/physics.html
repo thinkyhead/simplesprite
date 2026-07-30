@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SimpleSprite : Sounds &amp; Music</title>
+<title>SimpleSprite : Physics</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
@@ -14,7 +14,6 @@
 <a name="top"></a>
 <div id="layout">
 <nav id="nav">
-
 
 <h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
@@ -27,35 +26,49 @@
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
-		<li>Sounds &amp; Music
-			<ul>
-				<li><a href="ss_music.html">SS_Music</a></li>
-				<li><a href="ss_sound.html">SS_Sound</a></li>
-			</ul>
-		</li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
-		<li><a href="physics.html">Physics</a></li>
+		<li>Physics
+			<ul>
+				<li><a href="ss_physics.html">SS_Physics</a></li>
+			</ul>
+		</li>
 		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
-
 </nav>
 <main id="main">
 
-
-<!--
-
-		Class Description
-
--->
-
 <div id="classbox">
-<h1>Sounds &amp; Music</h1>
-<p>About this section...</p>
+<h1>Physics</h1>
+<p>
+The optional physics subsystem lets SimpleSprite items participate in a
+Box2D world. It is disabled by default and enabled with
+<tt>SS_PHYSICS_ENABLE</tt>.
+</p>
 </div>
 
+<div id="reflist">
+<table width="100%"><tr valign="top">
+
+<td>
+<h4>Physics classes</h4>
+<ul>
+	<li><a href="ss_physics.html">SS_Physics</a></li>
+</ul>
+</td>
+
+<td>
+<h4>Physics hooks</h4>
+<ul>
+	<li><a href="ss_layeritem.html">SS_LayerItem::physicsBody / AttachPhysicsBody / SyncPhysicsBody</a></li>
+</ul>
+</td>
+
+</tr></table>
+</div>
 
 </main>
 </div>

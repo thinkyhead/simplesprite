@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_GUI Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -26,7 +29,7 @@
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
-		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="gui.html">User Interface</a>
 			<ul>
 				<li><a href="ss_button.html">SS_Button</a></li>
 				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
@@ -39,15 +42,20 @@
 				<li><a href="ss_menubar.html">SS_Menubar</a></li>
 				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
 				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_scrollbar.html">SS_Scrollbar</a></li>
 				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
 				<li><a href="ss_slider.html">SS_Slider</a></li>
 				<li><a href="ss_textinput.html">SS_TextInput</a></li>
 			</ul>
+		</li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <div id="classbox">
@@ -184,7 +192,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>A GUI layer that manages gadgets, rollover/click state, and event routing.</p>
 </div>
 
 
@@ -193,7 +201,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="Enable"></a><h3>Enable</h3>
 <pre>void Enable()</pre>
-<p>Enable Description...</p>
+<p>Enable this layer/gadget.</p>
 </div>
 
 
@@ -202,7 +210,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="SetWorld"></a><h3>SetWorld</h3>
 <pre>void SetWorld(SS_World *w)</pre>
-<p>SetWorld Description...</p>
+<p>Set containing world.</p>
 </div>
 
 
@@ -211,7 +219,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="World"></a><h3>World</h3>
 <pre>SS_World* World()</pre>
-<p>World Description...</p>
+<p>Return the world that contains this GUI layer.</p>
 </div>
 
 
@@ -220,7 +228,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="CheckboxSprite"></a><h3>CheckboxSprite</h3>
 <pre>SS_Sprite* CheckboxSprite()</pre>
-<p>CheckboxSprite Description...</p>
+<p>Return the shared checkbox sprite used by all checkboxes.</p>
 </div>
 
 
@@ -229,7 +237,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="RadioButtonSprite"></a><h3>RadioButtonSprite</h3>
 <pre>SS_Sprite* RadioButtonSprite()</pre>
-<p>RadioButtonSprite Description...</p>
+<p>Return the shared radio button sprite used by all radio buttons.</p>
 </div>
 
 
@@ -238,7 +246,7 @@ SS_World.
 <a href="#top">top</a>
 <a name="SliderSprite"></a><h3>SliderSprite</h3>
 <pre>SS_ItemGroup* SliderSprite()</pre>
-<p>SliderSprite Description...</p>
+<p>Return the shared slider sprite used by all sliders.</p>
 </div>
 
 
@@ -252,7 +260,7 @@ SS_World.
 	char *off2=NULL,
 	char *on2=NULL
 	)</pre>
-<p>LoadCheckboxImages Description...</p>
+<p>LoadCheckboxImages LoadCheckboxImages.</p>
 </div>
 
 
@@ -266,7 +274,7 @@ SS_World.
 	char *file3=NULL,
 	char *file4=NULL
 	)</pre>
-<p>LoadSliderImages Description...</p>
+<p>LoadSliderImages LoadSliderImages.</p>
 </div>
 
 
@@ -280,7 +288,7 @@ SS_World.
 	char *file3=NULL,
 	char *file4=NULL
 	)</pre>
-<p>MakeSprite Description...</p>
+<p>MakeSprite MakeSprite.</p>
 </div>
 
 
@@ -294,7 +302,7 @@ SS_World.
 	char *file3=NULL,
 	char *file4=NULL
 	)</pre>
-<p>MakeSpriteGroup Description...</p>
+<p>MakeSpriteGroup MakeSpriteGroup.</p>
 </div>
 
 
@@ -304,7 +312,7 @@ SS_World.
 <a name="SetFont"></a><h3>SetFont</h3>
 <pre>void SetFont(char *filename, float desc)
 void SetFont(SS_SFont * const font)</pre>
-<p>SetFont Description...</p>
+<p>SetFont Assign a font.</p>
 </div>
 
 
@@ -313,7 +321,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="Font"></a><h3>Font</h3>
 <pre>SS_SFont* Font()</pre>
-<p>Font Description...</p>
+<p>Return the font used by this GUI layer.</p>
 </div>
 
 
@@ -322,7 +330,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="AddGadget"></a><h3>AddGadget</h3>
 <pre>void AddGadget(SS_Gadget *gadget)</pre>
-<p>AddGadget Description...</p>
+<p>Add a gadget to this GUI.</p>
 </div>
 
 
@@ -331,7 +339,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="GadgetAtPointer"></a><h3>GadgetAtPointer</h3>
 <pre>SS_Gadget* GadgetAtPointer()</pre>
-<p>GadgetAtPointer Description...</p>
+<p>Return gadget under mouse.</p>
 </div>
 
 
@@ -340,7 +348,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="GadgetAtXY"></a><h3>GadgetAtXY</h3>
 <pre>SS_Gadget* GadgetAtXY(float x, float y)</pre>
-<p>GadgetAtXY Description...</p>
+<p>Return gadget at a point.</p>
 </div>
 
 
@@ -349,7 +357,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="KeyFocus"></a><h3>KeyFocus</h3>
 <pre>SS_Gadget* KeyFocus()</pre>
-<p>KeyFocus Description...</p>
+<p>Return the gadget that currently has keyboard focus.</p>
 </div>
 
 
@@ -358,7 +366,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="HandleEvent"></a><h3>HandleEvent</h3>
 <pre>bool HandleEvent(SDL_Event *e)</pre>
-<p>HandleEvent Description...</p>
+<p>Process an SDL Event for this gadget.</p>
 </div>
 
 
@@ -367,7 +375,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="Process"></a><h3>Process</h3>
 <pre>void Process()</pre>
-<p>Process Description...</p>
+<p>Run per-frame update logic.</p>
 </div>
 
 
@@ -376,7 +384,7 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Run animation frame updates.</p>
 </div>
 
 
@@ -385,11 +393,10 @@ void SetFont(SS_SFont * const font)</pre>
 <a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render()</pre>
-<p>Render Description...</p>
+<p>Render this object in the current GL state.</p>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

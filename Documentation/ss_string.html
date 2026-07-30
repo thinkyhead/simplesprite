@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_String Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -23,21 +26,25 @@
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
-		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a>
 			<ul>
 				<li><a href="ss_editstring.html">SS_EditString</a></li>
 				<li><a href="ss_sfont.html">SS_SFont</a></li>
 				<li>SS_String</li>
 				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
 			</ul>
+		</li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -51,7 +58,7 @@
 <h1>SS_String</h1>
 <h4><strong>Superclass</strong>: <a href="ss_layeritem.html">SS_LayerItem</a></h4>
 <h4><strong>Subclasses</strong>: <a href="ss_editstring.html">SS_EditString</a></h4>
-<p>Class Description...</p>
+<p>Text string rendered by an <tt>SS_SFont</tt>, with alignment and width helpers.</p>
 </div>
 
 
@@ -155,7 +162,7 @@ its alignment. Alignments for this method and others that take a position are:</
 <a href="#top">top</a>
 <a name="AlignToRect"></a><h3>AlignToRect</h3>
 <pre>void AlignToRect(SS_Rect &rect, stringAlign position=(SA_LEFT|SA_CENTERV))</pre>
-<p>Align the string to a given rectangular region and optionally set its position.</p>
+<p>the string to a given rectangular region and optionally set its position.</p>
 </div>
 
 
@@ -164,7 +171,7 @@ its alignment. Alignments for this method and others that take a position are:</
 <a href="#top">top</a>
 <a name="AlignToSprite"></a><h3>AlignToSprite</h3>
 <pre>void AlignToSprite(SS_LayerItem *spr, stringAlign position=(SA_LEFT|SA_CENTERV))</pre>
-<p>Align the string to a given Layer Item and optionally set its position.</p>
+<p>the string to a given Layer Item and optionally set its position.</p>
 </div>
 
 
@@ -219,7 +226,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -228,7 +235,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="IsPointInside"></a><h3>IsPointInside</h3>
 <pre>bool IsPointInside(float pixx, float pixy)</pre>
-<p>IsPointInside Description...</p>
+<p>Hit-test a point in rendered text.</p>
 </div>
 
 
@@ -237,7 +244,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="Length"></a><h3>Length</h3>
 <pre>Uint16 Length()</pre>
-<p>Length Description...</p>
+<p>Return the number of characters in the string.</p>
 </div>
 
 
@@ -246,7 +253,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="Move"></a><h3>Move</h3>
 <pre>void Move(float x, float y)</pre>
-<p>Move Description...</p>
+<p>gadget to a new position.</p>
 </div>
 
 
@@ -255,7 +262,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="RedoAlignment"></a><h3>RedoAlignment</h3>
 <pre>void RedoAlignment()</pre>
-<p>RedoAlignment Description...</p>
+<p>Reapply current alignment.</p>
 </div>
 
 
@@ -264,7 +271,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render(SScolorb &inTint, SDL_Rect *rect=NULL)</pre>
-<p>Render Description...</p>
+<p>this object in the current GL state.</p>
 </div>
 
 
@@ -273,7 +280,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="SetFont"></a><h3>SetFont</h3>
 <pre>void SetFont(SS_SFont * const font)</pre>
-<p>SetFont Description...</p>
+<p>Assign a font.</p>
 </div>
 
 
@@ -282,7 +289,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="SetText"></a><h3>SetText</h3>
 <pre>void SetText(char *t)</pre>
-<p>SetText Description...</p>
+<p>Replace text content.</p>
 </div>
 
 
@@ -291,7 +298,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="StringCopy"></a><h3>StringCopy</h3>
 <pre>void StringCopy(char *t)</pre>
-<p>StringCopy Description...</p>
+<p>Copy text from a C string.</p>
 </div>
 
 
@@ -300,7 +307,7 @@ example, you can discover which character in the string was clicked on.</p>
 <a href="#top">top</a>
 <a name="Top"></a><h3>Top</h3>
 <pre>float Top()</pre>
-<p>Top Description...</p>
+<p>Return the y position of the top of the string.</p>
 </div>
 
 
@@ -310,12 +317,11 @@ example, you can discover which character in the string was clicked on.</p>
 <a name="Width"></a><h3>Width</h3>
 <pre>float Width()
 float Width(Uint16 pos)</pre>
-<p>Width Description...</p>
+<p>Width Width.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

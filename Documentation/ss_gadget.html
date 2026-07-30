@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_Gadget Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -26,7 +29,7 @@
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
-		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="gui.html">User Interface</a>
 			<ul>
 				<li><a href="ss_button.html">SS_Button</a></li>
 				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
@@ -39,15 +42,20 @@
 				<li><a href="ss_menubar.html">SS_Menubar</a></li>
 				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
 				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_scrollbar.html">SS_Scrollbar</a></li>
 				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
 				<li><a href="ss_slider.html">SS_Slider</a></li>
 				<li><a href="ss_textinput.html">SS_TextInput</a></li>
 			</ul>
+		</li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -267,7 +275,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Base UI gadget with rect-based collision, event procs, and color/state management.</p>
 </div>
 
 
@@ -275,7 +283,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="ContainsPoint"></a><h3>ContainsPoint</h3>
 <pre>bool ContainsPoint(float x, float y)</pre>
-<p>ContainsPoint Description...</p>
+<p>Hit-test for a point in this gadget.</p>
 </div>
 
 
@@ -283,7 +291,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="CountClicks"></a><h3>CountClicks</h3>
 <pre>Uint16 CountClicks()</pre>
-<p>CountClicks Description...</p>
+<p>Return click count since mousedown.</p>
 </div>
 
 
@@ -291,7 +299,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="Disable"></a><h3>Disable</h3>
 <pre>void Disable()</pre>
-<p>Disable Description...</p>
+<p>Disable this layer/gadget.</p>
 </div>
 
 
@@ -299,7 +307,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="DisableFlag"></a><h3>DisableFlag</h3>
 <pre>void DisableFlag(Uint32 f)</pre>
-<p>DisableFlag Description...</p>
+<p>Clear a specific flag bit on this gadget.</p>
 </div>
 
 
@@ -307,7 +315,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="Enable"></a><h3>Enable</h3>
 <pre>void Enable()</pre>
-<p>Enable Description...</p>
+<p>Enable this layer/gadget.</p>
 </div>
 
 
@@ -315,7 +323,7 @@ gadgets then broadcast to their grouping object.
 <div class="mitem"><a href="#top">top</a>
 <a name="EnableFlag"></a><h3>EnableFlag</h3>
 <pre>void EnableFlag(Uint32 f)</pre>
-<p>EnableFlag Description...</p>
+<p>Set a specific flag bit on this gadget.</p>
 </div>
 
 
@@ -326,7 +334,7 @@ gadgets then broadcast to their grouping object.
 Uint32 Flags()
 Uint32 Flags(Uint32 m)
 </pre>
-<p>Flags Description...</p>
+<p>Return the current flag bits, or mask them with the given value.</p>
 </div>
 
 
@@ -334,7 +342,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="Font"></a><h3>Font</h3>
 <pre>SS_SFont* Font()</pre>
-<p>Font Description...</p>
+<p>Return the font associated with this gadget.</p>
 </div>
 
 
@@ -342,7 +350,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="FrameForState"></a><h3>FrameForState</h3>
 <pre>Uint16 FrameForState()</pre>
-<p>FrameForState Description...</p>
+<p>Return sprite frame for current state.</p>
 </div>
 
 
@@ -350,7 +358,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="HandleEvent"></a><h3>HandleEvent</h3>
 <pre>bool HandleEvent(SS_Event *event)</pre>
-<p>HandleEvent Description...</p>
+<p>Process an SDL Event for this gadget.</p>
 </div>
 
 
@@ -358,7 +366,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="Height"></a><h3>Height</h3>
 <pre>float Height()</pre>
-<p>Height Description...</p>
+<p>Return the height of this gadget.</p>
 </div>
 
 
@@ -366,7 +374,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -374,7 +382,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="IsClicked"></a><h3>IsClicked</h3>
 <pre>bool IsClicked()</pre>
-<p>IsClicked Description...</p>
+<p>Return true if this gadget is the currently clicked gadget.</p>
 </div>
 
 
@@ -382,7 +390,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="IsEntered"></a><h3>IsEntered</h3>
 <pre>bool IsEntered()</pre>
-<p>IsEntered Description...</p>
+<p>Return whether pointer is hovering.</p>
 </div>
 
 
@@ -390,7 +398,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="IsHover"></a><h3>IsHover</h3>
 <pre>bool IsHover()</pre>
-<p>IsHover Description...</p>
+<p>Return true if the pointer is hovering over this gadget.</p>
 </div>
 
 
@@ -398,7 +406,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="IsPressed"></a><h3>IsPressed</h3>
 <pre>bool IsPressed()</pre>
-<p>IsPressed Description...</p>
+<p>Return true if this gadget is currently in the pressed state.</p>
 </div>
 
 
@@ -406,7 +414,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="Label"></a><h3>Label</h3>
 <pre>char* Label()</pre>
-<p>Label Description...</p>
+<p>Return the label text string for this gadget.</p>
 </div>
 
 
@@ -414,7 +422,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="MakeSprite"></a><h3>MakeSprite</h3>
 <pre>SS_Sprite* MakeSprite(char *file1, char *file2=NULL, char *file3=NULL, char *file4=NULL)</pre>
-<p>MakeSprite Description...</p>
+<p>Create a sprite from one to four image files for gadget states.</p>
 </div>
 
 
@@ -422,7 +430,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="MakeSpriteGroup"></a><h3>MakeSpriteGroup</h3>
 <pre>SS_ItemGroup* MakeSpriteGroup(char *file1, char *file2 = NULL, char *file3=NULL, char *file4=NULL)</pre>
-<p>MakeSpriteGroup Description...</p>
+<p>Create a sprite group from one to four image files for gadget states.</p>
 </div>
 
 
@@ -430,7 +438,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="MarkEntered"></a><h3>MarkEntered</h3>
 <pre>void MarkEntered()</pre>
-<p>MarkEntered Description...</p>
+<p>Set rollover state.</p>
 </div>
 
 
@@ -438,7 +446,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="MarkExited"></a><h3>MarkExited</h3>
 <pre>void MarkExited()</pre>
-<p>MarkExited Description...</p>
+<p>Clear rollover state.</p>
 </div>
 
 
@@ -446,7 +454,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="Move"></a><h3>Move</h3>
 <pre>void Move(float x, float y)</pre>
-<p>Move Description...</p>
+<p>Move gadget to a new position.</p>
 </div>
 
 
@@ -454,7 +462,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="RealignLabel"></a><h3>RealignLabel</h3>
 <pre>void RealignLabel()</pre>
-<p>RealignLabel Description...</p>
+<p>Reposition label after config change.</p>
 </div>
 
 
@@ -462,7 +470,7 @@ Uint32 Flags(Uint32 m)
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveSelf"></a><h3>RemoveSelf</h3>
 <pre>void RemoveSelf()</pre>
-<p>RemoveSelf Description...</p>
+<p>Schedule this item for removal.</p>
 </div>
 
 
@@ -473,7 +481,7 @@ Uint32 Flags(Uint32 m)
 void Render()
 void Render(SScolorb &amp;inTint)
 </pre>
-<p>Render Description...</p>
+<p>Render Render this object in the current GL state.</p>
 </div>
 
 
@@ -481,7 +489,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="Reset"></a><h3>Reset</h3>
 <pre>void Reset()</pre>
-<p>Reset Description...</p>
+<p>Reset the gadget to its initial state.</p>
 </div>
 
 
@@ -489,7 +497,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="ResetClicks"></a><h3>ResetClicks</h3>
 <pre>void ResetClicks()</pre>
-<p>ResetClicks Description...</p>
+<p>Reset click count to 1.</p>
 </div>
 
 
@@ -497,7 +505,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SendCommand"></a><h3>SendCommand</h3>
 <pre>void SendCommand(long command)</pre>
-<p>SendCommand Description...</p>
+<p>Send a command to the GUI.</p>
 </div>
 
 
@@ -505,7 +513,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetCommand"></a><h3>SetCommand</h3>
 <pre>void SetCommand(long command)</pre>
-<p>SetCommand Description...</p>
+<p>Set the command code sent when this gadget is activated.</p>
 </div>
 
 
@@ -513,7 +521,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetDisabledAlpha"></a><h3>SetDisabledAlpha</h3>
 <pre>void SetDisabledAlpha(GLubyte a)</pre>
-<p>SetDisabledAlpha Description...</p>
+<p>Scale disabled color alpha.</p>
 </div>
 
 
@@ -521,7 +529,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetDisabledColor"></a><h3>SetDisabledColor</h3>
 <pre>void SetDisabledColor(colorSet &amp;col)</pre>
-<p>SetDisabledColor Description...</p>
+<p>Set disabled-state colors.</p>
 </div>
 
 
@@ -529,7 +537,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetFlags"></a><h3>SetFlags</h3>
 <pre>void SetFlags(Uint32 f)</pre>
-<p>SetFlags Description...</p>
+<p>Set flag bits.</p>
 </div>
 
 
@@ -537,7 +545,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetFont"></a><h3>SetFont</h3>
 <pre>void SetFont(SS_SFont * const font)</pre>
-<p>SetFont Description...</p>
+<p>Assign a font.</p>
 </div>
 
 
@@ -545,7 +553,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetGUI"></a><h3>SetGUI</h3>
 <pre>void SetGUI(SS_GUI *g)</pre>
-<p>SetGUI Description...</p>
+<p>Set the GUI layer that owns this gadget.</p>
 </div>
 
 
@@ -553,7 +561,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetHandler"></a><h3>SetHandler</h3>
 <pre>void SetHandler(ssEventCode type, gadgetEventProcPtr proc)</pre>
-<p>SetHandler Description...</p>
+<p>Install an event handler callback for a specific event type.</p>
 </div>
 
 
@@ -561,7 +569,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetHeight"></a><h3>SetHeight</h3>
 <pre>void SetHeight(float h)</pre>
-<p>SetHeight Description...</p>
+<p>Set y scale from target height.</p>
 </div>
 
 
@@ -569,7 +577,7 @@ void Render(SScolorb &amp;inTint)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetHoverColor"></a><h3>SetHoverColor</h3>
 <pre>void SetHoverColor(colorSet &amp;col)</pre>
-<p>SetHoverColor Description...</p>
+<p>Set hover-state colors.</p>
 </div>
 
 
@@ -580,7 +588,7 @@ void Render(SScolorb &amp;inTint)
 void SetLabel(char *text)
 void SetLabel(SS_String *str)
 </pre>
-<p>SetLabel Description...</p>
+<p>SetLabel Set the text label.</p>
 </div>
 
 
@@ -588,7 +596,7 @@ void SetLabel(SS_String *str)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetLabelAlignment"></a><h3>SetLabelAlignment</h3>
 <pre>void SetLabelAlignment(stringAlign la)</pre>
-<p>SetLabelAlignment Description...</p>
+<p>Set label position relative to gadget.</p>
 </div>
 
 
@@ -596,7 +604,7 @@ void SetLabel(SS_String *str)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetMaxClicks"></a><h3>SetMaxClicks</h3>
 <pre>void SetMaxClicks(Uint16 m)</pre>
-<p>SetMaxClicks Description...</p>
+<p>Set maximum tracked clicks.</p>
 </div>
 
 
@@ -604,7 +612,7 @@ void SetLabel(SS_String *str)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetNormalColor"></a><h3>SetNormalColor</h3>
 <pre>void SetNormalColor(colorSet &amp;col)</pre>
-<p>SetNormalColor Description...</p>
+<p>Set normal-state colors.</p>
 </div>
 
 
@@ -612,7 +620,7 @@ void SetLabel(SS_String *str)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPressedColor"></a><h3>SetPressedColor</h3>
 <pre>void SetPressedColor(colorSet &amp;col)</pre>
-<p>SetPressedColor Description...</p>
+<p>Set pressed-state colors.</p>
 </div>
 
 
@@ -620,7 +628,7 @@ void SetLabel(SS_String *str)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetRegion"></a><h3>SetRegion</h3>
 <pre>void SetRegion(float w, float h)</pre>
-<p>SetRegion Description...</p>
+<p>Set gadget width and height.</p>
 </div>
 
 
@@ -637,7 +645,7 @@ void SetSprite(
 
 void SetSprite(SS_LayerItem *item)
 </pre>
-<p>SetSprite Description...</p>
+<p>SetSprite SetSprite.</p>
 </div>
 
 
@@ -654,7 +662,7 @@ void SetSpriteGroup(
 
 void SetSpriteGroup(SS_ItemGroup *grp)
 </pre>
-<p>SetSpriteGroup Description...</p>
+<p>SetSpriteGroup SetSpriteGroup.</p>
 </div>
 
 
@@ -662,7 +670,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetState"></a><h3>SetState</h3>
 <pre>void SetState(Uint16 s)</pre>
-<p>SetState Description...</p>
+<p>Set the gadget's internal state value.</p>
 </div>
 
 
@@ -670,7 +678,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetWidth"></a><h3>SetWidth</h3>
 <pre>void SetWidth(float w)</pre>
-<p>SetWidth Description...</p>
+<p>Set x scale from target width.</p>
 </div>
 
 
@@ -678,7 +686,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="SetWorld"></a><h3>SetWorld</h3>
 <pre>void SetWorld(SS_World *w)</pre>
-<p>SetWorld Description...</p>
+<p>Set containing world.</p>
 </div>
 
 
@@ -686,7 +694,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="Sprite"></a><h3>Sprite</h3>
 <pre>SS_LayerItem* Sprite()</pre>
-<p>Sprite Description...</p>
+<p>Return the foreground sprite for this gadget.</p>
 </div>
 
 
@@ -694,7 +702,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="SpriteGroup"></a><h3>SpriteGroup</h3>
 <pre>SS_ItemGroup* SpriteGroup()</pre>
-<p>SpriteGroup Description...</p>
+<p>Return the sprite group associated with this gadget.</p>
 </div>
 
 
@@ -702,7 +710,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="State"></a><h3>State</h3>
 <pre>Uint16 State()</pre>
-<p>State Description...</p>
+<p>Return the gadget's current state value.</p>
 </div>
 
 
@@ -710,7 +718,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="String"></a><h3>String</h3>
 <pre>SS_String* String()</pre>
-<p>String Description...</p>
+<p>Return the label string object for this gadget.</p>
 </div>
 
 
@@ -718,7 +726,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="TestLabelCollision"></a><h3>TestLabelCollision</h3>
 <pre>bool TestLabelCollision(float x, float y)</pre>
-<p>TestLabelCollision Description...</p>
+<p>Test whether a point collides with the label text.</p>
 </div>
 
 
@@ -726,7 +734,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="TestRectCollision"></a><h3>TestRectCollision</h3>
 <pre>bool TestRectCollision(float x, float y)</pre>
-<p>TestRectCollision Description...</p>
+<p>Point-in-rect test for this gadget.</p>
 </div>
 
 
@@ -734,7 +742,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="Type"></a><h3>Type</h3>
 <pre>layerType Type()</pre>
-<p>Type Description...</p>
+<p>Return the item type identifier for this gadget.</p>
 </div>
 
 
@@ -742,7 +750,7 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="Update"></a><h3>Update</h3>
 <pre>void Update()</pre>
-<p>Update Description...</p>
+<p>Called to update the gadget's visual state.</p>
 </div>
 
 
@@ -750,12 +758,11 @@ void SetSpriteGroup(SS_ItemGroup *grp)
 <div class="mitem"><a href="#top">top</a>
 <a name="Width"></a><h3>Width</h3>
 <pre>float Width()</pre>
-<p>Width Description...</p>
+<p>Return the width of this gadget.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

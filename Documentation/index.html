@@ -1,19 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : Introduction</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
-
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li>Introduction</li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -27,11 +29,14 @@
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -43,7 +48,7 @@
 <div id="classbox">
 <h1>Introduction to SimpleSprite</h1>
 <p>
-SimpleSprite is a C++ framework based on <a href="www.libsdl.org">SDL</a> and <a
+SimpleSprite is a C++ framework based on <a href="https://libsdl.org/">SDL3</a> and <a
 href="http://www.opengl.org">OpenGL</a> that you can use to create games,
 screensavers, demos, presentations, etc. Like other sprite engines it allows you
 to load and animate bitmap graphics, test collisions between objects, and assign
@@ -91,19 +96,17 @@ system supporting gcc.
 
 <div id="methbox">
 <h1>Features Overview</h1>
-
 <dl>
 
 <dt>Image and Texture support</dt>
-<dd>SimpleSprite can load image files in GIF, JPEG, BMP, and PNG
-formats. PNG is favored for its amazing powers of translucency.
-The SDL_image library provides all this power for free.</dd>
+<dd>SimpleSprite can load image files in PNG, JPEG, BMP, and GIF
+formats. PNG is favored for translucency. SDL3_image provides
+the decoding.</dd>
 
 <dt>Fonts, strings, and blocks of text</dt>
 <dd>An SFont file is an image file in any format containing the font and
-a line of markers at the top. (Samples should be included.) Your fonts
-can be used in their own layers or inside user interface objects.</dd>
-
+a line of markers at the top. Your fonts can be used in their own layers
+or inside user interface objects.</dd>
 
 <dt>Tiles and tile maps</dt>
 <dd>A Tile Palette file is an image file in any format containing a grid
@@ -112,19 +115,17 @@ environments that integrate seamlessly into nearly endless scrolling
 worlds. Sprites can interact with tile maps to test collisions or
 pick up objects on the map.</dd>
 
-
 <dt>User Interface and Event Chain</dt>
 <dd>The SS_GUI and SS_Gadget classes are the SimpleSprite equivalent of
 windows and controls. A GUI is a special layer for gadgets which
 implements an event chain. Simple controls like buttons, checkboxes, sliders,
-and edit fields are already provided.</dd>
-
+and edit fields are already provided. The SS_Window gadget adds viewport
+clipping, scrollbars, and a draggable title bar.</dd>
 
 <dt>Sound Effects and Music</dt>
-<dd>You can load and play AIFF, WAV, and MP3 files with the SS_Sound and
-SS_Music classes. These classes utilize the SDL_mixer and smpeg libraries
-and playback performance is very good.</dd>
-
+<dd>You can load and play WAV, AIFF, MP3, and OGG files with the SS_Sound and
+SS_Music classes. These classes utilize the SDL3_mixer MIX_* API; the old
+SDL2_mixer Mix_Chunk API is no longer used.</dd>
 
 <dt>Inter-Object Messaging</dt>
 <dd>Objects can easily send messages to one another with the SS_Broadcaster
@@ -132,24 +133,30 @@ and SS_Listener classes. Worlds, Layers, LayerItems, GUIs, and Gadgets
 already inherit from these classes, so virtually any object in your
 game can register to listen to any other object.</dd>
 
-
 <dt>Distributed AI</dt>
 <dd>Every sprite and game object has hooks for procedures that define its
 behavior. This provides discreet intelligence for simple behaviors like
-spinning, pursuit, gravitation, flashing, animation, etc. You can use
-Finite State Machine technology to generate more complex behaviors and
-decision-making. AI Stacks make it easy to jump in and out of states as
-required. This means your creatures can take detours from a current task
-and return to it later when the detour is completed.</dd>
+spinning, pursuit, gravitation, flashing, animation, etc. AI Stacks make it
+easy to jump in and out of states as required. This means your creatures can
+take detours from a current task and return to it later when the detour is
+completed.</dd>
 <dd>Finite State Machines are very fast, so you can have thousands of concurrent
 decision trees evolving simultaneously.</dd>
+
+<dt>Physics</dt>
+<dd>An optional Box2D physics subsystem can be enabled via SS_PHYSICS_ENABLE.
+Each SS_LayerItem can host a b2BodyId, and SS_Physics owns the b2WorldId
+world step. The coordinate convention is 32 pixels per meter.</dd>
+
+<dt>Particle System</dt>
+<dd>SS_Emitter subclasses generate particles in sprays, drops, streams,
+fantails, and triangle meshes with chaos, arc, and lifespan control.</dd>
 
 </dl>
 
 </div>
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

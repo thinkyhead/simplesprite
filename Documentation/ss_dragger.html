@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_Dragger Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -26,7 +29,7 @@
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
-		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="gui.html">User Interface</a>
 			<ul>
 				<li><a href="ss_button.html">SS_Button</a></li>
 				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
@@ -39,15 +42,20 @@
 				<li><a href="ss_menubar.html">SS_Menubar</a></li>
 				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
 				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_scrollbar.html">SS_Scrollbar</a></li>
 				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
 				<li><a href="ss_slider.html">SS_Slider</a></li>
 				<li><a href="ss_textinput.html">SS_TextInput</a></li>
 			</ul>
+		</li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <div id="classbox">
@@ -112,7 +120,7 @@ SS_Dragger(SS_GUI *g, char *file1, char *file2, char *file3)
 <a href="#top">top</a>
 <a name="HandleEvent"></a><h3>HandleEvent</h3>
 <pre>bool HandleEvent(SS_Event *event)</pre>
-<p>HandleEvent Description...</p>
+<p>Draggable thumb gadget for scrollbars or generic value input.</p>
 </div>
 
 
@@ -121,12 +129,11 @@ SS_Dragger(SS_GUI *g, char *file1, char *file2, char *file3)
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init(Uint32 f)</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

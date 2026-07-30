@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_EditString Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -23,21 +26,25 @@
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
-		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a>
 			<ul>
 				<li>SS_EditString</li>
 				<li><a href="ss_sfont.html">SS_SFont</a></li>
 				<li><a href="ss_string.html">SS_String</a></li>
 				<li><a href="ss_textlayer.html">SS_TextLayer</a></li>
 			</ul>
+		</li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -164,7 +171,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorEnd"></a><h3>CursorEnd</h3>
 <pre>void CursorEnd(bool ext=false)</pre>
-<p>CursorEnd Description...</p>
+<p>An editable text string with selection, cursor styles, and keyboard handling.</p>
 </div>
 
 
@@ -173,7 +180,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorHome"></a><h3>CursorHome</h3>
 <pre>void CursorHome(bool ext=false)</pre>
-<p>CursorHome Description...</p>
+<p>Move cursor to start.</p>
 </div>
 
 
@@ -182,7 +189,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorLeft"></a><h3>CursorLeft</h3>
 <pre>void CursorLeft(bool ext=false)</pre>
-<p>CursorLeft Description...</p>
+<p>Move cursor left.</p>
 </div>
 
 
@@ -191,7 +198,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorRight"></a><h3>CursorRight</h3>
 <pre>void CursorRight(bool ext=false)</pre>
-<p>CursorRight Description...</p>
+<p>Move cursor right.</p>
 </div>
 
 
@@ -200,7 +207,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorStyle"></a><h3>CursorStyle</h3>
 <pre>cursorStyle CursorStyle()</pre>
-<p>CursorStyle Description...</p>
+<p>Return the current cursor style.</p>
 </div>
 
 
@@ -209,7 +216,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorWordLeft"></a><h3>CursorWordLeft</h3>
 <pre>void CursorWordLeft(bool ext=false)</pre>
-<p>CursorWordLeft Description...</p>
+<p>Move cursor left by one word.</p>
 </div>
 
 
@@ -218,7 +225,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="CursorWordRight"></a><h3>CursorWordRight</h3>
 <pre>void CursorWordRight(bool ext=false)</pre>
-<p>CursorWordRight Description...</p>
+<p>Move cursor right by one word.</p>
 </div>
 
 
@@ -227,7 +234,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="GainFocus"></a><h3>GainFocus</h3>
 <pre>void GainFocus()</pre>
-<p>GainFocus Description...</p>
+<p>Give keyboard focus.</p>
 </div>
 
 
@@ -236,7 +243,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="HandleKey"></a><h3>HandleKey</h3>
 <pre>void HandleKey(SDLKey k, SDLMod m=KMOD_NONE)</pre>
-<p>HandleKey Description...</p>
+<p>Process a raw SDL key event.</p>
 </div>
 
 
@@ -246,7 +253,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -255,7 +262,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="LoseFocus"></a><h3>LoseFocus</h3>
 <pre>void LoseFocus()</pre>
-<p>LoseFocus Description...</p>
+<p>Remove keyboard focus.</p>
 </div>
 
 
@@ -264,7 +271,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render(GLubyte *t=NULL)</pre>
-<p>Render Description...</p>
+<p>Render this object in the current GL state.</p>
 </div>
 
 
@@ -274,7 +281,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 <a href="#top">top</a>
 <a name="RenderCursor"></a><h3>RenderCursor</h3>
 <pre>void RenderCursor()</pre>
-<p>RenderCursor Description...</p>
+<p>Render the text cursor or selection highlight.</p>
 </div>
 
 
@@ -286,7 +293,7 @@ SS_EditString(SS_SFont *font, char *t, float x, float y)
 void ReplaceSelection(char c)
 void ReplaceSelection(char *t)
 </pre>
-<p>ReplaceSelection Description...</p>
+<p>ReplaceSelection Replace selected text.</p>
 </div>
 
 
@@ -295,7 +302,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SelectAll"></a><h3>SelectAll</h3>
 <pre>void SelectAll()</pre>
-<p>SelectAll Description...</p>
+<p>Select the entire text content.</p>
 </div>
 
 
@@ -304,7 +311,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SelectionEnd"></a><h3>SelectionEnd</h3>
 <pre>Uint16 SelectionEnd()</pre>
-<p>SelectionEnd Description...</p>
+<p>Return the index of the character after the last selected character.</p>
 </div>
 
 
@@ -313,7 +320,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SelectionLength"></a><h3>SelectionLength</h3>
 <pre>Sint16 SelectionLength()</pre>
-<p>SelectionLength Description...</p>
+<p>Return the number of characters in the current selection.</p>
 </div>
 
 
@@ -322,7 +329,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SelectionStart"></a><h3>SelectionStart</h3>
 <pre>Uint16 SelectionStart()</pre>
-<p>SelectionStart Description...</p>
+<p>Return the index of the first selected character.</p>
 </div>
 
 
@@ -331,7 +338,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SelectWord"></a><h3>SelectWord</h3>
 <pre>void SelectWord(Uint16 i, bool ext=false)</pre>
-<p>SelectWord Description...</p>
+<p>Select a word.</p>
 </div>
 
 
@@ -340,7 +347,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorAlpha"></a><h3>SetCursorAlpha</h3>
 <pre>void SetCursorAlpha(GLubyte a)</pre>
-<p>SetCursorAlpha Description...</p>
+<p>Set the alpha transparency of the cursor.</p>
 </div>
 
 
@@ -349,7 +356,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorAlpha1"></a><h3>SetCursorAlpha1</h3>
 <pre>void SetCursorAlpha1(GLubyte a)</pre>
-<p>SetCursorAlpha1 Description...</p>
+<p>SetCursorAlpha1.</p>
 </div>
 
 
@@ -358,7 +365,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorAlpha2"></a><h3>SetCursorAlpha2</h3>
 <pre>void SetCursorAlpha2(GLubyte a)</pre>
-<p>SetCursorAlpha2 Description...</p>
+<p>SetCursorAlpha2.</p>
 </div>
 
 
@@ -367,7 +374,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorStyle"></a><h3>SetCursorStyle</h3>
 <pre>void SetCursorStyle(cursorStyle s)</pre>
-<p>SetCursorStyle Description...</p>
+<p>Choose cursor shape.</p>
 </div>
 
 
@@ -376,7 +383,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorTint"></a><h3>SetCursorTint</h3>
 <pre>void SetCursorTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
-<p>SetCursorTint Description...</p>
+<p>Set cursor color and alpha.</p>
 </div>
 
 
@@ -385,7 +392,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorTint1"></a><h3>SetCursorTint1</h3>
 <pre>void SetCursorTint1(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
-<p>SetCursorTint1 Description...</p>
+<p>SetCursorTint1.</p>
 </div>
 
 
@@ -394,7 +401,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetCursorTint2"></a><h3>SetCursorTint2</h3>
 <pre>void SetCursorTint2(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
-<p>SetCursorTint2 Description...</p>
+<p>SetCursorTint2.</p>
 </div>
 
 
@@ -403,7 +410,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetFocus"></a><h3>SetFocus</h3>
 <pre>void SetFocus(bool f)</pre>
-<p>SetFocus Description...</p>
+<p>Give or remove keyboard focus from this edit string.</p>
 </div>
 
 
@@ -412,7 +419,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetMaxStringLength"></a><h3>SetMaxStringLength</h3>
 <pre>void SetMaxStringLength(Uint16 max)</pre>
-<p>SetMaxStringLength Description...</p>
+<p>Limit character count.</p>
 </div>
 
 
@@ -421,7 +428,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetMaxStringWidth"></a><h3>SetMaxStringWidth</h3>
 <pre>void SetMaxStringWidth(Uint16 max)</pre>
-<p>SetMaxStringWidth Description...</p>
+<p>Limit pixel width.</p>
 </div>
 
 
@@ -430,7 +437,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetSelection"></a><h3>SetSelection</h3>
 <pre>void SetSelection(Sint16 s=0, Sint16 l=0)</pre>
-<p>SetSelection Description...</p>
+<p>Set selection start and length.</p>
 </div>
 
 
@@ -439,7 +446,7 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetSelectionAlpha"></a><h3>SetSelectionAlpha</h3>
 <pre>void SetSelectionAlpha(GLubyte a)</pre>
-<p>SetSelectionAlpha Description...</p>
+<p>Set the alpha transparency of the selection highlight.</p>
 </div>
 
 
@@ -448,12 +455,11 @@ void ReplaceSelection(char *t)
 <a href="#top">top</a>
 <a name="SetSelectionTint"></a><h3>SetSelectionTint</h3>
 <pre>void SetSelectionTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a=0xFF)</pre>
-<p>SetSelectionTint Description...</p>
+<p>Set selection color and alpha.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

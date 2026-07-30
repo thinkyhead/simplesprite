@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_LayerItem Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -21,7 +24,7 @@
 		<li><a href="base.html">Base Classes</a></li>
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
-		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a>
 			<ul>
 				<li><a href="ss_frame.html">SS_Frame</a></li>
 				<li><a href="ss_itemgroup.html">SS_ItemGroup</a></li>
@@ -30,16 +33,20 @@
 				<li><a href="ss_vectorframe.html">SS_VectorFrame</a></li>
 				<li><a href="ss_vectorsprite.html">SS_VectorSprite</a></li>
 			</ul>
+		</li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -60,7 +67,7 @@
 <a href="ss_sprite.html">SS_Sprite</a> |
 <a href="ss_itemgroup.html">SS_ItemGroup</a>
 </h4>
-<p>Class Description...</p>
+<p>Extends <tt>SS_LayerItem</tt> with bitmask collision types, a source id, and spatial collision list management.</p>
 </div>
 
 
@@ -220,7 +227,7 @@
 <a href="#top">top</a>
 <a name="AddPeer"></a><h3>AddPeer</h3>
 <pre>void AddPeer(SS_LayerItem *base)</pre>
-<p>AddPeer Description...</p>
+<p>Add a peer item that moves and rotates in sync with this item.</p>
 </div>
 
 
@@ -232,7 +239,7 @@
 float AngleTo(float x, float y)
 float AngleTo(SS_LayerItem *other)
 </pre>
-<p>AngleTo Description...</p>
+<p>AngleTo Return angle to a point or item.</p>
 </div>
 
 
@@ -241,7 +248,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="Animate"></a><h3>Animate</h3>
 <pre>void Animate()</pre>
-<p>Animate Description...</p>
+<p>Run animation frame updates.</p>
 </div>
 
 
@@ -250,7 +257,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="ApplyMotion"></a><h3>ApplyMotion</h3>
 <pre>void ApplyMotion()</pre>
-<p>ApplyMotion Description...</p>
+<p>Add velocity to position.</p>
 </div>
 
 
@@ -259,7 +266,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="AutoMove"></a><h3>AutoMove</h3>
 <pre>void AutoMove()</pre>
-<p>AutoMove Description...</p>
+<p>Apply motion and rotate by spin.</p>
 </div>
 
 
@@ -268,7 +275,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="BounceOff"></a><h3>BounceOff</h3>
 <pre>void BounceOff(SS_LayerItem *base)</pre>
-<p>BounceOff Description...</p>
+<p>Reflect velocity off another item as if bouncing.</p>
 </div>
 
 
@@ -277,7 +284,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="BurnFuse"></a><h3>BurnFuse</h3>
 <pre>Uint16 BurnFuse()</pre>
-<p>BurnFuse Description...</p>
+<p>Decrement lifespan and kill if expired.</p>
 </div>
 
 
@@ -286,7 +293,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="Center"></a><h3>Center</h3>
 <pre>void Center()</pre>
-<p>Center Description...</p>
+<p>Center the item within its containing layer or group.</p>
 </div>
 
 
@@ -295,7 +302,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="CenterHandle"></a><h3>CenterHandle</h3>
 <pre>void CenterHandle()</pre>
-<p>CenterHandle Description...</p>
+<p>Center handle on frame dimensions.</p>
 </div>
 
 
@@ -304,7 +311,7 @@ float AngleTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="Clone"></a><h3>Clone</h3>
 <pre>SS_LayerItem* Clone()</pre>
-<p>Clone Description...</p>
+<p>Create a deep copy of this collider item.</p>
 </div>
 
 
@@ -316,7 +323,7 @@ float AngleTo(SS_LayerItem *other)
 Uint32 Collisions()
 Uint32 Collisions(Uint32 m)
 </pre>
-<p>Collisions Description...</p>
+<p>Collisions Return or set collision bits.</p>
 </div>
 
 
@@ -325,7 +332,7 @@ Uint32 Collisions(Uint32 m)
 <a href="#top">top</a>
 <a name="defaultAnimProc"></a><h3>defaultAnimProc</h3>
 <pre>void defaultAnimProc(SS_LayerItem *base)</pre>
-<p>defaultAnimProc Description...</p>
+<p>Default animation proc: advance frame and wrap around.</p>
 </div>
 
 
@@ -333,7 +340,7 @@ Uint32 Collisions(Uint32 m)
 <div class="mitem">
 <a name="defaultMoveProc"></a><h3>defaultMoveProc</h3>
 <pre>void defaultMoveProc(SS_LayerItem *base)</pre>
-<p>defaultMoveProc Description...</p>
+<p>Default movement proc: ApplyMotion().</p>
 </div>
 
 
@@ -342,7 +349,7 @@ Uint32 Collisions(Uint32 m)
 <a name="DisableFlag"></a><h3>DisableFlag</h3>
 <a href="#top">top</a>
 <pre>void DisableFlag(Uint32 f)</pre>
-<p>DisableFlag Description...</p>
+<p>Clear a specific flag bit on this item.</p>
 </div>
 
 
@@ -354,7 +361,7 @@ Uint32 Collisions(Uint32 m)
 float DistanceSquaredTo(float x2, float y2)
 float DistanceSquaredTo(SS_LayerItem *other)
 </pre>
-<p>DistanceSquaredTo Description...</p>
+<p>DistanceSquaredTo Return squared distance to a target.</p>
 </div>
 
 
@@ -363,7 +370,7 @@ float DistanceSquaredTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="EnableCollisions"></a><h3>EnableCollisions</h3>
 <pre>void EnableCollisions(Uint32 out, Uint32 in)</pre>
-<p>EnableCollisions Description...</p>
+<p>Set collision masks.</p>
 </div>
 
 
@@ -372,7 +379,7 @@ float DistanceSquaredTo(SS_LayerItem *other)
 <a href="#top">top</a>
 <a name="EnableFlag"></a><h3>EnableFlag</h3>
 <pre>void EnableFlag(Uint32 f)</pre>
-<p>EnableFlag Description...</p>
+<p>Set a specific flag bit on this item.</p>
 </div>
 
 
@@ -384,7 +391,7 @@ float DistanceSquaredTo(SS_LayerItem *other)
 Uint32 Flags()
 Uint32 Flags(Uint32 mask)
 </pre>
-<p>Flags Description...</p>
+<p>Return the current flag bits, or mask them with the given value.</p>
 </div>
 
 
@@ -393,7 +400,7 @@ Uint32 Flags(Uint32 mask)
 <a href="#top">top</a>
 <a name="FrameCount"></a><h3>FrameCount</h3>
 <pre>Uint16 FrameCount()</pre>
-<p>FrameCount Description...</p>
+<p>Return the total number of frames in this item.</p>
 </div>
 
 
@@ -402,7 +409,7 @@ Uint32 Flags(Uint32 mask)
 <a href="#top">top</a>
 <a name="GetNewCollisions"></a><h3>GetNewCollisions</h3>
 <pre>Uint32 GetNewCollisions()</pre>
-<p>GetNewCollisions Description...</p>
+<p>Return new collision bitset.</p>
 </div>
 
 
@@ -411,7 +418,7 @@ Uint32 Flags(Uint32 mask)
 <a href="#top">top</a>
 <a name="GlobalPosition"></a><h3>GlobalPosition</h3>
 <pre>void GlobalPosition(SS_Point *point, bool scr=false)</pre>
-<p>GlobalPosition Description...</p>
+<p>Return world-space position.</p>
 </div>
 
 
@@ -420,7 +427,7 @@ Uint32 Flags(Uint32 mask)
 <a href="#top">top</a>
 <a name="Group"></a><h3>Group</h3>
 <pre>SS_ItemGroup* Group()</pre>
-<p>Group Description...</p>
+<p>Return the containing item group, if any.</p>
 </div>
 
 
@@ -432,7 +439,7 @@ Uint32 Flags(Uint32 mask)
 float Heading()
 float HeadingRad()
 </pre>
-<p>Heading Description...</p>
+<p>Heading Heading.</p>
 </div>
 
 
@@ -441,7 +448,7 @@ float HeadingRad()
 <a href="#top">top</a>
 <a name="Hide"></a><h3>Hide</h3>
 <pre>void Hide()</pre>
-<p>Hide Description...</p>
+<p>Hide this item so it is not rendered.</p>
 </div>
 
 
@@ -450,7 +457,7 @@ float HeadingRad()
 <a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -462,7 +469,7 @@ float HeadingRad()
 bool IsHidden()
 bool IsVisible()
 </pre>
-<p>IsHidden Description...</p>
+<p>IsHidden IsHidden.</p>
 </div>
 
 
@@ -471,7 +478,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="IsOnScreen"></a><h3>IsOnScreen</h3>
 <pre>bool IsOnScreen()</pre>
-<p>IsOnScreen Description...</p>
+<p>Return true if item is in the viewport.</p>
 </div>
 
 
@@ -480,7 +487,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="Kill"></a><h3>Kill</h3>
 <pre>void Kill()</pre>
-<p>Kill Description...</p>
+<p>Schedule this layer or item for removal.</p>
 </div>
 
 
@@ -489,7 +496,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="Layer"></a><h3>Layer</h3>
 <pre>SS_Layer* Layer()</pre>
-<p>Layer Description...</p>
+<p>Return the layer that contains this item.</p>
 </div>
 
 
@@ -498,7 +505,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="LayerPosition"></a><h3>LayerPosition</h3>
 <pre>void LayerPosition(SS_Point *point)</pre>
-<p>LayerPosition Description...</p>
+<p>Return layer-space position.</p>
 </div>
 
 
@@ -507,7 +514,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="LightFuse"></a><h3>LightFuse</h3>
 <pre>void LightFuse(Uint16 fuse)</pre>
-<p>LightFuse Description...</p>
+<p>Set lifespan in cycles.</p>
 </div>
 
 
@@ -516,7 +523,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="LocalPosition"></a><h3>LocalPosition</h3>
 <pre>void LocalPosition(SS_Point *point)</pre>
-<p>LocalPosition Description...</p>
+<p>Return layer-local position.</p>
 </div>
 
 
@@ -525,7 +532,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="Move"></a><h3>Move</h3>
 <pre>void Move(float x, float y)</pre>
-<p>Move Description...</p>
+<p>Move gadget to a new position.</p>
 </div>
 
 
@@ -534,7 +541,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="Process"></a><h3>Process</h3>
 <pre>void Process()</pre>
-<p>Process Description...</p>
+<p>Run per-frame update logic.</p>
 </div>
 
 
@@ -543,7 +550,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="PushAndPrepareMatrix"></a><h3>PushAndPrepareMatrix</h3>
 <pre>void PushAndPrepareMatrix()</pre>
-<p>PushAndPrepareMatrix Description...</p>
+<p>Push and set modelview matrix.</p>
 </div>
 
 
@@ -552,7 +559,7 @@ bool IsVisible()
 <a href="#top">top</a>
 <a name="RemoveSelf"></a><h3>RemoveSelf</h3>
 <pre>void RemoveSelf()</pre>
-<p>RemoveSelf Description...</p>
+<p>Schedule this item for removal.</p>
 </div>
 
 
@@ -565,7 +572,7 @@ void Render()
 void Render(const ssColorQuad *q)
 void Render(const GLubyte *t)
 </pre>
-<p>Render Description...</p>
+<p>Render Render this object in the current GL state.</p>
 </div>
 
 
@@ -574,7 +581,7 @@ void Render(const GLubyte *t)
 <a name="ResetCollisions"></a><h3>ResetCollisions</h3>
 <a href="#top">top</a>
 <pre>void ResetCollisions()</pre>
-<p>ResetCollisions Description...</p>
+<p>Clear collision bits.</p>
 </div>
 
 
@@ -583,7 +590,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="RestoreMatrix"></a><h3>RestoreMatrix</h3>
 <pre>void RestoreMatrix() { glPopMatrix()</pre>
-<p>RestoreMatrix Description...</p>
+<p>Pop modelview matrix.</p>
 </div>
 
 
@@ -592,7 +599,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="SetAlpha"></a><h3>SetAlpha</h3>
 <pre>void SetAlpha(GLubyte a)</pre>
-<p>SetAlpha Description...</p>
+<p>Set item alpha.</p>
 </div>
 
 
@@ -601,7 +608,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="SetAngularVelocity"></a><h3>SetAngularVelocity</h3>
 <pre>void SetAngularVelocity(float a, float vel)</pre>
-<p>SetAngularVelocity Description...</p>
+<p>Set rotation speed.</p>
 </div>
 
 
@@ -610,7 +617,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="SetAnimateProc"></a><h3>SetAnimateProc</h3>
 <pre>void SetAnimateProc(spriteProcPtr proc)</pre>
-<p>SetAnimateProc Description...</p>
+<p>Install an animation callback.</p>
 </div>
 
 
@@ -619,7 +626,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="SetAnimInterval"></a><h3>SetAnimInterval</h3>
 <pre>void SetAnimInterval(Uint32 ms)</pre>
-<p>SetAnimInterval Description...</p>
+<p>Set step interval.</p>
 </div>
 
 
@@ -628,7 +635,7 @@ void Render(const GLubyte *t)
 <a href="#top">top</a>
 <a name="SetFlags"></a><h3>SetFlags</h3>
 <pre>void SetFlags(Uint32 f)</pre>
-<p>SetFlags Description...</p>
+<p>Set flag bits.</p>
 </div>
 
 
@@ -640,7 +647,7 @@ void Render(const GLubyte *t)
 void SetGlobalRotation(angle deg)
 void SetGlobalRotationRad(angle rad)
 </pre>
-<p>SetGlobalRotation Description...</p>
+<p>SetGlobalRotation SetGlobalRotation.</p>
 </div>
 
 
@@ -649,7 +656,7 @@ void SetGlobalRotationRad(angle rad)
 <a href="#top">top</a>
 <a name="SetGroup"></a><h3>SetGroup</h3>
 <pre>void SetGroup(SS_ItemGroup *g)</pre>
-<p>SetGroup Description...</p>
+<p>Set containing group.</p>
 </div>
 
 
@@ -658,7 +665,7 @@ void SetGlobalRotationRad(angle rad)
 <a href="#top">top</a>
 <a name="SetHandle"></a><h3>SetHandle</h3>
 <pre>void SetHandle(float x, float y)</pre>
-<p>SetHandle Description...</p>
+<p>Set frame origin offset.</p>
 </div>
 
 
@@ -684,7 +691,7 @@ void Show()
 void SetLayer(SS_Layer *l)
 void SetLayer(SS_GUI *l)
 </pre>
-<p>SetLayer Description...</p>
+<p>SetLayer Set containing layer.</p>
 </div>
 
 
@@ -693,7 +700,7 @@ void SetLayer(SS_GUI *l)
 <a href="#top">top</a>
 <a name="SetMoveInterval"></a><h3>SetMoveInterval</h3>
 <pre>void SetMoveInterval(Uint32 ms)</pre>
-<p>SetMoveInterval Description...</p>
+<p>Set how often the move proc is called, in milliseconds.</p>
 </div>
 
 
@@ -702,7 +709,7 @@ void SetLayer(SS_GUI *l)
 <a href="#top">top</a>
 <a name="SetMoveProc"></a><h3>SetMoveProc</h3>
 <pre>void SetMoveProc(spriteProcPtr proc)</pre>
-<p>SetMoveProc Description...</p>
+<p>Install a movement callback.</p>
 </div>
 
 
@@ -714,7 +721,7 @@ void SetLayer(SS_GUI *l)
 void SetRadarColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
 void SetRadarColor(GLubyte r, GLubyte g, GLubyte b)
 </pre>
-<p>SetRadarColor Description...</p>
+<p>SetRadarColor Set radar display color.</p>
 </div>
 
 
@@ -723,7 +730,7 @@ void SetRadarColor(GLubyte r, GLubyte g, GLubyte b)
 <a href="#top">top</a>
 <a name="SetRadarSize"></a><h3>SetRadarSize</h3>
 <pre>void SetRadarSize(float s)</pre>
-<p>SetRadarSize Description...</p>
+<p>Set the size of the blip drawn for this item on radar.</p>
 </div>
 
 
@@ -735,7 +742,7 @@ void SetRadarColor(GLubyte r, GLubyte g, GLubyte b)
 void SetRotation(float deg)
 void SetRotationRad(float rad)
 </pre>
-<p>SetRotation Description...</p>
+<p>SetRotation Set rotation in degrees.</p>
 </div>
 
 
@@ -747,7 +754,7 @@ void SetRotationRad(float rad)
 void SetScale(float sx, float sy)
 void SetScale(float xy)
 </pre>
-<p>SetScale Description...</p>
+<p>SetScale Set x and y scale.</p>
 </div>
 
 
@@ -759,7 +766,7 @@ void SetScale(float xy)
 void SetTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
 void SetTint(GLubyte r, GLubyte g, GLubyte b)
 </pre>
-<p>SetTint Description...</p>
+<p>SetTint Apply a color tint.</p>
 </div>
 
 
@@ -768,7 +775,7 @@ void SetTint(GLubyte r, GLubyte g, GLubyte b)
 <a href="#top">top</a>
 <a name="SetVelocity"></a><h3>SetVelocity</h3>
 <pre>void SetVelocity(float h, float v)</pre>
-<p>SetVelocity Description...</p>
+<p>Set velocity vector.</p>
 </div>
 
 
@@ -777,7 +784,7 @@ void SetTint(GLubyte r, GLubyte g, GLubyte b)
 <a href="#top">top</a>
 <a name="SetWorld"></a><h3>SetWorld</h3>
 <pre>void SetWorld(SS_World *w)</pre>
-<p>SetWorld Description...</p>
+<p>Set containing world.</p>
 </div>
 
 
@@ -786,7 +793,7 @@ void SetTint(GLubyte r, GLubyte g, GLubyte b)
 <a href="#top">top</a>
 <a name="Velocity"></a><h3>Velocity</h3>
 <pre>float Velocity()</pre>
-<p>Velocity Description...</p>
+<p>Return the speed (magnitude of velocity vector).</p>
 </div>
 
 
@@ -795,12 +802,11 @@ void SetTint(GLubyte r, GLubyte g, GLubyte b)
 <a href="#top">top</a>
 <a name="World"></a><h3>World</h3>
 <pre>SS_World* World()</pre>
-<p>World Description...</p>
+<p>Return the world that contains this item.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

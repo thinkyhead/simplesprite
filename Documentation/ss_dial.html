@@ -1,18 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_Dial Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -25,7 +29,7 @@
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
-		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="gui.html">User Interface</a>
 			<ul>
 				<li><a href="ss_button.html">SS_Button</a></li>
 				<li><a href="ss_checkbox.html">SS_Checkbox</a></li>
@@ -38,15 +42,20 @@
 				<li><a href="ss_menubar.html">SS_Menubar</a></li>
 				<li><a href="ss_menuitem.html">SS_MenuItem</a></li>
 				<li><a href="ss_radiobutton.html">SS_RadioButton</a></li>
+				<li><a href="ss_scrollbar.html">SS_Scrollbar</a></li>
 				<li><a href="ss_slidearea.html">SS_SlideArea</a></li>
 				<li><a href="ss_slider.html">SS_Slider</a></li>
 				<li><a href="ss_textinput.html">SS_TextInput</a></li>
 			</ul>
+		</li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -59,7 +68,7 @@
 <div id="hdr">SS_GUI.h</div>
 <h1>SS_Dial</h1>
 <h4><strong>Superclass</strong>: <a href="ss_gadget.html">SS_Gadget</a></h4>
-<p>Class Description...</p>
+<p>Rotary dial gadget with min/max value range and angle limits.</p>
 </div>
 
 
@@ -129,8 +138,7 @@
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

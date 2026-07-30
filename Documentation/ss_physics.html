@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SimpleSprite : SS_Physics Class</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
+
+<a name="top"></a>
+<div id="layout">
+<nav id="nav">
+
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a>
+			<ul>
+				<li>SS_Physics</li>
+			</ul>
+		</li>
+		<li><a href="extras.html">Extras</a></li>
+	</ul>
+</ul>
+
+</nav>
+<main id="main">
+
+<div id="classbox">
+<div id="hdr">SS_Physics.h</div>
+<h1>SS_Physics</h1>
+<p>
+SS_Physics owns a Box2D 3.x world and provides a Step method that advances
+the simulation. When physics is enabled, each SS_LayerItem can host a
+<tt>b2BodyId</tt> that is synced after every step.
+</p>
+</div>
+
+<div id="databox">
+<h2>Member Data</h2>
+<table>
+<tr><td><tt>b2WorldId</tt></td><td><tt>mWorldId</tt></td><td>The Box2D world handle.</td></tr>
+<tr><td><tt>int</tt></td><td><tt>mSubStepCount</tt></td><td>Sub-steps per Step call.</td></tr>
+</table>
+</div>
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>SS_Physics(b2Vec2 gravity = b2Vec2{0.0f, -10.0f})
+~SS_Physics()</pre>
+<p>
+Create the physics world with the desired gravity vector. Use
+<tt>EnablePhysics()</tt> from SS_World to attach it to the active world.
+</p>
+</div>
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+<td><ul>
+<li><a href="#SetGravity">SetGravity</a></li>
+<li><a href="#Step">Step</a></li>
+<li><a href="#SubStepCount">SubStepCount</a></li>
+</ul></td>
+<td><ul>
+<li><a href="#WorldId">WorldId</a></li>
+<li><a href="#IsValid">IsValid</a></li>
+</ul></td>
+</tr></table>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="WorldId"></a><h3>WorldId</h3>
+<pre>b2WorldId WorldId() const</pre>
+<p>Access the underlying Box2D world handle for direct API calls.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Step"></a><h3>Step</h3>
+<pre>void Step(float dt, int subStepCount = 4)</pre>
+<p>Advance the simulation by <tt>dt</tt> seconds.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SetGravity"></a><h3>SetGravity</h3>
+<pre>void SetGravity(float x, float y)</pre>
+<p>the world gravity vector in m/s&sup2;.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="SubStepCount"></a><h3>SubStepCount</h3>
+<pre>int SubStepCount() const
+void SetSubStepCount(int n)</pre>
+<p>Get/set the number of internal sub-steps performed per Step call.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="IsValid"></a><h3>IsValid</h3>
+<pre>bool IsValid() const</pre>
+<p>Return whether the world handle is currently valid.</p>
+</div>
+
+</main>
+</div>
+</body>
+</html>

@@ -1,31 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_LinkedList&lt;T&gt; Template Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
 	<ul>
-		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="base.html">Base Classes</a>
 			<ul>
 				<li><a href="ss_iterator.html">SS_Iterator&lt;T&gt;</a></li>
 				<li>SS_LinkedList&lt;T&gt;</li>
 				<li><a href="ss_listnode.html">SS_ListNode&lt;T&gt;</a></li>
 				<li><a href="ss_objectlist.html">SS_ObjectList&lt;T&gt;</a></li>
 				<li><a href="ss_refcounter.html">SS_RefCounter</a></li>
+				<li><a href="ss_itemlist.html">SS_ItemList</a></li>
 			</ul>
+        </li>
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
@@ -34,11 +39,14 @@
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -129,7 +137,7 @@
 SS_ListNode&lt;T&gt;* Append( T p_data )
 void Append( SS_ListNode&lt;T&gt; *newnode )
 </pre>
-<p>Append Description...</p>
+<p>Append Doubly-linked list with append/prepend/remove and serialization.</p>
 </div>
 
 
@@ -137,7 +145,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="Clear"></a><h3>Clear</h3>
 <pre>void Clear()</pre>
-<p>Clear Description...</p>
+<p>Remove and delete all nodes in the list.</p>
 </div>
 
 
@@ -145,7 +153,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="Exchange"></a><h3>Exchange</h3>
 <pre>void Exchange( SS_ListNode&lt;T&gt; *node1, SS_ListNode&lt;T&gt; *node2 )</pre>
-<p>Exchange Description...</p>
+<p>Swap the positions of two nodes in the list.</p>
 </div>
 
 
@@ -153,7 +161,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="GetIterator"></a><h3>GetIterator</h3>
 <pre>SS_Iterator&lt;T&gt; GetIterator()</pre>
-<p>GetIterator Description...</p>
+<p>Return an iterator pointing to the head of the list.</p>
 </div>
 
 
@@ -161,7 +169,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="InsertAfter"></a><h3>InsertAfter</h3>
 <pre>SS_ListNode&lt;T&gt;* InsertAfter( SS_Iterator&lt;T&gt;& p_iterator, T p_data )</pre>
-<p>InsertAfter Description...</p>
+<p>Insert data after the iterator position, or at the end if invalid.</p>
 </div>
 
 
@@ -169,7 +177,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="InsertBefore"></a><h3>InsertBefore</h3>
 <pre>SS_ListNode&lt;T&gt;* InsertBefore( SS_Iterator&lt;T&gt;& p_iterator, T p_data )</pre>
-<p>InsertBefore Description...</p>
+<p>Insert data before the iterator position, or at the head if invalid.</p>
 </div>
 
 
@@ -177,7 +185,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="Prepend"></a><h3>Prepend</h3>
 <pre>SS_ListNode&lt;T&gt;* Prepend( T p_data )</pre>
-<p>Prepend Description...</p>
+<p>a node.</p>
 </div>
 
 
@@ -185,7 +193,7 @@ void Append( SS_ListNode&lt;T&gt; *newnode )
 <div class="mitem"><a href="#top">top</a>
 <a name="ReadFromDisk"></a><h3>ReadFromDisk</h3>
 <pre>bool ReadFromDisk( char* p_filename )</pre>
-<p>ReadFromDisk Description...</p>
+<p>Read a list of data items from a binary file.</p>
 </div>
 
 
@@ -197,7 +205,7 @@ void Remove( SS_Iterator&lt;T&gt; &amp;p_iterator )
 void Remove( SS_ListNode&lt;T&gt; *node, bool del=true )
 void Remove(T p_data, bool del=true)
 </pre>
-<p>Remove Description...</p>
+<p>Remove Remove.</p>
 </div>
 
 
@@ -205,7 +213,7 @@ void Remove(T p_data, bool del=true)
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveHead"></a><h3>RemoveHead</h3>
 <pre>void RemoveHead()</pre>
-<p>RemoveHead Description...</p>
+<p>Remove and delete the first node in the list.</p>
 </div>
 
 
@@ -213,7 +221,7 @@ void Remove(T p_data, bool del=true)
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveTail"></a><h3>RemoveTail</h3>
 <pre>void RemoveTail()</pre>
-<p>RemoveTail Description...</p>
+<p>Remove and delete the last node in the list.</p>
 </div>
 
 
@@ -221,7 +229,7 @@ void Remove(T p_data, bool del=true)
 <div class="mitem"><a href="#top">top</a>
 <a name="SaveToDisk"></a><h3>SaveToDisk</h3>
 <pre>bool SaveToDisk( char* p_filename )</pre>
-<p>SaveToDisk Description...</p>
+<p>Write the list and all its data to a binary file.</p>
 </div>
 
 
@@ -229,11 +237,11 @@ void Remove(T p_data, bool del=true)
 <div class="mitem"><a href="#top">top</a>
 <a name="Size"></a><h3>Size</h3>
 <pre>Uint16 Size()</pre>
-<p>Size Description...</p>
+<p>Return the number of nodes in the list.</p>
 </div>
 
 
-</td></tr></table>
-
+</main>
+</div>
 </body>
 </html>

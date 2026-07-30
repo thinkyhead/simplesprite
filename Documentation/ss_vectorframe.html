@@ -1,18 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_VectorFrame Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -20,7 +24,7 @@
 		<li><a href="base.html">Base Classes</a></li>
 		<li><a href="messaging.html">Messaging</a></li>
 		<li><a href="contain.html">Container Classes</a></li>
-		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a>
 			<ul>
 				<li><a href="ss_frame.html">SS_Frame</a></li>
 				<li><a href="ss_itemgroup.html">SS_ItemGroup</a></li>
@@ -29,16 +33,20 @@
 				<li>SS_VectorFrame</li>
 				<li><a href="ss_vectorsprite.html">SS_VectorSprite</a></li>
 			</ul>
+		</li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -157,7 +165,7 @@ SS_VectorFrame(char *vectorFile)
 <div class="mitem"><a href="#top">top</a>
 <a name="Antialias"></a><h3>Antialias</h3>
 <pre>void Antialias(bool a=true)</pre>
-<p>Antialias Description...</p>
+<p>A compiled vector-geometry frame with display lists, handle, and GLU tessellation for complex shapes.</p>
 </div>
 
 
@@ -165,7 +173,7 @@ SS_VectorFrame(char *vectorFile)
 <div class="mitem"><a href="#top">top</a>
 <a name="AppendCircle"></a><h3>AppendCircle</h3>
 <pre>void AppendCircle(float x, float y, float r, int p=100)</pre>
-<p>AppendCircle Description...</p>
+<p>Append a circle outline to this frame.</p>
 </div>
 
 
@@ -173,7 +181,7 @@ SS_VectorFrame(char *vectorFile)
 <div class="mitem"><a href="#top">top</a>
 <a name="AppendDisc"></a><h3>AppendDisc</h3>
 <pre>void AppendDisc(float x, float y, float r, int p=100)</pre>
-<p>AppendDisc Description...</p>
+<p>Append a filled disc to this frame.</p>
 </div>
 
 
@@ -182,7 +190,7 @@ SS_VectorFrame(char *vectorFile)
 <a name="AppendRect"></a><h3>AppendRect</h3>
 <pre>void AppendRect(float w, float h)
 void AppendRect(float x1, float y1, float x2, float y2)</pre>
-<p>AppendRect Description...</p>
+<p>AppendRect AppendRect.</p>
 </div>
 
 
@@ -190,7 +198,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="AppendStar"></a><h3>AppendStar</h3>
 <pre>void AppendStar(float x, float y, float r1, float r2, int p)</pre>
-<p>AppendStar Description...</p>
+<p>Append a star shape to this frame.</p>
 </div>
 
 
@@ -198,7 +206,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="AppendVector"></a><h3>AppendVector</h3>
 <pre>void AppendVector(float x, float y)</pre>
-<p>AppendVector Description...</p>
+<p>Append a point.</p>
 </div>
 
 
@@ -206,7 +214,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="Begin"></a><h3>Begin</h3>
 <pre>void Begin(GLenum m=SS_POINTS)</pre>
-<p>Begin Description...</p>
+<p>Begin collecting vertices of a new vector unit.</p>
 </div>
 
 
@@ -214,7 +222,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="End"></a><h3>End</h3>
 <pre>void End()</pre>
-<p>End Description...</p>
+<p>Finish collecting vertices and close the current vector unit.</p>
 </div>
 
 
@@ -222,7 +230,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetHandle"></a><h3>GetHandle</h3>
 <pre>void GetHandle(float *x, float *y)</pre>
-<p>GetHandle Description...</p>
+<p>Return the handle offset for this frame.</p>
 </div>
 
 
@@ -230,7 +238,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -238,7 +246,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="InitDisplayList"></a><h3>InitDisplayList</h3>
 <pre>void InitDisplayList()</pre>
-<p>InitDisplayList Description...</p>
+<p>Create GL display list for this frame.</p>
 </div>
 
 
@@ -246,7 +254,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="LoadImage"></a><h3>LoadImage</h3>
 <pre>void LoadImage(const char *filename)</pre>
-<p>LoadImage Description...</p>
+<p>Load vector frame image.</p>
 </div>
 
 
@@ -254,7 +262,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="LoadSurface"></a><h3>LoadSurface</h3>
 <pre>void LoadSurface(SDL_Surface *s)</pre>
-<p>LoadSurface Description...</p>
+<p>Load vector geometry from an SDL surface.</p>
 </div>
 
 
@@ -263,7 +271,7 @@ void AppendRect(float x1, float y1, float x2, float y2)</pre>
 <a name="PrependRect"></a><h3>PrependRect</h3>
 <pre>void PrependRect(float w, float h)
 void PrependRect(float x1, float y1, float x2, float y2)</pre>
-<p>PrependRect Description...</p>
+<p>PrependRect PrependRect.</p>
 </div>
 
 
@@ -271,7 +279,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="PrependVector"></a><h3>PrependVector</h3>
 <pre>void PrependVector(float x, float y)</pre>
-<p>PrependVector Description...</p>
+<p>Prepend a single point to the beginning of the frame's geometry.</p>
 </div>
 
 
@@ -279,7 +287,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="Realloc"></a><h3>Realloc</h3>
 <pre>void Realloc(Uint16 size)</pre>
-<p>Realloc Description...</p>
+<p>Resize the internal vector array to the given size.</p>
 </div>
 
 
@@ -287,7 +295,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveFirstVector"></a><h3>RemoveFirstVector</h3>
 <pre>void RemoveFirstVector()</pre>
-<p>RemoveFirstVector Description...</p>
+<p>Remove the first vector from the frame's geometry.</p>
 </div>
 
 
@@ -295,7 +303,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="RemoveLastVector"></a><h3>RemoveLastVector</h3>
 <pre>void RemoveLastVector()</pre>
-<p>RemoveLastVector Description...</p>
+<p>Remove the last vector from the frame's geometry.</p>
 </div>
 
 
@@ -303,7 +311,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="Render"></a><h3>Render</h3>
 <pre>void Render(float x, float y, float rot, float xscale, float yscale)</pre>
-<p>Render Description...</p>
+<p>this object in the current GL state.</p>
 </div>
 
 
@@ -311,7 +319,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SendGeometry"></a><h3>SendGeometry</h3>
 <pre>void SendGeometry()</pre>
-<p>SendGeometry Description...</p>
+<p>Compile geometry into display list.</p>
 </div>
 
 
@@ -319,7 +327,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetFillAlpha"></a><h3>SetFillAlpha</h3>
 <pre>void SetFillAlpha(GLubyte a)</pre>
-<p>SetFillAlpha Description...</p>
+<p>Set the alpha transparency of the fill color.</p>
 </div>
 
 
@@ -330,7 +338,7 @@ void PrependRect(float x1, float y1, float x2, float y2)</pre>
 void SetFillTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
 void SetFillTint(GLubyte r, GLubyte g, GLubyte b)
 void SetFillTint(SScolorb *t)</pre>
-<p>SetFillTint Description...</p>
+<p>SetFillTint Set fill color.</p>
 </div>
 
 
@@ -338,7 +346,7 @@ void SetFillTint(SScolorb *t)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetHandle"></a><h3>SetHandle</h3>
 <pre>void SetHandle(float x, float y)</pre>
-<p>SetHandle Description...</p>
+<p>Set frame origin offset.</p>
 </div>
 
 
@@ -346,7 +354,7 @@ void SetFillTint(SScolorb *t)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetLineAlpha"></a><h3>SetLineAlpha</h3>
 <pre>void SetLineAlpha(GLubyte a)</pre>
-<p>SetLineAlpha Description...</p>
+<p>Set the alpha transparency of the line color.</p>
 </div>
 
 
@@ -357,7 +365,7 @@ void SetFillTint(SScolorb *t)</pre>
 void SetLineTint(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
 void SetLineTint(GLubyte r, GLubyte g, GLubyte b)
 void SetLineTint(SScolorb *t)</pre>
-<p>SetLineTint Description...</p>
+<p>SetLineTint Set stroke color.</p>
 </div>
 
 
@@ -365,12 +373,11 @@ void SetLineTint(SScolorb *t)</pre>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetLineWeight"></a><h3>SetLineWeight</h3>
 <pre>void SetLineWeight(float w)</pre>
-<p>SetLineWeight Description...</p>
+<p>Set default line thickness.</p>
 </div>
 
 
-</td></tr></table>
-
-
+</main>
+</div>
 </body>
 </html>

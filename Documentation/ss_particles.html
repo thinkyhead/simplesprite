@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SimpleSprite : Sounds &amp; Music</title>
+<title>SimpleSprite : Particle System</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
@@ -14,7 +14,6 @@
 <a name="top"></a>
 <div id="layout">
 <nav id="nav">
-
 
 <h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
@@ -27,12 +26,7 @@
 		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
-		<li>Sounds &amp; Music
-			<ul>
-				<li><a href="ss_music.html">SS_Music</a></li>
-				<li><a href="ss_sound.html">SS_Sound</a></li>
-			</ul>
-		</li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
 		<li><a href="physics.html">Physics</a></li>
@@ -40,22 +34,36 @@
 	</ul>
 </ul>
 
-
 </nav>
 <main id="main">
 
-
-<!--
-
-		Class Description
-
--->
-
 <div id="classbox">
-<h1>Sounds &amp; Music</h1>
-<p>About this section...</p>
+<h1>Particle System</h1>
+<p>
+Particles are lightweight layer items emitted by <tt>SS_Emitter</tt>
+subclasses. They are best used for fx like fire, smoke, and sparks.
+</p>
 </div>
 
+<div id="reflist">
+<table width="100%"><tr valign="top">
+
+<td>
+<h4>Particle classes</h4>
+<ul>
+	<li><a href="ss_particles.html">SS_Emitter / SS_Sprayer / SS_Dropper / SS_Streamer / SS_Fantail / SS_TriPoly</a></li>
+</ul>
+</td>
+
+<td>
+<h4>Notes</h4>
+<ul>
+	<li><tt>SS_Polygon</tt>, <tt>SS_Streamer</tt>, <tt>SS_Fantail</tt>, <tt>SS_TriPoly</tt> are extended LayerItems with strip/point-list interfaces.</li>
+</ul>
+</td>
+
+</tr></table>
+</div>
 
 </main>
 </div>

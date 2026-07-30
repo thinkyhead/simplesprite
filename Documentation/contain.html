@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : Container Classes</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -32,11 +35,14 @@
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
 		<li><a href="files.html">Files &amp; Folders</a></li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -46,12 +52,156 @@
 -->
 
 <div id="classbox">
+<div id="hdr">SS_Game.h, SS_World.h, SS_Layer.h</div>
 <h1>Container Classes</h1>
-<p>About this section...</p>
+<p>
+The Container Classes are the structural backbone of a SimpleSprite
+application. They form a containment hierarchy: an <a href="ss_game.html">SS_Game</a>
+owns a stack of <a href="ss_world.html">SS_World</a> objects, each world owns a
+collection of <a href="ss_layer.html">SS_Layer</a> objects, and each layer owns a
+list of <a href="ss_layeritem.html">SS_LayerItem</a> objects.
+</p>
+<p>
+This hierarchy provides a clean separation of concerns:
+</p>
+<table class="indent">
+<tr><td><tt>SS_Game</tt></td><td>The top-level application controller. Owns the window, OpenGL context, trig tables, and a world stack.</td></tr>
+<tr><td><tt>SS_World</tt></td><td>A self-contained game mode or level. Manages layers, input polling, the process/render loop, collision detection, and world-level state such as zoom and scroll position.</td></tr>
+<tr><td><tt>SS_Layer</tt></td><td>A z-ordered group of items with its own offset, scale, and tint. Layers can scroll with the world, stay fixed for HUDs, be paused, hidden, or reordered.</td></tr>
+</table>
+<p>
+Together these three classes provide the scaffolding on which all sprites,
+frames, text, tiles, particles, and GUI widgets are placed. You typically
+subclass <tt>SS_Game</tt> to provide your <a href="#Run">Run</a> method, create
+one or more <tt>SS_World</tt> subclasses for each game mode, and add
+<tt>SS_Layer</tt> instances to organize your content.
+</p>
 </div>
 
 
-</td></tr></table>
+<!--
 
+		Member Data
+
+-->
+
+<div id="databox">
+<h2>Member Data</h2>
+<p>This section describes the container classes collectively. See each class page for its own member data.</p>
+<table>
+<tr><td><tt>SS_Game</tt></td><td><a href="ss_game.html">SS_Game</a></td><td>Application controller — window, audio, worlds, trig.</td></tr>
+<tr><td><tt>SS_World</tt></td><td><a href="ss_world.html">SS_World</a></td><td>Game mode container — layers, input, loop, collisions.</td></tr>
+<tr><td><tt>SS_Layer</tt></td><td><a href="ss_layer.html">SS_Layer</a></td><td>Z-ordered item group — offset, scale, flags, visibility.</td></tr>
+</table>
+</div>
+
+
+<!--
+
+		Constructors
+
+-->
+
+<div id="conbox">
+<h2>Constructors</h2>
+<p>Each container class has a constructor that initializes its internal state:</p>
+<pre>SS_Game()
+SS_World()
+SS_Layer(Uint32 flags=SS_NONE)
+SS_Layer(SS_World *world, Uint32 flags=SS_NONE)</pre>
+<p>
+<a href="ss_game.html">SS_Game</a> creates the window and OpenGL context.
+<a href="ss_world.html">SS_World</a> starts as an empty container awaiting layers.
+<a href="ss_layer.html">SS_Layer</a> can be created standalone or attached to a world at construction time.
+</p>
+</div>
+
+
+<!--
+
+		Method Index
+
+-->
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+
+<td><ul>
+<li><a href="ss_game.html#Run">SS_Game::Run</a></li>
+<li><a href="ss_game.html#PushWorld">SS_Game::PushWorld</a></li>
+<li><a href="ss_game.html#PopWorld">SS_Game::PopWorld</a></li>
+<li><a href="ss_game.html#Init">SS_Game::Init</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="ss_world.html#Run">SS_World::Run</a></li>
+<li><a href="ss_world.html#NewLayer">SS_World::NewLayer</a></li>
+<li><a href="ss_world.html#NewGUI">SS_World::NewGUI</a></li>
+<li><a href="ss_world.html#Process">SS_World::Process</a></li>
+</ul></td>
+
+<td><ul>
+<li><a href="ss_layer.html#AddItem">SS_Layer::AddItem</a></li>
+<li><a href="ss_layer.html#PrepareMatrix">SS_Layer::PrepareMatrix</a></li>
+<li><a href="ss_layer.html#Render">SS_Layer::Render</a></li>
+<li><a href="ss_layer.html#SetOffset">SS_Layer::SetOffset</a></li>
+</ul></td>
+
+</tr></table>
+</div>
+
+
+<!--
+
+		Method Details
+
+-->
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="Run"></a><h3>SS_Game::Run</h3>
+<pre>virtual void Run() = 0</pre>
+<p>
+Main entry point for the game. Subclasses must implement this method. The
+Run method typically contains setup code, pushes an initial world onto the
+stack, and enters the main loop. See <a href="ss_game.html#Run">SS_Game::Run</a>
+for details.
+</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="PushWorld"></a><h3>SS_Game::PushWorld</h3>
+<pre>void PushWorld(SS_World *w)</pre>
+<p>
+Push a world onto the world stack and make it active. Use this to transition
+between game modes (menu, gameplay, pause) without destroying the previous
+world. See <a href="ss_game.html#PushWorld">SS_Game::PushWorld</a>.
+</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="NewLayer"></a><h3>SS_World::NewLayer</h3>
+<pre>SS_Layer* NewLayer(Uint32 f=SS_NONE)</pre>
+<p>
+Create a new layer owned by this world. The optional flags parameter
+controls scroll and zoom behavior. See <a href="ss_world.html#NewLayer">SS_World::NewLayer</a>.
+</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="AddItem"></a><h3>SS_Layer::AddItem</h3>
+<pre>void AddItem(SS_LayerItem *item)</pre>
+<p>
+Add an item to the layer. The item becomes a child of the layer and will be
+processed and rendered with it. See <a href="ss_layer.html#AddItem">SS_Layer::AddItem</a>.
+</p>
+</div>
+
+</main>
+</div>
 </body>
 </html>

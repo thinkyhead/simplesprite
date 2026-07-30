@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SimpleSprite : SS_Math / Vector</title>
+<link href="ss.css" rel="stylesheet" type="text/css" />
+<style type="text/css"><!-- @import url("ss.css"); --></style>
+</head>
+<body>
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
+
+<a name="top"></a>
+<div id="layout">
+<nav id="nav">
+
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
+<ul>
+<li><a href="index.html">Introduction</a></li>
+<li><a href="classes.html">Class Reference</a></li>
+	<ul>
+		<li><a href="base.html">Base Classes</a></li>
+		<li><a href="messaging.html">Messaging</a></li>
+		<li><a href="contain.html">Container Classes</a></li>
+		<li><a href="sprites.html">Sprites &amp; Frames</a></li>
+		<li><a href="tiles.html">Tile Maps</a></li>
+		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
+		<li><a href="sound.html">Sounds &amp; Music</a></li>
+		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
+	</ul>
+</ul>
+
+</nav>
+<main id="main">
+
+<div id="classbox">
+<div id="hdr">SS_Math.h</div>
+<h1>Vector</h1>
+<p>
+A lightweight 3D vector class used by the engine for geometry and motion
+calculations. It is not reference-counted and is typically used by value
+on the stack.
+</p>
+</div>
+
+<div id="conbox">
+<h2>Constructors</h2>
+<pre>Vector(float x, float y, float z=0.0)
+Vector()
+Vector(const Vector &v)</pre>
+</div>
+
+<div id="methbox">
+<h2>Method Index</h2>
+<table><tr valign="top">
+<td><ul>
+<li><a href="#set">set</a></li>
+<li><a href="#normalize">normalize</a></li>
+<li><a href="#invert">invert</a></li>
+<li><a href="#normal">normal</a></li>
+<li><a href="#unit">unit</a></li>
+</ul></td>
+<td><ul>
+<li><a href="#operator=">operator=</a></li>
+<li><a href="#operator+">operator+</a></li>
+<li><a href="#operator-">operator-</a></li>
+<li><a href="#operator*">operator*</a></li>
+<li><a href="#operator/">operator/</a></li>
+</ul></td>
+<td><ul>
+<li><a href="#dot">dot</a></li>
+<li><a href="#cross">cross</a></li>
+<li><a href="#operator==">operator==</a></li>
+</ul></td>
+</tr></table>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="set"></a><h3>set</h3>
+<pre>Vector &amp;set(float x, float y, float z=0.0)</pre>
+<p>Assign components and return <tt>*this</tt>.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="normalize"></a><h3>normalize</h3>
+<pre>void normalize()</pre>
+<p>Scale to unit length in place.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="invert"></a><h3>invert</h3>
+<pre>void invert()</pre>
+<p>Negate all components.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="normal"></a><h3>normal</h3>
+<pre>float normal() const</pre>
+<p>Return the length of the vector.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="unit"></a><h3>unit</h3>
+<pre>Vector &amp;unit() const</pre>
+<p>Return a unit-length copy.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="dot"></a><h3>dot</h3>
+<pre>float dot(const Vector &amp;v) const</pre>
+<p>Dot product.</p>
+</div>
+
+<div class="mitem">
+<a href="#top">top</a>
+<a name="cross"></a><h3>cross</h3>
+<pre>Vector cross(const Vector &amp;v) const</pre>
+<p>Cross product.</p>
+</div>
+
+</main>
+</div>
+</body>
+</html>

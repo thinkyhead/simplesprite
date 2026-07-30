@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>SimpleSprite : SS_File Class</title>
 <link href="ss.css" rel="stylesheet" type="text/css" />
 <style type="text/css"><!-- @import url("ss.css"); --></style>
 </head>
 <body>
-
+<button id="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script src="theme-toggle.js"></script>
 
 <a name="top"></a>
-<table><tr valign="top"><td id="nav">
+<div id="layout">
+<nav id="nav">
 
 
-<h1>SimpleSprite API<span>Version 1.0 July 2005</span></h1>
+<h1>SimpleSprite API<span>Version 1.1 July 2026</span></h1>
 <ul>
 <li><a href="index.html">Introduction</a></li>
 <li><a href="classes.html">Class Reference</a></li>
@@ -25,7 +28,7 @@
 		<li><a href="tiles.html">Tile Maps</a></li>
 		<li><a href="fonts.html">Fonts &amp; Strings</a></li>
 		<li><a href="sound.html">Sounds &amp; Music</a></li>
-		<li><a href="files.html">Files &amp; Folders</a></li>
+		<li><a href="files.html">Files &amp; Folders</a>
 			<ul>
 				<li><a href="ss_datacontext.html">SS_DataContext</a></li>
 				<li><a href="ss_datatoken.html">SS_DataToken</a></li>
@@ -34,12 +37,16 @@
 				<li><a href="ss_folder.html">SS_Folder</a></li>
 				<li><a href="ss_folderiterator.html">SS_FolderIterator</a></li>
 			</ul>
+		</li>
 		<li><a href="gui.html">User Interface</a></li>
+		<li><a href="physics.html">Physics</a></li>
+		<li><a href="extras.html">Extras</a></li>
 	</ul>
 </ul>
 
 
-</td><td id="main">
+</nav>
+<main id="main">
 
 
 <!--
@@ -179,7 +186,7 @@ SS_File(char *path)
 <div class="mitem"><a href="#top">top</a>
 <a name="ClearError"></a><h3>ClearError</h3>
 <pre>void ClearError()</pre>
-<p>ClearError Description...</p>
+<p>File I/O wrapper providing Read/Write/Seek plus path helpers based on <tt>std::filesystem</tt>.</p>
 </div>
 
 
@@ -220,7 +227,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Exists"></a><h3>Exists</h3>
 <pre>bool Exists()</pre>
-<p>Exists Description...</p>
+<p>Return true if the file exists on disk.</p>
 </div>
 
 
@@ -228,7 +235,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetAll"></a><h3>GetAll</h3>
 <pre>char* GetAll()</pre>
-<p>GetAll Description...</p>
+<p>Read the entire file contents into the buffer and return it.</p>
 </div>
 
 
@@ -236,7 +243,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetChar"></a><h3>GetChar</h3>
 <pre>char GetChar()</pre>
-<p>GetChar Description...</p>
+<p>Read and return a single character from the file.</p>
 </div>
 
 
@@ -244,7 +251,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetEOF"></a><h3>GetEOF</h3>
 <pre>bool GetEOF()</pre>
-<p>GetEOF Description...</p>
+<p>Return true if the file stream has reached end-of-file.</p>
 </div>
 
 
@@ -252,7 +259,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetLine"></a><h3>GetLine</h3>
 <pre>char* GetLine()</pre>
-<p>GetLine Description...</p>
+<p>Read a line from the file and return it as a string.</p>
 </div>
 
 
@@ -260,7 +267,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="GetStatus"></a><h3>GetStatus</h3>
 <pre>void GetStatus()</pre>
-<p>GetStatus Description...</p>
+<p>Update and cache the file's stat information.</p>
 </div>
 
 
@@ -268,7 +275,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Init"></a><h3>Init</h3>
 <pre>void Init()</pre>
-<p>Init Description...</p>
+<p>Initialize internal state for this object.</p>
 </div>
 
 
@@ -276,7 +283,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Open"></a><h3>Open</h3>
 <pre>bool Open(char *p=NULL)</pre>
-<p>Open Description...</p>
+<p>Open the file with the given path and mode.</p>
 </div>
 
 
@@ -284,7 +291,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="OpenAppend"></a><h3>OpenAppend</h3>
 <pre>bool OpenAppend(char *p=NULL)</pre>
-<p>OpenAppend Description...</p>
+<p>Open the file for appending.</p>
 </div>
 
 
@@ -292,7 +299,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="OpenRead"></a><h3>OpenRead</h3>
 <pre>bool OpenRead(char *p=NULL)</pre>
-<p>OpenRead Description...</p>
+<p>Open the file for reading.</p>
 </div>
 
 
@@ -300,7 +307,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="OpenRW"></a><h3>OpenRW</h3>
 <pre>bool OpenRW(char *p=NULL)</pre>
-<p>OpenRW Description...</p>
+<p>Open the file for reading and writing.</p>
 </div>
 
 
@@ -308,7 +315,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="OpenRWAppend"></a><h3>OpenRWAppend</h3>
 <pre>bool OpenRWAppend(char *p=NULL)</pre>
-<p>OpenRWAppend Description...</p>
+<p>Open the file for reading and appending.</p>
 </div>
 
 
@@ -316,7 +323,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="OpenWrite"></a><h3>OpenWrite</h3>
 <pre>bool OpenWrite(char *p=NULL)</pre>
-<p>OpenWrite Description...</p>
+<p>Open the file for writing.</p>
 </div>
 
 
@@ -324,7 +331,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Path"></a><h3>Path</h3>
 <pre>char* Path()</pre>
-<p>Path Description...</p>
+<p>Return the file's path as a C string.</p>
 </div>
 
 
@@ -332,7 +339,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="PrepareBuffer"></a><h3>PrepareBuffer</h3>
 <pre>char* PrepareBuffer(int size)</pre>
-<p>PrepareBuffer Description...</p>
+<p>Allocate or resize the internal read/write buffer.</p>
 </div>
 
 
@@ -340,7 +347,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Print"></a><h3>Print</h3>
 <pre>size_t Print(char *text)</pre>
-<p>Print Description...</p>
+<p>Write a null-terminated string to the file.</p>
 </div>
 
 
@@ -348,7 +355,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="PrintLine"></a><h3>PrintLine</h3>
 <pre>size_t PrintLine(char *text)</pre>
-<p>PrintLine Description...</p>
+<p>Write a string followed by a newline to the file.</p>
 </div>
 
 
@@ -356,7 +363,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Read"></a><h3>Read</h3>
 <pre>size_t Read(char *buf, size_t len=0)</pre>
-<p>Read Description...</p>
+<p>Read up to len bytes from the file into the buffer.</p>
 </div>
 
 
@@ -364,7 +371,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="ReadAll"></a><h3>ReadAll</h3>
 <pre>size_t ReadAll()</pre>
-<p>ReadAll Description...</p>
+<p>Read the entire file contents into the buffer.</p>
 </div>
 
 
@@ -372,7 +379,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="ReadLine"></a><h3>ReadLine</h3>
 <pre>size_t ReadLine()</pre>
-<p>ReadLine Description...</p>
+<p>Read one line from the file into the buffer.</p>
 </div>
 
 
@@ -380,7 +387,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Seek"></a><h3>Seek</h3>
 <pre>int Seek(long offset)</pre>
-<p>Seek Description...</p>
+<p>Seek to the given offset in the file.</p>
 </div>
 
 
@@ -388,7 +395,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="SetPath"></a><h3>SetPath</h3>
 <pre>void SetPath(char *path)</pre>
-<p>SetPath Description...</p>
+<p>Set the directory path.</p>
 </div>
 
 
@@ -396,7 +403,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Size"></a><h3>Size</h3>
 <pre>size_t Size()</pre>
-<p>Size Description...</p>
+<p>Return the file size in bytes.</p>
 </div>
 
 
@@ -404,7 +411,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Status"></a><h3>Status</h3>
 <pre>struct stat* Status()</pre>
-<p>Status Description...</p>
+<p>Status Status.</p>
 </div>
 
 
@@ -412,7 +419,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Stream"></a><h3>Stream</h3>
 <pre>FILE* Stream()</pre>
-<p>Stream Description...</p>
+<p>Return the underlying FILE stream pointer.</p>
 </div>
 
 
@@ -420,7 +427,7 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Touch"></a><h3>Touch</h3>
 <pre>void Touch()</pre>
-<p>Touch Description...</p>
+<p>Create the file if it does not exist, or update its modification time.</p>
 </div>
 
 
@@ -428,11 +435,11 @@ for plain text files and is not useful for binary files.</p>
 <div class="mitem"><a href="#top">top</a>
 <a name="Write"></a><h3>Write</h3>
 <pre>size_t Write(char *buf, size_t len=0)</pre>
-<p>Write Description...</p>
+<p>Write len bytes from the buffer to the file.</p>
 </div>
 
 
-</td></tr></table>
-
+</main>
+</div>
 </body>
 </html>
