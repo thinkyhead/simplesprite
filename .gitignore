@@ -10,3 +10,6 @@ xcode-*/
 # CMake build directories
 /build*/
 /_*/
+
+# ACP
+sqlite*.db
